@@ -9,22 +9,14 @@
                           <button class="botao-menu" @click="toggleMenu" ref="toggleButton">☰</button>
                   </div> <!-- topo-menu -->
           
-            <a href="form.html"><img src="static/paciente.png" alt="" /> <span>Pacientes</span></a>
-            <a href="dados.html"><img src="static/pesquisar.png" alt="" /> <span>Consultas</span></a>
-            <a href="#"><img src="static/agenda.png" alt="" /> <span>Agenda</span></a>
-            <a href="#"><img src="static/medico.png" alt="" /> <span>Médicos</span></a>
-            <a href="#"><img src="static/logout.png" alt="" /> <span>Sair</span></a>
-          </div> <!-- links-menu -->
-        </div> <!-- menu-geral -->
-  
-        <div id="ajuste-2">
-          <nav>
-            <a href="#"><img src="static/sino.png" alt="" /></a>
-            <a href="#"><img src="static/config.png" alt="" /></a>
-          </nav>
-  
-          <div id="ajuste-3">
-            <div id="conteudo">
+                  <div id="links-menu">
+                          <a href="#"><img src="static/home.png" alt="" /> <span>Home</span></a>
+                          <a style="background-color: var(--azul-claro)" href="index.html">
+                          <img src="static/dashboard.png" alt="" /> <span>Dashboard</span>
+                          </a>
+                          <a href="form.html"><img src="static/paciente.png" alt="" /> <span>Pacientes</span></a>
+                          <a href="dados.html"><img src="static/pesquisar.png" alt="" /> <span>Consultas</span></a>
+                          <a href="#"><img src="static/agenda.png" alt="" /> <span>Agenda</span></a>
                           <a href="#"><img src="static/medico.png" alt="" /> <span>Médicos</span></a>
                           <a href="#"><img src="static/logout.png" alt="" /> <span>Sair</span></a>
                   </div> <!-- links-menu -->
