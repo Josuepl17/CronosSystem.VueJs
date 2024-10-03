@@ -70,6 +70,8 @@
   <style scoped>
   #menu-geral.reduzido {
     width: 60px;
+    min-width: 0;
+
   }
   
   #menu-geral.reduzido #topo-menu p {
@@ -132,9 +134,9 @@
         width: 14%;
         height: 100%;
         max-width: 250px;
-     
+        min-width: 160px;
         background-color: var(--cinza-escuro);
-        transition: width 0.5s ease; /* Tempo de abrir e fechar menu */
+        
       }
 
       #topo-menu {
