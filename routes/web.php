@@ -11,3 +11,7 @@ Route::get('/', [DashboardController::class, 'dashboard'])->name('Dashboard');
 Route::get('/login', function(){
     return inertia::render('Login');
 });
+
+Route::get('/login/cadastro', function(){
+    return inertia::render('Form_User_Empresa');
+});

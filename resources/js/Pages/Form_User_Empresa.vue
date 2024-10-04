@@ -3,30 +3,27 @@
 
         <div class="form-container sign-in">
             <form>
-                <h1>Faça Login</h1>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <a href="#">Esqueci minha Senha?</a>
-                <button>Login</button>
-                <a style="padding:10px; border: 1px solid white; border-radius:10px; background-color:#014552;; color: white" href="#">Novo Usuario</a>
+                <input type="text" placeholder="Nome:">
+                <input type="text" placeholder="Segundo Nome:">
+                <input type="email" placeholder="Email:">
+                <input type="password" placeholder="Password:">
+                <input type="text" placeholder="Razão Social:">
+                <input type="number" placeholder="CNPJ:">
+
+                <a href="#">Voltar</a>
+                <button>Cadastrar</button>
             </form>
         </div>
         <div class="toggle-container">
             <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back!</h1>
-                    <p>Enter your personal details to use all of site features</p>
-                    <button class="hidden" id="login">Sign In</button>
-                </div>
                 <div class="toggle-panel toggle-right">
                     <h1>Ola, Meu Amigo(a)</h1>
-                    <p>Bem Vindo Ao Cronos, Seu Controle de Consultas.</p>
+                    <p>Faça O Seu Cadastro para Iniciarmos.</p>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
 
 
 <script>
