@@ -8,3 +8,6 @@ use Inertia\Inertia;
 
 
 Route::get('/', [DashboardController::class, 'dashboard'])->name('Dashboard');
+Route::get('/login', function(){
+    return inertia::render('Login');
+});

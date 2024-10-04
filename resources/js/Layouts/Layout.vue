@@ -61,7 +61,7 @@
       toggleButton.value.innerHTML = '☰';
       toggleButton.value.style.marginLeft = '-70%';
     } else {
-      toggleButton.value.innerHTML = '☰';
+      
       toggleButton.value.style.marginLeft = '0';  // Resetando a margem
     }
   }
@@ -92,7 +92,7 @@
    
    :root {
         --azul-escuro: #012841;
-        --azul-claro: #00657c;
+        --azul-claro: #00697e;
         --cinza-escuro: #212529;
       }
 
