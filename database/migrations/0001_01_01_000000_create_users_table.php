@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->integer('empresa_id'); // so para Seleção de filiais 
             $table->timestamps();
         });
 
