@@ -2,15 +2,15 @@
 <div class="container" id="container">
 
         <div class="form-container sign-in">
-            <form>
-                <input type="text" placeholder="Nome:">
-                <input type="text" placeholder="Segundo Nome:">
-                <input type="email" placeholder="Email:">
-                <input type="password" placeholder="Password:">
-                <input type="text" placeholder="Razão Social:">
-                <input type="number" placeholder="CNPJ:">
+            <form @submit.prevent="form.post('/create/login')" >
+                <input type="text" id="name" placeholder="Nome:" v-model="form.name">
+                <input type="text" id="second_name" placeholder="Segundo Nome:" v-model="form.second_name">
+                <input type="email" id="email" placeholder="Email:" v-model="form.email">
+                <input type="password" id="password" placeholder="Senha:" v-model="form.password">
+                <input type="text" id="razao_social" placeholder="Razão Social:" v-model="form.razao_social">
+                <input type="number" id="cnpj" placeholder="CNPJ:" v-model="form.cnpj">
 
-                <a href="#">Voltar</a>
+                <Link href="#">Voltar</Link>
                 <button>Cadastrar</button>
             </form>
         </div>
@@ -26,8 +26,17 @@
 </template>
 
 
-<script>
+<script setup>
+import { useForm } from '@inertiajs/vue3';
 
+const form = useForm({
+    name:  '',
+    second_name: '',
+    email: '',
+    password: '',
+    razao_social: '',
+    cnpj: '',
+});
 
 </script>
 
