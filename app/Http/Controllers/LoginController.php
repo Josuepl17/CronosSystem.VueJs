@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empresas;
+use App\Models\User_Empresas;
 use App\Models\Users;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
@@ -25,7 +27,17 @@ class LoginController extends Controller
         $user->password = $request->password;
         $user->save();
 
-        dd(Users::all());
+        $empresa = new Empresas();
+        $empresa->razao_social = $request->razao_social;
+        $empresa->cnpj = $request->cnpj;
+        $empresa->save();
+
+        $user_empresas = new User_Empresas();
+        $user_empresas->user_id = $user->id;
+        $user_empresas->empresa_id = $empresa->id;
+        $user_empresas->save();
+
+        dd(User_Empresas::all());
 
     }
 }
