@@ -13,11 +13,6 @@
         </div>
         <div class="toggle-container">
             <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back!</h1>
-                    <p>Enter your personal details to use all of site features</p>
-                    <button class="hidden" id="login">Sign In</button>
-                </div>
                 <div class="toggle-panel toggle-right">
                     <h1>Ola, Meu Amigo(a)</h1>
                     <p>Bem Vindo Ao Cronos, Seu Controle de Consultas.</p>
