@@ -7,7 +7,7 @@ use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-    public function dashboard() {
+    public function index() {
         return Inertia::render('Dashboard');
     }
 }

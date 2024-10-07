@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::get('/', [DashboardController::class, 'dashboard'])->name('Dashboard')->middleware(AuthMiddleware::class);
+Route::get('/', [DashboardController::class, 'index'])->name('index')->middleware(AuthMiddleware::class);
 
 Route::get('/login/usuario', [LoginController::class, 'form_login'])->name('login');
 Route::get('/login/cadastro', [LoginController::class, 'form_user_empresas']);
 Route::post('/create/login', [LoginController::class, 'criar_empresa_user']);
+Route::post('/login/autenticate', [LoginController::class, 'autenticate']);
 
 
 

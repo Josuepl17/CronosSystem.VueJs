@@ -2,8 +2,8 @@
 <div class="container" id="container">
 
         <div class="form-container sign-in">
-            <form>
-                <h1>Faça Login</h1>
+            <form @submit.prevent="form.post('/login/autenticate')" >
+                <h1 >Faça Login</h1>
                 <input type="email" placeholder="Email">
                 <input type="password" placeholder="Password">
                 <Link href="#">Esqueci minha Senha?</Link>
@@ -44,6 +44,12 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
+    
+}
+
+h1{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
 }
 
 body{

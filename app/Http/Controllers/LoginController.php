@@ -5,19 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Empresas;
 use App\Models\User_Empresas;
 use App\Models\Users;
+use App\Services\MeuServico;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class LoginController extends Controller
 {
-    public function form_user_empresas() {
-        return Inertia::render('Form_User_Empresa');
-    }
 
     public function form_login() {
         return Inertia::render('Login');
     }
+
+
+    public function form_user_empresas() {
+        return Inertia::render('Form_User_Empresa');
+    }
+
+
 
     public function criar_empresa_user(Request $request) {
         $user = new Users();
@@ -37,7 +43,16 @@ class LoginController extends Controller
         $user_empresas->empresa_id = $empresa->id;
         $user_empresas->save();
 
-        dd(User_Empresas::all());
+        return Inertia::render('Login');
 
     }
+
+
+    public function autenticate(Request $request) {
+        $credentials = $request->only('email', 'password');
+        
+        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
+            return Inertia::render('index');    }
+
 }
+};
