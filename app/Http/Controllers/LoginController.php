@@ -50,14 +50,20 @@ class LoginController extends Controller
     }
 
 
-    public function autenticate(Request $request) {
+    public function autenticate(Request $request)
+    {
         $credentials = $request->only('email', 'password');
-      
-        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
+        
+        if (Auth::attempt($credentials)) {
+            // Autenticação bem-sucedida
+            return redirect()->intended();
+        } else {
+            // Autenticação falhou
+            return back()->withErrors([
+                'email' => 'Credenciais inválidas.',
+            ]);
+        }
+    }
 
-          } else {
-            dd("deu ruim");
-          }
 
-}
 };
