@@ -54,8 +54,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
       
         if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
-           // return Inertia::render('index');  
-           dd("deu bom");
+
           } else {
             dd("deu ruim");
           }
