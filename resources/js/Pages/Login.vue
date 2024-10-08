@@ -4,8 +4,8 @@
         <div class="form-container sign-in">
             <form @submit.prevent="form.post('/login/autenticate')" >
                 <h1 >Faça Login</h1>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
+                <input type="email" placeholder="Email" v-model="form.email" >
+                <input type="password" placeholder="Password" v-model="form.password" >
                 <Link href="#">Esqueci minha Senha?</Link>
                 <button>Login</button>
                 <Link style="padding:10px; border: 1px solid white; border-radius:10px; background-color:#014552;; color: white" href="/login/cadastro">Novo Usuario</Link>
@@ -24,10 +24,25 @@
 
 
 
-<script>
+<script setup >
+import { defineProps } from 'vue';
+import { useForm } from '@inertiajs/vue3';
 
+const props = defineProps({
+    errors: Array,
+});
+
+const form = useForm({
+  email: '',
+  password: '',
+
+});
 
 </script>
+
+
+
+
 
 
 <style>
