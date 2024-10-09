@@ -47,14 +47,12 @@
     height: 100%;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    
-    
+    overflow: auto;
 }
 .card{
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-    margin-bottom: 10px;
     width: 17%;
     min-width: 160px;
     height: 130px;

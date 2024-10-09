@@ -202,6 +202,7 @@
         height: 100%;
         display: flex;
         flex-direction: column;
+        overflow: hidden;
       }
 
       nav {
@@ -214,6 +215,8 @@
         align-items: center;
         padding: 10px;
         background-color: white;
+        overflow: hidden;
+        
       }
 
       nav a img{
@@ -228,7 +231,7 @@
         justify-content: center;
         width: 100%;
         height: 92%;
-        flex-grow: 1;
+        overflow: hidden;
       }
 
       #conteudo {
@@ -238,7 +241,7 @@
         border-radius: 5px;
         background-color: white;
         padding: 20px;
-        overflow-x: auto;
+    
       }
 
 
