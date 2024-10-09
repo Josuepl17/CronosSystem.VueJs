@@ -1,4 +1,4 @@
-<template lang="">
+<template>
 
 <Layout>
   <template v-slot:conteudo>
@@ -40,6 +40,8 @@
     --azul-claro: #00657c;
     --cinza-escuro: #212529;
   }
+
+
 
 #conteudo-pessoal{
     display: flex;

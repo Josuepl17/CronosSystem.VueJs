@@ -18,7 +18,7 @@
                             <a href="dados.html"><img src="static/pesquisar.png" alt="" /> <span>Consultas</span></a>
                             <a href="#"><img src="static/agenda.png" alt="" /> <span>Agenda</span></a>
                             <a href="#"><img src="static/medico.png" alt="" /> <span>Médicos</span></a>
-                            <a href="#"><img src="static/logout.png" alt="" /> <span>Sair</span></a>
+                            <Link href="/logout"><img src="static/logout.png" alt="" /> <span>Sair</span></Link>
                     </div> <!-- links-menu -->
         </div> <!-- menu-geral -->
 
@@ -49,7 +49,8 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import { Link } from '@inertiajs/vue3';
+import { ref } from 'vue';
   
   const menu = ref(null);
   const toggleButton = ref(null);
@@ -67,7 +68,7 @@
   }
   </script>
   
-  <style scoped>
+  <style>
   #menu-geral.reduzido {
     width: 60px;
     min-width: 0;
@@ -103,6 +104,13 @@
         text-decoration: none;
         font-size: 13px;
         font-family: Arial, Helvetica, sans-serif;
+      }
+
+
+
+      template{
+        width: 100%;
+        height: 100dvh;
       }
 
 

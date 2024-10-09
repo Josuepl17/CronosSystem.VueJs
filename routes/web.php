@@ -18,9 +18,11 @@ Route::post('/create/login', [LoginController::class, 'criar_empresa_user']);
 Route::post('/login/autenticate', [LoginController::class, 'autenticate']);
 Route::get('/login/usuario', [LoginController::class, 'form_login'])->name('login');
 Route::get('/login/cadastro', [LoginController::class, 'form_user_empresas']);
+Route::get('/logout', [LoginController::class, 'logout']);
 
 
 Route::middleware(['auth', 'web'])->group(function () {
+    
     Route::get('/', [DashboardController::class, 'index']);
     
 

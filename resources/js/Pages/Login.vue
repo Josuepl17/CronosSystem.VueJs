@@ -86,6 +86,8 @@ body{
     width: 768px;
     max-width: 100%;
     min-height: 480px;
+    top: 12%;
+    left: 26%;
 }
 
 .container p{
