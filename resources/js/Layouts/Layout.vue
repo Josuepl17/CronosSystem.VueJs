@@ -238,7 +238,7 @@
         border-radius: 5px;
         background-color: white;
         padding: 20px;
-        overflow: hidden;
+        overflow-x: auto;
       }
 
 
