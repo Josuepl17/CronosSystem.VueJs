@@ -93,7 +93,7 @@ import { ref } from 'vue';
    
    :root {
         --azul-escuro: #012841;
-        --azul-claro: #00697e;
+        --azul-claro: #014552;
         --cinza-escuro: #212529;
       }
 

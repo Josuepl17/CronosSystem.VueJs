@@ -45,7 +45,7 @@ const form = useForm({
 
 
 
-<style>
+<style scoped >
 
    :root {
         --azul-escuro: #012841;
@@ -86,7 +86,7 @@ body{
     width: 768px;
     max-width: 100%;
     min-height: 480px;
-    top: 12%;
+    top: 100px;
     left: 26%;
 }
 
