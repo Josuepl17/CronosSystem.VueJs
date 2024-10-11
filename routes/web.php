@@ -23,7 +23,8 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::middleware(['auth', 'web'])->group(function () {
     
-    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'definirFilial']);
+    Route::get('/dash', [DashboardController::class, 'index']);
     
 
     Route::get('/teste', function () {

@@ -29,7 +29,7 @@
           <nav>
             <a href="#"><img src="static/sino.png" alt="" /></a>
             <a href="#"><img src="static/config.png" alt="" /></a>
-            <Link style="background-color: var(--azul-claro); padding: 10px; border-radius: 10px; color: white;"  href="">Filial Selecionada</Link>
+            <Link style="background-color: var(--azul-claro); padding: 10px; border-radius: 10px; color: white;"  href="">{{ empresa_id }}</Link>
           </nav>
   
           <div id="ajuste-3">
@@ -51,6 +51,12 @@
   <script setup>
   import { Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
+
+const props = defineProps({
+  empresa_id: Number,
+});
+
+
   
   const menu = ref(null);
   const toggleButton = ref(null);

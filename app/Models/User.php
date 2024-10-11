@@ -17,5 +17,6 @@ class User extends Authenticatable
         'second_name',
         'email',
         'password',
+        'empresa_id',
     ];
 }

@@ -33,22 +33,27 @@ class LoginController extends Controller
 
     public function createUserEmpresa(Request $request)
     { // CRIA UM USUARIO, UMA EMPRESA E UMA LIGAÇÃO ENTRE OS DOIS 
-        $user = new User();
-        $user->name = $request->name;
-        $user->second_name = $request->second_name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
+        
 
         $empresa = new Empresas();
         $empresa->razao_social = $request->razao_social;
         $empresa->cnpj = $request->cnpj;
         $empresa->save();
 
+        $user = new User();
+        $user->name = $request->name;
+        $user->second_name = $request->second_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->empresa_id = $empresa->id;
+        $user->save();
+
         $user_empresas = new User_Empresas();
         $user_empresas->user_id = $user->id;
         $user_empresas->empresa_id = $empresa->id;
         $user_empresas->save();
+
+
 
         return redirect('/form/login');
     }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('second_name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->integer('empresa_id');
             $table->timestamps();
         });
 

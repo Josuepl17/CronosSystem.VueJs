@@ -11,8 +11,8 @@ class DashboardController extends Controller{
 
 
 public function definirFilial() {
-
-    Session()->put('filialSelecionada', Auth::user()->empresa->id);
+    Session()->put('filialSelecionada', Auth::user()->empresa_id);
+    return redirect('/dash');
 }
 
 
