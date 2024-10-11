@@ -18,18 +18,21 @@ use Inertia\Inertia;
 class LoginController extends Controller
 {
 
-    public function formLogin() {
+    public function formLogin()
+    {
         return Inertia::render('Login');
     }
 
 
-    public function formUserEmpresa() {
+    public function formUserEmpresa()
+    {
         return Inertia::render('FormUserEmpresa');
     }
 
 
 
-    public function createUserEmpresa(Request $request) { // CRIA UM USUARIO, UMA EMPRESA E UMA LIGAÇÃO ENTRE OS DOIS 
+    public function createUserEmpresa(Request $request)
+    { // CRIA UM USUARIO, UMA EMPRESA E UMA LIGAÇÃO ENTRE OS DOIS 
         $user = new User();
         $user->name = $request->name;
         $user->second_name = $request->second_name;
@@ -48,14 +51,13 @@ class LoginController extends Controller
         $user_empresas->save();
 
         return redirect('/form/login');
-
     }
 
 
     public function Authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        
+
         if (Auth::attempt($credentials)) {
             // Autenticação bem-sucedida
             return redirect()->intended();
@@ -73,7 +75,4 @@ class LoginController extends Controller
         Auth::logout();
         return redirect('/form/login');
     }
-    
-
-
 };
