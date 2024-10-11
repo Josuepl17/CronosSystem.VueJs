@@ -139,12 +139,11 @@ import { ref } from 'vue';
 
       
       #menu-geral {
-        width: 14%;
+        width: 12%;
         height: 100%;
         max-width: 250px;
-        min-width: 160px;
         background-color: var(--cinza-escuro);
-        
+        transition: width 0.9s ease;
       }
 
       #topo-menu {
