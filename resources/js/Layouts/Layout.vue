@@ -13,7 +13,7 @@
                             <a style="background-color: var(--azul-claro)" href="index.html">
                             <img src="static/dashboard.png" alt="" /> <span>Dashboard</span>
                             </a>
-                            <a href="form.html"><img src="static/paciente.png" alt="" /> <span>Pacientes</span></a>
+                            <Link href="/pacientes"><img src="static/paciente.png" alt="" /> <span>Pacientes</span></Link>
                             <a href="dados.html"><img src="static/pesquisar.png" alt="" /> <span>Consultas</span></a>
                             <a href="#"><img src="static/agenda.png" alt="" /> <span>Agenda</span></a>
                             <a href="#"><img src="static/medico.png" alt="" /> <span>Médicos</span></a>
@@ -29,7 +29,7 @@
           <nav>
             <a href="#"><img src="static/sino.png" alt="" /></a>
             <a href="#"><img src="static/config.png" alt="" /></a>
-            <Link style="background-color: var(--azul-claro); padding: 10px; border-radius: 10px; color: white;"  href="">{{ empresa_id }}</Link>
+            <Link style="background-color: var(--azul-claro); padding: 10px; border-radius: 10px; color: white;"  href="">{{ $page.props.empresa_id }}</Link>
           </nav>
   
           <div id="ajuste-3">
@@ -145,7 +145,7 @@ const props = defineProps({
 
       
       #menu-geral {
-        width: 12%;
+        width: 13%;
         height: 100%;
         max-width: 250px;
         background-color: var(--cinza-escuro);

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AuthMiddleware;
 use GuzzleHttp\Psr7\Request as Psr7Request;
@@ -25,6 +26,8 @@ Route::middleware(['auth', 'web'])->group(function () {
     
     Route::get('/', [DashboardController::class, 'definirFilial']);
     Route::get('/dash', [DashboardController::class, 'index']);
+
+    Route::get('/pacientes', [PacientesController::class, 'listaPacientes']);
     
 
     Route::get('/teste', function () {

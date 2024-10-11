@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Session\Session;
+use App\Models\Empresas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
 class DashboardController extends Controller{
 
 
 public function definirFilial() {
-    Session()->put('filialSelecionada', Auth::user()->empresa_id);
+    
+    $razaoEmpresa = Empresas::find(Auth::user()->empresa_id);
+    Session::put('empresa_id', $razaoEmpresa->razao_social );
     return redirect('/dash');
 }
 
