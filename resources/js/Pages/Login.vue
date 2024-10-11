@@ -2,13 +2,13 @@
 <div class="container" id="container">
 
         <div class="form-container sign-in">
-            <form @submit.prevent="form.post('/login/autenticate')" >
+            <form @submit.prevent="form.post('/login')" >
                 <h1 >Faça Login</h1>
                 <input type="email" placeholder="Email" v-model="form.email" >
                 <input type="password" placeholder="Password" v-model="form.password" >
                 <Link href="#">Esqueci minha Senha?</Link>
                 <button>Login</button>
-                <Link style="padding:10px; border: 1px solid white; border-radius:10px; background-color:#014552;; color: white" href="/login/cadastro">Novo Usuario</Link>
+                <Link style="padding:10px; border: 1px solid white; border-radius:10px; background-color:#014552;; color: white" href="/form/user/empresas">Novo Usuario</Link>
             </form>
         </div>
         <div class="toggle-container">

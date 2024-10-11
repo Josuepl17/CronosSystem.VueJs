@@ -2,7 +2,7 @@
 <div class="container" id="container">
 
         <div class="form-container sign-in">
-            <form @submit.prevent="form.post('/create/login')" >
+            <form @submit.prevent="form.post('/create/user/empresas')" >
                 <input type="text" id="name" placeholder="Nome:" v-model="form.name">
                 <input type="text" id="second_name" placeholder="Segundo Nome:" v-model="form.second_name">
                 <input type="email" id="email" placeholder="Email:" v-model="form.email">
@@ -10,7 +10,7 @@
                 <input type="text" id="razao_social" placeholder="Razão Social:" v-model="form.razao_social">
                 <input type="number" id="cnpj" placeholder="CNPJ:" v-model="form.cnpj">
 
-                <Link href="#">Voltar</Link>
+                <Link href="/form/login">Voltar</Link>
                 <button>Cadastrar</button>
             </form>
         </div>

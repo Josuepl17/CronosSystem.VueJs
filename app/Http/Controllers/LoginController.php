@@ -13,21 +13,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
+// Padrão Nomes Views, primeira letra Maiuscula e as Demais minusculas.
+// Padrão Nomes Funções, primeira letra Minuscula e as Demais Maiusculas.
 class LoginController extends Controller
 {
 
-    public function form_login() {
+    public function formLogin() {
         return Inertia::render('Login');
     }
 
 
-    public function form_user_empresas() {
-        return Inertia::render('Form_User_Empresa');
+    public function formUserEmpresa() {
+        return Inertia::render('FormUserEmpresa');
     }
 
 
 
-    public function criar_empresa_user(Request $request) {
+    public function createUserEmpresa(Request $request) { // CRIA UM USUARIO, UMA EMPRESA E UMA LIGAÇÃO ENTRE OS DOIS 
         $user = new User();
         $user->name = $request->name;
         $user->second_name = $request->second_name;
@@ -45,12 +47,12 @@ class LoginController extends Controller
         $user_empresas->empresa_id = $empresa->id;
         $user_empresas->save();
 
-        return Inertia::render('Login');
+        return redirect('/form/login');
 
     }
 
 
-    public function autenticate(Request $request)
+    public function Authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
         
@@ -65,10 +67,11 @@ class LoginController extends Controller
         }
     }
 
+
     public function logout()
     {
         Auth::logout();
-        return redirect('/login/usuario');
+        return redirect('/form/login');
     }
     
 

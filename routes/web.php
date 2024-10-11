@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+// Padrão Nomes Funções, primeira letra Minuscula e as Demais Maiusculas.
+// Padrão Rotas, Form para Formularios, create, delete, edit, update para funções
 
-
-
-Route::post('/create/login', [LoginController::class, 'criar_empresa_user']);
-Route::post('/login/autenticate', [LoginController::class, 'autenticate']);
-Route::get('/login/usuario', [LoginController::class, 'form_login'])->name('login');
-Route::get('/login/cadastro', [LoginController::class, 'form_user_empresas']);
+Route::post('/create/user/empresas', [LoginController::class, 'createUserEmpresa']);
+Route::post('/login', [LoginController::class, 'Authenticate']);
+Route::get('/form/login', [LoginController::class, 'formLogin'])->name('login');
+Route::get('/form/user/empresas', [LoginController::class, 'formUserEmpresa']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
 
