@@ -10,7 +10,6 @@
                     </div> <!-- topo-menu -->
             
                     <div id="links-menu">
-                            <a href="#"><img src="static/home.png" alt="" /> <span>Home</span></a>
                             <a style="background-color: var(--azul-claro)" href="index.html">
                             <img src="static/dashboard.png" alt="" /> <span>Dashboard</span>
                             </a>
@@ -30,6 +29,7 @@
           <nav>
             <a href="#"><img src="static/sino.png" alt="" /></a>
             <a href="#"><img src="static/config.png" alt="" /></a>
+            
           </nav>
   
           <div id="ajuste-3">
@@ -268,7 +268,7 @@ import { ref } from 'vue';
 
       @media (max-width: 650px){
         #menu-geral {
-        width: 50%;
+        width: 55%;
       }
 
       p, span{
