@@ -29,7 +29,7 @@
           <nav>
             <a href="#"><img src="static/sino.png" alt="" /></a>
             <a href="#"><img src="static/config.png" alt="" /></a>
-            
+            <Link style="background-color: var(--azul-claro); padding: 10px; border-radius: 10px; color: white;"  href="">Filial Selecionada</Link>
           </nav>
   
           <div id="ajuste-3">
