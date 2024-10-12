@@ -114,12 +114,6 @@ const props = defineProps({
 
 
 
-      template{
-        width: 100%;
-        height: 100dvh;
-      }
-
-
       #conteiner-geral {
         background-color: rgb(185, 193, 201);
         width: 100%;
@@ -248,13 +242,10 @@ const props = defineProps({
       }
 
       #conteudo {
-        display: flex;
         width: 98%;
         height: 94%;
         border-radius: 5px;
         background-color: white;
-        padding: 20px;
-    
       }
 
 
