@@ -14,7 +14,7 @@
                             <img src="static/dashboard.png" alt="" /> <span>Dashboard</span>
                             </a>
                             <Link href="/pacientes"><img src="static/paciente.png" alt="" /> <span>Pacientes</span></Link>
-                            <a href="/consultasffffffff"><img src="static/pesquisar.png" alt="" /> <span>Consultas</span></a>
+                            <Link href="/consultas"><img src="static/pesquisar.png" alt="" /> <span>Consultas</span></Link>
                             <a href="#"><img src="static/agenda.png" alt="" /> <span>Agenda</span></a>
                             <a href="#"><img src="static/medico.png" alt="" /> <span>Médicos</span></a>
                             <Link href="/logout"><img src="static/logout.png" alt="" /> <span>Sair</span></Link>
