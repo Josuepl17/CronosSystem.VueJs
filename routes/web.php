@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConsultasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PacientesController;
@@ -29,6 +30,7 @@ Route::middleware(['auth', 'web'])->group(function () {
 
     Route::get('/pacientes', [PacientesController::class, 'listaPacientes']);
     Route::get('/form/paciente', [PacientesController::class, 'formPacientes']);
+    Route::get('/consultas', [ConsultasController::class, 'consultas']);
     
 
     Route::get('/teste', function () {

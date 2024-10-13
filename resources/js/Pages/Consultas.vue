@@ -1,4 +1,4 @@
-<template lang="">
+<template>
 
 <Layout>
     <template v-slot:conteudo>
@@ -6,6 +6,7 @@
 
 
     </template>
+    
 </Layout>
 
 </template>
