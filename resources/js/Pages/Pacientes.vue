@@ -6,7 +6,7 @@
 
         <div id="opcoes-conteudo" >
 
-            <Link href="/form/paciente" >Inserir</Link>
+          <Link href="/consultas">Inserir</Link>
 
             <form action="#" method="GET">
                 <input type="text"  placeholder="Search..." />
@@ -27,28 +27,28 @@
             </thead>
             <tbody>
               <tr>
-                <a href="/" class="row-link">
+              
           <td>1</td>
           <td>John Doe</td>
           <td>john@example.com</td>
           <td>Admin</td>
-                </a>
+               
               </tr>
               <tr>
-                <a href="#" class="row-link">
+                
           <td>2</td>
           <td>Jane Smith</td>
           <td>jane@example.com</td>
           <td>User</td>
-                </a>
+               
               </tr>
               <tr>
-                <a href="#" class="row-link">
+                
           <td>3</td>
           <td>Emily Johnson</td>
           <td>emily@example.com</td>
           <td>Editor</td>
-                </a>
+               
               </tr>
             </tbody>
           </table>
@@ -65,6 +65,7 @@
 </template>
 
 <script setup >
+import { Link } from '@inertiajs/vue3';
 </script>
 
 
