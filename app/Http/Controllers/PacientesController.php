@@ -10,4 +10,8 @@ class PacientesController extends Controller
     public function listaPacientes() {
         return Inertia::render('Pacientes');
     }
+
+    public function formPacientes() {
+        return Inertia::render('FormPacientes');
+    }
 }

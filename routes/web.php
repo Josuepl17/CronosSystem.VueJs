@@ -28,6 +28,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/dash', [DashboardController::class, 'index']);
 
     Route::get('/pacientes', [PacientesController::class, 'listaPacientes']);
+    Route::get('/form/paciente', [PacientesController::class, 'formPacientes']);
     
 
     Route::get('/teste', function () {

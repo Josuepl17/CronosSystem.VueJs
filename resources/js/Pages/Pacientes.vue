@@ -6,7 +6,7 @@
 
         <div id="opcoes-conteudo" >
 
-            <a href="/" >Inserir</a>
+            <Link href="/form/paciente" >Inserir</Link>
 
             <form action="#" method="GET">
                 <input type="text"  placeholder="Search..." />
@@ -15,42 +15,44 @@
 
         </div>
 
-        <table class="minimal-table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Role</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <a href="/" class="row-link">
-        <td>1</td>
-        <td>John Doe</td>
-        <td>john@example.com</td>
-        <td>Admin</td>
-      </a>
-    </tr>
-    <tr>
-      <a href="#" class="row-link">
-        <td>2</td>
-        <td>Jane Smith</td>
-        <td>jane@example.com</td>
-        <td>User</td>
-      </a>
-    </tr>
-    <tr>
-      <a href="#" class="row-link">
-        <td>3</td>
-        <td>Emily Johnson</td>
-        <td>emily@example.com</td>
-        <td>Editor</td>
-      </a>
-    </tr>
-  </tbody>
-</table>
+        <div id="tabela">
+          <table class="minimal-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <a href="/" class="row-link">
+          <td>1</td>
+          <td>John Doe</td>
+          <td>john@example.com</td>
+          <td>Admin</td>
+                </a>
+              </tr>
+              <tr>
+                <a href="#" class="row-link">
+          <td>2</td>
+          <td>Jane Smith</td>
+          <td>jane@example.com</td>
+          <td>User</td>
+                </a>
+              </tr>
+              <tr>
+                <a href="#" class="row-link">
+          <td>3</td>
+          <td>Emily Johnson</td>
+          <td>emily@example.com</td>
+          <td>Editor</td>
+                </a>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
 
 
@@ -67,6 +69,25 @@
 
 
 <style scoped>
+
+      @media (max-width: 650px){
+
+        form{
+          display: none;
+        }
+
+        #opcoes-conteudo a {
+
+          font-size: 12px;
+      }
+
+      }
+
+      #tabela{
+        width: 100%;
+        height: 92%;
+        overflow: auto;
+      }
 
 input{
     padding: 08px 29px 08px 29px;
@@ -101,7 +122,6 @@ button{
   background-color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  overflow: hidden;
 }
 
 /* Estilo para os cabeçalhos da tabela */
