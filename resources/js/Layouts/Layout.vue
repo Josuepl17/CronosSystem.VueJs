@@ -4,20 +4,20 @@
 
         <div id="menu-geral" :class="{ reduzido: isReduced }" ref="menu">
                     <div id="topo-menu">
-                            <img src="static/profile.jpg" alt="" />
+                            <img src="/images/profile.jpg" alt="" />
                             <p>Josué</p>
                             <button class="botao-menu" @click="toggleMenu" ref="toggleButton">☰</button>
                     </div> <!-- topo-menu -->
             
                     <div id="links-menu">
                             <a style="background-color: var(--azul-claro)" href="index.html">
-                            <img src="static/dashboard.png" alt="" /> <span>Dashboard</span>
+                            <img src="/images/agenda.png" alt="" /> <span>Dashboard</span>
                             </a>
-                            <Link href="/pacientes"><img src="static/paciente.png" alt="" /> <span>Pacientes</span></Link>
-                            <Link href="/consultas"><img src="static/pesquisar.png" alt="" /> <span>Consultas</span></Link>
-                            <a href="#"><img src="static/agenda.png" alt="" /> <span>Agenda</span></a>
-                            <a href="#"><img src="static/medico.png" alt="" /> <span>Médicos</span></a>
-                            <Link href="/logout"><img src="static/logout.png" alt="" /> <span>Sair</span></Link>
+                            <Link href="/pacientes"><img src="/images/paciente.png" alt="" /> <span>Pacientes</span></Link>
+                            <Link href="/consultas"><img src="/images/pesquisar.png" alt="" /> <span>Consultas</span></Link>
+                            <a href="#"><img src="/images/agenda.png" alt="" /> <span>Agenda</span></a>
+                            <a href="#"><img src="/images/medico.png" alt="" /> <span>Médicos</span></a>
+                            <Link href="/logout"><img src="/images/logout.png" alt="" /> <span>Sair</span></Link>
                     </div> <!-- links-menu -->
         </div> <!-- menu-geral -->
 
@@ -27,8 +27,8 @@
   
         <div id="ajuste-2">
           <nav>
-            <a href="#"><img src="static/sino.png" alt="" /></a>
-            <a href="#"><img src="static/config.png" alt="" /></a>
+            <a href="#"><img src="/images/sino.png" alt="" /></a>
+            <a href="#"><img src="/images/config.png" alt="" /></a>
             <Link style="background-color: var(--azul-claro); padding: 10px; border-radius: 10px; color: white;"  href="">{{ $page.props.empresa_id }}</Link>
           </nav>
   
