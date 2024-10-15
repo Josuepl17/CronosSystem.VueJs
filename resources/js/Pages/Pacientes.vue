@@ -1,4 +1,4 @@
-<template lang="">
+<template>
 
 <Layout>
 
@@ -7,7 +7,7 @@
         <div id="opcoes-conteudo" >
 
           <Link href="/consultas">Inserir</Link>
-          
+
             <form action="#" method="GET">
                 <input type="text"  placeholder="Search..." />
                 <button type="submit" >Busca</button>
