@@ -30,6 +30,7 @@ Route::middleware(['auth', 'web'])->group(function () {
 
     Route::get('/pacientes', [PacientesController::class, 'listaPacientes']);
     Route::get('/form/paciente', [PacientesController::class, 'formPacientes']);
+    Route::post('/create/paciente', [PacientesController::class, 'createPaciente']);
     Route::get('/consultas', [ConsultasController::class, 'consultas']);
     
 
