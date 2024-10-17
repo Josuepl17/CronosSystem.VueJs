@@ -10,7 +10,7 @@
                     </div> <!-- topo-menu -->
             
                     <div id="links-menu">
-                            <Link style="background-color: var(--azul-claro)" href="/dash">
+                            <Link  href="/dash">
                             <img src="/images/agenda.png" alt="" /> <span>Dashboard</span>
                             </Link>
                             <Link href="/pacientes"><img src="/images/paciente.png" alt="" /> <span>Pacientes</span></Link>

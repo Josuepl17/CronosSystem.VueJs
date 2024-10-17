@@ -99,6 +99,7 @@ button{
   align-items: center;
   height: 08%;
   width: 100%;
+  min-height: 38px;
 }
 
 #opcoes-conteudo a {
