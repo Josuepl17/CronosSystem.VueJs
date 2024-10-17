@@ -18,5 +18,6 @@ class User extends Authenticatable
         'email',
         'password',
         'empresa_id',
+        
     ];
 }

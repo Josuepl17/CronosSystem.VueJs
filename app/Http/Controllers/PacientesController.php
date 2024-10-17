@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ValidateRequest;
 use App\Models\Pacientes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class PacientesController extends Controller
 {
     public function listaPacientes() {
-        return Inertia::render('Pacientes');
+        $empresa_id = Auth::user()->empresa_id;
+        $pacientes = Pacientes::where('empresa_id', $empresa_id)->get();
+        
+        return Inertia::render('Pacientes', compact('pacientes'));
     }
 
     public function formPacientes() {
@@ -18,7 +22,9 @@ class PacientesController extends Controller
     }
 
     public function createPaciente(ValidateRequest $request) {
-        $dados = Pacientes::create($request->all());
-        dd($dados);
+        $dados = $request->all();
+        $dados['empresa_id'] = Auth::user()->empresa_id;
+        Pacientes::create($dados);
+        return redirect('/pacientes');
     }
 }

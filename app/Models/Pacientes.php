@@ -17,5 +17,6 @@ class Pacientes extends Model
         'cidade',
         'password',
         'bairro',
+        'empresa_id'
     ];
 }

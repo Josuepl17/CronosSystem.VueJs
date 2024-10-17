@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('cidade');
             $table->string('bairro');
             $table->string('password');
+
+            $table->unsignedBigInteger('empresa_id');
+            $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade')->onUpdate('cascade');
+            
             $table->timestamps();
         });
     }

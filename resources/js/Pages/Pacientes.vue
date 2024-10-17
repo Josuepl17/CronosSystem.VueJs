@@ -17,41 +17,25 @@
 
         <div id="tabela">
           <table class="minimal-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-              
-          <td>1</td>
-          <td>John Doe</td>
-          <td>john@example.com</td>
-          <td>Admin</td>
-               
-              </tr>
-              <tr>
-                
-          <td>2</td>
-          <td>Jane Smith</td>
-          <td>jane@example.com</td>
-          <td>User</td>
-               
-              </tr>
-              <tr>
-                
-          <td>3</td>
-          <td>Emily Johnson</td>
-          <td>emily@example.com</td>
-          <td>Editor</td>
-               
-              </tr>
-            </tbody>
-          </table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>CPF</th>
+        <th>Medico</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(paciente) in pacientes" :key="paciente.id">
+        <td>{{ paciente.id }}</td>
+        <td>{{ paciente.nome }}</td>
+        <td>{{ paciente.email }}</td>
+        <td>{{ paciente.cpf }}</td>
+        <td>{{ paciente.Medico }}</td> <!-- Ajuste conforme necessário -->
+      </tr>
+    </tbody>
+  </table>
         </div>
 
 
@@ -66,6 +50,16 @@
 
 <script setup >
 import { Link } from '@inertiajs/vue3';
+import { defineProps } from 'vue';
+
+
+
+
+const props = defineProps({
+  pacientes: Array,
+})
+
+
 </script>
 
 
@@ -123,6 +117,7 @@ button{
   background-color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
+  text-align: center;
 }
 
 /* Estilo para os cabeçalhos da tabela */
@@ -133,6 +128,7 @@ button{
   padding: 12px 15px;
   text-align: left;
   border-bottom: 2px solid #ddd;
+  text-align: center;
 }
 
 /* Estilo para as células */
