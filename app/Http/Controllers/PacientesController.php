@@ -27,4 +27,10 @@ class PacientesController extends Controller
         Pacientes::create($dados);
         return redirect('/pacientes');
     }
+
+    public function detalhesPaciente(Request $request) {
+
+        dd($request->id);
+
+    }
 }

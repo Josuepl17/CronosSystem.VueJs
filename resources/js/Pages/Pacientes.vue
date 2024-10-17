@@ -24,6 +24,7 @@
         <th>Email</th>
         <th>CPF</th>
         <th>Medico</th>
+        <th>#</th>
       </tr>
     </thead>
     <tbody>
@@ -33,6 +34,9 @@
         <td>{{ paciente.email }}</td>
         <td>{{ paciente.cpf }}</td>
         <td>{{ paciente.Medico }}</td> <!-- Ajuste conforme necessário -->
+        <td>
+          <Link id="inserir" :href="'/detalhes/paciente' + paciente.id">Inserir</Link>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -84,6 +88,12 @@ const props = defineProps({
         overflow: auto;
       }
 
+      :root {
+        --azul-escuro: #012841;
+        --azul-claro: #014552;
+        --cinza-escuro: #212529;
+      }
+
 input{
     padding: 08px 29px 08px 29px;
     margin-right: 10px;
@@ -100,6 +110,14 @@ button{
   height: 08%;
   width: 100%;
   min-height: 38px;
+}
+
+#inserir{
+  color: white; 
+  text-decoration: none;
+  padding: 05px 15px 05px 15px;
+  background-color: var(--azul-claro);
+  border-radius: 02px;
 }
 
 #opcoes-conteudo a {
