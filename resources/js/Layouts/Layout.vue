@@ -1,5 +1,22 @@
 <template>
     <div id="conteiner-geral">
+
+
+      <div v-if="isModalOpen" class="modal-overlay" @click="isModalOpen = false"> 
+      <div class="modal-content" @click.stop>
+        <h1 style="font-size: 16px; font-family: 'Times New Roman', Times, serif;" >Selecione Uma Filial</h1>
+        <br>
+        <div id="selecioneFilial" v-for="filial in $page.props.filiais" :key="filial.id" >
+          
+            <Link  :href="'/selecione/filial/' + filial.id">{{ filial.id }} - {{ filial.razao_social }} - {{ filial.cnpj }}</Link>
+        </div>
+
+      </div>
+      </div>
+
+      
+
+
       <div id="flex-1">
 
         <div id="menu-geral" :class="{ reduzido: isReduced }" ref="menu">
@@ -29,7 +46,7 @@
           <nav>
             <a href="#"><img src="/images/sino.png" alt="" /></a>
             <a href="#"><img src="/images/config.png" alt="" /></a>
-            <Link style="background-color: var(--azul-claro); padding: 10px; border-radius: 10px; color: white;"  href="">{{ $page.props.empresa_id }}</Link>
+            <button @click="isModalOpen = true"  style=" background-color: var(--azul-claro); padding: 10px; border-radius: 10px; color: white; border: none; ">{{ $page.props.empresa_id }}</button>
           </nav>
   
           <div id="ajuste-3">
@@ -52,10 +69,9 @@
   import { Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-const props = defineProps({
-  empresa_id: Number,
-});
 
+
+const isModalOpen = ref(false);
 
   
   const menu = ref(null);
@@ -95,6 +111,58 @@ const props = defineProps({
 
 
 <style>
+
+#selecioneFilial {
+ display: flex;
+justify-content: center;
+border: 1px solid black;
+border-radius: 05px;
+
+background-color: var(--azul-escuro);
+}
+
+#selecioneFilial a:hover{
+  background-color: var(--azul-claro);
+  
+}
+
+
+
+#selecioneFilial a{
+  display: flex;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 100%;
+ padding: 10px;
+ justify-content: center;
+ 
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 600px;
+  height: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+  transition: ease-in-out 1s;
+  text-align: center;
+}
+
    
    
    :root {

@@ -24,7 +24,8 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 
 Route::middleware(['auth', 'web'])->group(function () {
-    
+
+    Route::get('/selecione/filial/{id}', [DashboardController::class, 'mudarFilial']);
     Route::get('/', [DashboardController::class, 'definirFilial']);
     Route::get('/dash', [DashboardController::class, 'index']);
 
