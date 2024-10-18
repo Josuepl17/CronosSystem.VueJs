@@ -213,6 +213,7 @@ background-color: var(--azul-escuro);
         max-width: 250px;
         background-color: var(--cinza-escuro);
         transition: width 0.9s ease;
+        
       }
 
       #topo-menu {
