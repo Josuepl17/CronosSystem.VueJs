@@ -6,6 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AuthMiddleware;
+use App\Models\Empresas;
+use App\Models\User_Empresas;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request as HttpRequest;
@@ -42,5 +44,20 @@ Route::middleware(['auth', 'web'])->group(function () {
     });
 });
 
+
+
+Route::get('/gere', function(){
+    $e = new Empresas();
+    $e->razao_social = 'Empresa 5' ;
+    $e->cnpj = rand(1, 100000);
+    $e->save();
+
+    $r = new User_Empresas();
+    $r->user_id = 1;
+    $r->empresa_id = $e->id;
+    $r->save(); 
+
+    return redirect('/dash');
+});
 
 

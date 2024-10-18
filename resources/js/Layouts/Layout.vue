@@ -9,8 +9,9 @@
         <div id="selecioneFilial" v-for="filial in $page.props.filiais" :key="filial.id" >
           
             <Link  :href="'/selecione/filial/' + filial.id">{{ filial.id }} - {{ filial.razao_social }} - {{ filial.cnpj }}</Link>
+            
         </div>
-
+  
       </div>
       </div>
 
@@ -117,7 +118,7 @@ const isModalOpen = ref(false);
 justify-content: center;
 border: 1px solid black;
 border-radius: 05px;
-
+margin-bottom: 05px;
 background-color: var(--azul-escuro);
 }
 
