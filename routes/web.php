@@ -3,6 +3,7 @@
 use App\Http\Controllers\ConsultasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MedicosController;
 use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AuthMiddleware;
@@ -34,7 +35,8 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/pacientes', [PacientesController::class, 'listaPacientes']);
     Route::get('/form/paciente', [PacientesController::class, 'formPacientes']);
     Route::post('/create/paciente', [PacientesController::class, 'createPaciente']);
-    Route::get('/consultas', [ConsultasController::class, 'consultas']);
+    Route::get('/medicos', [MedicosController::class, 'listaMedicos']);
+    Route::get('/form/medicos', [MedicosController::class, 'formMedicos']);
 
     Route::get('/detalhes/paciente/{id}', [PacientesController::class, 'detalhesPaciente']);
     
