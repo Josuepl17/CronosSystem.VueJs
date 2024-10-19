@@ -27,10 +27,11 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 
 Route::middleware(['auth', 'web'])->group(function () {
-
-    Route::get('/selecione/filial/{id}', [DashboardController::class, 'mudarFilial']);
-    Route::get('/', [DashboardController::class, 'definirFilial']);
     Route::get('/dash', [DashboardController::class, 'index']);
+    Route::get('/', [LoginController::class, 'definirFilial']);
+    Route::get('/selecione/filial/{id}', [LoginController::class, 'mudarFilial']);
+    
+    
 
     Route::get('/pacientes', [PacientesController::class, 'listaPacientes']);
     Route::get('/form/paciente', [PacientesController::class, 'formPacientes']);

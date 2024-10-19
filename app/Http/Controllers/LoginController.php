@@ -11,6 +11,7 @@ use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
 // Padrão Nomes Views, primeira letra Maiuscula e as Demais minusculas.
@@ -33,7 +34,7 @@ class LoginController extends Controller
 
     public function createUserEmpresa(Request $request)
     { // CRIA UM USUARIO, UMA EMPRESA E UMA LIGAÇÃO ENTRE OS DOIS 
-        
+
 
         $empresa = new Empresas();
         $empresa->razao_social = $request->razao_social;
@@ -72,6 +73,28 @@ class LoginController extends Controller
                 'email' => 'Credenciais inválidas.',
             ]);
         }
+    }
+
+
+    public function definirFilial()
+    {
+
+        $user_id = Auth::user()->id;
+        $relacionamentos = User_Empresas::where('user_id', $user_id)->pluck('empresa_id');
+        $filiais = Empresas::whereIn('id', $relacionamentos)->get();
+        Session::put('filiais', $filiais);
+
+        $razaoEmpresa = Empresas::find(Auth::user()->empresa_id);
+        Session::put('empresa_id', $razaoEmpresa->razao_social);
+
+        return redirect('/dash');
+    }
+
+    public function mudarFilial(Request $request)
+    {
+        $usuario = Auth::user();
+        $usuario->empresa_id = $request->id;
+        return redirect('/');
     }
 
 
