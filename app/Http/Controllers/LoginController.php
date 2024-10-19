@@ -10,6 +10,7 @@ use App\Services\MeuServico;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -69,7 +70,7 @@ class LoginController extends Controller
         $relacionamentos = User_Empresas::where('user_id', $user_id)->pluck('empresa_id');
         $filiais = Empresas::whereIn('id', $relacionamentos)->get();
         Session::put('filiais', $filiais);
-
+        
         $razaoEmpresa = Empresas::find(Auth::user()->empresa_id);
         Session::put('empresa_id', $razaoEmpresa->razao_social);
 
@@ -79,6 +80,8 @@ class LoginController extends Controller
     // altera a filial selecionada na cluna do usuario registra na sessão na proxima função.
     public function mudarFilial(Request $request)
     {
+        $decryptedId = Crypt::decryptString($request->id);
+        dd($decryptedId);
         $usuario = Auth::user();
         $usuario->empresa_id = $request->id;
         return redirect('/');

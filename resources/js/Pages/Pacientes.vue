@@ -35,7 +35,7 @@
         <td>{{ paciente.cpf }}</td>
         <td>{{ paciente.Medico }}</td> <!-- Ajuste conforme necessário -->
         <td>
-          <Link id="inserir" :href="'/detalhes/paciente' + paciente.id">Inserir</Link>
+          <Link id="inserir" :href="'/detalhes/paciente/' + paciente.id">Inserir</Link>
         </td>
       </tr>
     </tbody>

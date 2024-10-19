@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
 use App\Models\Pacientes;
+use App\Services\MeuServico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -17,10 +18,12 @@ class PacientesController extends Controller
         $pacientes = Pacientes::where('empresa_id', $empresa_id)->get();
 
         $pacientes->each(function ($paciente) {
-            $paciente->id = Crypt::encryptString($paciente->id);
+            $paciente->id = base64_encode($paciente->id) ;
         });
-
-        return Inertia::render('Pacientes', compact('pacientes'));
+       
+      //  dd($pacientes);
+      //  return Inertia::render('Pacientes', compact('pacientes'));
+       
     }
     
 
