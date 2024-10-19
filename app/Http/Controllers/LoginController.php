@@ -16,7 +16,7 @@ use Inertia\Inertia;
 
 class LoginController extends Controller
 {
-    public function formLogin()
+    public function formLogin() // formulario de login
     {
         return Inertia::render('Login');
     }
@@ -33,7 +33,7 @@ class LoginController extends Controller
         }
     }
 
-    public function formUserEmpresa()
+    public function formUserEmpresa() // formulario de Cadastro Inicial 
     {
         return Inertia::render('FormUserEmpresa');
     }
@@ -61,7 +61,9 @@ class LoginController extends Controller
         return redirect('/form/login');
     }
 
-    public function definirFilial()
+// Defini a ultima filial selecionada na sessão para exibir dados no layout princiapal
+//Lista todas as empresas ligadas ao usuario logado.
+    public function definirFilial() 
     {
         $user_id = Auth::user()->id;
         $relacionamentos = User_Empresas::where('user_id', $user_id)->pluck('empresa_id');
@@ -74,6 +76,7 @@ class LoginController extends Controller
         return redirect('/dash');
     }
 
+    // altera a filial selecionada na cluna do usuario registra na sessão na proxima função.
     public function mudarFilial(Request $request)
     {
         $usuario = Auth::user();

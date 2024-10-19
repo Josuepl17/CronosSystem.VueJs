@@ -27,24 +27,27 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 
 Route::middleware(['auth', 'web'])->group(function () {
+    
+    //Dashboard
     Route::get('/dash', [DashboardController::class, 'index']);
     Route::get('/', [LoginController::class, 'definirFilial']);
     Route::get('/selecione/filial/{id}', [LoginController::class, 'mudarFilial']);
     
-    
+    // Pacientes
 
     Route::get('/pacientes', [PacientesController::class, 'listaPacientes']);
     Route::get('/form/paciente', [PacientesController::class, 'formPacientes']);
     Route::post('/create/paciente', [PacientesController::class, 'createPaciente']);
+    Route::get('/detalhes/paciente/{id}', [PacientesController::class, 'detalhesPaciente']);
+    
+    // Medicos
     Route::get('/medicos', [MedicosController::class, 'listaMedicos']);
     Route::get('/form/medicos', [MedicosController::class, 'formMedicos']);
 
-    Route::get('/detalhes/paciente/{id}', [PacientesController::class, 'detalhesPaciente']);
+    
     
 
-    Route::get('/teste', function () {
-        dd("deu bommmmmmmmmm");
-    });
+
 });
 
 

@@ -13,9 +13,9 @@ class PacientesController extends Controller
     public function listaPacientes() {
         $empresa_id = Auth::user()->empresa_id;
         $pacientes = Pacientes::where('empresa_id', $empresa_id)->get();
-        
         return Inertia::render('Pacientes', compact('pacientes'));
     }
+    
 
     public function formPacientes() {
         return Inertia::render('FormPacientes');
