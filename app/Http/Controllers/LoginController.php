@@ -14,28 +14,32 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
-// Padrão Nomes Views, primeira letra Maiuscula e as Demais minusculas.
-// Padrão Nomes Funções, primeira letra Minuscula e as Demais Maiusculas.
 class LoginController extends Controller
 {
-
     public function formLogin()
     {
         return Inertia::render('Login');
     }
 
+    public function Authenticate(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended();
+        } else {
+            return back()->withErrors([
+                'email' => 'Credenciais inválidas.',
+            ]);
+        }
+    }
 
     public function formUserEmpresa()
     {
         return Inertia::render('FormUserEmpresa');
     }
 
-
-
     public function createUserEmpresa(Request $request)
-    { // CRIA UM USUARIO, UMA EMPRESA E UMA LIGAÇÃO ENTRE OS DOIS 
-
-
+    {
         $empresa = new Empresas();
         $empresa->razao_social = $request->razao_social;
         $empresa->cnpj = $request->cnpj;
@@ -54,31 +58,11 @@ class LoginController extends Controller
         $user_empresas->empresa_id = $empresa->id;
         $user_empresas->save();
 
-
-
         return redirect('/form/login');
     }
 
-
-    public function Authenticate(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            // Autenticação bem-sucedida
-            return redirect()->intended();
-        } else {
-            // Autenticação falhou
-            return back()->withErrors([
-                'email' => 'Credenciais inválidas.',
-            ]);
-        }
-    }
-
-
     public function definirFilial()
     {
-
         $user_id = Auth::user()->id;
         $relacionamentos = User_Empresas::where('user_id', $user_id)->pluck('empresa_id');
         $filiais = Empresas::whereIn('id', $relacionamentos)->get();
@@ -97,10 +81,9 @@ class LoginController extends Controller
         return redirect('/');
     }
 
-
     public function logout()
     {
         Auth::logout();
         return redirect('/form/login');
     }
-};
+}
