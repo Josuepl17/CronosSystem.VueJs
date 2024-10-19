@@ -6,13 +6,20 @@ use App\Http\Requests\ValidateRequest;
 use App\Models\Pacientes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Inertia\Inertia;
 
 class PacientesController extends Controller
 {
     public function listaPacientes() {
         $empresa_id = Auth::user()->empresa_id;
+        
         $pacientes = Pacientes::where('empresa_id', $empresa_id)->get();
+
+        $pacientes->each(function ($paciente) {
+            $paciente->id = Crypt::encryptString($paciente->id);
+        });
+
         return Inertia::render('Pacientes', compact('pacientes'));
     }
     
