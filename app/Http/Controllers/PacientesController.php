@@ -16,13 +16,7 @@ class PacientesController extends Controller
         $empresa_id = Auth::user()->empresa_id;
         
         $pacientes = Pacientes::where('empresa_id', $empresa_id)->get();
-
-        $pacientes->each(function ($paciente) {
-            $paciente->id = base64_encode($paciente->id) ;
-        });
-       
-      //  dd($pacientes);
-      //  return Inertia::render('Pacientes', compact('pacientes'));
+        return Inertia::render('Pacientes', compact('pacientes'));
        
     }
     

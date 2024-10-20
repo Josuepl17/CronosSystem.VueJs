@@ -16,7 +16,7 @@
         </div>
 
         <div id="tabela">
-          <table class="minimal-table">
+  <table class="minimal-table">
     <thead>
       <tr>
         <th>#</th>
@@ -29,18 +29,18 @@
     </thead>
     <tbody>
       <tr v-for="(paciente) in pacientes" :key="paciente.id">
-        <td>{{ paciente.id }}</td>
-        <td>{{ paciente.nome }}</td>
-        <td>{{ paciente.email }}</td>
-        <td>{{ paciente.cpf }}</td>
-        <td>{{ paciente.Medico }}</td> <!-- Ajuste conforme necessário -->
-        <td>
-          <Link id="inserir" :href="'/detalhes/paciente/' + paciente.id">Inserir</Link>
-        </td>
+        <Link :href="'/detalhes/paciente/' + paciente.id">
+          <td>{{ paciente.id }}</td>
+          <td>{{ paciente.nome }}</td>
+          <td>{{ paciente.email }}</td>
+          <td>{{ paciente.cpf }}</td>
+          <td>{{ paciente.Medico }}</td>
+          <td>Detalhes</td>
+        </Link>
       </tr>
     </tbody>
   </table>
-        </div>
+</div>
 
 
 
@@ -118,6 +118,10 @@ button{
   padding: 05px 15px 05px 15px;
   background-color: var(--azul-claro);
   border-radius: 02px;
+}
+
+tr a{
+  color: black;
 }
 
 #opcoes-conteudo a {
