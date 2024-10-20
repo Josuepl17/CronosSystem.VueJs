@@ -12,7 +12,9 @@
             <div id="rodape"></div>
         </div>
 
-        <div id="publicacao"></div>
+        <div id="publicacao">
+
+        </div>
 
     </div>
 
@@ -79,6 +81,8 @@
     width: 100%;
     height: 08%;
 }
+
+#publicacao
 
 
 
