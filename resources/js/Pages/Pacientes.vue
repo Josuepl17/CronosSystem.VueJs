@@ -29,14 +29,14 @@
     </thead>
     <tbody>
       <tr v-for="(paciente) in pacientes" :key="paciente.id">
-        <Link :href="'/detalhes/paciente/' + paciente.id">
+        
           <td>{{ paciente.id }}</td>
           <td>{{ paciente.nome }}</td>
           <td>{{ paciente.email }}</td>
           <td>{{ paciente.cpf }}</td>
           <td>{{ paciente.Medico }}</td>
-          <td>Detalhes</td>
-        </Link>
+          <td><Link id="inserir" :href="'/detalhes/paciente/' + paciente.id">Inserir</Link></td>
+        
       </tr>
     </tbody>
   </table>
