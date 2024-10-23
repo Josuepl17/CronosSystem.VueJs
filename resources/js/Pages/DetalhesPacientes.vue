@@ -10,7 +10,7 @@
             <div id="titulo-texto"><h1>Josué Pacheco de Lima</h1></div>
             <div id="conteiner-texto">Durante a primeira avaliação de um paciente em uma consulta psicológica, o terapeuta busca criar um ambiente de confiança e acolhimento. É importante compreender as razões que levaram o paciente a buscar ajuda, explorando seu histórico pessoal e familiar, além de eventos recentes que possam ter contribuído para sua situação atual. O terapeuta observa tanto a comunicação verbal quanto a não-verbal, identificando sintomas e comportamentos relevantes. Questionários e escalas de avaliação podem ser utilizados para aprofundar o entendimento dos sintomas, como ansiedade ou depressão. Esse processo inicial é crucial para estabelecer um plano terapêutico personalizado e eficaz.</div>
             <div id="rodape">
-                
+                <a href="">Novo Registro</a>
             </div>
         </div>
 
@@ -92,17 +92,30 @@
 #conteiner-texto{
     border: 1px solid black;
     width: 100%;
-    height: 82%;
+    height: 80%;
     padding: 15px;
     font-family: 'Times New Roman', Times, serif;
     font-size: 16px;
 }
 
 #rodape{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     border: 1px solid black;
     width: 100%;
-    height: 08%;
+    height: 10%;
     border-radius:0px 0px 05px 05px;
+}
+
+#rodape a{
+
+padding: 07px 20px 07px 20px;
+  background-color: rgb(0, 0, 94);
+  border-radius: 05px;
+  color: white;
+  margin-right: 10px;
+
 }
 
 
