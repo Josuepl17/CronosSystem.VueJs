@@ -8,7 +8,11 @@
     <div id="lado-esquerdo">
         <div id="texto-principal">
             <div id="titulo-texto"><h1>Josué Pacheco de Lima</h1></div>
-            <div id="conteiner-texto">Durante a primeira avaliação de um paciente em uma consulta psicológica, o terapeuta busca criar um ambiente de confiança e acolhimento. É importante compreender as razões que levaram o paciente a buscar ajuda, explorando seu histórico pessoal e familiar, além de eventos recentes que possam ter contribuído para sua situação atual. O terapeuta observa tanto a comunicação verbal quanto a não-verbal, identificando sintomas e comportamentos relevantes. Questionários e escalas de avaliação podem ser utilizados para aprofundar o entendimento dos sintomas, como ansiedade ou depressão. Esse processo inicial é crucial para estabelecer um plano terapêutico personalizado e eficaz.</div>
+
+            <div id="conteiner-texto">
+                <textarea  ></textarea>
+            </div>
+
             <div id="rodape">
                 <a href="">Novo Registro</a>
             </div>
@@ -48,6 +52,12 @@
 
 <style scoped>
 
+:root {
+        --azul-escuro: #012841;
+        --azul-claro: #014552;
+        --cinza-escuro: #212529;
+      }
+
 #conteudo{
     background-color: #000000;
 }
@@ -80,23 +90,38 @@
 }
 
 #titulo-texto{
-    border: 1px solid black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.177);
     width: 100%;
     height: 10%;
     border-radius:05px 05px 0px 0px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    color: white;
+    background-color: var(--cinza-escuro);
 }
 
 #conteiner-texto{
-    border: 1px solid black;
+    
     width: 100%;
     height: 80%;
     padding: 15px;
     font-family: 'Times New Roman', Times, serif;
     font-size: 16px;
 }
+
+#conteiner-texto textarea{
+width: 100%;
+height: 100%;
+border: none;
+outline: none;
+font-size: 16px;
+
+}
+
+textarea:focus {
+    border: none; /* Remove a borda ao clicar */
+  }
 
 #rodape{
     display: flex;
@@ -106,6 +131,7 @@
     width: 100%;
     height: 10%;
     border-radius:0px 0px 05px 05px;
+    background-color: var(--cinza-escuro);
 }
 
 #rodape a{
@@ -115,6 +141,7 @@ padding: 07px 20px 07px 20px;
   border-radius: 05px;
   color: white;
   margin-right: 10px;
+  
 
 }
 
