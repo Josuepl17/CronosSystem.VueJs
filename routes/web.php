@@ -11,10 +11,11 @@ use App\Models\Empresas;
 use App\Models\User_Empresas;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request as HttpRequest;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 // Padrão Nomes Funções, primeira letra Minuscula e as Demais Maiusculas.
 // Padrão Rotas, Form para Formularios, create, delete, edit, update para funções
@@ -50,6 +51,11 @@ Route::middleware(['auth', 'web'])->group(function () {
 
 });
 
+
+
+Route::post('/teste', function (Request $request) {
+    dd($request->all());
+});
 
 
 Route::get('/gere', function(){
