@@ -11,7 +11,7 @@
         <div id="texto-principal">
             <div id="titulo-texto">
                     <h1>Josué Pacheco de Lima</h1>
-                    <a @click.prevent="isModalOpen = true" href="">Novo</a>
+                    <a href="#" @click.prevent="abrirModal">Novo</a>
                 </div>
 
             <div id="conteiner-texto">
@@ -44,6 +44,33 @@
 
 
 </div>
+
+<!--        -->
+<div v-if="mostrarModal" class="modal-overlay">
+        <div class="modal-content">
+          <h1>Registro de Consulta</h1>
+          <br>
+
+          <div class="form-group">
+                       
+                        <input  type="text" id="titulo" placeholder="Titulo">
+                        
+                    </div>   
+
+                    <div class="form-group">
+                    
+                        
+                        <textarea placeholder="Descrição" name="descricao" id="descricao"></textarea>
+                        
+                    </div>   
+                    
+
+
+                    <button type="submit">Salvar</button>
+        </div>
+      </div>
+
+
 </form>
     </template>
 </Layout>
@@ -51,6 +78,7 @@
 </template>
 
 <script setup >
+import { ref } from 'vue';
 import { useForm } from "@inertiajs/vue3";
 
 const form = useForm({
@@ -69,6 +97,18 @@ arquivos: null,
 
 const armazena = (event) => {
   form.arquivos = event.target.files; // Armazenar os arquivos diretamente no formulário
+};
+
+const mostrarModal = ref(false); // Estado da modal, começa fechado
+
+// Função para abrir a modal
+const abrirModal = () => {
+  mostrarModal.value = true;
+};
+
+// Função para fechar a modal
+const fecharModal = () => {
+  mostrarModal.value = false;
 };
 </script>
 
@@ -89,11 +129,12 @@ const armazena = (event) => {
 }
 
 .modal-content {
+
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  width: 600px;
-  height: 400px;
+  width: 850px;
+  height: 450px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1001;
   transition: ease-in-out 1s;
@@ -104,6 +145,40 @@ const armazena = (event) => {
 
 
 <style scoped>
+
+.form-group {
+      margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+
+    }
+
+    .form-group textarea {
+      width: 100%;
+      height: 300px;
+
+    }
+
+
+
+    label {
+      display: block;
+      margin-bottom: 1px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="password"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      
+    }
 :root {
   --azul-escuro: #012841;
   --azul-claro: #014552;
@@ -156,10 +231,11 @@ form {
   padding: 06px;
 }
 
-#titulo-texto a {
-    all: unset;
+ a, button {
+  all: unset;
   padding: 07px 20px 07px 20px;
-  background-color: rgb(0, 108, 0);
+  background-color: rgb(0, 50, 0);
+  border: 1px solid rgba(255, 255, 255, 0.249) ;
   border-radius: 05px;
   color: white;
   margin-right: 10px;
@@ -173,7 +249,7 @@ form {
   font-size: 16px;
 }
 
-#conteiner-texto textarea {
+ textarea {
   width: 100%;
   height: 100%;
   border: none;
@@ -196,14 +272,7 @@ textarea:focus {
   background-color: var(--azul-escuro);
 }
 
-#rodape button {
-    all: unset;
-  padding: 07px 20px 07px 20px;
-  background-color: rgb(0, 108, 0);
-  border-radius: 05px;
-  color: white;
-  margin-right: 10px;
-}
+
 
 #rodape input {
   color: white;
