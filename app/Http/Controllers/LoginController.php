@@ -71,6 +71,15 @@ class LoginController extends Controller
         $filiais = Empresas::whereIn('id', $relacionamentos)->get();
         Session::put('filiais', $filiais);
         
+
+
+
+
+
+
+
+
+        
         $razaoEmpresa = Empresas::find(Auth::user()->empresa_id);
         Session::put('empresa_id', $razaoEmpresa->razao_social);
 
