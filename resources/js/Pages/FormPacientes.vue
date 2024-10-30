@@ -5,6 +5,8 @@
 
         <div class="fomulario-usuario">
                 <form @submit.prevent="form.post('/create/paciente')" >
+
+                  <div id="pessoais">
                     <div class="form-group">
                        <label for="nome">Nome Completo</label> 
                         <input type="text" id="nome" v-model="form.nome" placeholder="Nome Completo"  >
@@ -37,7 +39,14 @@
                         <input v-model="form.email" type="email" id="email" placeholder="Email">
                         <p style="color: red; font-size:13px; " v-if="errors.email" >{{ errors.email }}</p>
                     </div>
-            
+                  </div>
+
+
+
+
+
+
+            <div id="endereco">
                     <div class="form-group">
                         <label for="cidade">Cidade</label>
                         <input v-model="form.cidade" type="text" id="cidade" placeholder="Cidade">
@@ -60,6 +69,13 @@
                         <button type="submit" class="salvar">Salvar</button>
 
                     </div>
+                  </div>
+
+
+
+
+
+
                 </form>
             </div>
 
@@ -93,59 +109,5 @@ const props = defineProps({
 
 
 <style scoped>
-      .fomulario-usuario {
-      width: 100%;
-      height: 100%;
-      padding: 20px;
-      overflow: auto;
-  
-    }
-
-    .form-group {
-      margin-bottom: 10px;
-
-    }
-
-
-
-    label {
-      display: block;
-      margin-bottom: 1px;
-      font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="date"],
-    input[type="password"],
-    input[type="number"],
-    select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      
-    }
-
-    button {
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    button.salvar {
-      background-color: #4caf50;
-    }
-
-    button.fechar {
-      background-color: #9d9d9d;
-    }
-
-    .fechar-salvar {
-      display: flex;
-      justify-content: space-between;
-    }
-
+  @import "..\Components\css\formularios.css";
 </style>

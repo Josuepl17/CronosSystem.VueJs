@@ -129,7 +129,6 @@ const fecharModal = () => {
 }
 
 .modal-content {
-
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -234,12 +233,20 @@ form {
  a, button {
   all: unset;
   padding: 07px 20px 07px 20px;
-  background-color: rgb(0, 50, 0);
+  background-color: var(--azul-claro);
   border: 1px solid rgba(255, 255, 255, 0.249) ;
   border-radius: 05px;
   color: white;
+  
   margin-right: 10px;
 }
+
+a:hover, button:hover {
+  border: 1px solid white;
+  transition: ease-in-out 0.3s;
+}
+
+
 
 #conteiner-texto {
   width: 100%;
