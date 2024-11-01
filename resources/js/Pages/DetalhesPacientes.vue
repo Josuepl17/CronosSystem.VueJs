@@ -2,7 +2,7 @@
 
 <Layout>
     <template v-slot:conteudo>
-<form @submit.prevent="form.post('/teste')" >
+<form @submit.prevent="form.post('/detalhes/pacientes')" >
     
 
 <div id="caixa">
@@ -15,7 +15,7 @@
                 </div>
 
             <div id="conteiner-texto">
-                <textarea v-model="form.TextoPrincipal" rows="" cols=""></textarea  >
+                <textarea v-model="form.texto_principal" rows="" cols=""></textarea placeholder="Escreva aqui...."  >
             </div>
 
             <div id="rodape">
@@ -60,7 +60,7 @@
                     <div class="form-group">
                     
                         
-                        <textarea placeholder="Descrição" name="descricao" id="descricao"></textarea>
+                        <textarea name="descricao" id="descricao"></textarea placeholder="Descrição" >
                         
                     </div>   
                     
@@ -82,15 +82,8 @@ import { ref } from 'vue';
 import { useForm } from "@inertiajs/vue3";
 
 const form = useForm({
-TextoPrincipal: "",
+texto_principal: "",
 arquivos: null,
-  crp: "",
-  especialidade: "",
-  telefone: "",
-  email: "",
-  endereco: "",
-  cidade: "",
-  bairro: "",
 });
 
 
@@ -225,7 +218,7 @@ form {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
+  color: rgb(255, 255, 255);
   background-color: var(--azul-escuro);
   padding: 06px;
 }

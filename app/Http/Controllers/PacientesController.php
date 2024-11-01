@@ -32,7 +32,7 @@ class PacientesController extends Controller
     }
 
     public function detalhesPaciente(Request $request) {
-
+        
         return Inertia::render('DetalhesPacientes');
 
     }
