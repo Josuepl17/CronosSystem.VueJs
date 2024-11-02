@@ -15,7 +15,12 @@
                 </div>
 
             <div id="conteiner-texto">
-                <textarea v-model="form.texto_principal" rows="" cols=""></textarea placeholder="Escreva aqui...."  >
+
+                  <textarea v-model="form.texto_principal" >
+                   
+                  </textarea>
+
+               
             </div>
 
             <div id="rodape">
@@ -60,7 +65,9 @@
                     <div class="form-group">
                     
                         
-                        <textarea name="descricao" id="descricao"></textarea placeholder="Descrição" >
+                        <textarea name="descricao" id="descricao">
+                   
+                          </textarea>
                         
                     </div>   
                     
@@ -81,10 +88,15 @@
 import { ref } from 'vue';
 import { useForm } from "@inertiajs/vue3";
 
+const props = defineProps({
+  detalhes: Object,
+})
+
 const form = useForm({
-texto_principal: "",
+texto_principal:   "",
 arquivos: null,
 });
+
 
 
 

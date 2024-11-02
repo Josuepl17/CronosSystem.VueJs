@@ -42,15 +42,17 @@ class PacientesController extends Controller
     public function detalhesPacientes() {
         $id_paciente = FacadesSession::get('id_paciente');
         $detalhes = Detalhes_Pacientes::find($id_paciente);
+        
         return Inertia::render('DetalhesPacientes', compact('detalhes'));
 
     }
 
     public function createDetalhesPacientes(Request $request) {
-        $detalhes_pacientes = new Detalhes_Pacientes();
+        $detalhes_pacientes = Detalhes_Pacientes::find(FacadesSession::get('id_paciente'));
+
         $detalhes_pacientes->texto_principal = $request->texto_principal;
-        $detalhes_pacientes->paciente_id = 1;
-        $detalhes_pacientes->empresa_id = 1;
+        $detalhes_pacientes->paciente_id = FacadesSession::get('id_paciente');
+        $detalhes_pacientes->empresa_id = Auth::user()->empresa_id;
         $detalhes_pacientes->save();
         return redirect('/detalhes/paciente');
     }
