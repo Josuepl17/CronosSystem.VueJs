@@ -2,7 +2,7 @@
 
 <Layout>
     <template v-slot:conteudo>
-<form @submit.prevent="form.post('/detalhes/pacientes')" >
+<form @submit.prevent="form.post('/create/paciente/detalhes')" >
     
 
 <div id="caixa">

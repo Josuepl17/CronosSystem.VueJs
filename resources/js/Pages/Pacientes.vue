@@ -6,7 +6,7 @@
 
         <div id="opcoes-conteudo" >
 
-          <Link href="/form/paciente">Inserir</Link>
+          <Link   href="/form/paciente">Inserir</Link>
 
             <form action="#" method="GET">
                 <input type="text"  placeholder="Search..." />

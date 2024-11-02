@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
+use App\Models\Detalhes_Pacientes;
 use App\Models\Pacientes;
 use App\Services\MeuServico;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Session as FacadesSession;
 use Inertia\Inertia;
 
 class PacientesController extends Controller
@@ -31,9 +34,25 @@ class PacientesController extends Controller
         return redirect('/pacientes');
     }
 
-    public function detalhesPaciente(Request $request) {
-        
-        return Inertia::render('DetalhesPacientes');
+    public function sessionPaciente(Request $request) {
+        FacadesSession::put('id_paciente', $request->id);
+        return redirect('/detalhes/paciente');
+    }
+
+    public function detalhesPacientes() {
+        $id_paciente = FacadesSession::get('id_paciente');
+        $detalhes = Detalhes_Pacientes::find($id_paciente);
+        return Inertia::render('DetalhesPacientes', compact('detalhes'));
 
     }
+
+    public function createDetalhesPacientes(Request $request) {
+        $detalhes_pacientes = new Detalhes_Pacientes();
+        $detalhes_pacientes->texto_principal = $request->texto_principal;
+        $detalhes_pacientes->paciente_id = 1;
+        $detalhes_pacientes->empresa_id = 1;
+        $detalhes_pacientes->save();
+        return redirect('/detalhes/paciente');
+    }
+
 }
