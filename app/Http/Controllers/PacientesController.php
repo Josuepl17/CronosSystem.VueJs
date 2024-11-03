@@ -48,8 +48,8 @@ class PacientesController extends Controller
     }
 
     public function createDetalhesPacientes(Request $request) {
-        $detalhes_pacientes = Detalhes_Pacientes::find(FacadesSession::get('id_paciente'));
 
+        $detalhes_pacientes = Detalhes_Pacientes::find(FacadesSession::get('id_paciente'));
         $detalhes_pacientes->texto_principal = $request->texto_principal;
         $detalhes_pacientes->paciente_id = FacadesSession::get('id_paciente');
         $detalhes_pacientes->empresa_id = Auth::user()->empresa_id;

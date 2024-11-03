@@ -93,7 +93,7 @@ const props = defineProps({
 })
 
 const form = useForm({
-texto_principal:   "",
+texto_principal:  "",
 arquivos: null,
 });
 
