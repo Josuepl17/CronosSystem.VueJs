@@ -92,14 +92,10 @@ const props = defineProps({
   detalhes: Object,
 })
 
-const arquivosArray = props.detalhes.arquivos ? props.detalhes.arquivos.split(',') : [];
-
 const form = useForm({
-  texto_principal: props.detalhes.texto_principal || "",
-  arquivos: arquivosArray, // Armazena o array de arquivos
+  texto_principal: "" || props.detalhes.texto_principal,
+  arquivos: null, // Armazena o array de arquivos
 });
-
-
 
 
 const armazena = (event) => {

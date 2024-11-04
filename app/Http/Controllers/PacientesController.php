@@ -58,16 +58,14 @@ class PacientesController extends Controller
     public function detalhesPacientes() {
         $id_paciente = FacadesSession::get('id_paciente');
         $detalhes = Detalhes_Pacientes::find($id_paciente);
-        
+       // dd($detalhes);
         return Inertia::render('DetalhesPacientes', compact('detalhes'));
 
     }
 
     public function createDetalhesPacientes(Request $request)
     {
-
-        
-        if ($request->hasFile('arquivos')) {
+        if ($request->arquivos !== null ) {
             foreach ($request->file('arquivos') as $file) {
                 // Nome do arquivo
                 $filename = $file->getClientOriginalName();
@@ -99,7 +97,7 @@ class PacientesController extends Controller
                 'texto_principal' => $request->texto_principal,
                 'paciente_id' => FacadesSession::get('id_paciente'),
                 'empresa_id' => Auth::user()->empresa_id,
-                'arquivos' => $caminhosArquivos,
+                'arquivos' => $caminhosArquivos ?? null,
             ]
         );
 
