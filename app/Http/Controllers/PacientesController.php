@@ -67,19 +67,24 @@ class PacientesController extends Controller
     {
 
         
-        foreach ($request->file('arquivos') as $file) {
-            $filename = $file->getClientOriginalName();
+        if ($request->hasFile('arquivos')) {
+            foreach ($request->file('arquivos') as $file) {
+                // Nome do arquivo
+                $filename = $file->getClientOriginalName();
+                
+                // Caminho para armazenar o arquivo
+                $destinationPath = public_path('uploads');
+    
+                // Move o arquivo para o caminho desejado
+                $file->move($destinationPath, $filename);
+
+                $caminhosArquivos[] = 'uploads/' . $filename;
+
+            }
         }
+    
 
 
-     
-        foreach ($request->file('arquivos') as $file) {
-            $filename = $file->getClientOriginalName();
-            $path = $file->store('uploads', 'public');
-            // Faça algo com o caminho do arquivo, como armazenar em um banco de dados
-        }
-
-        dd($path);
 
           
   
@@ -94,7 +99,7 @@ class PacientesController extends Controller
                 'texto_principal' => $request->texto_principal,
                 'paciente_id' => FacadesSession::get('id_paciente'),
                 'empresa_id' => Auth::user()->empresa_id,
-                'arquivos' => $filename,
+                'arquivos' => $caminhosArquivos,
             ]
         );
 
