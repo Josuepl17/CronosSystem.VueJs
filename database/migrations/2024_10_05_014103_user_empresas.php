@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -23,6 +24,13 @@ return new class extends Migration
             $table->timestamps();
 
         });
+
+        DB::table('user_empresas')->insert([
+            'user_id' => 1, // SUBSTITUA PELO ID DO USUÁRIO EXISTENTE
+            'empresa_id' => 1, // SUBSTITUA PELO ID DA EMPRESA EXISTENTE
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 
     /**

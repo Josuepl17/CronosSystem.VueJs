@@ -10,6 +10,7 @@ class Detalhes_Pacientes extends Model
     protected $table = 'detalhes_pacientes';
     protected $fillable = [
         'texto_principal',
+        'arquivos',
         'paciente_id',
         'empresa_id',
 

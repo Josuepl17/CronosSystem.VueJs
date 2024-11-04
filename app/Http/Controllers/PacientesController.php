@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Inertia\Inertia;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class PacientesController extends Controller
 {
@@ -29,10 +30,25 @@ class PacientesController extends Controller
 
     public function createPaciente(ValidateRequest $request) {
         $dados = $request->all();
+        
+
+        // PREPARA OS DADOS
+     
         $dados['empresa_id'] = Auth::user()->empresa_id;
-        Pacientes::create($dados);
+    
+        $paciente =  Pacientes::create($dados);
+    
+
+        Detalhes_Pacientes::create([
+            'paciente_id' => $paciente->id,
+            'texto_principal' => "",
+            'arquivos' => "",
+            'empresa_id' => Auth::user()->empresa_id,
+        ]);
+
         return redirect('/pacientes');
     }
+
 
     public function sessionPaciente(Request $request) {
         FacadesSession::put('id_paciente', $request->id);
@@ -47,14 +63,41 @@ class PacientesController extends Controller
 
     }
 
-    public function createDetalhesPacientes(Request $request) {
+    public function createDetalhesPacientes(Request $request)
+    {
 
-        $detalhes_pacientes = Detalhes_Pacientes::find(FacadesSession::get('id_paciente'));
-        $detalhes_pacientes->texto_principal = $request->texto_principal;
-        $detalhes_pacientes->paciente_id = FacadesSession::get('id_paciente');
-        $detalhes_pacientes->empresa_id = Auth::user()->empresa_id;
-        $detalhes_pacientes->save();
-        return redirect('/detalhes/paciente');
-    }
+        
+        foreach ($request->file('arquivos') as $file) {
+            $filename = $file->getClientOriginalName();
+        }
+
+
+     
+        foreach ($request->file('arquivos') as $file) {
+            $filename = $file->getClientOriginalName();
+            $path = $file->store('uploads', 'public');
+            // Faça algo com o caminho do arquivo, como armazenar em um banco de dados
+        }
+
+        dd($path);
+
+          
+  
+     
+
+        Detalhes_Pacientes::updateOrCreate(
+            // CONDIÇÃO PARA ENCONTRAR O REGISTRO EXISTENTE
+            ['paciente_id' => FacadesSession::get('id_paciente')],
+    
+            // DADOS PARA CRIAR OU ATUALIZAR O REGISTRO
+            [
+                'texto_principal' => $request->texto_principal,
+                'paciente_id' => FacadesSession::get('id_paciente'),
+                'empresa_id' => Auth::user()->empresa_id,
+                'arquivos' => $filename,
+            ]
+        );
+
+}
 
 }

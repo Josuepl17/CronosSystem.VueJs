@@ -26,7 +26,7 @@
             <div id="rodape">
                 <button type="submit">Salvar</button>
                
-                <input @change="armazena"  type="file" name="" value="" style="color:white;" multiple >
+                <input @change="armazena"  type="file" name="" value="" style="color:white;">
             </div>
         </div>
 
@@ -93,7 +93,7 @@ const props = defineProps({
 })
 
 const form = useForm({
-texto_principal:  "",
+texto_principal: "" || props.detalhes.texto_principal,
 arquivos: null,
 });
 

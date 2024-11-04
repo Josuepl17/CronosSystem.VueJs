@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('detalhes_pacientes', function (Blueprint $table) {
             $table->id();
-            $table->string('texto_principal');
+            $table->string('texto_principal')->nullable();
+            $table->string('arquivos')->nullable();
             
             $table->unsignedBigInteger('paciente_id');
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade')->onUpdate('cascade');
