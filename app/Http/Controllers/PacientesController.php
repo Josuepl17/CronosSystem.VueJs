@@ -81,13 +81,6 @@ class PacientesController extends Controller
             }
         }
     
-
-
-
-          
-  
-     
-
         Detalhes_Pacientes::updateOrCreate(
             // CONDIÇÃO PARA ENCONTRAR O REGISTRO EXISTENTE
             ['paciente_id' => FacadesSession::get('id_paciente')],
@@ -102,5 +95,26 @@ class PacientesController extends Controller
         );
 
 }
+
+
+
+
+
+
+##public function downloadArquivo($filename)
+{
+    // Caminho completo do arquivo
+    $filePath = public_path('uploads/' . $filename);
+
+    // Verifica se o arquivo existe
+    if (file_exists($filePath)) {
+        // Retorna o arquivo para download
+        return response()->download($filePath);
+    } else {
+        // Retorna uma mensagem de erro se o arquivo não existir
+        return response()->json(['error' => 'Arquivo não encontrado.'], 404);
+    }
+}
+
 
 }

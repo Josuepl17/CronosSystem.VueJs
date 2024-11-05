@@ -27,6 +27,7 @@
                 <button type="submit">Salvar</button>
                
                 <input @change="armazena"  type="file" name="" value="" style="color:white;" multiple >
+                <a href="">Donwload</a>
             </div> 
         </div>
 
@@ -280,13 +281,15 @@ textarea:focus {
   height: 10%;
   border-radius: 0px 0px 05px 05px;
   background-color: var(--azul-escuro);
+  
 }
 
 
 
 #rodape input {
   color: white;
-
+  padding-right: 10px;
+  
 }
 
 #publicacao {
