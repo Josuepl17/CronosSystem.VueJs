@@ -75,8 +75,8 @@ class PacientesController extends Controller
     
                 // Move o arquivo para o caminho desejado
                 $file->move($destinationPath, $filename);
-
-                $caminhosArquivos[] = 'uploads/' . $filename;
+                
+                $caminhosArquivos[] = 'uploads' . $filename;
 
             }
         }
@@ -101,19 +101,20 @@ class PacientesController extends Controller
 
 
 
-##public function downloadArquivo($filename)
+public function downloadArquivo()
 {
     // Caminho completo do arquivo
-    $filePath = public_path('uploads/' . $filename);
+    $paciente = Detalhes_Pacientes::Find(FacadesSession::get('id_paciente'));
+    $arquivos = $paciente->arquivos;
+    $arquivos = explode(",", $arquivos);
 
-    // Verifica se o arquivo existe
-    if (file_exists($filePath)) {
-        // Retorna o arquivo para download
-        return response()->download($filePath);
-    } else {
+
+
+        return response()->download('uploads\1644922624416.pdf');
+
         // Retorna uma mensagem de erro se o arquivo não existir
-        return response()->json(['error' => 'Arquivo não encontrado.'], 404);
-    }
+
+    
 }
 
 

@@ -27,7 +27,7 @@
                 <button type="submit">Salvar</button>
                
                 <input @change="armazena"  type="file" name="" value="" style="color:white;" multiple >
-                <a href="">Donwload</a>
+                <a href="/download/paciente/detalhes">Donwload</a>
             </div> 
         </div>
 

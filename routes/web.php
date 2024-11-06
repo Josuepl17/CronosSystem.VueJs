@@ -42,10 +42,12 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/detalhes/paciente/{id}', [PacientesController::class, 'sessionPaciente']);
     Route::get('/detalhes/paciente', [PacientesController::class, 'detalhesPacientes']);
     Route::post('/create/paciente/detalhes', [PacientesController::class, 'createDetalhesPacientes']);
+    Route::get('/download/paciente/detalhes', [PacientesController::class, 'downloadArquivo']);
 
     // Medicos
     Route::get('/medicos', [MedicosController::class, 'listaMedicos']);
     Route::get('/form/medicos', [MedicosController::class, 'formMedicos']);
+  
 
     
     
