@@ -76,7 +76,8 @@ class PacientesController extends Controller
                 // Move o arquivo para o caminho desejado
                 $file->move($destinationPath, $filename);
                 
-                $caminhosArquivos[] = 'uploads' . $filename;
+                $caminhosArquivos[] = 'uploads/' . $filename;
+                //$caminhoArquivosString = is_array($caminhosArquivos) ? implode(',', $caminhosArquivos) : $caminhosArquivos;
 
             }
         }
@@ -90,7 +91,7 @@ class PacientesController extends Controller
                 'texto_principal' => $request->texto_principal,
                 'paciente_id' => FacadesSession::get('id_paciente'),
                 'empresa_id' => Auth::user()->empresa_id,
-                'arquivos' => $caminhosArquivos ?? null,
+                'arquivos' => $caminhoArquivosString ?? null,
             ]
         );
 
@@ -108,13 +109,16 @@ public function downloadArquivo()
     $arquivos = $paciente->arquivos;
     $arquivos = explode(",", $arquivos);
 
+        foreach ($arquivos as $arquivo) {
+           
+          
+                return response()->download($arquivo);
+        
+             
+              
+            }
 
-
-        return response()->download('uploads\1644922624416.pdf');
-
-        // Retorna uma mensagem de erro se o arquivo não existir
-
-    
+      
 }
 
 
