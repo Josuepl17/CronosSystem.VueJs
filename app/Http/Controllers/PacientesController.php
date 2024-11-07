@@ -16,17 +16,29 @@ use PhpParser\Node\Expr\Cast\Object_;
 
 class PacientesController extends Controller
 {
+
+
+
+
     public function listaPacientes() {
         $empresa_id = Auth::user()->empresa_id;
         $pacientes = Pacientes::where('empresa_id', $empresa_id)->get();
         return Inertia::render('Pacientes', compact('pacientes'));
        
     }
+
+
+
+
     
 
     public function formPacientes() {
         return Inertia::render('FormPacientes');
     }
+
+
+
+
 
     public function createPaciente(ValidateRequest $request) {
         $dados = $request->all();
@@ -50,10 +62,22 @@ class PacientesController extends Controller
     }
 
 
+
+
+
+
+
+
     public function sessionPaciente(Request $request) {
         FacadesSession::put('id_paciente', $request->id);
         return redirect('/detalhes/paciente');
     }
+
+
+
+
+
+
 
     public function detalhesPacientes() {
         $id_paciente = FacadesSession::get('id_paciente');
@@ -63,9 +87,15 @@ class PacientesController extends Controller
 
     }
 
+
+
+
+
+
+
     public function createDetalhesPacientes(Request $request)
     {
-        if ($request->arquivos !== null ) {
+       /* if ($request->arquivos !== null ) {
             foreach ($request->file('arquivos') as $file) {
                 // Nome do arquivo
                 $filename = $file->getClientOriginalName();
@@ -80,7 +110,7 @@ class PacientesController extends Controller
                 $caminhoArquivosString = is_array($caminhosArquivos) ? implode(',', $caminhosArquivos) : $caminhosArquivos;
 
             }
-        }
+        }*/
     
         Detalhes_Pacientes::updateOrCreate(
             // CONDIÇÃO PARA ENCONTRAR O REGISTRO EXISTENTE
@@ -99,10 +129,20 @@ class PacientesController extends Controller
 
 
 
+public function createTramite(Request $request) {
+    dd($request->all());
+}
 
 
 
-public function downloadArquivo()
+
+
+
+
+
+
+
+/*public function downloadArquivo()
 {
     // Caminho completo do arquivo
     $paciente = Detalhes_Pacientes::Find(FacadesSession::get('id_paciente'));
@@ -112,16 +152,9 @@ public function downloadArquivo()
 
 
         foreach ($arquivos as $arquivo) {
-           
-          
-            return response()->download($arquivo);
-        
-             
-              
-            }
-
-      
-}
+            return response()->download($arquivo);   
+            }   
+}*/
 
 
 }

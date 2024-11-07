@@ -11,7 +11,7 @@
         <div id="texto-principal">
             <div id="titulo-texto">
                     <h1>Josué Pacheco de Lima</h1>
-                    <a href="#" @click.prevent="abrirModal">Novo</a>
+                    
                 </div>
 
             <div id="conteiner-texto">
@@ -28,9 +28,9 @@
                
                 <input @change="armazena"  type="file" name="" value="" style="opacity: 0; position: absolute; z-index: -1;"
                 ref="fileInput">
-                <button type="button" @click="selecionarArquivo">Escolher arquivo</button>
-                
-                <a href="/download/paciente/detalhes">Donwload</a>
+                <!--<button type="button" @click="selecionarArquivo">Escolher arquivo</button>-->
+                <a href="#" @click.prevent="abrirModal">Novo</a>
+                <!--<a href="/download/paciente/detalhes">Donwload</a>-->
             </div> 
         </div>
 
@@ -55,34 +55,33 @@
 </div>
 
 <!--        -->
-<div v-if="mostrarModal" class="modal-overlay">
-        <div class="modal-content">
-          <h1>Registro de Consulta</h1>
-          <br>
-
-          <div class="form-group">
-                       
-                        <input  type="text" id="titulo" placeholder="Titulo">
-                        
-                    </div>   
-
-                    <div class="form-group">
-                    
-                        
-                        <textarea name="descricao" id="descricao">
-                   
-                          </textarea>
-                        
-                    </div>   
-                    
-
-
-                    <button type="submit">Salvar</button>
-        </div>
-      </div>
-
 
 </form>
+
+
+
+<div v-if="mostrarModal" class="modal-overlay">
+  <div class="modal-content">
+    <h1>Registro de Consulta</h1>
+    <br>
+    <form @submit.prevent="modal.post('/inserir/tramite')">
+      <div class="form-group">
+        <input v-model="modal.titulo" type="text" id="titulo" placeholder="Título">
+      </div>
+      <div class="form-group">
+        <textarea v-model="modal.descricao" name="descricao" id="descricao"></textarea>
+      </div>
+      <a href="#" @click.prevent="fecharModal">Fechar</a>
+      <button type="submit">Salvar</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
     </template>
 </Layout>
 
@@ -93,20 +92,26 @@ import { ref } from 'vue';
 import { useForm } from "@inertiajs/vue3";
 
 
-function selecionarArquivo() {
-  document.querySelector('input[type="file"]').click()
-}
+//function selecionarArquivo() {
+  //document.querySelector('input[type="file"]').click()
+//}
 
 const props = defineProps({
   detalhes: Object,
 })
 
-const arquivoNome = "ola"
+
 
 const form = useForm({
   texto_principal: "" || props.detalhes.texto_principal,
   arquivos: null, // Armazena o array de arquivos
 });
+
+
+const modal = useForm({
+  titulo: "",
+  descricao: "",
+})
 
 
 const armazena = (event) => {
@@ -190,8 +195,22 @@ const fecharModal = () => {
       padding: 10px;
       border-radius: 4px;
       border: 1px solid #ccc;
+      font-weight: 550;
       
     }
+
+    input:focus {
+  outline: none; /* Remove a borda externa (geralmente mais grossa) */
+  border: 1px solid #ccc; /* Mantém a borda normal */
+}
+
+textarea:focus {
+  outline: none; /* Remove a borda externa (geralmente mais grossa) */
+  border: 1px solid #ccc; /* Mantém a borda normal */
+}
+
+
+
 :root {
   --azul-escuro: #012841;
   --azul-claro: #014552;
@@ -239,33 +258,37 @@ form {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: rgb(255, 255, 255);
-  background-color: var(--azul-escuro);
+  color: rgb(0, 0, 0);
   padding: 06px;
 }
 
- a, button {
+button {
   all: unset;
   padding: 07px 20px 07px 20px;
-  background-color: var(--azul-claro);
+  background-color: rgb(0, 97, 0);
   border: 1px solid rgba(255, 255, 255, 0.249) ;
   border-radius: 05px;
   color: white;
-  
   margin-right: 10px;
 }
 
-a:hover, button:hover {
-  border: 1px solid white;
-  transition: ease-in-out 0.3s;
+a {
+  
+  padding: 07px 20px 07px 20px;
+  background-color: var(--azul-escuro);
+  border: 1px solid rgba(255, 255, 255, 0.249) ;
+  border-radius: 05px;
+  color: white;
+  margin-right: 10px;
 }
+
 
 
 
 #conteiner-texto {
   width: 100%;
   height: 80%;
-  padding: 15px;
+  padding: 09px;
   font-family: "Times New Roman", Times, serif;
   font-size: 16px;
 }
@@ -273,24 +296,23 @@ a:hover, button:hover {
  textarea {
   width: 100%;
   height: 100%;
-  border: none;
-  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.229);
+  border-radius: 04px;
   font-size: 16px;
+  padding: 10px;
 }
 
-textarea:focus {
-  border: none; /* Remove a borda ao clicar */
-}
+
 
 #rodape {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.212);
   width: 100%;
   height: 10%;
   border-radius: 0px 0px 05px 05px;
-  background-color: var(--azul-escuro);
+
   
 }
 
