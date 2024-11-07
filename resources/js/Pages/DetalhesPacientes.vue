@@ -26,7 +26,10 @@
             <div id="rodape">
                 <button type="submit">Salvar</button>
                
-                <input @change="armazena"  type="file" name="" value="" style="color:white;" multiple >
+                <input @change="armazena"  type="file" name="" value="" style="opacity: 0; position: absolute; z-index: -1;"
+                ref="fileInput">
+                <button type="button" @click="selecionarArquivo">Escolher arquivo</button>
+                
                 <a href="/download/paciente/detalhes">Donwload</a>
             </div> 
         </div>
@@ -89,9 +92,16 @@
 import { ref } from 'vue';
 import { useForm } from "@inertiajs/vue3";
 
+
+function selecionarArquivo() {
+  document.querySelector('input[type="file"]').click()
+}
+
 const props = defineProps({
   detalhes: Object,
 })
+
+const arquivoNome = "ola"
 
 const form = useForm({
   texto_principal: "" || props.detalhes.texto_principal,

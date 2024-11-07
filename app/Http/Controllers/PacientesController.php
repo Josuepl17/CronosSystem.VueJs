@@ -77,7 +77,7 @@ class PacientesController extends Controller
                 $file->move($destinationPath, $filename);
                 
                 $caminhosArquivos[] = 'uploads/' . $filename;
-                //$caminhoArquivosString = is_array($caminhosArquivos) ? implode(',', $caminhosArquivos) : $caminhosArquivos;
+                $caminhoArquivosString = is_array($caminhosArquivos) ? implode(',', $caminhosArquivos) : $caminhosArquivos;
 
             }
         }
@@ -108,11 +108,13 @@ public function downloadArquivo()
     $paciente = Detalhes_Pacientes::Find(FacadesSession::get('id_paciente'));
     $arquivos = $paciente->arquivos;
     $arquivos = explode(",", $arquivos);
+    print_r($arquivos);
+
 
         foreach ($arquivos as $arquivo) {
            
           
-                return response()->download($arquivo);
+            return response()->download($arquivo);
         
              
               
