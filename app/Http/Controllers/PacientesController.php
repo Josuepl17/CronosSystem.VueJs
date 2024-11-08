@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ValidateRequest;
 use App\Models\Detalhes_Pacientes;
 use App\Models\Pacientes;
+use App\Models\Tramites_Pacientes;
 use App\Services\MeuServico;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
@@ -81,9 +82,9 @@ class PacientesController extends Controller
 
     public function detalhesPacientes() {
         $id_paciente = FacadesSession::get('id_paciente');
-        $detalhes = Detalhes_Pacientes::find($id_paciente);
-       // dd($detalhes);
-        return Inertia::render('DetalhesPacientes', compact('detalhes'));
+        $detalhes = Detalhes_Pacientes::where('paciente_id', $id_paciente)->first();
+        $tramites_paciente = Tramites_Pacientes::where('paciente_id', $id_paciente)->get()->toArray();
+        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente'));
 
     }
 
@@ -130,7 +131,11 @@ class PacientesController extends Controller
 
 
 public function createTramite(Request $request) {
-    dd($request->all());
+    $dados = $request->all();
+    $dados['paciente_id'] = FacadesSession::get('id_paciente');
+    $dados['empresa_id'] = Auth::user()->empresa_id;
+    Tramites_Pacientes::create($dados);
+    return Inertia::location('/detalhes/paciente');
 }
 
 

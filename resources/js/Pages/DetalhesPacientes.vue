@@ -34,9 +34,18 @@
             </div> 
         </div>
 
-        <div id="publicacao"></div>
-        <div id="publicacao"></div>
-        <div id="publicacao"></div>
+
+
+        <div v-for="(tramites) in tramites_paciente" :key="tramites.id" class="publicacao">
+  <div class="publicacao-header">
+    <h3 class="publicacao-titulo">{{ tramites.titulo }}</h3>
+    <span class="publicacao-id">ID: {{ tramites.id }}</span>
+  </div>
+  <div class="publicacao-descricao">
+    <p>{{ tramites.descricao }}</p>
+  </div>
+</div>
+
 
 
 
@@ -88,31 +97,27 @@
 </template>
 
 <script setup >
-import { ref } from 'vue';
+import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
-
 //function selecionarArquivo() {
-  //document.querySelector('input[type="file"]').click()
+//document.querySelector('input[type="file"]').click()
 //}
 
 const props = defineProps({
   detalhes: Object,
-})
-
-
+  tramites_paciente: Array,
+});
 
 const form = useForm({
   texto_principal: "" || props.detalhes.texto_principal,
   arquivos: null, // Armazena o array de arquivos
 });
 
-
 const modal = useForm({
   titulo: "",
   descricao: "",
-})
-
+});
 
 const armazena = (event) => {
   form.arquivos = event.target.files; // Armazenar os arquivos diretamente no formulário
@@ -130,6 +135,52 @@ const fecharModal = () => {
   mostrarModal.value = false;
 };
 </script>
+
+
+
+<style>
+.publicacao {
+  width: 90%;
+  min-height: 145px;
+  border-radius: 8px; /* Borda arredondada mais suave */
+  margin-bottom: 15px; /* Espaçamento entre as publicações */
+  background-color: #f9f9f9; /* Fundo mais suave */
+  padding: 20px; /* Espaçamento interno */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para dar um efeito de profundidade */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito ao passar o mouse sobre a publicação */
+.publicacao:hover {
+  transform: translateY(-5px); /* Levanta a publicação */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra mais intensa */
+}
+
+.publicacao-header {
+  display: flex;
+  justify-content: space-between; /* Distribui o título e o ID de forma alinhada */
+  align-items: center;
+  margin-bottom: 10px; /* Espaçamento entre o cabeçalho e o conteúdo */
+}
+
+.publicacao-titulo {
+  font-size: 1.2rem; /* Tamanho de fonte do título */
+  font-weight: bold; /* Título em negrito */
+  color: #333; /* Cor do título */
+}
+
+.publicacao-id {
+  font-size: 0.9rem; /* Tamanho de fonte do ID */
+  color: #888; /* Cor mais suave para o ID */
+}
+
+.publicacao-descricao {
+  font-size: 1rem; /* Tamanho de fonte da descrição */
+  color: #555; /* Cor do texto da descrição */
+  line-height: 1.5; /* Aumenta a linha para melhorar a legibilidade */
+}
+
+</style>
 
 
 
@@ -158,48 +209,41 @@ const fecharModal = () => {
   transition: ease-in-out 1s;
   text-align: center;
 }
-
 </style>
 
 
 <style scoped>
-
 .form-group {
-      margin-bottom: 10px;
-    display: flex;
-    align-items: center;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
 
-    }
+.form-group textarea {
+  width: 100%;
+  height: 300px;
+}
 
-    .form-group textarea {
-      width: 100%;
-      height: 300px;
+label {
+  display: block;
+  margin-bottom: 1px;
+  font-weight: bold;
+}
 
-    }
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="password"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-weight: 550;
+}
 
-
-
-    label {
-      display: block;
-      margin-bottom: 1px;
-      font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="date"],
-    input[type="password"],
-    input[type="number"],
-    select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      font-weight: 550;
-      
-    }
-
-    input:focus {
+input:focus {
   outline: none; /* Remove a borda externa (geralmente mais grossa) */
   border: 1px solid #ccc; /* Mantém a borda normal */
 }
@@ -208,8 +252,6 @@ textarea:focus {
   outline: none; /* Remove a borda externa (geralmente mais grossa) */
   border: 1px solid #ccc; /* Mantém a borda normal */
 }
-
-
 
 :root {
   --azul-escuro: #012841;
@@ -266,24 +308,20 @@ button {
   all: unset;
   padding: 07px 20px 07px 20px;
   background-color: rgb(0, 97, 0);
-  border: 1px solid rgba(255, 255, 255, 0.249) ;
+  border: 1px solid rgba(255, 255, 255, 0.249);
   border-radius: 05px;
   color: white;
   margin-right: 10px;
 }
 
 a {
-  
   padding: 07px 20px 07px 20px;
   background-color: var(--azul-escuro);
-  border: 1px solid rgba(255, 255, 255, 0.249) ;
+  border: 1px solid rgba(255, 255, 255, 0.249);
   border-radius: 05px;
   color: white;
   margin-right: 10px;
 }
-
-
-
 
 #conteiner-texto {
   width: 100%;
@@ -293,7 +331,7 @@ a {
   font-size: 16px;
 }
 
- textarea {
+textarea {
   width: 100%;
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.229);
@@ -301,8 +339,6 @@ a {
   font-size: 16px;
   padding: 10px;
 }
-
-
 
 #rodape {
   display: flex;
@@ -312,16 +348,11 @@ a {
   width: 100%;
   height: 10%;
   border-radius: 0px 0px 05px 05px;
-
-  
 }
-
-
 
 #rodape input {
   color: white;
   padding-right: 10px;
-  
 }
 
 #publicacao {
