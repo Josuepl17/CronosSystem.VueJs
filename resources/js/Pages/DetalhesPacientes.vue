@@ -301,6 +301,7 @@ form {
   justify-content: space-between;
   align-items: center;
   color: rgb(0, 0, 0);
+  font-size: 1.2rem;
   padding: 06px;
 }
 
@@ -337,6 +338,7 @@ textarea {
   border: 1px solid rgba(0, 0, 0, 0.229);
   border-radius: 04px;
   font-size: 16px;
+  color: #555;
   padding: 10px;
 }
 
@@ -344,7 +346,6 @@ textarea {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.212);
   width: 100%;
   height: 10%;
   border-radius: 0px 0px 05px 05px;
