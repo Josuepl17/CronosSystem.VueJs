@@ -82,9 +82,10 @@ class PacientesController extends Controller
 
     public function detalhesPacientes() {
         $id_paciente = FacadesSession::get('id_paciente');
+        $paciente = Pacientes::Find($id_paciente);
         $detalhes = Detalhes_Pacientes::where('paciente_id', $id_paciente)->first();
         $tramites_paciente = Tramites_Pacientes::where('paciente_id', $id_paciente)->get()->toArray();
-        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente'));
+        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente'));
 
     }
 

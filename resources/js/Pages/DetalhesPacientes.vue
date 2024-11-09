@@ -10,7 +10,7 @@
     <div id="lado-esquerdo">
         <div id="texto-principal">
             <div id="titulo-texto">
-                    <h1>Josué Pacheco de Lima</h1>
+                    <h1>{{props.paciente.nome}}</h1>
                     
                 </div>
 
@@ -106,6 +106,7 @@ import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
   detalhes: Object,
+  paciente: Object,
   tramites_paciente: Array,
 });
 
