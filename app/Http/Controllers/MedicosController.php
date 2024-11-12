@@ -11,8 +11,9 @@ use Inertia\Inertia;
 class MedicosController extends Controller
 {
     public function listaMedicos() {
-     
-       return Inertia::render('Medicos');
+        $empresa_id = Auth::user()->empresa_id;
+        $medicos = Medicos::where('empresa_id', $empresa_id)->get();
+        return Inertia::render('Medicos', compact('medicos'));
     }
 
     public function formMedicos() {
@@ -23,13 +24,8 @@ class MedicosController extends Controller
 
     public function createMedicos(ValidateRequest $request) {
         $dados = $request->all();
-        
-
-     
         $dados['empresa_id'] = Auth::user()->empresa_id;
-    
          Medicos::create($dados);
-    
         return redirect('/medicos');
     }
 }

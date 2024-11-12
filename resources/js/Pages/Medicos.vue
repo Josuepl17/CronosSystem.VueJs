@@ -22,13 +22,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td> <!-- Ajuste conforme necessário -->
-                           
-                        </tr>
+                            <tr v-for="(medico) in medicos" :key="medico.id">
+                                <td>{{ medico.id }}</td>
+                                <td>{{ medico.nome }}</td>
+                                <td>{{ medico.especialidade }}</td>
+                                <td>{{ medico.telefone }}</td>
+                            </tr>
                     </tbody>
                 </table>
             </div>
@@ -38,6 +37,11 @@
 
 
 <script setup >
+
+const props = defineProps ({
+    medicos: Array,
+})
+
 
 </script>
 
