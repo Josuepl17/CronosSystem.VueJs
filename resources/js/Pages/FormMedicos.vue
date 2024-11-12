@@ -4,7 +4,7 @@
     <template v-slot:conteudo>
 
         <div class="fomulario-usuario">
-                <form @submit.prevent="form.post('/create/paciente')" >
+                <form @submit.prevent="form.post('/create/medico')" >
 
 
                     <div id="pessoais">

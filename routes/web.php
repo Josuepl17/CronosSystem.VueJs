@@ -48,6 +48,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     // Medicos
     Route::get('/medicos', [MedicosController::class, 'listaMedicos']);
     Route::get('/form/medicos', [MedicosController::class, 'formMedicos']);
+    Route::post('/create/medico', [MedicosController::class, 'createMedicos']);
   
 
     

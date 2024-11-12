@@ -24,7 +24,7 @@ class ValidateRequest extends FormRequest
         return [
             'cpf' => 'required|size:11|unique:users,cpf',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
+            'password' => 'string|min:6',
         ];
     }
 
@@ -38,7 +38,6 @@ class ValidateRequest extends FormRequest
             'email.required' => 'O e-mail é obrigatório.',
             'email.email' => 'O e-mail deve ser um endereço de e-mail válido.',
             'email.unique' => 'Este e-mail já está cadastrado.',
-            'password.required' => 'A senha é obrigatória.',
             'password.min' => 'A senha deve ter pelo menos 6 dígitos.',
         ];
     }
