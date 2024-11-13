@@ -20,10 +20,9 @@
                   <div  class="form-group">
                   <label for="Medico">Medico Responsavel</label>
                   <select v-model="form.Medico" name="Medico" id="Medico">
-                    <option value="Carlos (Pisicologo)">Carlos (Pisicologo)</option>
-                    <option value="Mariana (Psiquiatra)">Mariana (Psiquiatra)</option>
-                    <option value="Marlon (Neurologista)">Marlon (Neurologista)</option>
-                    <option value="Jessica (Pedriatra)">Jessica (Pedriatra)</option>
+                     <option v-for="medico in medicos" :key="medico.id" :value="`${medico.nome} (${medico.especialidade})`">
+                          {{ medico.nome }} ({{ medico.especialidade }})
+                      </option>
                   </select>
                 </div>  
 
@@ -85,29 +84,27 @@
 </template>
 
 <script setup >
-import { defineProps } from 'vue';
-import { useForm } from '@inertiajs/vue3';
+import { defineProps } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
 const form = useForm({
-  nome: '',
-  DataNascimento: '',
-  Medico: '',
-  cpf: '',
-  email: '',
-  cidade: '',
-  password: '',
-  bairro: '',
-
-})
-
+  nome: "",
+  DataNascimento: "",
+  Medico: "",
+  cpf: "",
+  email: "",
+  cidade: "",
+  password: "",
+  bairro: "",
+});
 
 const props = defineProps({
   errors: Array,
-})
-
+  medicos: Array,
+});
 </script>
 
 
 <style scoped>
-  @import "..\Components\css\formularios.css";
+@import "..\Components\css\formularios.css";
 </style>

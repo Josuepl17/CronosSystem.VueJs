@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
 use App\Models\Detalhes_Pacientes;
+use App\Models\Medicos;
 use App\Models\Pacientes;
 use App\Models\Tramites_Pacientes;
 use App\Services\MeuServico;
@@ -19,8 +20,6 @@ class PacientesController extends Controller
 {
 
 
-
-
     public function listaPacientes() {
         $empresa_id = Auth::user()->empresa_id;
         $pacientes = Pacientes::where('empresa_id', $empresa_id)->get();
@@ -34,7 +33,9 @@ class PacientesController extends Controller
     
 
     public function formPacientes() {
-        return Inertia::render('FormPacientes');
+        $empresa_id = Auth::user()->empresa_id;
+        $medicos = Medicos::where('empresa_id', $empresa_id)->get();
+        return Inertia::render('FormPacientes', compact('medicos'));
     }
 
 
