@@ -23,18 +23,17 @@
         <th>Name</th>
         <th>Email</th>
         <th>CPF</th>
-        <th>Medico</th>
+       <!-- <th>Medico</th>-->
         <th>#</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="(paciente) in pacientes" :key="paciente.id">
-        
           <td>{{ paciente.id }}</td>
           <td>{{ paciente.nome }}</td>
           <td>{{ paciente.email }}</td>
           <td>{{ paciente.cpf }}</td>
-          <td>{{ paciente.Medico }}</td>
+          <!--<td>{{ paciente.Medico }}</td>-->
           <td><Link id="inserir" :href="'/detalhes/paciente/' + paciente.id">Inserir</Link></td>
         
       </tr>

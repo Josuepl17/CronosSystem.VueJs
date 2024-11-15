@@ -16,20 +16,20 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('second_name');
             $table->string('email')->unique();
             $table->string('password');
             $table->integer('empresa_id'); // apenas para busca da empresa
+            $table->integer('funcionario_id')->unique(); 
             $table->timestamps();
         });
 
 
         DB::table('users')->insert([
             'name' => 'josue',
-            'second_name' => 'Lima',
             'email' => 'josuep.l@outlook.com',
            'password' => Hash::make('123'),
             'empresa_id' => 1, // DEFINE UM ID PADRÃO PARA EMPRESA
+            'funcionario_id' => 999,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

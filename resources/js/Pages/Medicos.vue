@@ -16,6 +16,7 @@
                         <tr>
                             <th>#</th>
                             <th>Medico</th>
+                            <th>Email</th>
                             <th>Especialidade</th>
                             <th>Contato</th>
                             
@@ -25,6 +26,7 @@
                             <tr v-for="(medico) in medicos" :key="medico.id">
                                 <td>{{ medico.id }}</td>
                                 <td>{{ medico.nome }}</td>
+                                <td>{{ medico.email }}</td>
                                 <td>{{ medico.especialidade }}</td>
                                 <td>{{ medico.telefone }}</td>
                             </tr>

@@ -13,6 +13,7 @@ class Detalhes_Pacientes extends Model
         'arquivos',
         'paciente_id',
         'empresa_id',
+        'medico_id',
 
     ];
     use HasFactory;

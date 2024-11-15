@@ -17,7 +17,8 @@ class User extends Authenticatable
         'second_name',
         'email',
         'password',
-        'empresa_id',
+        'empresa_id', // so para acessar a empresa acessada
+        'funcionario_id', // usado para filtrar de acordo com pacientes
         
     ];
 }

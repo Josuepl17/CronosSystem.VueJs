@@ -18,12 +18,12 @@
                   </div>   
 
                   <div  class="form-group">
-                  <label for="Medico">Medico Responsavel</label>
-                  <select v-model="form.Medico" name="Medico" id="Medico">
-                     <option v-for="medico in medicos" :key="medico.id" :value="`${medico.nome} (${medico.especialidade})`">
-                          {{ medico.nome }} ({{ medico.especialidade }})
+                    <label for="Medico">Médico(s) Responsável(is)</label>
+            <select v-model="form.medico" id="medico" multiple>
+                 <option v-for="medico in props.medicos" :key="medico.id" :value="medico.id">
+             {{ medico.nome }} ({{ medico.especialidade }})
                       </option>
-                  </select>
+                </select>
                 </div>  
 
                     <div class="form-group">
@@ -90,7 +90,7 @@ import { useForm } from "@inertiajs/vue3";
 const form = useForm({
   nome: "",
   DataNascimento: "",
-  Medico: "",
+  medico: [],
   cpf: "",
   email: "",
   cidade: "",

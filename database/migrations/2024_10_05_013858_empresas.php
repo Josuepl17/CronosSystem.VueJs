@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('empresas', function (Blueprint $table) {
             $table->id();
             $table->string('razao_social');
-            $table->integer('cnpj')->unique();
+            $table->bigInteger('cnpj')->unique();
             $table->timestamps();
         });
 

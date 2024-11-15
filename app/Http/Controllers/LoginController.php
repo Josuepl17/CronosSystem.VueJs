@@ -48,7 +48,6 @@ class LoginController extends Controller
 
         $user = new User();
         $user->name = $request->name;
-        $user->second_name = $request->second_name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->empresa_id = $empresa->id;
@@ -70,16 +69,7 @@ class LoginController extends Controller
         $relacionamentos = User_Empresas::where('user_id', $user_id)->pluck('empresa_id');
         $filiais = Empresas::whereIn('id', $relacionamentos)->get();
         Session::put('filiais', $filiais);
-        
 
-
-
-
-
-
-
-
-        
         $razaoEmpresa = Empresas::find(Auth::user()->empresa_id);
         Session::put('empresa_id', $razaoEmpresa->razao_social);
 

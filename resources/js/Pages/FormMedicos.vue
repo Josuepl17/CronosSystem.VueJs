@@ -60,6 +60,11 @@
                             <input v-model="form.bairro" type="text" id="bairro" placeholder="Bairro">
                         </div>
 
+                        <div class="form-group">
+                            <label for="senha">Senha</label>
+                            <input v-model="form.senha" type="text" id="senha" placeholder="Senha">
+                        </div>
+
                         <div class="fechar-salvar">
                         <button type="button" class="fechar">Fechar</button>
                         <button type="submit" class="salvar">Salvar</button>
@@ -100,6 +105,7 @@ const form = useForm({
   endereco: '',
   cidade: '',
   bairro: '',
+  senha: '',
 })
 
 
