@@ -58,6 +58,28 @@
 
     <div id="lado-direito">
 
+      <div class="box-detalhes" >
+        
+      <div class="box-info">
+        <p>Paciente Desde:</p> <p>13/12/2022</p>
+      </div>
+
+      <div class="box-info" >
+        <p>Primeira Consulta:</p> <p>03/10/2024</p>
+      </div>
+
+      <div class="box-info" >
+        <p>Ultima Consulta:</p> <p>14/10/2024</p>
+      </div>
+
+      <div class="box-info" >
+        <p>Proxima Consulta:</p> <p>20/10/2024</p>
+      </div>
+
+
+
+      </div>
+
     </div>
 
 
@@ -369,8 +391,39 @@ textarea {
   display: flex;
   width: 34%;
   height: 100%;
+  justify-content: center;
+}
 
+.box-detalhes {
+  width: 100%;
+  height: 200px;
   background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 8px;
+}
+
+.box-info {
+  display: flex;
+  justify-content: space-between;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 5px 0;
+}
+
+.box-info:last-child {
+  border-bottom: none;
+}
+
+.box-info p:first-child {
+  font-weight: bold;
+  color: #555;
 }
 
 ::-webkit-scrollbar {
