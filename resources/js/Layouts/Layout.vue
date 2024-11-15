@@ -18,7 +18,7 @@
       <div id="menu-geral" :class="{ reduzido: isReduced }" ref="menu">
         <div id="topo-menu">
           <img src="/images/profile.jpg" alt="" />
-          <p>Josué</p>
+          <p>{{ $page.props.nome }}</p>
           <button class="botao-menu" @click="toggleMenu" ref="toggleButton">☰</button>
         </div>
         <!-- topo-menu -->

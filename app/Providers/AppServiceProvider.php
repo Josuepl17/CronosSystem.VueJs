@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         Inertia::share([
             'empresa_id' => fn() => Session::get('empresa_id'),
             'filiais' => fn() => Session::get('filiais'),
+            'nome' => fn() => Session::get('nome'),
         ]);
 
 
