@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Permissao_User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medicos__pacientes', function (Blueprint $table) {
+        Schema::create('medicos_pacientes', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('paciente_id');
@@ -25,6 +26,8 @@ return new class extends Migration
             $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
+
+
     }
 
     /**
