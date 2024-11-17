@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Permissao_Users extends Model
+class User_Empresa extends Model
 {
     use HasFactory;
 
-    protected $table = 'permissao_users';
-
+    protected $table = 'user_empresas';
+    
     protected $fillable = [
         'user_id',
-        'permissoes_id',
-        'descricao',
+        'empresa_id',
     ];
 }

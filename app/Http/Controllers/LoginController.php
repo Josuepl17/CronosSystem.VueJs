@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresas;
 use App\Models\User;
+use App\Models\User_Empresa;
 use App\Models\User_Empresas;
 use App\Models\Users;
 use App\Services\MeuServico;
@@ -53,7 +54,7 @@ class LoginController extends Controller
         $user->empresa_id = $empresa->id;
         $user->save();
 
-        $user_empresas = new User_Empresas();
+        $user_empresas = new User_Empresa();
         $user_empresas->user_id = $user->id;
         $user_empresas->empresa_id = $empresa->id;
         $user_empresas->save();
@@ -66,7 +67,7 @@ class LoginController extends Controller
     public function definirFilial() 
     {
         $user_id = Auth::user()->id;
-        $relacionamentos = User_Empresas::where('user_id', $user_id)->pluck('empresa_id');
+        $relacionamentos = User_Empresa::where('user_id', $user_id)->pluck('empresa_id');
         $filiais = Empresas::whereIn('id', $relacionamentos)->get();
         Session::put('filiais', $filiais);
         $dd = Session::put('nome', Auth::user()->name);

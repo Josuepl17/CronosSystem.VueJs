@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ValidateRequest;
 use App\Models\Medicos;
 use App\Models\User;
-use App\Models\User_Empresas;
+use App\Models\User_Empresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -40,7 +40,7 @@ class MedicosController extends Controller
 
          ]);
 
-         $user_empresas = new User_Empresas();
+         $user_empresas = new User_Empresa();
          $user_empresas->user_id = $user->id;
          $user_empresas->empresa_id = $user->empresa_id;
          $user_empresas->save();

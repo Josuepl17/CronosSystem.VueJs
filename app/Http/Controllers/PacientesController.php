@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
 use App\Models\Detalhes_Pacientes;
+use App\Models\Medico_Paciente;
 use App\Models\Medicos;
 use App\Models\Medicos_Pacientes;
 use App\Models\Pacientes;
+use App\Models\Tramites;
 use App\Models\Tramites_Pacientes;
 use App\Services\MeuServico;
 use Illuminate\Contracts\Session\Session;
@@ -23,7 +25,7 @@ class PacientesController extends Controller
 
     public function listaPacientes() {
         $empresa_id = Auth::user()->empresa_id;
-        $pacienteIds = Medicos_Pacientes::where('medico_id', Auth::user()->funcionario_id)->where('empresa_id', $empresa_id)->pluck('paciente_id');
+        $pacienteIds = Medico_Paciente::where('medico_id', Auth::user()->funcionario_id)->where('empresa_id', $empresa_id)->pluck('paciente_id');
         $pacientes = Pacientes::whereIn('id', $pacienteIds)->where('empresa_id', $empresa_id)->get();
         return Inertia::render('Pacientes', compact('pacientes'));
        
@@ -52,7 +54,7 @@ class PacientesController extends Controller
 
         foreach ($request->medico as $medico_id) {
 
-            Medicos_Pacientes::create([
+            Medico_Paciente::create([
                 'paciente_id' => $paciente->id,
                 'medico_id' => $medico_id,
                 'empresa_id' => Auth::user()->empresa_id,
@@ -96,7 +98,7 @@ class PacientesController extends Controller
 
         $detalhes = Detalhes_Pacientes::where('paciente_id', $id_paciente)->where('medico_id', Auth::user()->funcionario_id)->first(); // filtra os detalhes de o paciente escolhido dos detalhes feitos pelo medico logado
 
-        $tramites_paciente = Tramites_Pacientes::where('paciente_id', $id_paciente)->where('medico_id', Auth::user()->funcionario_id)->get()->toArray();
+        $tramites_paciente = Tramites::where('paciente_id', $id_paciente)->where('medico_id', Auth::user()->funcionario_id)->get()->toArray();
         return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente'));
 
     }
@@ -127,7 +129,7 @@ public function createTramite(Request $request) {
     $dados['paciente_id'] = FacadesSession::get('id_paciente');
     $dados['empresa_id'] = Auth::user()->empresa_id;
     $dados['medico_id'] = Auth::user()->funcionario_id;
-    Tramites_Pacientes::create($dados);
+    Tramites::create($dados);
     return Inertia::location('/detalhes/paciente');
 }
 
