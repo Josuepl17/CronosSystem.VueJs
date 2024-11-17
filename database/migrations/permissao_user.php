@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Models\Permissao_Users;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-
+       
 
         
         'user_id' => 1,
