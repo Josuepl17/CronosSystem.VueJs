@@ -46,10 +46,6 @@ class PacientesController extends Controller
 
     public function createPaciente(ValidateRequest $request) {
         $dados = $request->all();
-
-
-
-     
         $dados['empresa_id'] = Auth::user()->empresa_id;
     
         $paciente =  Pacientes::create($dados);
