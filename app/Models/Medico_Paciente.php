@@ -14,4 +14,6 @@ class Medico_Paciente extends Model
         'medico_id',
         'empresa_id',
     ];
+
+
 }

@@ -28,9 +28,9 @@ return new class extends Migration
        
 
         
-        'user_id' => 1,
-        'permissoes_id' => 1,
-        'descricao' => 'adm',
+       // 'user_id' => 1,
+       // 'permissoes_id' => 1,
+       // 'descricao' => 'adm',
 
     }
 

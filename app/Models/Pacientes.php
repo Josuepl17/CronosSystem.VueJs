@@ -18,4 +18,8 @@ class Pacientes extends Model
         'bairro',
         'empresa_id'
     ];
+
+    public function medicos(){
+        return $this->belongsToMany(Medicos::class, 'medico_paciente', 'paciente_id', 'medico_id');
+    }
 }
