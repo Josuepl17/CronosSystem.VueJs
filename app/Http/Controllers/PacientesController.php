@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
-use App\Models\Detalhes_Pacientes;
+use App\Models\DetalhesPacientes;
 use App\Models\Medico_Paciente;
 use App\Models\Medicos;
 use App\Models\Medicos_Pacientes;
@@ -26,12 +26,14 @@ class PacientesController extends Controller
     public function listaPacientes() {
         $empresa_id = Auth::user()->empresa_id;
 
-        //$pacienteIds = Medico_Paciente::where('medico_id', Auth::user()->funcionario_id)->where('empresa_id', //$empresa_id)->pluck('paciente_id');
+       // $pacienteIds = Medico_Paciente::where('medico_id', Auth::user()->funcionario_id)->where('empresa_id', $empresa_id)->pluck('paciente_id');
 
-       // $pacientes = Pacientes::whereIn('id', $pacienteIds)->where('empresa_id', $empresa_id)->get();
+        //$pacientes = Pacientes::whereIn('id', $pacienteIds)->where('empresa_id', $empresa_id)->get();
 
         $medico = Medicos::Find(Auth::user()->funcionario_id);
-        dd($medico);
+        
+        
+        $medico->pacientes();
         return Inertia::render('Pacientes', compact('pacientes'));
        
     }
@@ -65,7 +67,7 @@ class PacientesController extends Controller
                 'empresa_id' => Auth::user()->empresa_id,
             ]);
 
-            Detalhes_Pacientes::create([
+        DetalhesPacientes::create([
                 'paciente_id' => $paciente->id,
                 'texto_principal' => "",
                 'arquivos' => "",
@@ -101,7 +103,7 @@ class PacientesController extends Controller
         $id_paciente = FacadesSession::get('id_paciente');
         $paciente = Pacientes::Find($id_paciente); // nome vue js 
 
-        $detalhes = Detalhes_Pacientes::where('paciente_id', $id_paciente)->where('medico_id', Auth::user()->funcionario_id)->first(); // filtra os detalhes de o paciente escolhido dos detalhes feitos pelo medico logado
+        $detalhes = DetalhesPacientes::where('paciente_id', $id_paciente)->where('medico_id', Auth::user()->funcionario_id)->first(); // filtra os detalhes de o paciente escolhido dos detalhes feitos pelo medico logado
 
         $tramites_paciente = Tramites::where('paciente_id', $id_paciente)->where('medico_id', Auth::user()->funcionario_id)->get()->toArray();
         return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente'));
@@ -120,7 +122,7 @@ class PacientesController extends Controller
         $pacienteId = FacadesSession::get('id_paciente');
     
         // Encontrar o registro existente e atualizar apenas os campos necessários
-        Detalhes_Pacientes::where('paciente_id', $pacienteId)->where('medico_id', Auth::user()->funcionario_id)
+        DetalhesPacientes::where('paciente_id', $pacienteId)->where('medico_id', Auth::user()->funcionario_id)
             ->update([
                 'texto_principal' => $request->texto_principal,
                 'arquivos' => $caminhoArquivosString ?? null,

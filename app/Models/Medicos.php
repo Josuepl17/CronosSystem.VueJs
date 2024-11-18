@@ -24,8 +24,8 @@ class Medicos extends Model
     ];
 
 
-    public function paciente(){
-        return $this->belongsToMany(Pacientes::class, 'pacientes', 'paciente_id', 'medico_id');
+    public function pacientes(){
+        return $this->belongsToMany(Pacientes::class, 'medico_paciente', 'medico_id', 'paciente_id');
     }
     
 }

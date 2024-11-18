@@ -8,6 +8,8 @@ use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Models\Empresas;
+use App\Models\Medicos;
+use App\Models\User;
 use App\Models\User_Empresas;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Foundation\Application;
@@ -16,6 +18,7 @@ use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 // Padrão Nomes Funções, primeira letra Minuscula e as Demais Maiusculas.
 // Padrão Rotas, Form para Formularios, create, delete, edit, update para funções
@@ -64,18 +67,64 @@ Route::post('/teste', function (Request $request) {
 });
 
 
-Route::get('/gere', function(){
+Route::get('/gere1', function(){
     $e = new Empresas();
     $e->razao_social = 'Empresa 5' ;
     $e->cnpj = rand(1, 100000);
     $e->save();
 
-    $r = new User_Empresas();
-    $r->user_id = 1;
-    $r->empresa_id = $e->id;
-    $r->save(); 
-
     return redirect('/dash');
+});
+
+
+
+
+Route::get('/hen', function () {
+    $d = new Medicos(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
+    $d->nome = 'Henrique';
+    $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
+    $d->crp = 'CRP-' . rand(1000, 9999);
+    $d->especialidade = 'Psicologo '; // Exemplo de especialidade
+    $d->telefone = '(11) ' . rand(90000, 99999) . '-' . rand(1000, 9999);
+    $d->email = 'henrique@gmail.com';
+    $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
+    $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
+    $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
+    $d->empresa_id = 1; // Ajuste conforme necessário para corresponder às IDs válidas na tabela de empresas.
+    $d->save();
+
+    $u = new User(); // Substitua "User" pelo nome correto do modelo.
+    $u->name = 'Henrique ';
+    $u->email = 'henrique@gmail.com';
+    $u->password = bcrypt('123456'); // Senha criptografada
+    $u->empresa_id = 1; // Obtém a empresa do usuário logado
+    $u->funcionario_id = $d->id; // Substitua por lógica adequada para atribuir um funcionário válido
+    $u->save();
+
+});
+
+Route::get('/rai', function () {
+    $d = new Medicos(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
+    $d->nome = 'Raiane';
+    $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
+    $d->crp = 'CRP-' . rand(1000, 9999);
+    $d->especialidade = 'Psicologo '; // Exemplo de especialidade
+    $d->telefone = '(11) ' . rand(90000, 99999) . '-' . rand(1000, 9999);
+    $d->email = 'raiane@gmail.com';
+    $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
+    $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
+    $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
+    $d->empresa_id = 1; // Ajuste conforme necessário para corresponder às IDs válidas na tabela de empresas.
+    $d->save();
+
+    $u = new User(); // Substitua "User" pelo nome correto do modelo.
+    $u->name = 'Raiane ';
+    $u->email = 'raiane@gmail.com';
+    $u->password = bcrypt('123456'); // Senha criptografada
+    $u->empresa_id = 1; // Obtém a empresa do usuário logado
+    $u->funcionario_id = $d->id; // Substitua por lógica adequada para atribuir um funcionário válido
+    $u->save();
+
 });
 
 
