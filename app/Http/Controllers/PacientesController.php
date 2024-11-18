@@ -31,9 +31,9 @@ class PacientesController extends Controller
         //$pacientes = Pacientes::whereIn('id', $pacienteIds)->where('empresa_id', $empresa_id)->get();
 
         $medico = Medicos::Find(Auth::user()->funcionario_id);
-        
-        
-        $medico->pacientes();
+        dd($medico);
+        $pacientes = $medico->pacientes()->get();
+        dd($pacientes);
         return Inertia::render('Pacientes', compact('pacientes'));
        
     }
