@@ -25,7 +25,7 @@ return new class extends Migration
 
         });
 
-        DB::table('user_empresas')->insert([
+        DB::table('user_empresa')->insert([
             'user_id' => 1, // SUBSTITUA PELO ID DO USUÁRIO EXISTENTE
             'empresa_id' => 1, // SUBSTITUA PELO ID DA EMPRESA EXISTENTE
             'created_at' => now(),

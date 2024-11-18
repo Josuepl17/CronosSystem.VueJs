@@ -25,8 +25,13 @@ class PacientesController extends Controller
 
     public function listaPacientes() {
         $empresa_id = Auth::user()->empresa_id;
-        $pacienteIds = Medico_Paciente::where('medico_id', Auth::user()->funcionario_id)->where('empresa_id', $empresa_id)->pluck('paciente_id');
-        $pacientes = Pacientes::whereIn('id', $pacienteIds)->where('empresa_id', $empresa_id)->get();
+
+        //$pacienteIds = Medico_Paciente::where('medico_id', Auth::user()->funcionario_id)->where('empresa_id', //$empresa_id)->pluck('paciente_id');
+
+       // $pacientes = Pacientes::whereIn('id', $pacienteIds)->where('empresa_id', $empresa_id)->get();
+
+        $medico = Medicos::Find(Auth::user()->funcionario_id);
+        dd($medico);
         return Inertia::render('Pacientes', compact('pacientes'));
        
     }
