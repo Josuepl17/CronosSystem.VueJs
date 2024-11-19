@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DetalhesPacientes extends Model
+class DetalhePaciente extends Model
 {
-    protected $table = 'detalhespaciente';
+   // protected $table = 'detalhespaciente';
     
     protected $fillable = [
         'texto_principal',
@@ -21,6 +21,6 @@ class DetalhesPacientes extends Model
 
 
     public function pacientes(){
-        return $this->belongsTo(Pacientes::class);
+        return $this->belongsTo(Paciente::class);
     }
 }

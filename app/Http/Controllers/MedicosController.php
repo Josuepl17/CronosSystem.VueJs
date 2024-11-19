@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
-use App\Models\Medicos;
+use App\Models\Medico;
 use App\Models\User;
 use App\Models\User_Empresa;
 use Illuminate\Http\Request;
@@ -15,8 +15,8 @@ class MedicosController extends Controller
 {
     public function listaMedicos() {
         $empresa_id = Auth::user()->empresa_id;
-        $medicos = Medicos::where('empresa_id', $empresa_id)->get();
-        return Inertia::render('Medicos', compact('medicos'));
+        $medicos = Medico::where('empresa_id', $empresa_id)->get();
+        return Inertia::render('Medico', compact('medicos'));
     }
 
     public function formMedicos() {
@@ -28,7 +28,7 @@ class MedicosController extends Controller
     public function createMedicos(ValidateRequest $request) {
         $dados = $request->except('senha');
         $dados['empresa_id'] = Auth::user()->empresa_id;
-        $medico =  Medicos::create($dados);
+        $medico =  Medico::create($dados);
 
         $user =  User::create([
             

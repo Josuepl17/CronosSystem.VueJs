@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pacientes extends Model
+class Paciente extends Model
 {
     use HasFactory;
 
@@ -23,7 +23,7 @@ class Pacientes extends Model
     ];
 
     public function medicos(){
-        return $this->belongsToMany(Medicos::class, 'medico_paciente', 'paciente_id', 'medico_id');
+        return $this->belongsToMany(Medico::class, 'medico_paciente', 'paciente_id', 'medico_id');
     }
 
     public function detalhespacientes (){
