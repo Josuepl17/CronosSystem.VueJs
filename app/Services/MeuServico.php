@@ -5,29 +5,18 @@ namespace App\Services;
 use App\Http\Controllers\Controller;
 use App\Models\caixas;
 use App\Models\empresas;
+use App\Models\Medicos;
 use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Stmt\If_;
 
 class MeuServico
 {
-    //Verifica se As datas recebidas Estão entre alguma do caixa
-    public static function Verificar($data)
-    {
-        $empresa_id = Auth()->user()->empresa_id;
-        $primeiroregistro = caixas::where('empresa_id', $empresa_id)->value('dataini') ?? '';
 
-        $ultimoregistro = caixas::where('empresa_id', $empresa_id)->latest('datafi')->first();
-        $ultimo = $ultimoregistro->datafi ?? '';
-
-        if ($data > $primeiroregistro  && $data > $ultimo) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
     
@@ -70,6 +59,24 @@ class MeuServico
         }
 
     }
+
+
+    public static function Autorizer(){
+
+         $id = 1; // O ID que você quer verificar
+
+            $exists = Medicos::where('id', FacadesAuth::user()->funcionario_id)->exists();
+
+                if ($exists) {
+  
+                     Session::flash('autorizaMedico', 'autorizado');
+                     return;
+
+                } else {
+
+                    return;
+                }
+             }
 
 
 

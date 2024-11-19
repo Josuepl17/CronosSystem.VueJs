@@ -24,19 +24,24 @@ class PacientesController extends Controller
 
 
     public function listaPacientes() {
-        $empresa_id = Auth::user()->empresa_id;
 
-       // $pacienteIds = Medico_Paciente::where('medico_id', Auth::user()->funcionario_id)->where('empresa_id', $empresa_id)->pluck('paciente_id');
+        if ($medico = Medicos::Find(Auth::user()->funcionario_id)){
 
-        //$pacientes = Pacientes::whereIn('id', $pacienteIds)->where('empresa_id', $empresa_id)->get();
-
-        $medico = Medicos::Find(Auth::user()->funcionario_id);
-        dd($medico);
         $pacientes = $medico->pacientes()->get();
-        dd($pacientes);
+
+        } else{
+            $pacientes = Pacientes::all();
+        }
+
+         MeuServico::Autorizer();
         return Inertia::render('Pacientes', compact('pacientes'));
        
     }
+
+
+
+
+
 
 
 
@@ -53,10 +58,13 @@ class PacientesController extends Controller
 
 
 
+
+
+
     public function createPaciente(ValidateRequest $request) {
         $dados = $request->all();
         $dados['empresa_id'] = Auth::user()->empresa_id;
-    
+
         $paciente =  Pacientes::create($dados);
 
         foreach ($request->medico as $medico_id) {
@@ -76,10 +84,10 @@ class PacientesController extends Controller
             ]);
         }
 
-
-
         return redirect('/pacientes');
     }
+
+
 
 
 
@@ -97,13 +105,25 @@ class PacientesController extends Controller
 
 
 
+
+
+
+
+
+
+
+
+
 ////////////////////////////////////////////
 
     public function detalhesPacientes() {
         $id_paciente = FacadesSession::get('id_paciente');
         $paciente = Pacientes::Find($id_paciente); // nome vue js 
 
-        $detalhes = DetalhesPacientes::where('paciente_id', $id_paciente)->where('medico_id', Auth::user()->funcionario_id)->first(); // filtra os detalhes de o paciente escolhido dos detalhes feitos pelo medico logado
+        //$detalhes = DetalhesPacientes::where('paciente_id', $id_paciente)->where('medico_id', Auth::user()->funcionario_id)->first(); // filtra os detalhes do paciente escolhido, pelo ID do medico logado
+
+        $detalhes = $paciente->detalhespacientes()->where('medico_id', Auth::user()->funcionario_id)->get();
+
 
         $tramites_paciente = Tramites::where('paciente_id', $id_paciente)->where('medico_id', Auth::user()->funcionario_id)->get()->toArray();
         return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente'));

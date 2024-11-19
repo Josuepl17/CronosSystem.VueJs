@@ -34,7 +34,7 @@
           <td>{{ paciente.email }}</td>
           <td>{{ paciente.cpf }}</td>
           <!--<td>{{ paciente.Medico }}</td>-->
-          <td><Link id="inserir" :href="'/detalhes/paciente/' + paciente.id">Inserir</Link></td>
+          <td><Link v-if="$page.props.autorizaMedico"  id="inserir" :href="'/detalhes/paciente/' + paciente.id">Inserir</Link></td>
         
       </tr>
     </tbody>

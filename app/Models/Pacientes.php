@@ -25,4 +25,8 @@ class Pacientes extends Model
     public function medicos(){
         return $this->belongsToMany(Medicos::class, 'medico_paciente', 'paciente_id', 'medico_id');
     }
+
+    public function detalhespacientes (){
+        return $this->hasMany(DetalhesPacientes::class);
+    }
 }

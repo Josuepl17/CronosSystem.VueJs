@@ -18,4 +18,9 @@ class DetalhesPacientes extends Model
 
     ];
     use HasFactory;
+
+
+    public function pacientes(){
+        return $this->belongsTo(Pacientes::class);
+    }
 }
