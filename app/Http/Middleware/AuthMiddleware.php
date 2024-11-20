@@ -24,7 +24,6 @@ class AuthMiddleware
             return redirect()->route('logi');
         }
 
-            Session::put('funcionario_id', Auth::id());
         
 
         return $next($request);

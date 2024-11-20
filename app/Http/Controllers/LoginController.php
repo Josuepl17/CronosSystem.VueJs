@@ -33,10 +33,16 @@ class LoginController extends Controller
         }
     }
 
+
+
+
     public function formUserEmpresa() // formulario de Cadastro Inicial 
     {
         return Inertia::render('FormUserEmpresa');
     }
+
+
+    
 
     public function createUserEmpresa(Request $request)
     {
