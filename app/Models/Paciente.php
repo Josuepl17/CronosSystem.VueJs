@@ -9,7 +9,7 @@ class Paciente extends Model
 {
     use HasFactory;
 
-    protected $table = 'pacientes';
+   // protected $table = 'pacientes';
 
     protected $fillable = [
         'nome',
@@ -27,12 +27,12 @@ class Paciente extends Model
     }
 
     public function detalhespacientes (){
-        return $this->hasMany(DetalhePaciente::class);
+        return $this->hasOne(DetalhePaciente::class); //tem 1
     }
 
 
     public function tramites (){
-        return $this->hasMany(Tramite::class);
+        return $this->hasMany(Tramite::class); // tem muitos
     }
 
 }

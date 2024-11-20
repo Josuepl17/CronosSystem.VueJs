@@ -14,4 +14,8 @@ class Empresa extends Model
         'razao_social',
         'cnpj',
     ];
+
+    public function medicos (){
+        return $this->hasMany(Medico::class); // tem muitos
+    }
 }

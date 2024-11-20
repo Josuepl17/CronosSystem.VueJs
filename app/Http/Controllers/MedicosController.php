@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
+use App\Models\Empresa;
 use App\Models\Medico;
 use App\Models\User;
 use App\Models\User_Empresa;
@@ -15,7 +16,9 @@ class MedicosController extends Controller
 {
     public function listaMedicos() {
         $empresa_id = Auth::user()->empresa_id;
-        $medicos = Medico::where('empresa_id', $empresa_id)->get();
+        $empresa = Empresa::find($empresa_id);
+        $medicos = $empresa->medicos()->get();
+        //$medicos = Medico::where('empresa_id', $empresa_id)->get();
         return Inertia::render('Medicos', compact('medicos'));
     }
 
