@@ -16,7 +16,7 @@ class MedicosController extends Controller
     public function listaMedicos() {
         $empresa_id = Auth::user()->empresa_id;
         $medicos = Medico::where('empresa_id', $empresa_id)->get();
-        return Inertia::render('Medico', compact('medicos'));
+        return Inertia::render('Medicos', compact('medicos'));
     }
 
     public function formMedicos() {

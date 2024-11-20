@@ -28,8 +28,9 @@ class PacientesController extends Controller
             $pacientes = Paciente::all();
         }
 
-         MeuServico::Autorizer();
-        return Inertia::render('Paciente', compact('pacientes'));
+        MeuServico::Autorizer();
+         
+        return Inertia::render('Pacientes', compact('pacientes'));
        
     }
 

@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empresa;
 use App\Models\Empresas;
 use App\Models\User;
 use App\Models\User_Empresa;
-use App\Models\User_Empresas;
-use App\Models\Users;
-use App\Services\MeuServico;
-use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -42,7 +39,7 @@ class LoginController extends Controller
 
     public function createUserEmpresa(Request $request)
     {
-        $empresa = new Empresas();
+        $empresa = new Empresa();
         $empresa->razao_social = $request->razao_social;
         $empresa->cnpj = $request->cnpj;
         $empresa->save();
@@ -68,11 +65,11 @@ class LoginController extends Controller
     {
         $user_id = Auth::user()->id;
         $relacionamentos = User_Empresa::where('user_id', $user_id)->pluck('empresa_id');
-        $filiais = Empresas::whereIn('id', $relacionamentos)->get();
+        $filiais = Empresa::whereIn('id', $relacionamentos)->get();
         Session::put('filiais', $filiais);
         $dd = Session::put('nome', Auth::user()->name);
         
-        $razaoEmpresa = Empresas::find(Auth::user()->empresa_id);
+        $razaoEmpresa = Empresa::find(Auth::user()->empresa_id);
         Session::put('empresa_id', $razaoEmpresa->razao_social);
 
         return redirect('/dash');

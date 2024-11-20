@@ -8,7 +8,7 @@ use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Models\Empresas;
-use App\Models\Medicos;
+use App\Models\Medico;
 use App\Models\User;
 use App\Models\User_Empresas;
 use GuzzleHttp\Psr7\Request as Psr7Request;
@@ -67,20 +67,13 @@ Route::post('/teste', function (Request $request) {
 });
 
 
-Route::get('/gere1', function(){
-    $e = new Empresas();
-    $e->razao_social = 'Empresa 5' ;
-    $e->cnpj = rand(1, 100000);
-    $e->save();
 
-    return redirect('/dash');
-});
 
 
 
 
 Route::get('/hen', function () {
-    $d = new Medicos(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
+    $d = new Medico(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
     $d->nome = 'Henrique';
     $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
     $d->crp = 'CRP-' . rand(1000, 9999);
@@ -104,7 +97,7 @@ Route::get('/hen', function () {
 });
 
 Route::get('/rai', function () {
-    $d = new Medicos(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
+    $d = new Medico(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
     $d->nome = 'Raiane';
     $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
     $d->crp = 'CRP-' . rand(1000, 9999);

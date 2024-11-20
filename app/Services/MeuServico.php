@@ -4,8 +4,9 @@ namespace App\Services;
 
 use App\Http\Controllers\Controller;
 use App\Models\caixas;
+use App\Models\Empresa;
 use App\Models\empresas;
-use App\Models\Medicos;
+use App\Models\Medico;
 use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class MeuServico
 
 
     public static function verificar_empresa($request){
-        if (empresas::where('cnpj', $request->cnpj)->first()){
+        if (Empresa::where('cnpj', $request->cnpj)->first()){
             return true;
         } else{
             return false;
@@ -65,7 +66,7 @@ class MeuServico
 
          $id = 1; // O ID que você quer verificar
 
-            $exists = Medicos::where('id', FacadesAuth::user()->funcionario_id)->exists();
+            $exists = Medico::where('id', session('funcionario_id'))->exists();
 
                 if ($exists) {
   
