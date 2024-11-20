@@ -78,7 +78,7 @@ Route::get('/hen', function () {
     $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
     $d->crp = 'CRP-' . rand(1000, 9999);
     $d->especialidade = 'Psicologo '; // Exemplo de especialidade
-    $d->telefone = '(11) ' . rand(90000, 99999) . '-' . rand(1000, 9999);
+    $d->telefone = rand(90000, 99999) . rand(1000, 9999);
     $d->email = 'henrique@gmail.com';
     $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
     $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
@@ -91,7 +91,7 @@ Route::get('/hen', function () {
     $u->email = 'henrique@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
     $u->empresa_id = 1; // Obtém a empresa do usuário logado
-    $u->funcionario_id = $d->id; // Substitua por lógica adequada para atribuir um funcionário válido
+    //$u->funcionario_id = $d->id; // Substitua por lógica adequada para atribuir um funcionário válido
     $u->save();
 
 });
@@ -102,7 +102,7 @@ Route::get('/rai', function () {
     $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
     $d->crp = 'CRP-' . rand(1000, 9999);
     $d->especialidade = 'Psicologo '; // Exemplo de especialidade
-    $d->telefone = '(11) ' . rand(90000, 99999) . '-' . rand(1000, 9999);
+    $d->telefone = rand(90000, 99999) . rand(1000, 9999);
     $d->email = 'raiane@gmail.com';
     $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
     $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
@@ -115,7 +115,7 @@ Route::get('/rai', function () {
     $u->email = 'raiane@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
     $u->empresa_id = 1; // Obtém a empresa do usuário logado
-    $u->funcionario_id = $d->id; // Substitua por lógica adequada para atribuir um funcionário válido
+   // $u->funcionario_id = $d->id; // Substitua por lógica adequada para atribuir um funcionário válido
     $u->save();
 
 });

@@ -22,7 +22,7 @@ class ValidateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cpf' => 'required|size:11|unique:users,cpf',
+            'cpf' => 'required|size:11',
             'email' => 'required|email|unique:users,email',
             'password' => 'string|min:6',
         ];

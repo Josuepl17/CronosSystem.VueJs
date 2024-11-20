@@ -9,6 +9,7 @@ use App\Models\Medico;
 use App\Models\Paciente;
 use App\Models\Tramite;
 use App\Services\MeuServico;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -17,18 +18,23 @@ use Inertia\Inertia;
 class PacientesController extends Controller
 {
 
+    
 
     public function listaPacientes() {
 
-        if ($medico = Medico::Find(session('funcionario_id'))){
+       $funcionario_id = session('funcionario_id');
 
+        if ($medico = Medico::Find($funcionario_id) ){
         $pacientes = $medico->pacientes()->get();
-
+        
         } else{
+            
             $pacientes = Paciente::all();
+            
         }
 
-        MeuServico::Autorizer();
+        dd($pacientes);
+      //  MeuServico::Autorizer();
          
         return Inertia::render('Pacientes', compact('pacientes'));
        
@@ -59,6 +65,7 @@ class PacientesController extends Controller
 
     public function createPaciente(ValidateRequest $request) {
         $dados = $request->all();
+
         $dados['empresa_id'] = Auth::user()->empresa_id;
 
         $paciente =  Paciente::create($dados);

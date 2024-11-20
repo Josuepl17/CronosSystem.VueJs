@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->date('DataNascimento');
-            $table->integer('cpf')->unique();
+            $table->bigInteger('cpf')->unique();
             $table->string('email')->unique();
             $table->string('cidade');
             $table->string('bairro');

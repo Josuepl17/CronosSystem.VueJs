@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('medicos', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->integer('cpf')->unique();
+            $table->bigInteger('cpf')->unique();
             $table->string('crp')->unique();
             $table->string('especialidade');
-            $table->integer('telefone');
+            $table->bigInteger('telefone');
             $table->string('email')->unique();
             $table->string('endereco');
             $table->string('cidade');

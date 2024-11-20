@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthMiddleware
 {
@@ -20,8 +21,11 @@ class AuthMiddleware
         // Verifica se o usuário está autenticado
         if (!Auth::check()) {
             // Redireciona para a página de login se não estiver autenticado
-            return redirect()->route('login');
+            return redirect()->route('logi');
         }
+
+            Session::put('funcionario_id', Auth::id());
+        
 
         return $next($request);
     }
