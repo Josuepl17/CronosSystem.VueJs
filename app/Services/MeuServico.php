@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Http\Controllers\Controller;
 use App\Models\caixas;
 use App\Models\Empresa;
-use App\Models\empresas;
 use App\Models\Medico;
 use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
@@ -64,10 +63,10 @@ class MeuServico
 
     public static function Autorizer(){
 
-         $id = 1; // O ID que você quer verificar
+      //  dd(session('funcionario_id'));
 
-            $exists = Medico::where('id', session('funcionario_id'))->exists();
-
+      $exists = Medico::where('id', session('funcionario_id'))->exists();
+      //  dd($exists);
                 if ($exists) {
   
                      Session::flash('autorizaMedico', 'autorizado');

@@ -29,4 +29,10 @@ class Paciente extends Model
     public function detalhespacientes (){
         return $this->hasMany(DetalhePaciente::class);
     }
+
+
+    public function tramites (){
+        return $this->hasMany(Tramite::class);
+    }
+
 }

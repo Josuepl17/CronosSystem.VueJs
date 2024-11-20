@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->integer('empresa_id'); // apenas para busca da empresa
+            $table->integer('funcionario_id')->unique(); 
             $table->timestamps();
         });
 
@@ -28,6 +29,7 @@ return new class extends Migration
             'email' => 'josuep.l@outlook.com',
            'password' => Hash::make('123'),
             'empresa_id' => 1, // DEFINE UM ID PADRÃO PARA EMPRESA
+            'funcionario_id' => 999,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

@@ -33,8 +33,8 @@ class PacientesController extends Controller
             
         }
 
-        dd($pacientes);
-      //  MeuServico::Autorizer();
+        //dd($pacientes);
+        MeuServico::Autorizer(); //responsavel para mostrar inserir paciente 
          
         return Inertia::render('Pacientes', compact('pacientes'));
        
@@ -125,15 +125,15 @@ class PacientesController extends Controller
 
         //$detalhes = DetalhesPacientes::where('paciente_id', $id_paciente)->where('medico_id', session('funcionario_id'))->first(); // filtra os detalhes do paciente escolhido, pelo ID do medico logado
 
-        $detalhes = $paciente->detalhespacientes()->where('medico_id', session('funcionario_id'))->get();
+        //$detalhes = $paciente->detalhespacientes()->where('medico_id', session('funcionario_id'))->get();
 
+        $detalhes = $paciente->detalhespacientes()->where('medico_id', session('funcionario_id'))->first(); // retona Object
 
-        $tramites_paciente = Tramite::where('paciente_id', $id_paciente)->where('medico_id', session('funcionario_id'))->get()->toArray();
+        $tramites_paciente = $paciente->tramites()->where('medico_id', session('funcionario_id'))->get(); // retorna array 
+        // Tramite::where('paciente_id', $id_paciente)->where('medico_id', session('funcionario_id'))->get()->toArray();
         return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente'));
 
     }
-
-
 
 
 
