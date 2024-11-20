@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
         Inertia::share([
-            'empresa_id' => fn() => Session::get('empresa_id'),
+            'razao_social' => fn() => Session::get('razao_social'),
             'filiais' => fn() => Session::get('filiais'),
             'nome' => fn() => Session::get('nome'),
             'autorizaMedico' => fn() => Session::get('autorizaMedico'),

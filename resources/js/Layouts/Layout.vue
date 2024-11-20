@@ -59,7 +59,7 @@
               border: none;
             "
           >
-            {{ $page.props.empresa_id }}
+            {{ $page.props.razao_social }}
           </button>
         </nav>
 

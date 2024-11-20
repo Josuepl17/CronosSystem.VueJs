@@ -73,11 +73,11 @@ class LoginController extends Controller
         $user_id = Auth::user()->id;
         $relacionamentos = User_Empresa::where('user_id', $user_id)->pluck('empresa_id');
         $filiais = Empresa::whereIn('id', $relacionamentos)->get();
+
         Session::put('filiais', $filiais);
-        $dd = Session::put('nome', Auth::user()->name);
-        
-        $razaoEmpresa = Empresa::find(Auth::user()->empresa_id);
-        Session::put('empresa_id', $razaoEmpresa->razao_social);
+        Session::put('nome', Auth::user()->name);
+        $empresa = Empresa::find(Auth::user()->empresa_id);
+        Session::put('razao_social', $empresa->razao_social);
 
         return redirect('/dash');
     }
