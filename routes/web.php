@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AtendenteController;
 use App\Http\Controllers\ConsultasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
@@ -7,9 +8,11 @@ use App\Http\Controllers\MedicosController;
 use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AuthMiddleware;
+use App\Models\Empresa;
 use App\Models\Empresas;
 use App\Models\Medico;
 use App\Models\User;
+use App\Models\User_Empresa;
 use App\Models\User_Empresas;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Foundation\Application;
@@ -52,8 +55,11 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/medicos', [MedicosController::class, 'listaMedicos']);
     Route::get('/form/medicos', [MedicosController::class, 'formMedicos']);
     Route::post('/create/medico', [MedicosController::class, 'createMedicos']);
-  
+  // Atendenetes
 
+    Route::get('/atendentes', [AtendenteController::class, 'listaAtendentes']);
+    Route::get('/form/atendentes', [AtendenteController::class, 'formAtendentes']);
+    Route::post('/create/atendentes', [AtendenteController::class, 'createAtendente']);
     
     
 
@@ -64,6 +70,22 @@ Route::middleware(['auth', 'web'])->group(function () {
 
 Route::post('/teste', function (Request $request) {
     dd($request->all());
+});
+
+
+
+Route::get('/gere', function(){
+    $e = new Empresa();
+    $e->razao_social = 'Empresa 5' ;
+    $e->cnpj = rand(1, 100000);
+    $e->save();
+
+    $r = new User_Empresa();
+    $r->user_id = 1;
+    $r->empresa_id = $e->id;
+    $r->save(); 
+
+    return redirect('/dash');
 });
 
 

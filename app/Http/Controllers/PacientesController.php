@@ -25,11 +25,11 @@ class PacientesController extends Controller
        $funcionario_id = session('funcionario_id');
 
         if ($medico = Medico::Find($funcionario_id) ){
-        $pacientes = $medico->pacientes()->get();
+        $pacientes = $medico->pacientes()->where('empresa_id', Session::get('empresa_id'))->get();
         
         } else{
             
-            $pacientes = Paciente::all();
+            $pacientes = Paciente::where('empresa_id', Session::get('empresa_id'))->get();
             
         }
 

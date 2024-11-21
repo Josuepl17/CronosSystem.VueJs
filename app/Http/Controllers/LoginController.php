@@ -78,6 +78,7 @@ class LoginController extends Controller
         Session::put('nome', Auth::user()->name);
         $empresa = Empresa::find(Auth::user()->empresa_id);
         Session::put('razao_social', $empresa->razao_social);
+        Session::put('empresa_id', Auth::user()->empresa_id);
 
         return redirect('/dash');
     }
@@ -85,10 +86,9 @@ class LoginController extends Controller
     // altera a filial selecionada na cluna do usuario registra na sessão na proxima função.
     public function mudarFilial(Request $request)
     {
-        $decryptedId = Crypt::decryptString($request->id);
-        dd($decryptedId);
-        $usuario = Auth::user();
-        $usuario->empresa_id = $request->id;
+
+        Auth::user()->update(['empresa_id' => $request->id]);
+    
         return redirect('/');
     }
 

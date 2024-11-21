@@ -27,16 +27,25 @@
           <Link href="/dash">
             <img src="/images/agenda.png" alt="" /> <span>Dashboard</span>
           </Link>
+
           <Link href="/pacientes"
             ><img src="/images/paciente.png" alt="" /> <span>Pacientes</span></Link
           >
+
+          <Link href="/atendentes"
+            ><img src="/images/medico.png" alt="" /> <span>Atendentes</span></Link
+          >
+
           <Link href="/consultas"
             ><img src="/images/pesquisar.png" alt="" /> <span>Consultas</span></Link
           >
+
           <a href="#"><img src="/images/agenda.png" alt="" /> <span>Agenda</span></a>
+
           <Link href="/medicos"
             ><img src="/images/medico.png" alt="" /> <span>Médicos</span></Link
           >
+
           <Link href="/logout"
             ><img src="/images/logout.png" alt="" /> <span>Sair</span></Link
           >
