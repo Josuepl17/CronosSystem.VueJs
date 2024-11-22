@@ -15,9 +15,14 @@ class AtendenteController extends Controller
         return Inertia::render('Atendentes', compact('atendentes'));
     }
 
+    
+
+
     public function formAtendentes() {
         return Inertia::render('FormAtendentes');
     }
+
+
 
     public function createAtendente(ValidateRequest $request) {
         $dados = $request->all();
