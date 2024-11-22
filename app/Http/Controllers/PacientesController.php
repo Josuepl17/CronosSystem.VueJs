@@ -9,9 +9,11 @@ use App\Models\Medico;
 use App\Models\Paciente;
 use App\Models\Tramite;
 use App\Services\MeuServico;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Inertia\Inertia;
 
@@ -25,15 +27,15 @@ class PacientesController extends Controller
        $funcionario_id = session('funcionario_id');
 
         if ($medico = Medico::Find($funcionario_id) ){
-        $pacientes = $medico->pacientes()->where('empresa_id', Session::get('empresa_id'))->get();
-        
+         
+        $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Auth::user()->empresa_id)->get();
+
         } else{
             
             $pacientes = Paciente::where('empresa_id', Session::get('empresa_id'))->get();
             
         }
 
-        //dd($pacientes);
         MeuServico::Autorizer(); //responsavel para mostrar inserir paciente 
          
         return Inertia::render('Pacientes', compact('pacientes'));
@@ -80,8 +82,9 @@ class PacientesController extends Controller
 
         DetalhePaciente::create([
                 'paciente_id' => $paciente->id,
-                'texto_principal' => "",
+                'texto_principal' => '',
                 'arquivos' => "",
+                'date_cad' => Carbon::now(),
                 'empresa_id' => Auth::user()->empresa_id,
                 'medico_id' => $medico_id,
             ]);
@@ -129,6 +132,7 @@ class PacientesController extends Controller
 
         $detalhes = $paciente->detalhespacientes()->where('medico_id', session('funcionario_id'))->first(); // retona Object
 
+
         $tramites_paciente = $paciente->tramites()->where('medico_id', session('funcionario_id'))->get(); // retorna array 
         // Tramite::where('paciente_id', $id_paciente)->where('medico_id', session('funcionario_id'))->get()->toArray();
         return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente'));
@@ -147,8 +151,9 @@ class PacientesController extends Controller
         // Encontrar o registro existente e atualizar apenas os campos necessários
         DetalhePaciente::where('paciente_id', $pacienteId)->where('medico_id', session('funcionario_id'))
             ->update([
-                'texto_principal' => $request->texto_principal,
+                'texto_principal' => Crypt::encrypt($request->texto_principal), 
                 'arquivos' => $caminhoArquivosString ?? null,
+            
             ]);
     }
 

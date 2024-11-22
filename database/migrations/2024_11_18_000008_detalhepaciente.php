@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('texto_principal')->nullable();
             $table->string('arquivos')->nullable();
+            $table->date('date_cad')->nullable(); // data cadastro
+            $table->date('date_pc')->nullable(); // primeira consulta 
+            $table->date('date_uc')->nullable(); // ultima consulta 
+            $table->date('date_pxc')->nullable(); // proxima consulta 
 
             $table->unsignedBigInteger('medico_id');
             $table->foreign('medico_id')->references('id')->on('medicos')->onDelete('cascade')->onUpdate('cascade');

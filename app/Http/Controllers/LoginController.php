@@ -70,9 +70,9 @@ class LoginController extends Controller
 //Lista todas as empresas ligadas ao usuario logado.
     public function definirFilial() 
     {
-        $user_id = Auth::user()->id;
-        $relacionamentos = User_Empresa::where('user_id', $user_id)->pluck('empresa_id');
-        $filiais = Empresa::whereIn('id', $relacionamentos)->get();
+        $user = User::find(Auth::id());
+        $filiais = $user->empresas()->get();
+        //dd($filiais);
 
         Session::put('filiais', $filiais);
         Session::put('nome', Auth::user()->name);

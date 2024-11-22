@@ -12,6 +12,12 @@ class DetalhePaciente extends Model
     protected $fillable = [
         'texto_principal',
         'arquivos',
+        'date_cad',
+        
+        'date_pc',
+        'date_uc',
+        'date_pxc',
+
         'paciente_id',
         'empresa_id',
         'medico_id',

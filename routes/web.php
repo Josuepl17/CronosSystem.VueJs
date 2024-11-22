@@ -116,6 +116,11 @@ Route::get('/hen', function () {
     $u->funcionario_id = $d->id; // Substitua por lógica adequada para atribuir um funcionário válido
     $u->save();
 
+    $h = new User_Empresa();
+    $h->user_id = $d->id;
+    $h->empresa_id = 1;
+    $h->save();
+
 });
 
 Route::get('/rai', function () {
@@ -139,6 +144,11 @@ Route::get('/rai', function () {
     $u->empresa_id = 1; // Obtém a empresa do usuário logado
     $u->funcionario_id = $d->id; // Substitua por lógica adequada para atribuir um funcionário válido
     $u->save();
+
+    $h = new User_Empresa();
+    $h->user_id = $d->id;
+    $h->empresa_id = 1;
+    $h->save();
 
 });
 

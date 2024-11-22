@@ -21,4 +21,8 @@ class User extends Authenticatable
         'funcionario_id', // usado para filtrar de acordo com pacientes
         
     ];
+
+    public function empresas(){
+        return $this->belongsToMany(Empresa::class, 'user_empresa', 'user_id', 'empresa_id');
+    }
 }
