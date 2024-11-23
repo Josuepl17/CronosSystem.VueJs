@@ -24,7 +24,7 @@ class PacientesController extends Controller
 
     public function listaPacientes() {
 
-       $funcionario_id = session('funcionario_id');
+       $funcionario_id = Session::get('funcionario_id');
 
         if ($medico = Medico::Find($funcionario_id) ){
          
@@ -162,8 +162,8 @@ class PacientesController extends Controller
 public function createTramite(Request $request) {
     $dados = $request->all();
     $dados['paciente_id'] = FacadesSession::get('id_paciente');
-    $dados['empresa_id'] = Auth::user()->empresa_id;
-    $dados['medico_id'] = session('funcionario_id');
+    $dados['empresa_id'] = Session::get('empresa_id');
+    $dados['medico_id'] = Session::get('funcionario_id');
     Tramite::create($dados);
     return Inertia::location('/detalhes/paciente');
 }

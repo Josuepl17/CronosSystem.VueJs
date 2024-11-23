@@ -24,7 +24,8 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            session(['funcionario_id' => Auth::user()->funcionario_id]);
+            Session::put('funcionario_id', Auth::user()->funcionario_id);
+            Session::put('nome', Auth::user()->name);
             return redirect()->intended();
         } else {
             return back()->withErrors([
@@ -72,14 +73,10 @@ class LoginController extends Controller
     {
         $user = User::find(Auth::id());
         $filiais = $user->empresas()->get();
-        //dd($filiais);
-
         Session::put('filiais', $filiais);
-        Session::put('nome', Auth::user()->name);
         $empresa = Empresa::find(Auth::user()->empresa_id);
         Session::put('razao_social', $empresa->razao_social);
         Session::put('empresa_id', Auth::user()->empresa_id);
-
         return redirect('/dash');
     }
 

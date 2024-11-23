@@ -10,15 +10,15 @@ use App\Models\User_Empresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
 class MedicosController extends Controller
 {
     public function listaMedicos() {
-        $empresa_id = Auth::user()->empresa_id;
+        $empresa_id = Session::get('empresa_id');
         $empresa = Empresa::find($empresa_id);
         $medicos = $empresa->medicos()->get();
-        //$medicos = Medico::where('empresa_id', $empresa_id)->get();
         return Inertia::render('Medicos', compact('medicos'));
     }
 
@@ -30,7 +30,7 @@ class MedicosController extends Controller
 
     public function createMedicos(ValidateRequest $request) {
         $dados = $request->except('senha');
-        $dados['empresa_id'] = Auth::user()->empresa_id;
+        $dados['empresa_id'] = Session::get('empresa_id');
         $medico =  Medico::create($dados);
 
         $user =  User::create([
