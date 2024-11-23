@@ -24,7 +24,7 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            Session::put('funcionario_id', Auth::user()->funcionario_id);
+            Session::put('id', Auth::id());
             Session::put('nome', Auth::user()->name);
             return redirect()->intended();
         } else {

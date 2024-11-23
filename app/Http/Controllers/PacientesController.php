@@ -27,7 +27,7 @@ class PacientesController extends Controller
 
       
 
-        if ($medico = Medico::Find(Session::get('funcionario_id')) ){
+        if ($medico = Medico::Find(Session::get('id')) ){
             // medico filtrado retorna todos os seus pacientes 
         $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
 
@@ -54,7 +54,7 @@ class PacientesController extends Controller
     
 
     public function formPacientes() {
-        $empresa_id = Auth::user()->empresa_id;
+        $empresa_id = Session::get('empresa_id');
         $medicos = Medico::where('empresa_id', $empresa_id)->get();
         return Inertia::render('FormPacientes', compact('medicos'));
     }
@@ -69,7 +69,7 @@ class PacientesController extends Controller
     public function createPaciente(ValidateRequest $request) {
         $dados = $request->all();
 
-        $dados['empresa_id'] = Auth::user()->empresa_id;
+        $dados['empresa_id'] = Session::get('empresa_id');
 
         $paciente =  Paciente::create($dados);
 
@@ -78,7 +78,7 @@ class PacientesController extends Controller
             Medico_Paciente::create([
                 'paciente_id' => $paciente->id,
                 'medico_id' => $medico_id,
-                'empresa_id' => Auth::user()->empresa_id,
+                'empresa_id' => Session::get('empresa_id'),
             ]);
 
         DetalhePaciente::create([
@@ -86,7 +86,7 @@ class PacientesController extends Controller
                 'texto_principal' => '',
                 'arquivos' => "",
                 'date_cad' => Carbon::now(),
-                'empresa_id' => Auth::user()->empresa_id,
+                'empresa_id' => Session::get('empresa_id'),
                 'medico_id' => $medico_id,
             ]);
         }
@@ -127,15 +127,15 @@ class PacientesController extends Controller
         $id_paciente = FacadesSession::get('id_paciente');
         $paciente = Paciente::Find($id_paciente); // nome vue js 
 
-        //$detalhes = DetalhesPacientes::where('paciente_id', $id_paciente)->where('medico_id', session('funcionario_id'))->first(); // filtra os detalhes do paciente escolhido, pelo ID do medico logado
+        //$detalhes = DetalhesPacientes::where('paciente_id', $id_paciente)->where('medico_id', session('id'))->first(); // filtra os detalhes do paciente escolhido, pelo ID do medico logado
 
-        //$detalhes = $paciente->detalhespacientes()->where('medico_id', session('funcionario_id'))->get();
+        //$detalhes = $paciente->detalhespacientes()->where('medico_id', session('id'))->get();
 
-        $detalhes = $paciente->detalhespacientes()->where('medico_id', session('funcionario_id'))->first(); // retona Object
+        $detalhes = $paciente->detalhespacientes()->where('medico_id', Session::get('id'))->first(); // retona Object
 
 
-        $tramites_paciente = $paciente->tramites()->where('medico_id', session('funcionario_id'))->get(); // retorna array 
-        // Tramite::where('paciente_id', $id_paciente)->where('medico_id', session('funcionario_id'))->get()->toArray();
+        $tramites_paciente = $paciente->tramites()->where('medico_id', Session::get('id'))->get(); // retorna array 
+        // Tramite::where('paciente_id', $id_paciente)->where('medico_id', session('id'))->get()->toArray();
         return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente'));
 
     }
@@ -150,7 +150,7 @@ class PacientesController extends Controller
         $pacienteId = FacadesSession::get('id_paciente');
     
         // Encontrar o registro existente e atualizar apenas os campos necessários
-        DetalhePaciente::where('paciente_id', $pacienteId)->where('medico_id', session('funcionario_id'))
+        DetalhePaciente::where('paciente_id', $pacienteId)->where('medico_id', Session::get('id'))
             ->update([
                 'texto_principal' => Crypt::encrypt($request->texto_principal), 
                 'arquivos' => $caminhoArquivosString ?? null,
@@ -164,7 +164,7 @@ public function createTramite(Request $request) {
     $dados = $request->all();
     $dados['paciente_id'] = FacadesSession::get('id_paciente');
     $dados['empresa_id'] = Session::get('empresa_id');
-    $dados['medico_id'] = Session::get('funcionario_id');
+    $dados['medico_id'] = Session::get('id');
     Tramite::create($dados);
     return Inertia::location('/detalhes/paciente');
 }

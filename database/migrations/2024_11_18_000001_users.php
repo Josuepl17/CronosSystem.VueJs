@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->integer('empresa_id'); // apenas para busca da empresa
-            $table->integer('funcionario_id')->unique(); 
             $table->timestamps();
         });
 

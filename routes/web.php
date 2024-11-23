@@ -116,7 +116,6 @@ Route::get('/1', function () {
     $u->email = 'henrique@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
     $u->empresa_id = 1; // Obtém a empresa do usuário logado
-    $u->funcionario_id = $d->id; // Substitua por lógica adequada para atribuir um funcionário válido
     $u->save();
 
     $h = new User_Empresa();
@@ -146,7 +145,6 @@ Route::get('/2', function () {
     $u->email = 'raiane@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
     $u->empresa_id = 1; // Obtém a empresa do usuário logado
-    $u->funcionario_id = $d->id; // Substitua por lógica adequada para atribuir um funcionário válido
     $u->save();
 
     $h = new User_Empresa();

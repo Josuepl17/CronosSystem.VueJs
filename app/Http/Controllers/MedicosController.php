@@ -16,7 +16,9 @@ use Inertia\Inertia;
 class MedicosController extends Controller
 {
     public function listaMedicos() {
-        $medicos = Empresa::find(Session::get('empresa_id'))->medicos()->get(); // busca pela empresa relacionada ao ID, e acessa metodo 'medicos' relacionado na Model, retornando todos  os atendentes  da empresa selecionada.
+        $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');// todos os usuarios dessa empresa, e depois todos os ids
+        $medicos = Medico::wherein('id', $users)->get();
+        //$medicos = Empresa::find(Session::get('empresa_id'))->medicos()->get(); // busca pela empresa relacionada ao ID, e acessa metodo 'medicos' relacionado na Model, retornando todos  os atendentes  da empresa selecionada.
         return Inertia::render('Medicos', compact('medicos')); 
     }
 
@@ -36,8 +38,7 @@ class MedicosController extends Controller
             'name' => $request->nome,
             'email' => $request->email,
             'password' => Hash::make($request->senha),
-            'empresa_id' => Auth::user()->empresa_id,
-            'funcionario_id' => $medico->id,
+            'empresa_id' => Session::get('empresa_id'),
 
          ]);
 
