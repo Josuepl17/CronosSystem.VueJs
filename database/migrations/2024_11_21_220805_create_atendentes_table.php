@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -24,6 +25,8 @@ return new class extends Migration
             $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
+
+       // DB::statement('ALTER SEQUENCE medicos_id_seq RESTART WITH 3000');
     }
 
     /**

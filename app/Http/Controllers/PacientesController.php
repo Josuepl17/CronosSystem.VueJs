@@ -24,11 +24,11 @@ class PacientesController extends Controller
 
     public function listaPacientes() {
 
-       $funcionario_id = Session::get('funcionario_id');
+       $funcionario_id = Session::get('funcionario_id'); // se o atendente e o medico for o mesmo id, vai cair errado o metodo.
 
         if ($medico = Medico::Find($funcionario_id) ){
          
-        $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Auth::user()->empresa_id)->get();
+        $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
 
         } else{
             

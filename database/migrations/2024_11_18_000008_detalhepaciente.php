@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('detalhe_pacientes', function (Blueprint $table) {
             $table->id();
-            $table->string('texto_principal')->nullable();
+            $table->text('texto_principal')->nullable();
             $table->string('arquivos')->nullable();
             $table->date('date_cad')->nullable(); // data cadastro
             $table->date('date_pc')->nullable(); // primeira consulta 
