@@ -85,6 +85,8 @@ Route::get('/gere', function(){
     $r->empresa_id = $e->id;
     $r->save(); 
 
+
+
     return redirect('/dash');
 });
 
@@ -94,7 +96,7 @@ Route::get('/gere', function(){
 
 
 
-Route::get('/hen', function () {
+Route::get('/1', function () {
     $d = new Medico(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
     $d->nome = 'Henrique';
     $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
@@ -109,6 +111,7 @@ Route::get('/hen', function () {
     $d->save();
 
     $u = new User(); // Substitua "User" pelo nome correto do modelo.
+    $u->id =  $d->id;
     $u->name = 'Henrique ';
     $u->email = 'henrique@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
@@ -117,13 +120,13 @@ Route::get('/hen', function () {
     $u->save();
 
     $h = new User_Empresa();
-    $h->user_id = $d->id;
+    $h->user_id = $u->id;
     $h->empresa_id = 1;
     $h->save();
 
 });
 
-Route::get('/rai', function () {
+Route::get('/2', function () {
     $d = new Medico(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
     $d->nome = 'Raiane';
     $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
@@ -138,6 +141,7 @@ Route::get('/rai', function () {
     $d->save();
 
     $u = new User(); // Substitua "User" pelo nome correto do modelo.
+    $u->id =  $d->id;
     $u->name = 'Raiane ';
     $u->email = 'raiane@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
@@ -146,7 +150,7 @@ Route::get('/rai', function () {
     $u->save();
 
     $h = new User_Empresa();
-    $h->user_id = $d->id;
+    $h->user_id = $u->id;
     $h->empresa_id = 1;
     $h->save();
 
