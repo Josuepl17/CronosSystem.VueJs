@@ -19,10 +19,6 @@ class Empresa extends Model
         return $this->hasMany(Medico::class); // tem muitos
     }
 
-    public function atendentes (){
-        return $this->hasMany(Atendente::class); // tem muitos
-    }
-
     public function users(){
         return $this->belongsToMany(User::class, 'user_empresa', 'empresa_id', 'user_id');
     }

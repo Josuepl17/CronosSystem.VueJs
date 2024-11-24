@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
 use App\Models\Atendente;
-use App\Models\Empresa;
 use App\Models\User;
 use App\Models\User_Empresa;
 use Illuminate\Http\Request;
@@ -16,7 +15,7 @@ use Inertia\Inertia;
 class AtendenteController extends Controller
 {
     public function listaAtendentes() {
-        $atendentes = Empresa::find(Session::get('empresa_id'))->atendentes()->get(); // busca pela empresa relacionada ao ID, e acessa metodo Atendentes relacionado na Model, retornando todos  os atendentes de da empresa selecionada.
+        $atendentes = Atendente::where('empresa_id', Session::get('empresa_id'))->get();;
         return Inertia::render('Atendentes', compact('atendentes'));
     }
 

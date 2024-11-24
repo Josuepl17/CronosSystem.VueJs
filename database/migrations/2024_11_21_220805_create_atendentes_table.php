@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::statement('ALTER SEQUENCE atendentes_id_seq RESTART WITH 3000');
+       // DB::statement('ALTER SEQUENCE medicos_id_seq RESTART WITH 3000');
     }
 
     /**

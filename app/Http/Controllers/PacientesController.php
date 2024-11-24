@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
 use App\Models\DetalhePaciente;
-use App\Models\Empresa;
 use App\Models\Medico_Paciente;
 use App\Models\Medico;
 use App\Models\Paciente;
@@ -25,10 +24,15 @@ class PacientesController extends Controller
 
     public function listaPacientes() {
 
-      
+       $funcionario_id = Session::get('funcionario_id'); // se o atendente e o medico for o mesmo id, vai cair errado o metodo.
 
+<<<<<<< HEAD
         if ($medico = Medico::Find(Session::get('id')) ){
             // medico filtrado retorna todos os seus pacientes 
+=======
+        if ($medico = Medico::Find($funcionario_id) ){
+         
+>>>>>>> parent of 72f1b51 (VOLTE AQUI SE TUDO DER ERRADO)
         $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
 
         } else{
