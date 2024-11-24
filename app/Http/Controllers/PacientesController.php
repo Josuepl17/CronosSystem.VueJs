@@ -26,13 +26,9 @@ class PacientesController extends Controller
 
        $funcionario_id = Session::get('funcionario_id'); // se o atendente e o medico for o mesmo id, vai cair errado o metodo.
 
-<<<<<<< HEAD
-        if ($medico = Medico::Find(Session::get('id')) ){
-            // medico filtrado retorna todos os seus pacientes 
-=======
         if ($medico = Medico::Find($funcionario_id) ){
          
->>>>>>> parent of 72f1b51 (VOLTE AQUI SE TUDO DER ERRADO)
+
         $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
 
         } else{
