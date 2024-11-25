@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
 use App\Models\Atendente;
+use App\Models\Empresa;
 use App\Models\User;
 use App\Models\User_Empresa;
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ use Inertia\Inertia;
 class AtendenteController extends Controller
 {
     public function listaAtendentes() {
-        $atendentes = Atendente::where('empresa_id', Session::get('empresa_id'))->get();;
+        $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
+        $medicos = Atendente::wherein('id', $users)->get();
         return Inertia::render('Atendentes', compact('atendentes'));
     }
 

@@ -28,7 +28,6 @@ return new class extends Migration
             'email' => 'josuep.l@outlook.com',
            'password' => Hash::make('123'),
             'empresa_id' => 1, // DEFINE UM ID PADRÃO PARA EMPRESA
-            'funcionario_id' => 999,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
