@@ -94,7 +94,7 @@ Route::get('/gere', function(){
 
 
 
-Route::get('/hen', function () {
+Route::get('/1', function () {
     $d = new Medico(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
     $d->nome = 'Henrique';
     $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
@@ -122,7 +122,7 @@ Route::get('/hen', function () {
 
 });
 
-Route::get('/rai', function () {
+Route::get('/2', function () {
     $d = new Medico(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
     $d->nome = 'Raiane';
     $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício

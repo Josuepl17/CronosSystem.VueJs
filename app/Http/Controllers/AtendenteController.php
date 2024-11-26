@@ -17,7 +17,7 @@ class AtendenteController extends Controller
 {
     public function listaAtendentes() {
         $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
-        $medicos = Atendente::wherein('id', $users)->get();
+        $atendentes = Atendente::wherein('id', $users)->get();
         return Inertia::render('Atendentes', compact('atendentes'));
     }
 
@@ -34,12 +34,11 @@ class AtendenteController extends Controller
         $atendente =  Atendente::create($dados);
         
         $user =  User::create([
-            
+            'id' => $atendente->id,
             'name' => $request->nome,
             'email' => $request->email,
             'password' => Hash::make($request->senha),
             'empresa_id' => Session::get('empresa_id'),
-            'funcionario_id' => $atendente->id,
 
          ]);
 
