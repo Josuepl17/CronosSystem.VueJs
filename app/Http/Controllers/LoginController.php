@@ -50,6 +50,7 @@ class LoginController extends Controller
         $empresa = new Empresa();
         $empresa->razao_social = $request->razao_social;
         $empresa->cnpj = $request->cnpj;
+        $empresa->filial_id = $empresa->id;
         $empresa->save();
 
         $user = new User();

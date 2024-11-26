@@ -16,12 +16,14 @@ return new class extends Migration
             $table->id();
             $table->string('razao_social');
             $table->bigInteger('cnpj')->unique();
+            $table->bigInteger('filial_id');
             $table->timestamps();
         });
 
         DB::table('empresas')->insert([
             'razao_social' => 'Empresa Padrão',
             'cnpj' => '12345678000100', // CNPJ EXEMPLO, SUBSTITUA POR UM VÁLIDO SE NECESSÁRIO
+            'filial_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
