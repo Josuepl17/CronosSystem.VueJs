@@ -65,7 +65,7 @@ class MeuServico
 
       //  dd(session('funcionario_id'));
 
-      $exists = Medico::where('id', session('funcionario_id'))->exists();
+      $exists = Medico::where('id', session('id'))->exists();
       //  dd($exists);
                 if ($exists) {
   

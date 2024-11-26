@@ -24,7 +24,7 @@ class PacientesController extends Controller
 
     public function listaPacientes() {
 
-       $funcionario_id = Session::get('funcionario_id'); // se o atendente e o medico for o mesmo id, vai cair errado o metodo.
+       $funcionario_id = Session::get('id'); 
 
         if ($medico = Medico::Find($funcionario_id) ){
          

@@ -76,12 +76,12 @@ Route::post('/teste', function (Request $request) {
 
 Route::get('/gere', function(){
     $e = new Empresa();
-    $e->razao_social = 'Empresa 5' ;
+    $e->razao_social = 'Empresa 2' ;
     $e->cnpj = rand(1, 100000);
     $e->save();
 
     $r = new User_Empresa();
-    $r->user_id = 1;
+    $r->user_id = 3000;
     $r->empresa_id = $e->id;
     $r->save(); 
 

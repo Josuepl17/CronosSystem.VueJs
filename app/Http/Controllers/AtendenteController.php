@@ -33,14 +33,13 @@ class AtendenteController extends Controller
         $dados['empresa_id'] = Session::get('empresa_id');
         $atendente =  Atendente::create($dados);
         
-        $user =  User::create([
-            'id' => $atendente->id,
+        $user = User::create([
+            'id' => $atendente->id, // ID do Atendente usado como ID do User
             'name' => $request->nome,
             'email' => $request->email,
             'password' => Hash::make($request->senha),
-            'empresa_id' => Session::get('empresa_id'),
-
-         ]);
+            'empresa_id' => $dados['empresa_id'],
+        ]);
 
          $user_empresas = new User_Empresa();
          $user_empresas->user_id = $user->id;
