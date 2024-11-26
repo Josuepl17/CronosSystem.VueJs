@@ -18,6 +18,8 @@ class MedicosController extends Controller
     public function listaMedicos() {
         $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
         $medicos = Medico::wherein('id', $users)->get();
+
+        $medicos = Medico::where('empresa_id', Session::get('empresa_id'))->get();
         return Inertia::render('Medicos', compact('medicos'));
 
     }
@@ -30,7 +32,7 @@ class MedicosController extends Controller
 
     public function createMedicos(ValidateRequest $request) {
         $dados = $request->except('senha');
-        $dados['empresa_id'] = Session::get('empresa_id');
+       // $dados['empresa_id'] = Session::get('empresa_id');
         $medico =  Medico::create($dados);
 
         $user =  User::create([

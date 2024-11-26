@@ -24,17 +24,18 @@ class PacientesController extends Controller
 
     public function listaPacientes() {
 
-       $funcionario_id = Session::get('id'); 
+       $funcionario_id = Session::get('id'); // Medico ou atendente Logado 
 
-        if ($medico = Medico::Find($funcionario_id) ){
+        if ($medico = Medico::Find($funcionario_id) ){// se existir é um medico, entrara em um filtro onde apresentará apenas os pacientes daquele medico especifico, e se for da empresa selecionada.
          
 
         $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
-
+            // Pelo relacionamento da tabela pivo ele encontra os pacientes relacionados com o medico Logado.
+            // caso um dia precise, para os pacientes seja apresentado onde o medico estiver logado, precisa apemnas remover o where do filtro da empresa
         } else{
             
             $pacientes = Paciente::where('empresa_id', Session::get('empresa_id'))->get();
-            
+            // retorna todos os pacientes da empresa pois caiu no filtro de atendente
         }
 
         MeuServico::Autorizer(); //responsavel para mostrar inserir paciente 
@@ -48,14 +49,10 @@ class PacientesController extends Controller
 
 
 
-
-
-
     
 
     public function formPacientes() {
-        $empresa_id = Session::get('empresa_id');
-        $medicos = Medico::where('empresa_id', $empresa_id)->get();
+        $medicos = Medico::where('empresa_id', Session::get('empresa_id'))->get();// todos medicos da empresa logada
         return Inertia::render('FormPacientes', compact('medicos'));
     }
 
@@ -69,19 +66,19 @@ class PacientesController extends Controller
     public function createPaciente(ValidateRequest $request) {
         $dados = $request->all();
 
-        $dados['empresa_id'] = Session::get('empresa_id');
+        //$dados['empresa_id'] = Session::get('empresa_id');
 
-        $paciente =  Paciente::create($dados);
+        $paciente =  Paciente::create($dados);// cria o paciente
 
         foreach ($request->medico as $medico_id) {
 
-            Medico_Paciente::create([
+            Medico_Paciente::create([ // faz o relacionamento dos medicos selecionados com o paciente criado
                 'paciente_id' => $paciente->id,
                 'medico_id' => $medico_id,
                 'empresa_id' => Session::get('empresa_id'),
             ]);
 
-        DetalhePaciente::create([
+        DetalhePaciente::create([ // dados importantes para primeira consulta 
                 'paciente_id' => $paciente->id,
                 'texto_principal' => '',
                 'arquivos' => "",
