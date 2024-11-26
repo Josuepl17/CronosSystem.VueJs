@@ -109,6 +109,7 @@ Route::get('/1', function () {
     $d->save();
 
     $u = new User(); // Substitua "User" pelo nome correto do modelo.
+    $u->id = $d->id; 
     $u->name = 'Henrique ';
     $u->email = 'henrique@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
@@ -137,6 +138,7 @@ Route::get('/2', function () {
     $d->save();
 
     $u = new User(); // Substitua "User" pelo nome correto do modelo.
+    $u->id = $d->id; 
     $u->name = 'Raiane ';
     $u->email = 'raiane@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
