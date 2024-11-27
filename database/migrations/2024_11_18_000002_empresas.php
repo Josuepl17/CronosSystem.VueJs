@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('razao_social');
             $table->bigInteger('cnpj')->unique();
-            $table->bigInteger('filial_id');
+            $table->bigInteger('filial_id')->nullable();
             $table->timestamps();
         });
 

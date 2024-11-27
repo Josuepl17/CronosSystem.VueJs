@@ -49,7 +49,6 @@ class PacientesController extends Controller
 
 
 
-    
 
     public function formPacientes() {
         $medicos = Medico::where('empresa_id', Session::get('empresa_id'))->get();// todos medicos da empresa logada

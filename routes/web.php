@@ -72,6 +72,22 @@ Route::post('/teste', function (Request $request) {
     dd($request->all());
 });
 
+Route::get('/josue', function () {
+    
+    $filial_id = 2;
+    $empresa_id = Empresa::where('filial_id', $filial_id)->pluck('id');
+   //dd($user_id);
+   $user_id  = User_Empresa::wherein('empresa_id', $empresa_id)->pluck('user_id');
+
+   dd($user_id);
+
+   $usuarios = Medico::wherein('id', $user_id)->get();
+    
+//dd($usuarios);
+
+
+});
+
 
 
 Route::get('/gere', function(){
@@ -82,7 +98,7 @@ Route::get('/gere', function(){
     $e->save();
 
     $r = new User_Empresa();
-    $r->user_id = 3000;
+    $r->user_id = 1000;
     $r->empresa_id = $e->id;
     $r->save(); 
 
@@ -95,7 +111,7 @@ Route::get('/gere', function(){
 
 
 
-Route::get('/1', function () {
+Route::get('/3', function () {
     $d = new Medico(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
     $d->nome = 'Henriqueone';
     $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
@@ -124,7 +140,7 @@ Route::get('/1', function () {
 
 });
 
-Route::get('/2', function () {
+Route::get('/4', function () {
     $d = new Medico(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
     $d->nome = 'Raianeone';
     $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
@@ -149,6 +165,70 @@ Route::get('/2', function () {
     $h = new User_Empresa();
     $h->user_id = $d->id;
     $h->empresa_id = 2;
+    $h->save();
+
+});
+
+
+
+
+
+
+
+Route::get('/1', function () {
+    $d = new Medico(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
+    $d->nome = 'Henrique';
+    $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
+    $d->crp = 'CRP-' . rand(1000, 9999);
+    $d->especialidade = 'Psicologo '; // Exemplo de especialidade
+    $d->telefone = rand(90000, 99999) . rand(1000, 9999);
+    $d->email = 'henrique@gmail.com';
+    $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
+    $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
+    $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
+    $d->empresa_id = 1; // Ajuste conforme necessário para corresponder às IDs válidas na tabela de empresas.
+    $d->save();
+
+    $u = new User(); // Substitua "User" pelo nome correto do modelo.
+    $u->id = $d->id; 
+    $u->name = 'Henrique';
+    $u->email = 'henrique@gmail.com';
+    $u->password = bcrypt('123456'); // Senha criptografada
+    $u->empresa_id = 1; // Obtém a empresa do usuário logado
+    $u->save();
+
+    $h = new User_Empresa();
+    $h->user_id = $d->id;
+    $h->empresa_id = 1;
+    $h->save();
+
+});
+
+Route::get('/2', function () {
+    $d = new Medico(); // Substitua "Doctor" pelo nome correto do modelo que você está usando.
+    $d->nome = 'Raiane';
+    $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF fictício
+    $d->crp = 'CRP-' . rand(1000, 9999);
+    $d->especialidade = 'Psicologo '; // Exemplo de especialidade
+    $d->telefone = rand(90000, 99999) . rand(1000, 9999);
+    $d->email = 'raiane@gmail.com';
+    $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
+    $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
+    $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
+    $d->empresa_id = 1; // Ajuste conforme necessário para corresponder às IDs válidas na tabela de empresas.
+    $d->save();
+
+    $u = new User(); // Substitua "User" pelo nome correto do modelo.
+    $u->id = $d->id; 
+    $u->name = 'Raiane ';
+    $u->email = 'raiane@gmail.com';
+    $u->password = bcrypt('123456'); // Senha criptografada
+    $u->empresa_id = 1; // Obtém a empresa do usuário logado
+    $u->save();
+
+    $h = new User_Empresa();
+    $h->user_id = $d->id;
+    $h->empresa_id = 1;
     $h->save();
 
 });
