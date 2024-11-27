@@ -40,7 +40,7 @@ class MedicosController extends Controller
             'name' => $request->nome,
             'email' => $request->email,
             'password' => Hash::make($request->senha),
-            'empresa_id' => Session::get('empresa_id'),
+            'empresa_id' => Session::get('empresa_id'), // so para acessar a empresa selecionada
 
          ]);
 

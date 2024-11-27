@@ -92,13 +92,13 @@ Route::get('/josue', function () {
 
 Route::get('/gere', function(){
     $e = new Empresa();
-    $e->razao_social = 'Empresa 2' ;
+    $e->razao_social = 'IPDR 2' ;
     $e->cnpj = rand(1, 100000);
-    $e->filial_id = 1;
+    $e->filial_id = 2;
     $e->save();
 
     $r = new User_Empresa();
-    $r->user_id = 1000;
+    $r->user_id = 2;
     $r->empresa_id = $e->id;
     $r->save(); 
 
