@@ -10,13 +10,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    
     public function up(): void
     {
         Schema::create('empresas', function (Blueprint $table) {
             $table->id();
             $table->string('razao_social');
             $table->bigInteger('cnpj')->unique();
-            $table->bigInteger('filial_id')->nullable();
+
+
+            $table->bigInteger('telefone');
+            $table->string('email')->unique();
+            $table->string('endereco');
+            $table->string('cidade');
+            $table->string('bairro');
+
+
+            $table->unsignedBigInteger('filial_id')->nullable();
+            $table->foreign('filial_id')->references('id')->on('empresas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
