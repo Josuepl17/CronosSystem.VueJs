@@ -32,6 +32,7 @@ Route::post('/login', [LoginController::class, 'Authenticate']);
 Route::get('/form/login', [LoginController::class, 'formLogin'])->name('login');
 Route::get('/form/user/empresas', [LoginController::class, 'formUserEmpresa']);
 Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/gerenciar/filial', [LoginController::class, 'gerenciarFiliais']);
 Route::get('/editar/filial', [LoginController::class, 'editarFilial']);
 
 
@@ -94,11 +95,11 @@ Route::get('/josue', function () {
 
 Route::get('/gere', function(){
     $e = new Empresa();
-    $e->razao_social = 'IPDR 2' ;
+    $e->razao_social = 'IPDR 3' ;
     $e->cnpj = rand(1, 100000);
     $e->filial_id = 1;
-    $e->telefone = 27996550965;
-    $e->email = 'qualqff
+    $e->telefone = 27996550963;
+    $e->email = 'qualwwqff
     uer@gmail.com';
     $e->endereco  = 'nsjknsdn';
     $e->cidade = 'Paffncas' ;

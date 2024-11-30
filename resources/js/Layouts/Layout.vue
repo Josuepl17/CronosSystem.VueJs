@@ -46,7 +46,7 @@
             ><img src="/images/medico.png" alt="" /> <span>Médicos</span></Link
           >
 
-          <Link href="/editar/filial"
+          <Link href="/gerenciar/filial"
             ><img src="/images/filial.png" alt="" /> <span>Gerenciar Filial</span></Link
           >
 
@@ -113,7 +113,7 @@ function toggleMenu() {
 }
 </script>
 
-<style>
+<style scoped>
 #menu-geral.reduzido {
   width: 60px;
   min-width: 0;

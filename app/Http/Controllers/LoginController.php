@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresa;
 use App\Models\Empresas;
+use App\Models\Medico;
 use App\Models\User;
 use App\Models\User_Empresa;
 use Illuminate\Http\Request;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
+use App\Http\Requests\ValidateRequest;
+
 
 class LoginController extends Controller
 {
@@ -71,8 +74,25 @@ class LoginController extends Controller
     }
 
 
-public function editarFilial(Request $request) {
-    return Inertia::render('ListaFiliais');
+public function gerenciarFiliais() {
+
+    $filial_id = Auth::user()->empresa_id;
+    $filial_id = Empresa::find($filial_id);
+    $filial_id = $filial_id->filial_id;
+    $todasfiliais = Empresa::where('filial_id', $filial_id)->get();
+    //dd($todasfiliais);
+   // $user_id  = User_Empresa::wherein('empresa_id', $empresa_id)->pluck('user_id');
+
+   // $usuarios = Medico::wherein('id', $user_id)->get();
+    
+//dd($usuarios);
+
+    return Inertia::render('ListaFiliais', compact('todasfiliais'));
+}
+
+public function editarFilial() {
+
+
 }
 
 
@@ -98,7 +118,8 @@ public function editarFilial(Request $request) {
     public function mudarFilial(Request $request)
     {
 
-        Auth::user()->update(['empresa_id' => $request->id]);
+        \App\Models\User::where('id', Auth::id())
+        ->update(['empresa_id' => $request->id]);
     
         return redirect('/');
     }

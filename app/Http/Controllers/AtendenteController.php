@@ -30,7 +30,7 @@ class AtendenteController extends Controller
 
     public function createAtendente(ValidateRequest $request) {
         $dados = $request->all();
-        $dados['empresa_id'] = Session::get('empresa_id');
+       // $dados['empresa_id'] = Session::get('empresa_id');
         $atendente =  Atendente::create($dados);
         
         $user = User::create([
@@ -38,7 +38,7 @@ class AtendenteController extends Controller
             'name' => $request->nome,
             'email' => $request->email,
             'password' => Hash::make($request->senha),
-            'empresa_id' => $dados['empresa_id'],
+            'empresa_id' => Session::get('empresa_id'),
         ]);
 
          $user_empresas = new User_Empresa();
