@@ -3,7 +3,10 @@
 
 
 <div id="conteiner-geral">
-      <nav></nav>
+      
+  <div id="nav" >
+
+  </div>
 
       <div id="conteudo">
         <div class="filial">
@@ -25,7 +28,7 @@
                 <td>{{ filial.razao_social }}</td>
                 <td>{{ filial.cnpj }}</td>
                 <td>
-                  <Link>Editar</Link>
+                  <Link :href="'/editar/filial/' + filial.id" >Editar</Link>
                 </td>
             </tr>
              
@@ -71,8 +74,8 @@ const props = defineProps ({
         
       }
 
-      nav {
-        height: 05%;
+      #nav {
+       height: 08%;
         background-color: var(--azul-escuro);
       }
 

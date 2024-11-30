@@ -94,11 +94,27 @@ public function gerenciarFiliais() {
     return Inertia::render('ListaFiliais', compact('todasfiliais'));
 }
 
-public function editarFilial() {
+public function editarFilial(Request $request) {
 
+    $filial_id = Auth::user()->empresa_id;
+    $filial_id = Empresa::find($filial_id);
+    $filial_id = $filial_id->filial_id;
+    $todasfiliais = Empresa::where('filial_id', $filial_id)->pluck('id');
+
+     $user_id = User_Empresa::wherein('empresa_id', $todasfiliais)->pluck('user_id');
+   
+     $todosusuarios = User::wherein('id', $user_id )->get();
+
+    $usuariosfilial = User_Empresa::wherein('empresa_id', $request->id)->pluck('user_id');
+    $usuariosfili = User::wherein('id', $user_id )->get();
+
+
+    $filial = Empresa::find($request->id);
+
+
+return Inertia::render('EditarFilial', compact('filial', 'todosusuarios', 'usuariosfili'));
 
 }
-
 
 
 
