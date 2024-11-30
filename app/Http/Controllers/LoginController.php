@@ -70,6 +70,18 @@ class LoginController extends Controller
         return redirect('/form/login');
     }
 
+
+public function editarFilial(Request $request) {
+    dd($request->id);
+}
+
+
+
+
+
+
+
+
 // Defini a ultima filial selecionada na sessão para exibir dados no layout princiapal
 //Lista todas as empresas ligadas ao usuario logado.
     public function definirFilial() 

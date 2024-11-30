@@ -46,6 +46,10 @@
             ><img src="/images/medico.png" alt="" /> <span>Médicos</span></Link
           >
 
+          <Link href="/editar/filial"
+            ><img src="/images/logout.png" alt="" /> <span>Sair</span></Link
+          >
+
           <Link href="/logout"
             ><img src="/images/logout.png" alt="" /> <span>Sair</span></Link
           >

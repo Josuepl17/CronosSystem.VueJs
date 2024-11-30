@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\User_Empresa;
 use App\Models\User_Empresas;
 use GuzzleHttp\Psr7\Request as Psr7Request;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request as HttpRequest;
@@ -31,6 +32,7 @@ Route::post('/login', [LoginController::class, 'Authenticate']);
 Route::get('/form/login', [LoginController::class, 'formLogin'])->name('login');
 Route::get('/form/user/empresas', [LoginController::class, 'formUserEmpresa']);
 Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/editar/filial/{id}', [LoginController::class, 'editarFilial']);
 
 
 Route::middleware(['auth', 'web'])->group(function () {
