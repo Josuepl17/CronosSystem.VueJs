@@ -47,7 +47,7 @@
           >
 
           <Link href="/editar/filial"
-            ><img src="/images/filial.png" alt="" /> <span>Sair</span></Link
+            ><img src="/images/filial.png" alt="" /> <span>Gerenciar Filial</span></Link
           >
 
           <Link href="/logout"

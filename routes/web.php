@@ -32,7 +32,7 @@ Route::post('/login', [LoginController::class, 'Authenticate']);
 Route::get('/form/login', [LoginController::class, 'formLogin'])->name('login');
 Route::get('/form/user/empresas', [LoginController::class, 'formUserEmpresa']);
 Route::get('/logout', [LoginController::class, 'logout']);
-Route::get('/editar/filial/{id}', [LoginController::class, 'editarFilial']);
+Route::get('/editar/filial', [LoginController::class, 'editarFilial']);
 
 
 Route::middleware(['auth', 'web'])->group(function () {

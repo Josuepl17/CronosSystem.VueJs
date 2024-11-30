@@ -72,7 +72,7 @@ class LoginController extends Controller
 
 
 public function editarFilial(Request $request) {
-    dd($request->id);
+    dd('ola');
 }
 
 
