@@ -35,6 +35,11 @@ return new class extends Migration
             'razao_social' => 'Empresa Padrão',
             'cnpj' => '12345678000100', // CNPJ EXEMPLO, SUBSTITUA POR UM VÁLIDO SE NECESSÁRIO
             'filial_id' => 1,
+            'telefone' => 27996550967,
+            'email' => 'qualquer@gmail.com',
+            'endereco'  => 'nsjknsdn',
+            'cidade' => 'Pancas' ,
+            'bairro' => 'iejfijdi',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

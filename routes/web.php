@@ -94,11 +94,17 @@ Route::get('/gere', function(){
     $e = new Empresa();
     $e->razao_social = 'IPDR 2' ;
     $e->cnpj = rand(1, 100000);
-    $e->filial_id = 2;
+    $e->filial_id = 1;
+    $e->telefone = 27996550965;
+    $e->email = 'qualqff
+    uer@gmail.com';
+    $e->endereco  = 'nsjknsdn';
+    $e->cidade = 'Paffncas' ;
+    $e->bairro = 'iejfijdi';
     $e->save();
 
     $r = new User_Empresa();
-    $r->user_id = 2;
+    $r->user_id = 1;
     $r->empresa_id = $e->id;
     $r->save(); 
 
