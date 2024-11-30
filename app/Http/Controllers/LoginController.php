@@ -72,9 +72,8 @@ class LoginController extends Controller
 
 
 public function editarFilial(Request $request) {
-    dd('ola');
+    return Inertia::render('ListaFiliais');
 }
-
 
 
 
