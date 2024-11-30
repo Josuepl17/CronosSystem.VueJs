@@ -47,7 +47,7 @@
           >
 
           <Link href="/editar/filial"
-            ><img src="/images/logout.png" alt="" /> <span>Sair</span></Link
+            ><img src="/images/filial.png" alt="" /> <span>Sair</span></Link
           >
 
           <Link href="/logout"
