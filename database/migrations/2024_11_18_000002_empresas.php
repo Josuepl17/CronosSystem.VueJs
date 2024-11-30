@@ -18,9 +18,7 @@ return new class extends Migration
             $table->string('razao_social');
             $table->bigInteger('cnpj')->unique();
 
-
             $table->bigInteger('telefone');
-            $table->string('email')->unique();
             $table->string('endereco');
             $table->string('cidade');
             $table->string('bairro');
@@ -36,7 +34,6 @@ return new class extends Migration
             'cnpj' => '12345678000100', // CNPJ EXEMPLO, SUBSTITUA POR UM VÁLIDO SE NECESSÁRIO
             'filial_id' => 1,
             'telefone' => 27996550967,
-            'email' => 'qualquer@gmail.com',
             'endereco'  => 'nsjknsdn',
             'cidade' => 'Pancas' ,
             'bairro' => 'iejfijdi',

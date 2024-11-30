@@ -3,12 +3,18 @@
 
         <div class="form-container sign-in">
             <form @submit.prevent="form.post('/create/user/empresas')" >
-                <input type="text" id="name" placeholder="Nome:" v-model="form.name">
-                <input type="text" id="second_name" placeholder="Segundo Nome:" v-model="form.second_name">
-                <input type="email" id="email" placeholder="Email:" v-model="form.email">
-                <input type="password" id="password" placeholder="Senha:" v-model="form.password">
+                <input type="text" id="name" placeholder="Nome Usuario:" v-model="form.name">
+                <input type="email" id="email" placeholder="Email Usuario:" v-model="form.email">
+                <input type="password" id="password" placeholder="Senha Usuario:" v-model="form.password">
+
+               
                 <input type="text" id="razao_social" placeholder="Razão Social:" v-model="form.razao_social">
                 <input type="number" id="cnpj" placeholder="CNPJ:" v-model="form.cnpj">
+
+                <input type="number" id="telefone" placeholder="Telefone Empresa:" v-model="form.telefone">
+                <input type="text" id="endereco" placeholder="Endereco Empresa:" v-model="form.endereco">
+                <input type="text" id="cidade" placeholder="Cidade Empresa:" v-model="form.cidade">
+                <input type="text" id="bairro" placeholder="Bairro Empresa:" v-model="form.bairro">
 
                 <Link href="/form/login">Voltar</Link>
                 <button>Cadastrar</button>
@@ -31,11 +37,14 @@ import { useForm } from '@inertiajs/vue3';
 
 const form = useForm({
     name:  '',
-    second_name: '',
     email: '',
     password: '',
     razao_social: '',
     cnpj: '',
+    bairro:'',
+    cidade:'',
+    endereco:'',
+    telefone:'',
 });
 
 </script>
@@ -75,9 +84,9 @@ body{
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 480px;
-    top: 100px;
-    left: 26%;
+    min-height: 600px;
+    top: 50px;
+    left: 25%;
 }
 
 .container p{
