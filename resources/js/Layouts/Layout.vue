@@ -8,8 +8,8 @@
         <br />
         <div id="selecioneFilial" v-for="filial in $page.props.filiais" :key="filial.id">
           <Link :href="'/selecione/filial/' + filial.id"
-            >{{ filial.id }} - {{ filial.razao_social }} - {{ filial.cnpj }}</Link
-          >
+            >{{ filial.id }} - {{ filial.razao_social }} - {{ filial.cnpj }}
+          </Link>
         </div>
       </div>
     </div>
@@ -58,6 +58,7 @@
         <nav>
           <a href="#"><img src="/images/sino.png" alt="" /></a>
           <a href="#"><img src="/images/config.png" alt="" /></a>
+
           <button
             @click="isModalOpen = true"
             style="
