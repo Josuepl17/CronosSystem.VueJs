@@ -23,14 +23,7 @@ return new class extends Migration
         });
 
 
-        DB::table('users')->insert([
-            'name' => 'josue',
-            'email' => 'josuep.l@outlook.com',
-           'password' => Hash::make('123'),
-            'empresa_id' => 1, // DEFINE UM ID PADRÃO PARA EMPRESA
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+
 
 
 
