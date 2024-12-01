@@ -97,10 +97,8 @@ Route::get('/gere', function(){
     $e = new Empresa();
     $e->razao_social = 'IPDR 3' ;
     $e->cnpj = rand(1, 100000);
-    $e->filial_id = 1;
+    $e->filial_id = 2;
     $e->telefone = 27996550963;
-    $e->email = 'qualwwqff
-    uer@gmail.com';
     $e->endereco  = 'nsjknsdn';
     $e->cidade = 'Paffncas' ;
     $e->bairro = 'iejfijdi';
@@ -194,8 +192,7 @@ Route::get('/1', function () {
     $d->email = 'henrique@gmail.com';
     $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
     $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
-    $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
-    $d->empresa_id = 1; // Ajuste conforme necessário para corresponder às IDs válidas na tabela de empresas.
+    $d->bairro = 'Bairro Exemplo ' . rand(1, 5); // Ajuste conforme necessário para corresponder às IDs válidas na tabela de empresas.
     $d->save();
 
     $u = new User(); // Substitua "User" pelo nome correto do modelo.
@@ -203,12 +200,12 @@ Route::get('/1', function () {
     $u->name = 'Henrique';
     $u->email = 'henrique@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
-    $u->empresa_id = 1; // Obtém a empresa do usuário logado
+    $u->empresa_id = 3; // Obtém a empresa do usuário logado
     $u->save();
 
     $h = new User_Empresa();
     $h->user_id = $d->id;
-    $h->empresa_id = 1;
+    $h->empresa_id = 3;
     $h->save();
 
 });

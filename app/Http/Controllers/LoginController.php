@@ -105,14 +105,10 @@ public function editarFilial(Request $request) {
    
      $todosusuarios = User::wherein('id', $user_id )->get();
 
-    $usuariosfilial = User_Empresa::where('empresa_id', $request->id)->pluck('user_id');
-    $usuariosfili = User::wherein('id', $user_id )->get();
-
-
     $filial = Empresa::find($request->id);
 
 
-return Inertia::render('EditarFilial', compact('filial', 'todosusuarios', 'usuariosfili'));
+return Inertia::render('EditarFilial', compact('filial', 'todosusuarios'));
 
 }
 

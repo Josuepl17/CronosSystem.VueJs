@@ -98,12 +98,6 @@
 
               <label :for="'todos-' + todos.id">{{ todos.name }}</label>
 
-              <input
-        :id="'todos-' + todos.id"
-        type="checkbox"
-        :value="todos.id"
-        v-bind="usuariosfili"
-      />
               
 
               </div>
@@ -127,9 +121,10 @@ import { useForm } from "@inertiajs/vue3";
 const props = defineProps({
   filial: Object,
 
-  todosusuarios: Array,
+  errors:Array,
 
-  usuariosfili: Array,
+todosusuarios:Array,
+
 
 });
 

@@ -16,7 +16,7 @@ use Inertia\Inertia;
 class AtendenteController extends Controller
 {
     public function listaAtendentes() {
-        $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
+        $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id'); // relacionamento empresa user
         $atendentes = Atendente::wherein('id', $users)->get();
         return Inertia::render('Atendentes', compact('atendentes'));
     }
