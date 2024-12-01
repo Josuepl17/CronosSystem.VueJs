@@ -105,7 +105,7 @@ public function editarFilial(Request $request) {
    
      $todosusuarios = User::wherein('id', $user_id )->get();
 
-    $usuariosfilial = User_Empresa::wherein('empresa_id', $request->id)->pluck('user_id');
+    $usuariosfilial = User_Empresa::where('empresa_id', $request->id)->pluck('user_id');
     $usuariosfili = User::wherein('id', $user_id )->get();
 
 

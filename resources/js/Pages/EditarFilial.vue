@@ -126,7 +126,6 @@ import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
   filial: Object,
-  errors: Array,
 
   todosusuarios: Array,
 
