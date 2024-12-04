@@ -46,7 +46,7 @@ class LoginController extends Controller
     }
 
 
-    
+
 
     public function createUserEmpresa(Request $request)
     {
@@ -61,7 +61,7 @@ class LoginController extends Controller
 
         $empresa->filial_id = $empresa->id;
         $empresa->save();
-        
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -78,48 +78,58 @@ class LoginController extends Controller
     }
 
 
-public function gerenciarFiliais() {
+    public function gerenciarFiliais()
+    {
 
-    $filial_id = Auth::user()->empresa_id;
-    $filial_id = Empresa::find($filial_id);
-    $filial_id = $filial_id->filial_id;
-    $todasfiliais = Empresa::where('filial_id', $filial_id)->get();
-    //dd($todasfiliais);
-   // $user_id  = User_Empresa::wherein('empresa_id', $empresa_id)->pluck('user_id');
+        $filial_id = Auth::user()->empresa_id;
+        $filial_id = Empresa::find($filial_id);
+        $filial_id = $filial_id->filial_id;
+        $todasfiliais = Empresa::where('filial_id', $filial_id)->get();
+        //dd($todasfiliais);
+        // $user_id  = User_Empresa::wherein('empresa_id', $empresa_id)->pluck('user_id');
 
-   // $usuarios = Medico::wherein('id', $user_id)->get();
-    
-//dd($usuarios);
+        // $usuarios = Medico::wherein('id', $user_id)->get();
 
-    return Inertia::render('ListaFiliais', compact('todasfiliais'));
-}
+        //dd($usuarios);
 
-public function editarFilial(Request $request) {
+        return Inertia::render('ListaFiliais', compact('todasfiliais'));
+    }
 
-    $filial_id = Auth::user()->empresa_id;
-    $filial_id = Empresa::find($filial_id);
-    $filial_id = $filial_id->filial_id;
-    $todasfiliais = Empresa::where('filial_id', $filial_id)->pluck('id');
+    public function editarFilial(Request $request)
+    {
 
-     $user_id = User_Empresa::wherein('empresa_id', $todasfiliais)->pluck('user_id');
-   
-     $todosusuarios = User::wherein('id', $user_id )->get();
+        $filial_id = Auth::user()->empresa_id;
+        $filial_id = Empresa::find($filial_id);
+        $filial_id = $filial_id->filial_id;
+        $todasfiliais = Empresa::where('filial_id', $filial_id)->pluck('id');
 
-    $filial = Empresa::find($request->id);
+        $user_id = User_Empresa::wherein('empresa_id', $todasfiliais)->pluck('user_id');
+        $user_id_filial = User_Empresa::wherein('empresa_id', [$request->id])->pluck('user_id');
 
-
-return Inertia::render('EditarFilial', compact('filial', 'todosusuarios'));
-
-}
+        $todosusuarios = User::wherein('id', $user_id)->get();
+        $usuariosfilial = User::whereIn('id', $user_id_filial)->pluck('id');
 
 
+        $todosusuarios = $todosusuarios->map(function ($usuario) use ($usuariosfilial) {
+            $usuario->is_select = $usuariosfilial->contains($usuario->id);
+            return $usuario;
+        });
+
+             //   dd($todosusuarios);
+        $filial = Empresa::find($request->id);
+
+
+        return Inertia::render('EditarFilial', compact('filial', 'todosusuarios'));
+    }
 
 
 
 
-// Defini a ultima filial selecionada na sessão para exibir dados no layout princiapal
-//Lista todas as empresas ligadas ao usuario logado.
-    public function definirFilial() 
+
+
+    // Defini a ultima filial selecionada na sessão para exibir dados no layout princiapal
+    //Lista todas as empresas ligadas ao usuario logado.
+    public function definirFilial()
     {
         $user = User::find(Auth::id());
         $filiais = $user->empresas()->get();
@@ -135,8 +145,8 @@ return Inertia::render('EditarFilial', compact('filial', 'todosusuarios'));
     {
 
         \App\Models\User::where('id', Auth::id())
-        ->update(['empresa_id' => $request->id]);
-    
+            ->update(['empresa_id' => $request->id]);
+
         return redirect('/');
     }
 

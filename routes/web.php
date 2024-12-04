@@ -95,11 +95,11 @@ Route::get('/josue', function () {
 
 Route::get('/gere', function(){
     $e = new Empresa();
-    $e->razao_social = 'IPDR 3' ;
+    $e->razao_social = 'filial' ;
     $e->cnpj = rand(1, 100000);
-    $e->filial_id = 2;
-    $e->telefone = 27996550963;
-    $e->endereco  = 'nsjknsdn';
+    $e->filial_id = 1;
+    $e->telefone = 27996530963;
+    $e->endereco  = 'ddddddda';
     $e->cidade = 'Paffncas' ;
     $e->bairro = 'iejfijdi';
     $e->save();
@@ -129,7 +129,6 @@ Route::get('/3', function () {
     $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
     $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
     $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
-    $d->empresa_id = 2; // Ajuste conforme necessário para corresponder às IDs válidas na tabela de empresas.
     $d->save();
 
     $u = new User(); // Substitua "User" pelo nome correto do modelo.
@@ -137,12 +136,12 @@ Route::get('/3', function () {
     $u->name = 'Henriqueone';
     $u->email = 'henrique1@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
-    $u->empresa_id = 2; // Obtém a empresa do usuário logado
+    $u->empresa_id = 3; // Obtém a empresa do usuário logado
     $u->save();
 
     $h = new User_Empresa();
     $h->user_id = $d->id;
-    $h->empresa_id = 2;
+    $h->empresa_id = 3;
     $h->save();
 
 });

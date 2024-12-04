@@ -98,13 +98,17 @@
 
               <label :for="'todos-' + todos.id">{{ todos.name }}</label>
 
-              
+              <input 
+                    type="checkbox" 
+                       :id="'todos-' + todos.id" 
+                          v-model="todos.is_select"
+                                                      >
+            
+          </div>
 
               </div>
 
 
-            
-          </div>
 
 
 
@@ -121,11 +125,9 @@ import { useForm } from "@inertiajs/vue3";
 const props = defineProps({
   filial: Object,
 
-  errors:Array,
+  errors: Array,
 
-todosusuarios:Array,
-
-
+  todosusuarios: Array,
 });
 
 const form = useForm({
@@ -161,7 +163,6 @@ const form = useForm({
   height: 05%;
   background-color: var(--azul-escuro);
 }
-
 
 #conteudo {
   display: flex;
@@ -252,24 +253,10 @@ button.fechar {
   text-align: center;
 }
 
-.checkbox {
-  /* Checkbox container styling */
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-}
 
-.checkbox label {
-  /* Checkbox label styling */
-  margin-right: 10px;
-  font-size: 14px;
-  color: #666;
-}
 
-.checkbox input[type="checkbox"] {
-  /* Checkbox input styling */
-  accent-color: #333; /* Adjust the accent color as needed */
-}
+
+
 
 #usuarios {
   display: flex;
@@ -285,7 +272,9 @@ button.fechar {
   padding-top: 10px;
   width: 100%;
   height: 20px;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding-right: 15px;
+  padding-left: 15px;
   align-items: center;
 }
 
