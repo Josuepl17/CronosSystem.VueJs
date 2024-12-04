@@ -9,7 +9,7 @@
   
         <div id="conteudo">
           <div class="filial">
-            <form @submit.prevent="form.post('/create/atendentes')">
+            <form @submit.prevent="form.post('/teste')">
               <div id="pessoais">
                 <div class="form-group">
                   <label for="nome">Razão Social</label>
@@ -101,8 +101,10 @@
               <input 
                     type="checkbox" 
                        :id="'todos-' + todos.id" 
-                       :value="todos.is_select"           
-                       v-model="form.selectedUsers" >
+                       v-model="todos.is_select"  
+                       :value="todos.id" 
+                        disabled="true"
+                        >
                                                       
           </div>
 
@@ -120,6 +122,7 @@
 </template>
 
 <script setup >
+import { ref } from 'vue';
 import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
@@ -130,6 +133,8 @@ const props = defineProps({
   todosusuarios: Array,
 });
 
+
+
 const form = useForm({
   razao_social: props.filial.razao_social,
   cnpj: props.filial.cnpj,
@@ -137,9 +142,7 @@ const form = useForm({
   cidade: props.filial.cidade,
   endereco: props.filial.endereco,
   telefone: props.filial.telefone,
-  selectedUsers: [],
 
-  
 });
 </script>
 
