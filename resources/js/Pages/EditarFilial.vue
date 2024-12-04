@@ -101,9 +101,9 @@
               <input 
                     type="checkbox" 
                        :id="'todos-' + todos.id" 
-                          v-model="todos.is_select"
-                                                      >
-            
+                       :value="todos.is_select"           
+                       v-model="form.selectedUsers" >
+                                                      
           </div>
 
               </div>
@@ -137,6 +137,9 @@ const form = useForm({
   cidade: props.filial.cidade,
   endereco: props.filial.endereco,
   telefone: props.filial.telefone,
+  selectedUsers: [],
+
+  
 });
 </script>
 
