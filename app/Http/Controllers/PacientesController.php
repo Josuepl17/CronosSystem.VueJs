@@ -131,8 +131,10 @@ class PacientesController extends Controller
         //$detalhes = $paciente->detalhespacientes()->where('medico_id', session('id'))->get();
 
         $detalhes = $paciente->detalhespacientes()->where('medico_id', Session::get('id'))->first(); // retona Object
+        $texto_principal = Crypt::decrypt($detalhes->texto_principal);
 
-
+        $detalhes->texto_principal = $texto_principal;
+        
         $tramites_paciente = $paciente->tramites()->where('medico_id', Session::get('id'))->get(); // retorna array 
         // Tramite::where('paciente_id', $id_paciente)->where('medico_id', session('id'))->get()->toArray();
         return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente'));
