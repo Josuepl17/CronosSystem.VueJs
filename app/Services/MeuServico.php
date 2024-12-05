@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Stmt\If_;
@@ -80,5 +81,26 @@ class MeuServico
 
 
 
+             public static function Encrypted ($dados){
+                foreach ($dados as $dado) {
+                    $dado->identificacao = Crypt::encrypt($dado->id);
+                    return $dados;
+                }
+             }
+
+
+
+
+
+
+             public static function Decrypted ($dados){
+               
+                    $dados = Crypt::decrypt($dados);
+                    return $dados;
+                
+             }
+
+
+            
 
 }

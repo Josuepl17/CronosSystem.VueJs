@@ -7,6 +7,7 @@ use App\Models\Empresa;
 use App\Models\Medico;
 use App\Models\User;
 use App\Models\User_Empresa;
+use App\Services\MeuServico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;

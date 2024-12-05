@@ -19,7 +19,6 @@
   <table class="minimal-table">
     <thead>
       <tr>
-        <th>#</th>
         <th>Name</th>
         <th>Email</th>
         <th>CPF</th>
@@ -29,12 +28,11 @@
     </thead>
     <tbody>
       <tr v-for="(paciente) in pacientes" :key="paciente.id">
-          <td>{{ paciente.id }}</td>
           <td>{{ paciente.nome }}</td>
           <td>{{ paciente.email }}</td>
           <td>{{ paciente.cpf }}</td>
           <!--<td>{{ paciente.Medico }}</td>-->
-          <td><Link v-if="$page.props.autorizaMedico"  id="inserir" :href="'/detalhes/paciente/' + paciente.id">Inserir</Link></td>
+          <td><Link v-if="$page.props.autorizaMedico"  id="inserir" :href="'/detalhes/paciente/' + paciente.identificacao">Inserir</Link></td>
         
       </tr>
     </tbody>
@@ -54,7 +52,6 @@
 <script setup >
 import { Link } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
-
 
 
 

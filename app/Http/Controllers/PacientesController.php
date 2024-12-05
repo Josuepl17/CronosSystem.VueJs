@@ -21,6 +21,10 @@ use Inertia\Inertia;
 class PacientesController extends Controller
 {
 
+
+
+
+
     
 
     public function listaPacientes() {
@@ -30,7 +34,13 @@ class PacientesController extends Controller
         if ($medico = Medico::Find($funcionario_id) ){// se existir é um medico, entrara em um filtro onde apresentará apenas os pacientes daquele medico especifico, e se for da empresa selecionada.
          
 
-        $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
+         $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
+            $pacientes = MeuServico::Encrypted($pacientes);
+
+        
+        // Mostra os pacientes com os IDs criptografados
+        //dd($pacientes);
+
             // Pelo relacionamento da tabela pivo ele encontra os pacientes relacionados com o medico Logado.
             // caso um dia precise, para os pacientes seja apresentado onde o medico estiver logado, precisa apemnas remover o where do filtro da empresa
         } else{
@@ -103,15 +113,10 @@ class PacientesController extends Controller
 
 
     public function sessionPaciente(Request $request) {
-        FacadesSession::put('id_paciente', $request->id);
+       
+       FacadesSession::put('id_paciente', MeuServico::Decrypted($request->id));
         return redirect('/detalhes/paciente');
     }
-
-
-
-
-
-
 
 
 
