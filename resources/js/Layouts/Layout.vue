@@ -1,5 +1,9 @@
 <template>
   <div id="conteiner-geral">
+
+
+
+
     <div v-if="isModalOpen" class="modal-overlay" @click="isModalOpen = false">
       <div class="modal-content" @click.stop>
         <h1 style="font-size: 16px; font-family: 'Times New Roman', Times, serif">
@@ -13,6 +17,10 @@
         </div>
       </div>
     </div>
+
+
+
+    
 
     <div id="flex-1">
       <div id="menu-geral" :class="{ reduzido: isReduced }" ref="menu">

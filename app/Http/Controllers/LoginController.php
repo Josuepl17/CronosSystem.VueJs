@@ -106,7 +106,7 @@ class LoginController extends Controller
         $user_id = User_Empresa::wherein('empresa_id', $todasfiliais)->pluck('user_id');
         $user_id_filial = User_Empresa::wherein('empresa_id', [$request->id])->pluck('user_id');
 
-        $todosusuarios = User::wherein('id', $user_id) ->whereNotIn('id', $user_id_filial)->get();
+        $outrosfilial = User::wherein('id', $user_id) ->whereNotIn('id', $user_id_filial)->get();
         $usuariosfilial = User::whereIn('id', $user_id_filial)->get();
 
 
@@ -121,7 +121,7 @@ class LoginController extends Controller
         $filial = Empresa::find($request->id);
 
 
-        return Inertia::render('EditarFilial', compact('filial', 'todosusuarios', 'usuariosfilial'));
+        return Inertia::render('EditarFilial', compact('filial', 'outrosfilial', 'usuariosfilial'));
     }
 
 

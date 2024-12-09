@@ -2,8 +2,58 @@
 
 
     <div id="conteiner-geral">
+
+
+<!----------------------------------------------------------------------------------->  
+
+
+
+
+
+
+
+
 <!----------------------------------------------------------------------------------->     
       <div id="nav" >
+
+      
+
+        <div v-if="mostrarModal" class="modal-overlay">
+  <div class="modal-content">
+    <h1>Adicionar Usuario</h1>
+    <br>
+    <form @submit.prevent="adicionar.post('/teste')">
+
+      <div class="checkbox-item" v-for="outros in outrosfilial" :key="outros.id">
+
+
+              <div class="input-label" >
+
+                <label :for="'outros-' + outros.id" >{{ outros.name }}</label>
+
+                <input
+                  type="checkbox"
+                  :id="'todos-' + outros.id"
+                  v-model="adicionar.users"
+                  :value="outros.id"
+                  class="custom-checkbox"
+                />
+              </div>
+
+
+
+              <div class="fechar-salvar-model" >
+                <a href="#" @click.prevent="fecharModal">Fechar</a>
+                <button type="submit">Salvar</button>
+              </div>
+
+            </div>
+     
+
+    </form>
+  </div>
+</div>
+
 
       </div>
 <!----------------------------------------------------------------------------------->  
@@ -98,21 +148,19 @@
   
             <div id="usuarios">
               <div id="titulo-usuarios"><h3>Usuarios Da Filial</h3></div>
+
+              
   
               <div class="checkbox" v-for="userfilial in usuariosfilial" :key="userfilial.id">
   
                 <label :for="'userfilial-' + userfilial.id">{{ userfilial.name }}</label>
   
-  
-                <input
-                      type="checkbox"
-                         :id="'userfilial-' + userfilial.id"
-                         v-model="form.users"
-                         :value="userfilial.id"
-                         
-                          >
+
 
             </div>
+
+            <br><br>
+            <a href="#" @click.prevent="abrirModal">Adicionar</a>
   
                 </div>
   
@@ -127,17 +175,10 @@
                 <div id="usuarios">
               <div id="titulo-usuarios"><h3>Usuarios De Outra Filial</h3></div>
   
-              <div class="checkbox" v-for="todos in todosusuarios" :key="todos.id">
+              <div class="checkbox" v-for="outros in outrosfilial" :key="outros.id">
   
-                <label :for="'todos-' + todos.id">{{ todos.name }}</label>
+                <label :for="'outros-' + outros.id">{{ outros.name }}</label>
   
-                <input
-                      type="checkbox"
-                         :id="'todos-' + todos.id"
-                         v-model="form.users"
-                         :value="todos.id"
-                         
-                          >
   
             </div>
   
@@ -153,6 +194,8 @@
       </div> <!--conteiner-geral-->
       
 
+
+
 </template>
 
 <script setup >
@@ -164,7 +207,7 @@ const props = defineProps({
 
   errors: Array,
   usuariosfilial: Array,
-  todosusuarios: Array,
+  outrosfilial: Array,
 });
 
 
@@ -178,7 +221,113 @@ const form = useForm({
   telefone: props.filial.telefone,
 
 });
+
+const adicionar = useForm({
+ users: [],
+});
+
+
+
+const mostrarModal = ref(false); // Usando ref() para reatividade
+
+
+const abrirModal = () => {
+  mostrarModal.value = true;
+  console.log('mostrarModal:', mostrarModal.value); // Depuração
+};
+
+const fecharModal = () => {
+  mostrarModal.value = false;
+  console.log('mostrarModal:', mostrarModal.value); // Depuração
+};
+
+
+
+
+
+
+
+
+
+
 </script>
+
+
+
+<style scoped >
+
+a {
+  display: flex;
+  padding: 07px 20px 07px 20px;
+  background-color: var(--azul-escuro);
+  border: 1px solid rgba(255, 255, 255, 0.249);
+  border-radius: 05px;
+  color: white;
+  margin-right: 10px;
+  height: 35px;
+  width: 70px;
+  justify-content: center;
+  
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 600px;
+  height: 450px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+  transition: ease-in-out 1s;
+  text-align: center;
+}
+
+
+.checkbox-item{
+display: flex;
+flex-direction: column;
+width: 100%;
+
+
+}
+
+.input-label{
+  display: flex;
+  height: 10%;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.114);
+  border-radius: 05px;
+
+}
+
+.fechar-salvar-model{
+  display: flex;
+  height: 10%;
+  width: 100%;
+  flex-direction: row;
+  justify-content: right;
+  padding-right: 05px;
+  align-items: center;
+
+}
+
+</style>
 
 
 <style scoped>
@@ -271,11 +420,16 @@ select {
 }
 
 button {
+  display: flex;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
+  height: 35px;
+  width: 70px;
+  background-color:green;
+  justify-content: center;
 }
 
 button.salvar {
@@ -289,6 +443,7 @@ button.fechar {
 .fechar-salvar {
   display: flex;
   justify-content: space-between;
+  
 }
 </style>
 
@@ -302,54 +457,87 @@ button.fechar {
 }
 
 
-#box-usuarios{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 37%;
-
-}
-
-
-#titulo-usuarios {
-  /* Title styling */
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-
-
-
-
-
 #usuarios {
-  border: 1px solid rgba(0, 0, 0, 0.503);
+  width: 100%;
+  background-color: #f4f4f9; /* Cor de fundo clara */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra elegante */
   display: flex;
   flex-direction: column;
-  width: 25%;
-  height: 200px;
-  background: white;
-  min-width: 300px;
 }
 
-.checkbox {
-  display: flex;
-  padding-top: 10px;
-  width: 100%;
-  height: 20px;
-  justify-content: space-between;
-  padding-right: 15px;
-  padding-left: 15px;
-  align-items: center;
+#titulo-usuarios h3 {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
-#titulo-usuarios {
-  width: 100%;
-  height: 30px;
+/* Lista de checkboxes centralizada */
+.checkbox-list {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  border-bottom: 1px solid black;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.checkbox-item {
+  display: flex;
   align-items: center;
+  gap: 10px;
+}
+
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--azul-escuro); /* Cor personalizada do checkbox */
+  border-radius: 4px;
+}
+
+.checkbox-label {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Botões no final, alinhados à direita */
+.action-buttons {
+  display: flex;
+  justify-content: flex-end; /* Alinhamento à direita */
+  gap: 10px; /* Espaçamento entre os botões */
+  margin-top: auto; /* Para garantir que os botões fiquem no final */
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.btn-save {
+  background-color: var(--azul-escuro);
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-save:hover {
+  background-color: #0056b3;
+}
+
+.btn-close {
+  background-color: #ccc;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.btn-close:hover {
+  background-color: #999;
 }
 
 </style>
