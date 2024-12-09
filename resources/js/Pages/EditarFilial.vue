@@ -2,11 +2,11 @@
 
 
     <div id="conteiner-geral">
-     
+<!----------------------------------------------------------------------------------->     
       <div id="nav" >
 
       </div>
-  
+<!----------------------------------------------------------------------------------->  
         <div id="conteudo">
           <div class="filial">
             <form @submit.prevent="form.post('/teste')">
@@ -87,29 +87,63 @@
             </form>
           </div>
 
+          <br>
 
 
 
+
+
+<div id="box-usuarios" >
+  <!----------------------------------------------------------------------------------->
   
-          <div id="usuarios">
-            <div id="titulo-usuarios"><h3>Usuarios</h3></div>
+            <div id="usuarios">
+              <div id="titulo-usuarios"><h3>Usuarios Da Filial</h3></div>
   
-            <div class="checkbox" v-for="todos in todosusuarios" :key="todos.id">
+              <div class="checkbox" v-for="userfilial in usuariosfilial" :key="userfilial.id">
+  
+                <label :for="'userfilial-' + userfilial.id">{{ userfilial.name }}</label>
+  
+  
+                <input
+                      type="checkbox"
+                         :id="'userfilial-' + userfilial.id"
+                         v-model="form.users"
+                         :value="userfilial.id"
+                         
+                          >
 
-              <label :for="'todos-' + todos.id">{{ todos.name }}</label>
-
-              <input 
-                    type="checkbox" 
-                       :id="'todos-' + todos.id" 
-                       v-model="todos.is_select"  
-                       :value="todos.id" 
-                        disabled="true"
-                        >
-                                                      
-          </div>
-
-              </div>
-
+            </div>
+  
+                </div>
+  
+  
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <!----------------------------------------------------------------------------------->
+  
+                <div id="usuarios">
+              <div id="titulo-usuarios"><h3>Usuarios De Outra Filial</h3></div>
+  
+              <div class="checkbox" v-for="todos in todosusuarios" :key="todos.id">
+  
+                <label :for="'todos-' + todos.id">{{ todos.name }}</label>
+  
+                <input
+                      type="checkbox"
+                         :id="'todos-' + todos.id"
+                         v-model="form.users"
+                         :value="todos.id"
+                         
+                          >
+  
+            </div>
+  
+                </div>
+  <!----------------------------------------------------------------------------------->
+</div>
 
 
 
@@ -129,7 +163,7 @@ const props = defineProps({
   filial: Object,
 
   errors: Array,
-
+  usuariosfilial: Array,
   todosusuarios: Array,
 });
 
@@ -152,7 +186,10 @@ const form = useForm({
   box-sizing: border-box;
   padding: 0px;
   margin: 0px;
+  
 }
+
+
 
 :root {
   --azul-escuro: #012841;
@@ -162,7 +199,8 @@ const form = useForm({
 
 #conteiner-geral {
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
+  
 }
 
 #nav {
@@ -177,22 +215,25 @@ const form = useForm({
   height: 95%;
   justify-content: space-around;
   padding-top: 10px;
-  background-color: #5858580e;
+
 }
 
+
+
 .filial {
-  width: 60%;
+  width: 57%;
   min-width: 500px;
   height: 60%;
   padding: 20px;
   overflow: auto;
-  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.503);
   border-radius: 04px;
 }
 
 #endereco {
   width: 50%;
 }
+
 
 #pessoais {
   padding-right: 20px;
@@ -253,6 +294,23 @@ button.fechar {
 
 
 <style>
+
+
+#conteiner-geral {
+  width: 100%;
+  height: 100dvh;
+}
+
+
+#box-usuarios{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 37%;
+
+}
+
+
 #titulo-usuarios {
   /* Title styling */
   margin-bottom: 10px;
@@ -265,10 +323,11 @@ button.fechar {
 
 
 #usuarios {
+  border: 1px solid rgba(0, 0, 0, 0.503);
   display: flex;
   flex-direction: column;
   width: 25%;
-  height: 30%;
+  height: 200px;
   background: white;
   min-width: 300px;
 }
@@ -292,4 +351,5 @@ button.fechar {
   border-bottom: 1px solid black;
   align-items: center;
 }
+
 </style>
