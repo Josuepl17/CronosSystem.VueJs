@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
             'filiais' => fn() => Session::get('filiais'),
             'nome' => fn() => Session::get('nome'),
             'autorizaMedico' => fn() => Session::get('autorizaMedico'),
+            'adm' => fn() => Session::get('adm'),
         ]);
 
 

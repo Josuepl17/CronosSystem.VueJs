@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use App\Http\Requests\ValidateRequest;
-
+use App\Models\Atendente;
 
 class LoginController extends Controller
 {
@@ -27,6 +27,15 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            Session::put('id', Auth::id());
+          
+            if (Medico::where('id', Auth::id())->exists() || Atendente::where('id', Auth::id())->exists()) {
+                
+            }else{
+                Session::put('adm', "adm");
+
+            }
+//dd(Session::get('adm'));
             Session::put('id', Auth::id());
             Session::put('nome', Auth::user()->name);
             return redirect()->intended();
@@ -155,6 +164,7 @@ class LoginController extends Controller
 
     public function logout()
     {
+        Session::flush();
         Auth::logout();
         return redirect('/form/login');
     }
@@ -172,7 +182,7 @@ class LoginController extends Controller
             $user_empresa->save();
         }
 
-            return $this->gerenciarFiliais();
+        return redirect('/gerenciar/filial');
 
     }
 
@@ -185,7 +195,7 @@ class LoginController extends Controller
          User_Empresa::wherein('user_id',  $dados)->where('user_id', '!=', Auth::id())->where('empresa_id', Session::get('empresa_selecionada'))->delete();
 
 
-            return $this->gerenciarFiliais();
+         return redirect('/gerenciar/filial');
 
     }
 }

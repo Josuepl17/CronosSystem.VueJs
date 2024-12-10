@@ -54,7 +54,7 @@
             ><img src="/images/medico.png" alt="" /> <span>Médicos</span></Link
           >
 
-          <Link href="/gerenciar/filial"
+          <Link v-if="$page.props.adm" href="/gerenciar/filial"
             ><img src="/images/filial.png" alt="" /> <span>Gerenciar Filial</span></Link
           >
 
