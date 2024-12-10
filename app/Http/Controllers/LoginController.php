@@ -118,7 +118,7 @@ class LoginController extends Controller
 
 
 
-             //   dd($todosusuarios);
+            //   dd($usuariosfilial);
         $filial = Empresa::find($request->id);
 
 
@@ -171,6 +171,19 @@ class LoginController extends Controller
             $user_empresa->empresa_id = Session::get('empresa_selecionada'); 
             $user_empresa->save();
         }
+
+            return $this->gerenciarFiliais();
+
+    }
+
+
+
+    public function removeVinculoUser(Request $request) {
+        
+        $dados = $request->users;
+
+         User_Empresa::wherein('user_id',  $dados)->where('user_id', '!=', Auth::id())->where('empresa_id', Session::get('empresa_selecionada'))->delete();
+
 
             return $this->gerenciarFiliais();
 

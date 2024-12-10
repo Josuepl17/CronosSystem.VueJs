@@ -18,41 +18,82 @@
 
       
 
-        <div v-if="mostrarModal" class="modal-overlay">
+  <div v-if="mostrarModal" class="modal-overlay">
   <div class="modal-content">
     <h1>Adicionar Usuario</h1>
     <br>
     <form @submit.prevent="adicionar.post('/create/vinculo/user')">
 
-      <div class="checkbox-item" v-for="outros in outrosfilial" :key="outros.id">
 
-
-              <div class="input-label" >
-
-                <label :for="'outros-' + outros.id" >{{ outros.name }}</label>
-
-                <input
-                  type="checkbox"
-                  :id="'todos-' + outros.id"
-                  v-model="adicionar.users"
-                  :value="outros.id"
-                  class="custom-checkbox"
-                />
-              </div>
-
-
-
-              <div class="fechar-salvar-model" >
-                <a href="#" @click.prevent="fecharModal">Fechar</a>
-                <button type="submit">Salvar</button>
-              </div>
-
-            </div>
+      <div class="input-label">
+        <div class="checkbox-item" v-for="outros in outrosfilial" :key="outros.id">
+                  <label :for="'outros-' + outros.id" >{{ outros.name }}</label>
+                  <input
+                    type="checkbox"
+                    :id="'todos-' + outros.id"
+                    v-model="adicionar.users"
+                    :value="outros.id"
+                    class="custom-checkbox"
+                  />
+                </div>
+                <br> <br>
+                <div class="fechar-salvar-model" >
+                  <a href="#" @click.prevent="fecharModal">Fechar</a>
+                  <button type="submit">Salvar</button>
+                </div>
+      </div>
      
 
     </form>
   </div>
 </div>
+
+
+
+
+
+
+
+
+<div v-if="mostrarModal2" class="modal-overlay">
+  <div class="modal-content">
+    <h1>Adicionar Usuario</h1>
+    <br><br>
+    <form @submit.prevent="remover.post('/remove/vinculo/user')">
+
+
+      <div class="input-label">
+        <div class="checkbox-item" v-for="userfilial in usuariosfilial" :key="userfilial.id">
+                  <label :for="'userfilial-' + userfilial.id" >{{ userfilial.name }}</label>
+                  <label :for="'userfilial-' + userfilial.id" >{{ userfilial.email }}</label>
+                  <input
+                    type="checkbox"
+                    :id="'userfilial-' + userfilial.id"
+                    v-model="remover.users"
+                    :value="userfilial.id"
+                    class="custom-checkbox"
+                  />
+                </div>
+                <br> <br>
+                <div class="fechar-salvar-model" >
+                  <a href="#" @click.prevent="fecharModal2">Fechar</a>
+                  <button type="submit">Salvar</button>
+                </div>
+      </div>
+     
+
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 
       </div>
@@ -181,7 +222,9 @@
   
   
             </div>
-  
+            <br>
+            <a href="#" @click.prevent="abrirModal2">Adicionar</a>
+
                 </div>
   <!----------------------------------------------------------------------------------->
 </div>
@@ -226,6 +269,10 @@ const adicionar = useForm({
  users: [],
 });
 
+const remover = useForm({
+ users: [],
+});
+
 
 
 const mostrarModal = ref(false); // Usando ref() para reatividade
@@ -233,12 +280,29 @@ const mostrarModal = ref(false); // Usando ref() para reatividade
 
 const abrirModal = () => {
   mostrarModal.value = true;
-  console.log('mostrarModal:', mostrarModal.value); // Depuração
+
 };
 
 const fecharModal = () => {
   mostrarModal.value = false;
-  console.log('mostrarModal:', mostrarModal.value); // Depuração
+
+};
+
+
+
+
+
+const mostrarModal2 = ref(false); // Usando ref() para reatividade
+
+
+const abrirModal2 = () => {
+  mostrarModal2.value = true;
+
+};
+
+const fecharModal2 = () => {
+  mostrarModal2.value = false;
+
 };
 
 
@@ -298,7 +362,8 @@ a {
 
 .checkbox-item{
 display: flex;
-flex-direction: column;
+flex-direction: row;
+justify-content: space-between;
 width: 100%;
 
 
@@ -306,13 +371,10 @@ width: 100%;
 
 .input-label{
   display: flex;
-  height: 10%;
   width: 100%;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.114);
+  flex-direction: column;
   border-radius: 05px;
+
 
 }
 

@@ -67,6 +67,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     // User
 
     Route::post('/create/vinculo/user', [LoginController::class, 'createVinculoUser']);
+    Route::post('/remove/vinculo/user', [LoginController::class, 'removeVinculoUser']);
     
 
 
@@ -139,12 +140,12 @@ Route::get('/3', function () {
     $u->name = 'Henriqueone';
     $u->email = 'henrique1@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
-    $u->empresa_id = 3; // Obtém a empresa do usuário logado
+    $u->empresa_id = 2; // Obtém a empresa do usuário logado
     $u->save();
 
     $h = new User_Empresa();
     $h->user_id = $d->id;
-    $h->empresa_id = 3;
+    $h->empresa_id = 2;
     $h->save();
 
 });
