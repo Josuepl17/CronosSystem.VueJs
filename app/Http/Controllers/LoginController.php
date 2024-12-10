@@ -109,6 +109,7 @@ class LoginController extends Controller
         $outrosfilial = User::wherein('id', $user_id) ->whereNotIn('id', $user_id_filial)->get();
         $usuariosfilial = User::whereIn('id', $user_id_filial)->get();
 
+        Session::put('empresa_selecionada', $request->id);
 
         //$todosusuarios = $todosusuarios->map(function ($usuario) use ($usuariosfilial) {
         //    $usuario->is_select = $usuariosfilial->contains($usuario->id);
@@ -156,5 +157,22 @@ class LoginController extends Controller
     {
         Auth::logout();
         return redirect('/form/login');
+    }
+
+
+    public function createVinculoUser(Request $request) {
+        
+        $dados = $request->users;
+
+        foreach ($dados as $dado){
+
+            $user_empresa = new User_Empresa();
+            $user_empresa->user_id = $dado; 
+            $user_empresa->empresa_id = Session::get('empresa_selecionada'); 
+            $user_empresa->save();
+        }
+
+            return $this->gerenciarFiliais();
+
     }
 }

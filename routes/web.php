@@ -64,6 +64,9 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/form/atendentes', [AtendenteController::class, 'formAtendentes']);
     Route::post('/create/atendentes', [AtendenteController::class, 'createAtendente']);
     
+    // User
+
+    Route::post('/create/vinculo/user', [LoginController::class, 'createVinculoUser']);
     
 
 

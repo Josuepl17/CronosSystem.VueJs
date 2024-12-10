@@ -22,7 +22,7 @@
   <div class="modal-content">
     <h1>Adicionar Usuario</h1>
     <br>
-    <form @submit.prevent="adicionar.post('/teste')">
+    <form @submit.prevent="adicionar.post('/create/vinculo/user')">
 
       <div class="checkbox-item" v-for="outros in outrosfilial" :key="outros.id">
 
