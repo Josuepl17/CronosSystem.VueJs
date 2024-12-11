@@ -170,7 +170,7 @@ class PacientesController extends Controller
             
             ]);
 
-            $horaAtual = Carbon::now()->format('H:i');
+            $horaAtual = Carbon::now()->format('H:i:s');
 
             $mensagem = "Criado Com Sucesso " . $horaAtual;
 
@@ -188,7 +188,7 @@ public function createTramite(Request $request) {
     $dados['empresa_id'] = Session::get('empresa_id');
     $dados['medico_id'] = Session::get('id');
     Tramite::create($dados);
-    return Inertia::location('/detalhes/paciente');
+    return Inertia::location('/detalhes/paciente'); // faz ele recarregar a pagina
 }
 
 

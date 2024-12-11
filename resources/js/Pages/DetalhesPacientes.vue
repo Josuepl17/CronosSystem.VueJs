@@ -3,7 +3,11 @@
 <Layout>
     <template v-slot:conteudo>
 <form @submit.prevent="form.post('/create/paciente/detalhes')" >
-    
+
+  
+  <div v-if="message" class="notification">
+    {{ message }}
+  </div>
 
 <div id="caixa">
 
@@ -130,6 +134,7 @@ const props = defineProps({
   detalhes: Object,
   paciente: Object,
   tramites_paciente: Array,
+  message: String,
 });
 
 const form = useForm({
@@ -158,6 +163,47 @@ const fecharModal = () => {
   mostrarModal.value = false;
 };
 </script>
+
+
+
+<style scoped>
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  background-color: #4caf50; /* Verde para sucesso */
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+
+  /* Animações de entrada e saída com tempo adequado */
+  animation: slide-in 0.3s ease, fade-out 0.3s ease 2.7s forwards;
+}
+
+/* Animação de entrada */
+@keyframes slide-in {
+  from {
+    transform: translateX(100%); /* Inicia fora da tela à direita */
+  }
+  to {
+    transform: translateX(0); /* Fica na posição final */
+  }
+}
+
+/* Animação de saída (desaparecer) */
+@keyframes fade-out {
+  from {
+    opacity: 1; /* Começa visível */
+  }
+  to {
+    opacity: 0; /* Desaparece gradualmente */
+    visibility: hidden; /* Torna invisível após o desaparecimento */
+  }
+}
+</style>
 
 
 
