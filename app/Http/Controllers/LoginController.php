@@ -35,7 +35,7 @@ class LoginController extends Controller
                 Session::put('adm', "adm");
 
             }
-//dd(Session::get('adm'));
+            
             Session::put('id', Auth::id());
             Session::put('nome', Auth::user()->name);
             return redirect()->intended();

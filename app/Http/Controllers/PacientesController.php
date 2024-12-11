@@ -115,6 +115,7 @@ class PacientesController extends Controller
     public function sessionPaciente(Request $request) {
        
        FacadesSession::put('id_paciente', MeuServico::Decrypted($request->id));
+       Session::forget('message');
         return redirect('/detalhes/paciente');
     }
 
@@ -128,17 +129,23 @@ class PacientesController extends Controller
 ////////////////////////////////////////////
 
     public function detalhesPacientes() {
+   
         $id_paciente = FacadesSession::get('id_paciente');
+     
         $paciente = Paciente::Find($id_paciente); // nome vue js 
-
+      
         //$detalhes = DetalhesPacientes::where('paciente_id', $id_paciente)->where('medico_id', session('id'))->first(); // filtra os detalhes do paciente escolhido, pelo ID do medico logado
 
         //$detalhes = $paciente->detalhespacientes()->where('medico_id', session('id'))->get();
 
         $detalhes = $paciente->detalhespacientes()->where('medico_id', Session::get('id'))->first(); // retona Object
-        $texto_principal = Crypt::decrypt($detalhes->texto_principal);
 
-        $detalhes->texto_principal = $texto_principal;
+        if ($detalhes != null) {
+            $texto_principal = Crypt::decrypt($detalhes->texto_principal);
+            $detalhes->texto_principal = $texto_principal;
+        }
+       
+        
         
         $tramites_paciente = $paciente->tramites()->where('medico_id', Session::get('id'))->get(); // retorna array 
         // Tramite::where('paciente_id', $id_paciente)->where('medico_id', session('id'))->get()->toArray();
@@ -162,6 +169,15 @@ class PacientesController extends Controller
                 'arquivos' => $caminhoArquivosString ?? null,
             
             ]);
+
+            $horaAtual = Carbon::now()->format('H:i');
+
+            $mensagem = "Criado Com Sucesso " . $horaAtual;
+
+            Session::put('message', $mensagem);
+
+            return redirect('/detalhes/paciente');
+
     }
 
 

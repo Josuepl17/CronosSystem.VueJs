@@ -1,5 +1,7 @@
 <template lang="">
 
+
+
 <Layout>
 
     <template v-slot:conteudo>
@@ -57,13 +59,24 @@ import { defineProps } from 'vue';
 
 const props = defineProps({
   pacientes: Array,
+
+
+
+
 })
+
+
+
+
 
 
 </script>
 
 
 <style scoped>
+
+
+
 
 @import "..\Components\css\tabelas.css";
 
