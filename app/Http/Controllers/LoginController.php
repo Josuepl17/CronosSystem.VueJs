@@ -76,7 +76,7 @@ class LoginController extends Controller
 
     public function createUserEmpresa(Request $request)
     {
-        DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request) { // reverte caso algum inserção falhe
             $empresa = Empresa::create([
                 'razao_social' => $request->razao_social,
                 'cnpj' => $request->cnpj,
