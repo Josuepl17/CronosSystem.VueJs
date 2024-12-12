@@ -27,11 +27,6 @@ class LoginController extends Controller
 
 
 
-
-
-
-
-
     public function Authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -51,9 +46,6 @@ class LoginController extends Controller
             ]);
         }
     }
-
-
-
 
 
 
@@ -101,64 +93,15 @@ class LoginController extends Controller
             ]);
         });
         
-
         return redirect('/form/login');
     }
 
 
-    public function gerenciarFiliais()
-    {
-
-        $filial_id = Auth::user()->empresa_id;
-        $filial_id = Empresa::find($filial_id);
-        $filial_id = $filial_id->filial_id;
-        $todasfiliais = Empresa::where('filial_id', $filial_id)->get();
-        //dd($todasfiliais);
-        // $user_id  = User_Empresa::wherein('empresa_id', $empresa_id)->pluck('user_id');
-
-        // $usuarios = Medico::wherein('id', $user_id)->get();
-
-        //dd($usuarios);
-
-        return Inertia::render('ListaFiliais', compact('todasfiliais'));
-    }
-
-    public function editarFilial(Request $request)
-    {
-
-        $filial_id = Auth::user()->empresa_id;
-        $filial_id = Empresa::find($filial_id);
-        $filial_id = $filial_id->filial_id;
-        $todasfiliais = Empresa::where('filial_id', $filial_id)->pluck('id');
-
-        $user_id = User_Empresa::wherein('empresa_id', $todasfiliais)->pluck('user_id');
-        $user_id_filial = User_Empresa::wherein('empresa_id', [$request->id])->pluck('user_id');
-
-        $outrosfilial = User::wherein('id', $user_id) ->whereNotIn('id', $user_id_filial)->get();
-        $usuariosfilial = User::whereIn('id', $user_id_filial)->get();
-
-        Session::put('empresa_selecionada', $request->id);
-
-        //$todosusuarios = $todosusuarios->map(function ($usuario) use ($usuariosfilial) {
-        //    $usuario->is_select = $usuariosfilial->contains($usuario->id);
-        //    return $usuario;
-      //  });
-
-
-
-            //   dd($usuariosfilial);
-        $filial = Empresa::find($request->id);
-
-
-        return Inertia::render('EditarFilial', compact('filial', 'outrosfilial', 'usuariosfilial'));
-    }
 
 
 
 
-
-
-    // Defini a ultima filial selecionada na sessão para exibir dados no layout princiapal
+        // Defini a ultima filial selecionada na sessão para exibir dados no layout princiapal
     //Lista todas as empresas ligadas ao usuario logado.
     public function definirFilial()
     {
@@ -171,6 +114,9 @@ class LoginController extends Controller
         return redirect('/dash');
     }
 
+
+
+
     // altera a filial selecionada na cluna do usuario registra na sessão na proxima função.
     public function mudarFilial(Request $request)
     {
@@ -181,12 +127,50 @@ class LoginController extends Controller
         return redirect('/');
     }
 
-    public function logout()
+
+
+
+
+
+    public function gerenciarFiliais() 
     {
-        Session::flush();
-        Auth::logout();
-        return redirect('/form/login');
+
+        $empresa_id = Auth::user()->empresa_id;
+        $empresa = Empresa::find($empresa_id);
+        $filial_id = $empresa->filial_id;
+        $todasfiliais = Empresa::where('filial_id', $filial_id)->get(); // Busca todas as empresas que tiverem filial_id da  minha empresa selecionada, Isso trará a matriz de todas as filiais.
+        return Inertia::render('ListaFiliais', compact('todasfiliais'));
     }
+
+
+
+
+
+
+    public function editarFilial(Request $request)
+    {
+
+        $empresa_id = Auth::user()->empresa_id;
+        $empresa = Empresa::find($empresa_id);
+        $filial_id = $empresa->filial_id;
+        $todasfiliais = Empresa::where('filial_id', $filial_id)->pluck('id');
+
+        $user_id = User_Empresa::wherein('empresa_id', $todasfiliais)->pluck('user_id'); // User_id de todas Minhas filiais
+        $user_id_filial = User_Empresa::wherein('empresa_id', [$request->id])->pluck('user_id'); // User_id apenas da filial Selcionada 
+
+        $outrosfilial = User::wherein('id', $user_id) ->whereNotIn('id', $user_id_filial)->get(); // A partir dos ideias que eu peguei acima eu recupero todos os usuários que não pertencem a empresas selecionadas
+        $usuariosfilial = User::whereIn('id', $user_id_filial)->get(); // A parte do meu ID que eu peguei acima recupero todos os meus usuários que pertencem à empresa selecionada.
+
+        Session::put('empresa_selecionada', $request->id);
+
+        $filial = Empresa::find($request->id); // Dados para alterar informações da empresa
+
+
+        return Inertia::render('EditarFilial', compact('filial', 'outrosfilial', 'usuariosfilial'));
+    }
+
+
+
 
 
     public function createVinculoUser(Request $request) {
@@ -216,5 +200,23 @@ class LoginController extends Controller
 
          return redirect('/gerenciar/filial');
 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    public function logout()
+    {
+        Session::flush();
+        Auth::logout();
+        return redirect('/form/login');
     }
 }
