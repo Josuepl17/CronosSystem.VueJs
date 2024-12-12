@@ -22,37 +22,27 @@ class PacientesController extends Controller
 {
 
 
+    public function listaPacientes()
+    {
 
+        $funcionario_id = Session::get('id'); // Medico ou atendente Logado 
 
+        if ($medico = Medico::Find($funcionario_id)) { // se existir é um medico, entrara em um filtro onde apresentará apenas os pacientes daquele medico especifico, e se for da empresa selecionada.
 
-    
-
-    public function listaPacientes() {
-
-       $funcionario_id = Session::get('id'); // Medico ou atendente Logado 
-
-        if ($medico = Medico::Find($funcionario_id) ){// se existir é um medico, entrara em um filtro onde apresentará apenas os pacientes daquele medico especifico, e se for da empresa selecionada.
-         
-
-         $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
+            $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
             $pacientes = MeuServico::Encrypted($pacientes);
-
-        
-        // Mostra os pacientes com os IDs criptografados
-        //dd($pacientes);
-
+            // Mostra os pacientes com os IDs criptografados
             // Pelo relacionamento da tabela pivo ele encontra os pacientes relacionados com o medico Logado.
             // caso um dia precise, para os pacientes seja apresentado onde o medico estiver logado, precisa apemnas remover o where do filtro da empresa
-        } else{
-            
+        } else {
+
             $pacientes = Paciente::where('empresa_id', Session::get('empresa_id'))->get();
             // retorna todos os pacientes da empresa pois caiu no filtro de atendente
         }
 
         MeuServico::Autorizer(); //responsavel para mostrar inserir paciente 
-         
+
         return Inertia::render('Pacientes', compact('pacientes'));
-       
     }
 
 
@@ -61,9 +51,10 @@ class PacientesController extends Controller
 
 
 
-    public function formPacientes() {
+    public function formPacientes()
+    {
         $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
-        $medicos = Medico::wherein('id', $users)->get();// todos medicos da empresa logada
+        $medicos = Medico::wherein('id', $users)->get(); // todos medicos da empresa logada
         return Inertia::render('FormPacientes', compact('medicos'));
     }
 
@@ -75,12 +66,11 @@ class PacientesController extends Controller
 
 
 
-    public function createPaciente(ValidateRequest $request) {
+    public function createPaciente(ValidateRequest $request)
+    {
         $dados = $request->all();
-
         $dados['empresa_id'] = Session::get('empresa_id');
-
-        $paciente =  Paciente::create($dados);// cria o paciente
+        $paciente =  Paciente::create($dados); // cria o paciente
 
         foreach ($request->medico as $medico_id) {
 
@@ -90,7 +80,7 @@ class PacientesController extends Controller
                 'empresa_id' => Session::get('empresa_id'),
             ]);
 
-        DetalhePaciente::create([ // dados importantes para primeira consulta 
+            DetalhePaciente::create([ // dados importantes para primeira consulta 
                 'paciente_id' => $paciente->id,
                 'texto_principal' => '',
                 'arquivos' => "",
@@ -99,7 +89,6 @@ class PacientesController extends Controller
                 'medico_id' => $medico_id,
             ]);
         }
-
         return redirect('/pacientes');
     }
 
@@ -110,12 +99,10 @@ class PacientesController extends Controller
 
 
 
-
-
-    public function sessionPaciente(Request $request) {
-       
-       FacadesSession::put('id_paciente', MeuServico::Decrypted($request->id));
-       Session::forget('message');
+    public function sessionPaciente(Request $request)
+    {
+        FacadesSession::put('id_paciente', MeuServico::Decrypted($request->id));
+        Session::forget('message');
         return redirect('/detalhes/paciente');
     }
 
@@ -124,34 +111,21 @@ class PacientesController extends Controller
 
 
 
+    public function detalhesPacientes()
+    {
 
-
-////////////////////////////////////////////
-
-    public function detalhesPacientes() {
-   
         $id_paciente = FacadesSession::get('id_paciente');
-     
         $paciente = Paciente::Find($id_paciente); // nome vue js 
-      
-        //$detalhes = DetalhesPacientes::where('paciente_id', $id_paciente)->where('medico_id', session('id'))->first(); // filtra os detalhes do paciente escolhido, pelo ID do medico logado
-
-        //$detalhes = $paciente->detalhespacientes()->where('medico_id', session('id'))->get();
 
         $detalhes = $paciente->detalhespacientes()->where('medico_id', Session::get('id'))->first(); // retona Object
-      
 
         if ($detalhes->texto_principal != null) {
             $texto_principal = Crypt::decrypt($detalhes->texto_principal);
             $detalhes->texto_principal = $texto_principal;
         }
-       
-        
-        
-        $tramites_paciente = $paciente->tramites()->where('medico_id', Session::get('id'))->get(); // retorna array 
-        // Tramite::where('paciente_id', $id_paciente)->where('medico_id', session('id'))->get()->toArray();
-        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente'));
 
+        $tramites_paciente = $paciente->tramites()->where('medico_id', Session::get('id'))->get(); // retorna array 
+        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente'));
     }
 
 
@@ -160,35 +134,33 @@ class PacientesController extends Controller
 
     public function createDetalhesPacientes(Request $request)
     {
-        // Armazenar o valor de `id_paciente` da sessão para simplificação
+
         $pacienteId = FacadesSession::get('id_paciente');
-    
-        // Encontrar o registro existente e atualizar apenas os campos necessários
+
         DetalhePaciente::where('paciente_id', $pacienteId)->where('medico_id', Session::get('id'))
             ->update([
-                'texto_principal' => Crypt::encrypt($request->texto_principal), 
+                'texto_principal' => Crypt::encrypt($request->texto_principal),
                 'arquivos' => $caminhoArquivosString ?? null,
-            
+
             ]);
 
-            $mensagem = "Criado Com Sucesso ";
+        Session::put('message', "Criado Com Sucesso ");
 
-            Session::put('message', $mensagem);
-
-            return Inertia::location('/detalhes/paciente');
-
+        return Inertia::location('/detalhes/paciente');
     }
 
 
 
-public function createTramite(Request $request) {
-    $dados = $request->all();
-    $dados['paciente_id'] = FacadesSession::get('id_paciente');
-    $dados['empresa_id'] = Session::get('empresa_id');
-    $dados['medico_id'] = Session::get('id');
-    Tramite::create($dados);
-    return Inertia::location('/detalhes/paciente'); // faz ele recarregar a pagina
-}
+
+    public function createTramite(Request $request)
+    {
+        $dados = $request->all();
+        $dados['paciente_id'] = FacadesSession::get('id_paciente');
+        $dados['empresa_id'] = Session::get('empresa_id');
+        $dados['medico_id'] = Session::get('id');
+        Tramite::create($dados);
+        return Inertia::location('/detalhes/paciente'); // faz ele recarregar a pagina
+    }
 
 
 
@@ -199,7 +171,7 @@ public function createTramite(Request $request) {
 
 
 
-/*public function downloadArquivo()
+    /*public function downloadArquivo()
 {
     // Caminho completo do arquivo
     $paciente = Detalhes_Pacientes::Find(FacadesSession::get('id_paciente'));
@@ -212,6 +184,4 @@ public function createTramite(Request $request) {
             return response()->download($arquivo);   
             }   
 }*/
-
-
 }
