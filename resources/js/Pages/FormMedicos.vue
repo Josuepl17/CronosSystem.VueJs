@@ -95,23 +95,27 @@
 import { defineProps } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 
-const form = useForm({
-  nome: '',
-  cpf: '',
-  crp: '',
-  especialidade: '',
-  telefone: '',
-  email: '',
-  endereco: '',
-  cidade: '',
-  bairro: '',
-  senha: '',
-})
-
-
 const props = defineProps({
   errors: Array,
+  medico:Array,
 })
+
+
+const form = useForm({
+  nome: props.medico?.nome || "",
+  cpf: props.medico?.cpf || "",
+  crp: props.medico?.crp || "",
+  especialidade: props.medico?.especialidade || "",
+  telefone: props.medico?.telefone || "",
+  email: props.medico?.email || "",
+  endereco: props.medico?.endereco || "",
+  cidade: props.medico?.cidade || "",
+  bairro: props.medico?.bairro || "",
+  senha: props.medico?.senha || "",
+})
+
+
+
 
 </script>
 

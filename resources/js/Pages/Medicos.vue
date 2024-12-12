@@ -19,6 +19,7 @@
                             <th>Email</th>
                             <th>Especialidade</th>
                             <th>Contato</th>
+                            <th>X</th>
                             
                         </tr>
                     </thead>
@@ -29,6 +30,7 @@
                                 <td>{{ medico.email }}</td>
                                 <td>{{ medico.especialidade }}</td>
                                 <td>{{ medico.telefone }}</td>
+                                <td><Link id="inserir" :href="'/edit/medico/' + medico.id" >Editar</Link></td>
                             </tr>
                     </tbody>
                 </table>

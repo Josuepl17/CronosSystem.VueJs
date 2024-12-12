@@ -32,27 +32,55 @@ class MedicosController extends Controller
 
 
 
-    public function createMedicos(ValidateRequest $request) {
+    public function createMedicos(ValidateRequest $request) 
+    {
+        // Extrai os dados, exceto a senha, para uso no Medico
         $dados = $request->except('senha');
-       // $dados['empresa_id'] = Session::get('empresa_id');
-        $medico =  Medico::create($dados);
-
-        $user =  User::create([
-            'id' => $medico->id,
-            'name' => $request->nome,
-            'email' => $request->email,
-            'password' => Hash::make($request->senha),
-            'empresa_id' => Session::get('empresa_id'), // so para acessar a empresa selecionada
-
-         ]);
-
-         $user_empresas = new User_Empresa();
-         $user_empresas->user_id = $user->id;
-         $user_empresas->empresa_id = $user->empresa_id;
-         $user_empresas->save();
-
-
-
+    
+        // Cria ou atualiza o Médico com base no e-mail ou algum identificador único
+        $medico = Medico::updateOrCreate(
+            ['email' => $request->email], // Condição para buscar o médico
+            $dados // Dados para atualizar ou criar
+        );
+    
+        // Cria ou atualiza o usuário vinculado ao médico
+        $user = User::updateOrCreate(
+            ['email' => $request->email], // Condição para buscar o usuário
+            [
+                'name' => $request->nome,
+                'email' => $request->email,
+                'password' => Hash::make($request->senha),
+                'empresa_id' => Session::get('empresa_id'), // A empresa à qual ele pertence
+            ]
+        );
+    
+        // Cria ou atualiza a relação do usuário com a empresa na tabela User_Empresa
+        $user_empresas = User_Empresa::updateOrCreate(
+            ['user_id' => $user->id, 'empresa_id' => Session::get('empresa_id')], // Condição para buscar
+            ['user_id' => $user->id, 'empresa_id' => Session::get('empresa_id')] // Dados para atualizar ou criar
+        );
+    
         return redirect('/medicos');
     }
+
+    
+
+
+
+    
+
+
+
+    public function editMedicos(Request $request) {
+       $medico_id =  $request->id;
+
+       $medico = Medico::find($medico_id);
+
+       return Inertia::render('FormMedicos', compact('medico'));
+
+
+    }
+
+
+
 }
