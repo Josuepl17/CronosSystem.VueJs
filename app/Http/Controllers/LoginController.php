@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use App\Http\Requests\ValidateRequest;
 use App\Models\Atendente;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -23,19 +24,24 @@ class LoginController extends Controller
         return Inertia::render('Login');
     }
 
+
+
+
+
+
+
+
+
     public function Authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            Session::put('id', Auth::id());
-          
             if (Medico::where('id', Auth::id())->exists() || Atendente::where('id', Auth::id())->exists()) {
-                // id para apresentar gerenciamento de filial
+               // se for um medico ou atentende não faz um put de admisnitrador 
             }else{
-                Session::put('adm', "adm");
+                Session::put('adm', "adm"); // id para apresentar gerenciamento de filial
 
             }
-            
             Session::put('id', Auth::id());
             Session::put('nome', Auth::user()->name);
             return redirect()->intended();
@@ -45,6 +51,17 @@ class LoginController extends Controller
             ]);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -59,29 +76,31 @@ class LoginController extends Controller
 
     public function createUserEmpresa(Request $request)
     {
-        $empresa = new Empresa();
-        $empresa->razao_social = $request->razao_social;
-        $empresa->cnpj = $request->cnpj;
-        $empresa->telefone = $request->telefone;
-        $empresa->endereco = $request->endereco;
-        $empresa->cidade = $request->cidade;
-        $empresa->bairro = $request->bairro;
-        $empresa->save();
-
-        $empresa->filial_id = $empresa->id;
-        $empresa->save();
-
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->empresa_id = $empresa->id;
-        $user->save();
-
-        $user_empresas = new User_Empresa();
-        $user_empresas->user_id = $user->id;
-        $user_empresas->empresa_id = $empresa->id;
-        $user_empresas->save();
+        DB::transaction(function () use ($request) {
+            $empresa = Empresa::create([
+                'razao_social' => $request->razao_social,
+                'cnpj' => $request->cnpj,
+                'telefone' => $request->telefone,
+                'endereco' => $request->endereco,
+                'cidade' => $request->cidade,
+                'bairro' => $request->bairro,
+            ]);
+        
+            $empresa->update(['filial_id' => $empresa->id]);
+        
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'empresa_id' => $empresa->id,
+            ]);
+        
+            User_Empresa::create([
+                'user_id' => $user->id,
+                'empresa_id' => $empresa->id,
+            ]);
+        });
+        
 
         return redirect('/form/login');
     }
