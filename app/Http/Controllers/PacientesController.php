@@ -139,8 +139,9 @@ class PacientesController extends Controller
         //$detalhes = $paciente->detalhespacientes()->where('medico_id', session('id'))->get();
 
         $detalhes = $paciente->detalhespacientes()->where('medico_id', Session::get('id'))->first(); // retona Object
+      
 
-        if ($detalhes != null) {
+        if ($detalhes->texto_principal != null) {
             $texto_principal = Crypt::decrypt($detalhes->texto_principal);
             $detalhes->texto_principal = $texto_principal;
         }
@@ -170,13 +171,11 @@ class PacientesController extends Controller
             
             ]);
 
-            $horaAtual = Carbon::now()->format('H:i:s');
-
-            $mensagem = "Criado Com Sucesso " . $horaAtual;
+            $mensagem = "Criado Com Sucesso ";
 
             Session::put('message', $mensagem);
 
-            return redirect('/detalhes/paciente');
+            return Inertia::location('/detalhes/paciente');
 
     }
 
