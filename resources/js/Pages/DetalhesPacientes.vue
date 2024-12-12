@@ -137,6 +137,26 @@ const props = defineProps({
   message: String,
 });
 
+
+const displayedMessage = ref(props.message);
+
+// Observando mudanças na prop 'message'
+watch(() => props.message, (newMessage) => {
+  displayedMessage.value = newMessage;
+
+  // Limpar a mensagem após 1 segundo
+  setTimeout(() => {
+    displayedMessage.value = '';
+  }, 1000);
+});
+
+
+
+
+
+
+
+
 const form = useForm({
   texto_principal: "" || props.detalhes.texto_principal,
   arquivos: null, // Armazena o array de arquivos
