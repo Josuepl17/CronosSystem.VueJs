@@ -138,21 +138,6 @@ const props = defineProps({
 });
 
 
-const displayedMessage = ref(props.message);
-
-// Observando mudanças na prop 'message'
-watch(() => props.message, (newMessage) => {
-  displayedMessage.value = newMessage;
-
-  // Limpar a mensagem após 1 segundo
-  setTimeout(() => {
-    displayedMessage.value = '';
-  }, 1000);
-});
-
-
-
-
 
 
 
