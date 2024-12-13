@@ -39,13 +39,13 @@ class MedicosController extends Controller
     
         // Cria ou atualiza o Médico com base no e-mail ou algum identificador único
         $medico = Medico::updateOrCreate(
-            ['email' => $request->email], // Condição para buscar o médico
+            ['id' => $request->id], // Condição para buscar o médico
             $dados // Dados para atualizar ou criar
         );
     
         // Cria ou atualiza o usuário vinculado ao médico
         $user = User::updateOrCreate(
-            ['email' => $request->email], // Condição para buscar o usuário
+            ['id' => $request->id], // Condição para buscar o usuário
             [
                 'name' => $request->nome,
                 'email' => $request->email,

@@ -36,23 +36,47 @@ class AtendenteController extends Controller
 
 
 
-    public function createAtendente(ValidateRequest $request) {
+    public function createAtendente(ValidateRequest $request) 
+    {
+        // Obtém todos os dados do request
         $dados = $request->all();
-        $atendente =  Atendente::create($dados);
-        
-        $user = User::create([
-            'id' => $atendente->id, // ID do Atendente usado como ID do User
-            'name' => $request->nome,
-            'email' => $request->email,
-            'password' => Hash::make($request->senha),
-            'empresa_id' => Session::get('empresa_id'),
-        ]);
-
-         $user_empresas = new User_Empresa();
-         $user_empresas->user_id = $user->id;
-         $user_empresas->empresa_id = $user->empresa_id;
-         $user_empresas->save();
-
+    
+        // Verifica se já existe um atendente com o ID fornecido
+        $atendente = Atendente::updateOrCreate(
+            ['id' => $request->id], // Critério de busca
+            $dados // Dados a serem atualizados ou criados
+        );
+    
+        // Verifica se o usuário com o mesmo ID do atendente já existe
+        $user = User::updateOrCreate(
+            ['id' => $atendente->id], // Critério de busca
+            [
+                'name' => $request->nome,
+                'email' => $request->email,
+                'password' => Hash::make($request->senha),
+                'empresa_id' => Session::get('empresa_id'),
+            ]
+        );
+    
+        // Verifica se já existe uma relação entre o usuário e a empresa na tabela User_Empresa
+        $userEmpresa = User_Empresa::firstOrCreate(
+            ['user_id' => $user->id, 'empresa_id' => $user->empresa_id]
+        );
+    
         return $this->listaAtendentes();
+
+    }
+
+
+
+
+
+
+    public function editAtendente(Request $request) {
+
+        $atendente = Atendente::find($request->id);
+
+        return Inertia::render('FormAtendentes', compact('atendente'));
+        
     }
 }

@@ -23,6 +23,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>CPF</th>
+        <th>X</th>
       </tr>
     </thead>
     <tbody>
@@ -31,6 +32,7 @@
           <td>{{ atendente.nome }}</td>
           <td>{{ atendente.email }}</td>
           <td>{{ atendente.cpf }}</td>
+          <td><Link id="inserir" :href="'/edit/atendentes/' + atendente.id">Editar</Link></td>
       </tr>
     </tbody>
   </table>

@@ -64,21 +64,26 @@
 import { defineProps } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 
-const form = useForm({
-  nome: '',
-  cpf: '',
-  telefone: '',
-  email: '',
-  endereco: '',
-  cidade: '',
-  bairro: '',
-  senha: '',
-})
-
 
 const props = defineProps({
   errors: Array,
+  atendente: Object,
 })
+
+const form = useForm({
+  id: props.atendente?.id || "",
+  nome: props.atendente?.nome || "",
+  cpf: props.atendente?.cpf || "",
+  telefone: props.atendente?.telefone || "",
+  email: props.atendente?.email || "",
+  endereco: props.atendente?.endereco || "",
+  cidade: props.atendente?.cidade || "",
+  bairro: props.atendente?.bairro || "",
+  senha: props.atendente?.senha || "",
+})
+
+
+
 
 </script>
 

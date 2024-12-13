@@ -64,6 +64,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/atendentes', [AtendenteController::class, 'listaAtendentes']);
     Route::get('/form/atendentes', [AtendenteController::class, 'formAtendentes']);
     Route::post('/create/atendentes', [AtendenteController::class, 'createAtendente']);
+    Route::get('/edit/atendentes/{id}', [AtendenteController::class, 'editAtendente']);
     
     // User
 

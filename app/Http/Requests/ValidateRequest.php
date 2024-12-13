@@ -21,9 +21,10 @@ class ValidateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->input('id'); 
         return [
             'cpf' => 'required|size:11',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:users,email,' . intval($id), //
             'password' => 'string|min:6',
         ];
     }
