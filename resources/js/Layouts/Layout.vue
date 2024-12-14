@@ -141,7 +141,7 @@ function toggleMenu() {
 
   if (isReduced) {
     toggleButton.value.innerHTML = "☰";
-    toggleButton.value.style.marginLeft = "-190%";
+    toggleButton.value.style.marginLeft = "-90%";
   } else {
     toggleButton.value.style.marginLeft = ""; // Resetando a margem
   }
@@ -312,6 +312,7 @@ function toggleMenu() {
   color: white;
   margin-left: 10px;
   transition: opacity 0.3s ease;
+  width: 100%;
 }
 
 #links-menu {

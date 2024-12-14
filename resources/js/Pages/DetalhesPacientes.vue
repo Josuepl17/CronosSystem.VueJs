@@ -65,7 +65,7 @@
       <div class="box-detalhes" >
         
       <div class="box-info">
-        <p>Paciente Desde:</p> <p>13/12/2022</p>
+        <p>Paciente Desde:</p> <p>{{ formatarData(props.paciente.created_at) }}</p>
       </div>
 
       <div class="box-info" >
@@ -138,6 +138,11 @@ const props = defineProps({
 });
 
 
+function formatarData(data) {
+  const [datePart] = data.split('T'); // Divide a data e a hora
+  const [ano, mes, dia] = datePart.split('-'); // Separa AAAA-MM-DD
+  return `${dia}/${mes}/${ano}`; // Retorna no formato DD/MM/AAAA
+}
 
 
 
