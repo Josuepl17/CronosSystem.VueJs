@@ -80,4 +80,9 @@ const props = defineProps({
 
 @import "..\Components\css\tabelas.css";
 
+#tipo{
+  background-color: rgb(255, 0, 0);
+   color: white;
+}
+
 </style>

@@ -32,36 +32,63 @@
         <!-- topo-menu -->
 
         <div id="links-menu">
-          <Link href="/dash">
-            <img src="/images/agenda.png" alt="" /> <span>Dashboard</span>
-          </Link>
+  <Link 
+    href="/dash" 
+    :class="{'active-link': $page.url === '/dash'}">
+    <img src="/images/agenda.png" alt="" /> 
+    <span>Dashboard</span>
+  </Link>
 
-          <Link href="/pacientes"
-            ><img src="/images/paciente.png" alt="" /> <span>Pacientes</span></Link
-          >
+  <Link 
+    href="/pacientes" 
+    :class="{'active-link': $page.url === '/pacientes'}">
+    <img src="/images/paciente.png" alt="" /> 
+    <span>Pacientes</span>
+  </Link>
 
-          <Link href="/atendentes"
-            ><img src="/images/medico.png" alt="" /> <span>Atendentes</span></Link
-          >
+  <Link 
+    href="/atendentes" 
+    :class="{'active-link': $page.url === '/atendentes'}">
+    <img src="/images/medico.png" alt="" /> 
+    <span>Atendentes</span>
+  </Link>
 
-          <Link href="/consultas"
-            ><img src="/images/pesquisar.png" alt="" /> <span>Consultas</span></Link
-          >
+  <Link 
+    href="/consultas" 
+    :class="{'active-link': $page.url === '/consultas'}">
+    <img src="/images/pesquisar.png" alt="" /> 
+    <span>Consultas</span>
+  </Link>
 
-          <a href="#"><img src="/images/agenda.png" alt="" /> <span>Agenda</span></a>
+  <a href="#" 
+    :class="{'active-link': $page.url === '#'}">
+    <img src="/images/agenda.png" alt="" /> 
+    <span>Agenda</span>
+  </a>
 
-          <Link href="/medicos"
-            ><img src="/images/medico.png" alt="" /> <span>Médicos</span></Link
-          >
+  <Link 
+    href="/medicos" 
+    :class="{'active-link': $page.url === '/medicos'}">
+    <img src="/images/medico.png" alt="" /> 
+    <span>Médicos</span>
+  </Link>
 
-          <Link v-if="$page.props.adm" href="/gerenciar/filial"
-            ><img src="/images/filial.png" alt="" /> <span>Gerenciar Filial</span></Link
-          >
+  <Link 
+    v-if="$page.props.adm" 
+    href="/gerenciar/filial" 
+    :class="{'active-link': $page.url === '/gerenciar/filial'}">
+    <img src="/images/filial.png" alt="" /> 
+    <span>Gerenciar Filial</span>
+  </Link>
 
-          <Link href="/logout"
-            ><img src="/images/logout.png" alt="" /> <span>Sair</span></Link
-          >
-        </div>
+  <Link 
+    href="/logout" 
+    :class="{'active-link': $page.url === '/logout'}">
+    <img src="/images/logout.png" alt="" /> 
+    <span>Sair</span>
+  </Link>
+</div>
+
         <!-- links-menu -->
       </div>
       <!-- menu-geral -->
@@ -114,14 +141,40 @@ function toggleMenu() {
 
   if (isReduced) {
     toggleButton.value.innerHTML = "☰";
-    toggleButton.value.style.marginLeft = "-70%";
+    toggleButton.value.style.marginLeft = "-190%";
   } else {
-    toggleButton.value.style.marginLeft = "0"; // Resetando a margem
+    toggleButton.value.style.marginLeft = ""; // Resetando a margem
   }
 }
 </script>
 
 <style scoped>
+
+
+
+#links-menu a, 
+#links-menu .active-link {
+  text-decoration: none;
+  color: #8a8888; /* Cor padrão */
+}
+
+#links-menu .active-link {
+  background-color: var(--azul-claro); /* Cor de fundo */
+  color: #fff; /* Cor do texto */
+  font-weight: bold; /* Deixa o texto mais forte */
+  border-radius: 8px; /* Bordas arredondadas */
+}
+
+
+
+
+
+
+
+
+
+
+
 #menu-geral.reduzido {
   width: 60px;
   min-width: 0;
@@ -137,6 +190,10 @@ function toggleMenu() {
   visibility: hidden;
 }
 </style>
+
+
+
+
 
 <style>
 #selecioneFilial {
