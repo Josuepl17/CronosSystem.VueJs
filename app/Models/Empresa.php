@@ -15,6 +15,10 @@ class Empresa extends Model
         'razao_social',
         'filial_id',
         'cnpj',
+        'bairro',
+        'cidade',
+        'endereco',
+        'telefone',
     ];
 
     public function medicos (){

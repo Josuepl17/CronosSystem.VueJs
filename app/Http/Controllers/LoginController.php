@@ -42,7 +42,7 @@ class LoginController extends Controller
             return redirect()->intended();
         } else {
             return back()->withErrors([
-                'email' => 'Credenciais inválidas.',
+                'email' => 'Email Invalido.',
             ]);
         }
     }
@@ -195,7 +195,7 @@ class LoginController extends Controller
         
         $dados = $request->users;
 
-         User_Empresa::wherein('user_id',  $dados)->where('user_id', '!=', Auth::id())->where('empresa_id', Session::get('empresa_selecionada'))->delete();
+         User_Empresa::wherein('user_id',  $dados)->where('user_id', '!=', Auth::id())->where('empresa_id', Session::get('empresa_selecionada'))->delete(); // não deteta o usuario logado, que no caso é somente o adm
 
 
          return redirect('/gerenciar/filial');
