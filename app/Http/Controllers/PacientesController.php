@@ -30,7 +30,7 @@ class PacientesController extends Controller
         if ($medico = Medico::Find($funcionario_id)) { // se existir é um medico, entrara em um filtro onde apresentará apenas os pacientes daquele medico especifico, e se for da empresa selecionada.
 
             $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
-            $pacientes = MeuServico::Encrypted($pacientes);
+            
             // Mostra os pacientes com os IDs criptografados
             // Pelo relacionamento da tabela pivo ele encontra os pacientes relacionados com o medico Logado.
             // caso um dia precise, para os pacientes seja apresentado onde o medico estiver logado, precisa apemnas remover o where do filtro da empresa
@@ -40,10 +40,41 @@ class PacientesController extends Controller
             // retorna todos os pacientes da empresa pois caiu no filtro de atendente
         }
 
+        $pacientes = MeuServico::Encrypted($pacientes);
+
         MeuServico::Autorizer(); //responsavel para mostrar inserir paciente 
 
         return Inertia::render('Pacientes', compact('pacientes'));
     }
+
+    public function buscaPaciente(Request $request) 
+    {
+        $funcionario_id = Session::get('id'); // Medico ou atendente logado
+        $nomePaciente = $request->input('pesquisa'); // Nome do paciente a ser buscado
+    
+        if ($medico = Medico::find($funcionario_id)) { 
+            // Médico logado — busca apenas os pacientes vinculados ao médico e à empresa atual
+            $pacientes = $medico->pacientes()
+                ->where('pacientes.empresa_id', Session::get('empresa_id'))
+                ->when($nomePaciente, function ($query, $nomePaciente) {
+                    $query->where('pacientes.nome', 'LIKE', '%' . $nomePaciente . '%');
+                })
+                ->get();
+        } else {
+            // Atendente logado — busca todos os pacientes da empresa atual
+            $pacientes = Paciente::where('empresa_id', Session::get('empresa_id'))
+                ->when($nomePaciente, function ($query, $nomePaciente) {
+                    $query->where('nome', 'LIKE', '%' . $nomePaciente . '%');
+                })
+                ->get();
+        }
+    
+        $pacientes = MeuServico::Encrypted($pacientes);
+        MeuServico::Autorizer(); // Responsável por mostrar ou inserir paciente
+    
+        return Inertia::render('Pacientes', compact('pacientes'));
+    }
+    
 
 
 

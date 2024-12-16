@@ -8,10 +8,10 @@
 
         <div id="opcoes-conteudo" >
 
-          <Link   href="/form/paciente">Inserir</Link>
+          <Link  href="/form/paciente">Inserir</Link>
 
-            <form action="#" method="GET">
-                <input type="text"  placeholder="Search..." />
+            <form @submit.prevent="form.post('/busca/atendentes')">
+                <input v-model="form.pesquisa" type="text"   placeholder="Search..." />
                 <button type="submit" >Busca</button>
             </form>
 
@@ -54,14 +54,16 @@
 <script setup >
 import { Link } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
+import { useForm } from '@inertiajs/vue3';
 
 
 
 const props = defineProps({
   pacientes: Array,
+})
 
-
-
+const form = useForm({
+pesquisa: "", 
 
 })
 

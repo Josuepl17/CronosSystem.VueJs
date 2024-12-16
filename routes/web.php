@@ -53,6 +53,9 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::post('/create/paciente/detalhes', [PacientesController::class, 'createDetalhesPacientes']);
     //Route::get('/download/paciente/detalhes', [PacientesController::class, 'downloadArquivo']);
     Route::post('/inserir/tramite', [PacientesController::class, 'createTramite']);
+    Route::post('/busca/atendentes', [PacientesController::class, 'buscaPaciente']);
+
+   
 
     // Medicos
     Route::get('/medicos', [MedicosController::class, 'listaMedicos']);
