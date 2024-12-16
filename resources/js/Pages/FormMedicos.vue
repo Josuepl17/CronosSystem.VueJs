@@ -60,9 +60,9 @@
                             <input v-model="form.bairro" type="text" id="bairro" placeholder="Bairro">
                         </div>
 
-                        <div class="form-group">
+                        <div v-if="$page.props.adm"  class="form-group">
                             <label for="senha">Senha</label>
-                            <input v-model="form.senha" type="text" id="senha" placeholder="Senha">
+                            <input  v-model="form.senha" type="password" id="senha" placeholder="Senha">
                         </div>
 
                         <div class="fechar-salvar">
@@ -112,7 +112,7 @@ const form = useForm({
   endereco: props.medico?.endereco || "",
   cidade: props.medico?.cidade || "",
   bairro: props.medico?.bairro || "",
-  senha: props.medico?.senha || "",
+  senha:  "semsenha",
 })
 
 

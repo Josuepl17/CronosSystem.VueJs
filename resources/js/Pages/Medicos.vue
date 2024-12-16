@@ -4,10 +4,7 @@
             <div id="opcoes-conteudo">
                 <Link href="/form/medicos">Inserir</Link>
 
-                <form action="#" method="GET">
-                    <input type="text" placeholder="Search..." />
-                    <button type="submit">Busca</button>
-                </form>
+
             </div>
 
             <div id="tabela">

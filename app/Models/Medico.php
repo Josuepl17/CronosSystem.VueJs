@@ -21,6 +21,7 @@ class Medico extends Model
         'cidade',
         'bairro',
         'empresa_id',
+        'senha',
     ];
 
 

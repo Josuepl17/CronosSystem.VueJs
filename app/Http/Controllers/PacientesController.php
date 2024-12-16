@@ -47,26 +47,38 @@ class PacientesController extends Controller
         return Inertia::render('Pacientes', compact('pacientes'));
     }
 
+
+
+
+
+
+
+
+
+
     public function buscaPaciente(Request $request) 
     {
         $funcionario_id = Session::get('id'); // Medico ou atendente logado
         $nomePaciente = $request->input('pesquisa'); // Nome do paciente a ser buscado
+        
     
         if ($medico = Medico::find($funcionario_id)) { 
             // Médico logado — busca apenas os pacientes vinculados ao médico e à empresa atual
             $pacientes = $medico->pacientes()
-                ->where('pacientes.empresa_id', Session::get('empresa_id'))
-                ->when($nomePaciente, function ($query, $nomePaciente) {
-                    $query->where('pacientes.nome', 'LIKE', '%' . $nomePaciente . '%');
-                })
-                ->get();
+            ->where('pacientes.empresa_id', Session::get('empresa_id'))
+            ->when($nomePaciente, function ($query, $nomePaciente) {
+                $query->whereRaw('LOWER(pacientes.nome) LIKE ?', ['%' . strtolower($nomePaciente) . '%']);
+            })
+            ->get();
+        
         } else {
             // Atendente logado — busca todos os pacientes da empresa atual
             $pacientes = Paciente::where('empresa_id', Session::get('empresa_id'))
-                ->when($nomePaciente, function ($query, $nomePaciente) {
-                    $query->where('nome', 'LIKE', '%' . $nomePaciente . '%');
-                })
-                ->get();
+            ->when($nomePaciente, function ($query, $nomePaciente) {
+                $query->whereRaw('LOWER(nome) LIKE ?', ['%' . strtolower($nomePaciente) . '%']);
+            })
+            ->get();
+        
         }
     
         $pacientes = MeuServico::Encrypted($pacientes);
@@ -79,6 +91,7 @@ class PacientesController extends Controller
 
 
 
+    
 
 
 

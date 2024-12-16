@@ -46,18 +46,24 @@ class MedicosController extends Controller
             );
         
             // Cria ou atualiza o usuário vinculado ao médico
+            $dados2 = [
+                'name' => $request->nome,
+                'email' => $request->email,
+                'empresa_id' => Session::get('empresa_id'),
+            ];
+            
+            // Verifica se a senha foi enviada e não é "semsenha"
+            if ($request->senha !== 'semsenha' && !empty($request->senha)) {
+                $dados2['password'] = Hash::make($request->senha);
+            }
+            
             $user = User::updateOrCreate(
                 ['id' => $medico->id], // Condição para buscar o usuário
-                [
-                    'name' => $request->nome,
-                    'email' => $request->email,
-                    'password' => Hash::make($request->senha),
-                    'empresa_id' => Session::get('empresa_id'), // A empresa à qual ele pertence
-                ]
+                $dados2
             );
         
             // Cria ou atualiza a relação do usuário com a empresa na tabela User_Empresa
-            $user_empresas = User_Empresa::updateOrCreate(
+            User_Empresa::updateOrCreate(
                 ['user_id' => $user->id, 'empresa_id' => Session::get('empresa_id')], // Condição para buscar
                 ['user_id' => $user->id, 'empresa_id' => Session::get('empresa_id')] // Dados para atualizar ou criar
             );

@@ -8,10 +8,7 @@
 
           <Link href="/form/atendentes">Inserir</Link>
 
-            <form action="#" method="GET">
-                <input type="text"  placeholder="Search..." />
-                <button type="submit" >Busca</button>
-            </form>
+
 
         </div>
 
