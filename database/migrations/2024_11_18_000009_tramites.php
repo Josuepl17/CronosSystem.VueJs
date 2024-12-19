@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tramites', function (Blueprint $table) {
             $table->id();
             $table->string('titulo')->nullable();
-            $table->string('descricao', 1000)->change()->nullable();
+            $table->text('descricao')->nullable();
 
             $table->unsignedBigInteger('medico_id');
             $table->foreign('medico_id')->references('id')->on('medicos')->onDelete('cascade')->onUpdate('cascade');

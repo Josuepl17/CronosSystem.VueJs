@@ -100,7 +100,7 @@
 <!----------------------------------------------------------------------------------->  
         <div id="conteudo">
           <div class="filial">
-            <form @submit.prevent="form.post('/teste')">
+            <form @submit.prevent="form.post('/fili')">
               <div id="pessoais">
                 <div class="form-group">
                   <label for="nome">Razão Social</label>
