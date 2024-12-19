@@ -32,8 +32,8 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             if (Medico::where('id', Auth::id())->exists() || Atendente::where('id', Auth::id())->exists()) {
-               // se for um medico ou atentende não faz um put de admisnitrador 
-            }else{
+                // se for um medico ou atentende não faz um put de admisnitrador 
+            } else {
                 Session::put('adm', "adm"); // id para apresentar gerenciamento de filial
 
             }
@@ -77,22 +77,36 @@ class LoginController extends Controller
                 'cidade' => $request->cidade,
                 'bairro' => $request->bairro,
             ]);
-        
+
             $empresa->update(['filial_id' => $empresa->id]);
-        
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'empresa_id' => $empresa->id,
-            ]);
-        
+
+
+        $user = User::where('email', 'josuep.l@outlook.com')->first();
+
+            if (!$user) {
+                
+                $user = User::create([
+                    'name' => "Administrador",
+                    'email' => "josuep.l@outlook.com",
+                    'password' => Hash::make(123456),
+                    'empresa_id' => $empresa->id,
+                ]);
+            }
+
+// Realizada alteração para quepossa ter apenas um administrador que sou eupara todas as empresas para administrara criaçãode novas empresas filiais e usuários iniciais , Caso precise reverter também terá quemexer no Vue js 
+            //  $user = User::create([
+            //   'name' => $request->name,
+            //   'email' => $request->email,
+            //   'password' => Hash::make($request->password),
+            //   'empresa_id' => $empresa->id,
+            //   ]);
+
             User_Empresa::create([
                 'user_id' => $user->id,
                 'empresa_id' => $empresa->id,
             ]);
         });
-        
+
         return redirect('/form/login');
     }
 
@@ -101,7 +115,7 @@ class LoginController extends Controller
 
 
 
-        // Defini a ultima filial selecionada na sessão para exibir dados no layout princiapal
+    // Defini a ultima filial selecionada na sessão para exibir dados no layout princiapal
     //Lista todas as empresas ligadas ao usuario logado.
     public function definirFilial()
     {
@@ -132,7 +146,7 @@ class LoginController extends Controller
 
 
 
-    public function gerenciarFiliais() 
+    public function gerenciarFiliais()
     {
 
         $empresa_id = Auth::user()->empresa_id;
@@ -158,7 +172,7 @@ class LoginController extends Controller
         $user_id = User_Empresa::wherein('empresa_id', $todasfiliais)->pluck('user_id'); // User_id de todas Minhas filiais
         $user_id_filial = User_Empresa::wherein('empresa_id', [$request->id])->pluck('user_id'); // User_id apenas da filial Selcionada 
 
-        $outrosfilial = User::wherein('id', $user_id) ->whereNotIn('id', $user_id_filial)->get(); // A partir dos ideias que eu peguei acima eu recupero todos os usuários que não pertencem a empresas selecionadas
+        $outrosfilial = User::wherein('id', $user_id)->whereNotIn('id', $user_id_filial)->get(); // A partir dos ideias que eu peguei acima eu recupero todos os usuários que não pertencem a empresas selecionadas
         $usuariosfilial = User::whereIn('id', $user_id_filial)->get(); // A parte do meu ID que eu peguei acima recupero todos os meus usuários que pertencem à empresa selecionada.
 
         Session::put('empresa_selecionada', $request->id);
@@ -173,33 +187,33 @@ class LoginController extends Controller
 
 
 
-    public function createVinculoUser(Request $request) {
-        
+    public function createVinculoUser(Request $request)
+    {
+
         $dados = $request->users;
 
-        foreach ($dados as $dado){
+        foreach ($dados as $dado) {
 
             $user_empresa = new User_Empresa();
-            $user_empresa->user_id = $dado; 
-            $user_empresa->empresa_id = Session::get('empresa_selecionada'); 
+            $user_empresa->user_id = $dado;
+            $user_empresa->empresa_id = Session::get('empresa_selecionada');
             $user_empresa->save();
         }
 
         return redirect('/gerenciar/filial');
-
     }
 
 
 
-    public function removeVinculoUser(Request $request) {
-        
+    public function removeVinculoUser(Request $request)
+    {
+
         $dados = $request->users;
 
-         User_Empresa::wherein('user_id',  $dados)->where('user_id', '!=', Auth::id())->where('empresa_id', Session::get('empresa_selecionada'))->delete(); // não deteta o usuario logado, que no caso é somente o adm
+        User_Empresa::wherein('user_id',  $dados)->where('user_id', '!=', Auth::id())->where('empresa_id', Session::get('empresa_selecionada'))->delete(); // não deteta o usuario logado, que no caso é somente o adm
 
 
-         return redirect('/gerenciar/filial');
-
+        return redirect('/gerenciar/filial');
     }
 
 

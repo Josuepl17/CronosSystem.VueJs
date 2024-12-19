@@ -3,9 +3,10 @@
 
         <div class="form-container sign-in">
             <form @submit.prevent="form.post('/create/user/empresas')" >
-                <input type="text" id="name" placeholder="Nome Usuario:" v-model="form.name">
+                
+               <!-- <input type="text" id="name" placeholder="Nome Usuario:" v-model="form.name">
                 <input type="email" id="email" placeholder="Email Usuario:" v-model="form.email">
-                <input type="password" id="password" placeholder="Senha Usuario:" v-model="form.password">
+                <input type="password" id="password" placeholder="Senha Usuario:" v-model="form.password">-->
 
                
                 <input type="text" id="razao_social" placeholder="Razão Social:" v-model="form.razao_social">
