@@ -60,7 +60,7 @@
                             <input v-model="form.bairro" type="text" id="bairro" placeholder="Bairro">
                         </div>
 
-                        <div v-if="$page.props.adm"  class="form-group">
+                        <div class="form-group">
                             <label for="senha">Senha</label>
                             <input  v-model="form.senha" type="password" id="senha" placeholder="Senha">
                         </div>

@@ -104,7 +104,7 @@ Route::get('/josue', function () {
 
 Route::get('/gere', function(){
     $e = new Empresa();
-    $e->razao_social = 'filial' ;
+    $e->razao_social = 'Integrar Filial' ;
     $e->cnpj = rand(1, 100000);
     $e->filial_id = 1;
     $e->telefone = 27996530963;

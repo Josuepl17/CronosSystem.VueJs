@@ -40,7 +40,7 @@
 
 
 
-        <div v-for="(tramites) in tramites_paciente" :key="tramites.id" class="publicacao">
+        <div class="publicacao" v-for="(tramites) in tramites_paciente" :key="tramites.id" >
   <div class="publicacao-header">
     <h3 class="publicacao-titulo">{{ tramites.titulo }}</h3>
     <span class="publicacao-id">ID: {{ tramites.id }}</span>
@@ -179,8 +179,9 @@ const fecharModal = () => {
 <style scoped>
 .notification {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 10px; /* Alinhado ao topo */
+  left: 50%;
+  transform: translateX(-50%);
   padding: 15px 20px;
   background-color: #4caf50; /* Verde para sucesso */
   color: #fff;
@@ -189,17 +190,19 @@ const fecharModal = () => {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 999;
 
-  /* Animações de entrada e saída com tempo adequado */
-  animation: slide-in 0.3s ease, fade-out 0.3s ease 2.7s forwards;
+  /* Animações de entrada e saída */
+  animation: slide-down 0.5s ease, fade-out 0.3s ease 2.7s forwards;
 }
 
-/* Animação de entrada */
-@keyframes slide-in {
+/* Animação de entrada de cima para baixo */
+@keyframes slide-down {
   from {
-    transform: translateX(100%); /* Inicia fora da tela à direita */
+    transform: translateY(-100%) translateX(-50%);
+    opacity: 0;
   }
   to {
-    transform: translateX(0); /* Fica na posição final */
+    transform: translateY(0) translateX(-50%);
+    opacity: 1;
   }
 }
 
@@ -217,10 +220,11 @@ const fecharModal = () => {
 
 
 
+
 <style>
 .publicacao {
   width: 90%;
-  min-height: 145px;
+
   border-radius: 8px; /* Borda arredondada mais suave */
   margin-bottom: 15px; /* Espaçamento entre as publicações */
   background-color: #f9f9f9; /* Fundo mais suave */

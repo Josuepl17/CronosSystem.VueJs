@@ -214,7 +214,7 @@
   <!----------------------------------------------------------------------------------->
   
                 <div id="usuarios">
-              <div id="titulo-usuarios"><h3>Usuarios De Outra Filial</h3></div>
+              <div id="titulo-usuarios"><h3>Outros Usuarios</h3></div>
   
               <div class="checkbox" v-for="outros in outrosfilial" :key="outros.id">
   
