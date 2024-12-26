@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AtendenteController;
+use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\ConsultasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
@@ -73,6 +74,11 @@ Route::middleware(['auth', 'web'])->group(function () {
 
     Route::post('/create/vinculo/user', [LoginController::class, 'createVinculoUser']);
     Route::post('/remove/vinculo/user', [LoginController::class, 'removeVinculoUser']);
+
+    // Consultas
+
+    Route::get('/consultas', [ConsultaController::class, 'listaConsultas']);
+    Route::get('/form/consultas', [ConsultaController::class, 'formConsultas']);
     
 
 
