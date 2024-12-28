@@ -3,12 +3,12 @@
 <Layout>
     <template v-slot:conteudo>
         <div class="fomulario-usuario">
-            <form @submit.prevent="form.post('/create/paciente')">
+            <form @submit.prevent="form.post('/create/consulta')">
                 <div id="pessoais">
 
                     <div class="form-group">
                         <label for="Medico">Médico(s) Responsável(is)</label>
-                        <select v-model="form.medico" id="medico">
+                        <select v-model="form.medico_id" id="medico">
                             <option v-for="medico in props.medicos" :key="medico.id" :value="medico.id">
                                 {{ medico.nome }} ({{ medico.especialidade }})
                             </option>
@@ -18,7 +18,7 @@
 
                     <div class="form-group">
                         <label for="Paciente">Paciente(s)</label>
-                        <select v-model="form.paciente" id="paciente">
+                        <select v-model="form.paciente_id" id="paciente">
                             <option v-for="paciente in props.pacientes" :key="paciente.id" :value="paciente.id">
                                 {{ paciente.nome }} ({{ paciente.idade }} anos)
                             </option>
@@ -37,7 +37,7 @@
 
                     <div class="form-group">
                         <label for="time">Hora</label>
-                        <input v-model="form.time" type="time" id="time" placeholder="Hora Consulta">
+                        <input v-model="form.hora" type="time" id="time" placeholder="Hora Consulta">
                     </div> <!-- .form-group -->
 
 
@@ -60,7 +60,14 @@
 import { defineProps } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
-const form = useForm({});
+const form = useForm({
+
+    paciente_id: '',
+    medico_id: '',
+    date: '',
+    hora: '',
+
+});
 
 const props = defineProps({
   errors: Array,

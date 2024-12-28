@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ConsultaPaciente;
 use App\Models\Empresa;
 use App\Models\Medico;
 use App\Models\Paciente;
@@ -14,6 +15,11 @@ class ConsultaController extends Controller
     public function listaConsultas() {
         return Inertia::render('Consultas');
     }
+
+
+
+
+
 
     public function formConsultas() {
         // Obtém o ID do funcionário logado (médico ou atendente) da sessão
@@ -38,5 +44,30 @@ class ConsultaController extends Controller
     
         // Renderiza a página 'FormConsultas' passando as variáveis 'medicos' e 'pacientes'
         return Inertia::render('FormConsultas', compact('medicos', 'pacientes'));
+    }
+
+
+
+
+
+
+
+
+
+    public function createConsultas(Request $request) {
+        
+        $ConsultaPaciente = new ConsultaPaciente();
+        $ConsultaPaciente->date = $request->date;
+        $ConsultaPaciente->hora = $request->hora;   
+        $ConsultaPaciente->paciente_id = $request->paciente_id;
+        $ConsultaPaciente->medico_id = $request->medico_id;
+        $ConsultaPaciente->empresa_id = Session::get('empresa_id');
+        $ConsultaPaciente->nome_paciente = Paciente::find($request->paciente_id)->nome;
+        $ConsultaPaciente->nome_medico = Medico::find($request->medico_id)->nome;   
+        $ConsultaPaciente->contato = Paciente::find($request->paciente_id)->email; // trocar por telefone
+        $ConsultaPaciente->save();
+
+        dd($ConsultaPaciente);
+
     }
 }
