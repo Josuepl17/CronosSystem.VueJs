@@ -20,7 +20,7 @@
                         <label for="Paciente">Paciente(s)</label>
                         <select v-model="form.paciente_id" id="paciente">
                             <option v-for="paciente in props.pacientes" :key="paciente.id" :value="paciente.id">
-                                {{ paciente.nome }} ({{ paciente.idade }} anos)
+                                {{ paciente.nome }}
                             </option>
                         </select>
                     </div> <!-- .form-group -->

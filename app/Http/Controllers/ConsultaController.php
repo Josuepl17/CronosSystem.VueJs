@@ -55,7 +55,9 @@ class ConsultaController extends Controller
 
 
     public function createConsultas(Request $request) {
-        
+       // var_dump($request->all());
+
+        dd($request->all());
         $ConsultaPaciente = new ConsultaPaciente();
         $ConsultaPaciente->date = $request->date;
         $ConsultaPaciente->hora = $request->hora;   

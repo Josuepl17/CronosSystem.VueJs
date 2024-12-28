@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->date('date');
-            $table->string('hora');
+            $table->time('hora');
 
             
             $table->unsignedBigInteger('paciente_id');

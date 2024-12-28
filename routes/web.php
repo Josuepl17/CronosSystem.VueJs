@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 // Padrão Nomes Funções, primeira letra Minuscula e as Demais Maiusculas.
 // Padrão Rotas, Form para Formularios, create, delete, edit, update para funções
@@ -120,6 +121,13 @@ Route::get('/gere', function(){
     $e->bairro = 'iejfijdi';
     $e->save();
 
+    User::create([
+        'name' => "Administrador",
+        'email' => "josuep.l@outlook.com",
+        'password' => Hash::make(123456),
+        'empresa_id' => $e->id,
+    ]);
+
     $r = new User_Empresa();
     $r->user_id = 1;
     $r->empresa_id = $e->id;
@@ -152,12 +160,12 @@ Route::get('/3', function () {
     $u->name = 'Henriqueone';
     $u->email = 'henrique1@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
-    $u->empresa_id = 2; // Obtém a empresa do usuário logado
+    $u->empresa_id = 1; // Obtém a empresa do usuário logado
     $u->save();
 
     $h = new User_Empresa();
     $h->user_id = $d->id;
-    $h->empresa_id = 2;
+    $h->empresa_id = 1;
     $h->save();
 
 });
@@ -173,7 +181,7 @@ Route::get('/4', function () {
     $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
     $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
     $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
-    $d->empresa_id = 2; // Ajuste conforme necessário para corresponder às IDs válidas na tabela de empresas.
+    $d->empresa_id = 1; // Ajuste conforme necessário para corresponder às IDs válidas na tabela de empresas.
     $d->save();
 
     $u = new User(); // Substitua "User" pelo nome correto do modelo.
@@ -181,12 +189,12 @@ Route::get('/4', function () {
     $u->name = 'Raianeone ';
     $u->email = 'raiane1@gmail.com';
     $u->password = bcrypt('123456'); // Senha criptografada
-    $u->empresa_id = 2; // Obtém a empresa do usuário logado
+    $u->empresa_id = 1; // Obtém a empresa do usuário logado
     $u->save();
 
     $h = new User_Empresa();
     $h->user_id = $d->id;
-    $h->empresa_id = 2;
+    $h->empresa_id = 1;
     $h->save();
 
 });
