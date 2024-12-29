@@ -42,9 +42,18 @@ class ConsultaController extends Controller
             // Obtém os dados dos médicos que estão na lista de usuários da empresa
             $medicos = Medico::wherein('id', $users)->get(); 
         }
+
+
     
         // Renderiza a página 'FormConsultas' passando as variáveis 'medicos' e 'pacientes'
         return Inertia::render('FormConsultas', compact('medicos', 'pacientes'));
+    }
+
+    public function editConsulta(Request $request) {
+
+        $consulta = ConsultaPaciente::find($request->id)->first();
+        //dd($consulta);
+        return Inertia::render('FormConsultas', compact('consulta'));
     }
 
 

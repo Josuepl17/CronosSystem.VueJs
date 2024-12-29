@@ -81,6 +81,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/consultas', [ConsultaController::class, 'listaConsultas']);
     Route::get('/form/consultas', [ConsultaController::class, 'formConsultas']);
     Route::post('/create/consulta', [ConsultaController::class, 'createConsultas']);
+    Route::get('/edit/consulta/{id}', [ConsultaController::class, 'editConsulta']);
     
 
 

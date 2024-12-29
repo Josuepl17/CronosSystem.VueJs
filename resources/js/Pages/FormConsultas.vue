@@ -13,6 +13,7 @@
                                 {{ medico.nome }} ({{ medico.especialidade }})
                             </option>
                         </select>
+
                     </div> <!-- .form-group -->
 
 
@@ -60,20 +61,37 @@
 import { defineProps } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
+const props = defineProps({
+    errors: Array,
+    medicos: {
+        type: Array,
+        default: () => props.consulta?.nome_medico || []
+    },
+    pacientes: {
+        type: Array,
+        default: () => []
+    },
+    consulta: {
+        type: Object,
+        default: () => ({
+            paciente_id: '',
+            medico_id: '',
+            date: '',
+            hora: ''
+        })
+    }
+});
+
 const form = useForm({
 
-    paciente_id: '',
-    medico_id: '',
-    date: '',
-    hora: '',
+    paciente_id: props.consulta?.paciente_id || '',
+    medico_id: props.consulta?.medico_id || '',
+    date: props.consulta?.date || '',
+    hora: props.consulta?.hora || '',
 
 });
 
-const props = defineProps({
-  errors: Array,
-  medicos: Array,
-  pacientes: Array,
-});
+
 </script>
 
 <style scoped>

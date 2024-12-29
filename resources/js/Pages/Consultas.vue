@@ -30,7 +30,7 @@
 <td>{{ consulta.nome_medico }}</td>
 <td>{{ consulta.date }}</td>
 <td>{{ consulta.hora }}</td>
-<td><Link id="inserir" :href="'/edit/atendentes/' + consulta.id">Editar</Link></td>
+<td><Link id="inserir" :href="'/edit/consulta/' + consulta.id">Editar</Link></td>
 </tr>
 </tbody>
 </table>
