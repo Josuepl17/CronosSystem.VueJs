@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('consulta_pacientes', function (Blueprint $table) {
             $table->id();
 
-            $table->date('date')->format('Y-m-d');
+            $table->date('date');
             $table->time('hora')->format('H:i');
             $table->string('nome_paciente');
             $table->string('nome_medico');
