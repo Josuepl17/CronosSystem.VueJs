@@ -12,6 +12,13 @@
                             <option v-for="medico in props.medicos" :key="medico.id" :value="medico.id">
                                 {{ medico.nome }} ({{ medico.especialidade }})
                             </option>
+        
+                            <option v-if="props.consulta" :value="props.consulta.medico_id">
+                                {{ props.consulta.nome_medico }}
+                            </option>
+
+
+
                         </select>
 
                     </div> <!-- .form-group -->
@@ -23,6 +30,13 @@
                             <option v-for="paciente in props.pacientes" :key="paciente.id" :value="paciente.id">
                                 {{ paciente.nome }}
                             </option>
+
+                            <option v-if="props.consulta" :value="props.consulta.paciente_id">
+                                {{ props.consulta.nome_paciente }}
+                            </option>
+
+
+
                         </select>
                     </div> <!-- .form-group -->
 
@@ -62,28 +76,14 @@ import { defineProps } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
-    errors: Array,
-    medicos: {
-        type: Array,
-        default: () => props.consulta?.nome_medico || []
-    },
-    pacientes: {
-        type: Array,
-        default: () => []
-    },
-    consulta: {
-        type: Object,
-        default: () => ({
-            paciente_id: '',
-            medico_id: '',
-            date: '',
-            hora: ''
-        })
-    }
+  errors: Array,
+  medicos: Array,
+  pacientes: Array,
+  consulta: Object,
 });
 
 const form = useForm({
-
+    id: props.consulta?.id || '',
     paciente_id: props.consulta?.paciente_id || '',
     medico_id: props.consulta?.medico_id || '',
     date: props.consulta?.date || '',
