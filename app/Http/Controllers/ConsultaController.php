@@ -60,7 +60,9 @@ class ConsultaController extends Controller
 
 
 
-    public function editConsulta(Request $request) {
+   /* public function editConsulta(Request $request) {
+
+
 
         $consulta = ConsultaPaciente::find($request->id)->first();
 
@@ -84,6 +86,13 @@ class ConsultaController extends Controller
         }
 
         return Inertia::render('FormConsultas', compact('consulta', 'medicos', 'pacientes'));
+    } */
+
+
+    public function destroyConsulta(Request $request) {
+        ConsultaPaciente::find($request->id)->delete();
+        return redirect('/consultas');
+        
     }
 
 
