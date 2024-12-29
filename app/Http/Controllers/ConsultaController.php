@@ -13,7 +13,8 @@ use Inertia\Inertia;
 class ConsultaController extends Controller
 {
     public function listaConsultas() {
-        return Inertia::render('Consultas');
+        $consultas = ConsultaPaciente::where('empresa_id', Session::get('empresa_id'))->orderBy('date', 'asc')->orderBy('hora', 'asc')->get();
+        return Inertia::render('Consultas', compact('consultas'));
     }
 
 
@@ -55,9 +56,7 @@ class ConsultaController extends Controller
 
 
     public function createConsultas(Request $request) {
-       // var_dump($request->all());
 
-        dd($request->all());
         $ConsultaPaciente = new ConsultaPaciente();
         $ConsultaPaciente->date = $request->date;
         $ConsultaPaciente->hora = $request->hora;   
@@ -69,7 +68,7 @@ class ConsultaController extends Controller
         $ConsultaPaciente->contato = Paciente::find($request->paciente_id)->email; // trocar por telefone
         $ConsultaPaciente->save();
 
-        dd($ConsultaPaciente);
+        return redirect('/consultas');
 
     }
 }
