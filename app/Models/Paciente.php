@@ -36,4 +36,8 @@ class Paciente extends Model
         return $this->hasMany(Tramite::class); // tem muitos
     }
 
+    public function consultas (){
+        return $this->hasMany(ConsultaPaciente::class); // tem muitos
+    }
+
 }

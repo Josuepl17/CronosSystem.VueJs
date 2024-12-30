@@ -81,6 +81,10 @@
           <form @submit.prevent="modal.post('/inserir/tramite')">
             <div class="form-group">
               <input v-model="modal.titulo" type="text" id="titulo" placeholder="Título" />
+                <div style="padding:05px;" v-for="consulta in consultas" :key="consulta.id">
+                <input v-model="modal.consulta" :value="consulta.id" type="checkbox" :name="'checkbox_' + consulta.id" />
+                <p> Consulta dia {{ consulta.date }}</p>
+                </div>
             </div>
             <div class="form-group">
               <textarea v-model="modal.descricao" name="descricao" id="descricao"></textarea>
@@ -107,6 +111,7 @@ const props = defineProps({
   paciente: Object,
   tramites_paciente: Array,
   message: String,
+  consultas: Array,
 });
 
 function formatarData(data) {
@@ -123,6 +128,7 @@ const form = useForm({
 const modal = useForm({
   titulo: "",
   descricao: "",
+  consulta: [],
 });
 
 const armazena = (event) => {
@@ -245,7 +251,7 @@ const fecharModal = () => {
   padding: 20px;
   border-radius: 8px;
   width: 850px;
-  height: 450px;
+  height: 480px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1001;
   transition: ease-in-out 1s;

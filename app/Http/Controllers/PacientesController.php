@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
+use App\Models\ConsultaPaciente;
 use App\Models\DetalhePaciente;
 use App\Models\Empresa;
 use App\Models\Medico_Paciente;
@@ -169,8 +170,12 @@ class PacientesController extends Controller
             $detalhes->texto_principal = $texto_principal;
         }
 
+        $consultas = $paciente->consultas()->where('medico_id', Session::get('id'))->get(); // retorna array
+        //dd($consultas);
+
         $tramites_paciente = $paciente->tramites()->where('medico_id', Session::get('id'))->get(); // retorna array 
-        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente'));
+        
+        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente',  'consultas'));
     }
 
 
@@ -200,6 +205,12 @@ class PacientesController extends Controller
     public function createTramite(Request $request)
     {
         $dados = $request->all();
+      //  dd($dados);
+        $id_consulta = $request->consulta;
+        $consulta = ConsultaPaciente::Find($id_consulta)->first();
+        $consulta->status = 'Concluido';
+        $consulta->save();
+
         $dados['paciente_id'] = FacadesSession::get('id_paciente');
         $dados['empresa_id'] = Session::get('empresa_id');
         $dados['medico_id'] = Session::get('id');
