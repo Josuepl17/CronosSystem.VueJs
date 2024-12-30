@@ -40,7 +40,7 @@
 </td>
 <td>{{ consulta.date }}</td>
 <td>{{ consulta.hora }}</td>
-<td><Link id="inserir" :href="'/edit/consulta/' + consulta.id">Delete</Link></td>
+<td><Link id="inserir" :href="'/edit/consulta/' + consulta.idcrypto">Delete</Link></td>
 </tr>
 </tbody>
 </table>
@@ -72,19 +72,19 @@ const props = defineProps({
 @import "..\Components\css\tabelas.css";
 
 .status-agendado {
-    background-color: #1a0099; 
+    background-color: #1a0099d2; 
    font-weight: 700;
     
 }
 
 .status-cancelado {
-    background-color: #ff0019; 
+    background-color: #ff0019d5; 
     font-weight: 700;
 
 }
 
 .status-concluido {
-    background-color: #009c08;
+    background-color: #009c08d9;
     font-weight: 700;
 
 }

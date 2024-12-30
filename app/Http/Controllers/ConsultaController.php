@@ -6,6 +6,7 @@ use App\Models\ConsultaPaciente;
 use App\Models\Empresa;
 use App\Models\Medico;
 use App\Models\Paciente;
+use App\Services\MeuServico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -21,6 +22,9 @@ class ConsultaController extends Controller
 
     public function listaConsultas() {
         $consultas = ConsultaPaciente::where('empresa_id', Session::get('empresa_id'))->orderBy('date', 'asc')->orderBy('hora', 'asc')->get();
+
+        $consultas = MeuServico::Encrypted($consultas);
+        dd($consultas);
         return Inertia::render('Consultas', compact('consultas'));
     }
 
