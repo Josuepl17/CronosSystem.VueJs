@@ -1,57 +1,59 @@
 <template>
+  <Layout>
+    <template v-slot:conteudo>
+      <div id="conteudo-pessoal">
+        <div class="card">
+          <span class="card-titulo">
+            <img width="8%" src="check.png" alt="">&nbsp; Consultas Marcadas
+          </span>
+          <span class="card-conteudo">10</span>
+        </div> <!-- card -->
 
-<Layout>
-  <template v-slot:conteudo>
-    <div id="conteudo-pessoal">
-                <div class="card">
-                  <span class="card-titulo"> <img width="8%" src="check.png" alt="">&nbsp; Consultas Marcadas</span>
-                  <span class="card-conteudo">10</span>
-                </div> <!-- card -->
-  
-                <div class="card">
-                  <span class="card-titulo"><img width="8%" src="usuario-ferido.png" alt="">&nbsp; Pacientes Ativos</span>
-                  <span class="card-conteudo">65</span>
-                </div> <!-- card -->
-  
-                <div class="card">
-                  <span class="card-titulo"><img width="8%" src="pendente.png" alt="">&nbsp; Exames Pendentes</span>
-                  <span class="card-conteudo">36</span>
-                </div> <!-- card -->
-  
-                <div class="card">
-                  <span class="card-titulo"><img width="8%" src="cancelado.png" alt="">&nbsp; Consultas Canceladas</span>
-                  <span class="card-conteudo">8</span>
-                </div> <!-- card -->
-              </div> <!-- conteudo-pessoal -->
+        <div class="card">
+          <span class="card-titulo">
+            <img width="8%" src="usuario-ferido.png" alt="">&nbsp; Pacientes Ativos
+          </span>
+          <span class="card-conteudo">65</span>
+        </div> <!-- card -->
 
+        <div class="card">
+          <span class="card-titulo">
+            <img width="8%" src="pendente.png" alt="">&nbsp; Exames Pendentes
+          </span>
+          <span class="card-conteudo">36</span>
+        </div> <!-- card -->
 
-            </template>
-</Layout>
+        <div class="card">
+          <span class="card-titulo">
+            <img width="8%" src="cancelado.png" alt="">&nbsp; Consultas Canceladas
+          </span>
+          <span class="card-conteudo">8</span>
+        </div> <!-- card -->
+      </div> <!-- conteudo-pessoal -->
+    </template>
+  </Layout>
 </template>
+
 <script>
-
-
-
 </script>
-<style scoped>
 
+<style scoped>
   :root {
     --azul-escuro: #012841;
     --azul-claro: #00657c;
     --cinza-escuro: #212529;
   }
 
-
-
-#conteudo-pessoal{
+  #conteudo-pessoal {
     display: flex;
     width: 100%;
     height: 100%;
     flex-wrap: wrap;
     justify-content: space-evenly;
     overflow: auto;
-}
-.card{
+  }
+
+  .card {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
@@ -59,11 +61,11 @@
     min-width: 160px;
     height: 130px;
     border-radius: 5px;
-    background-color:var(--cinza-escuro) ;
+    background-color: var(--cinza-escuro);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.311);
-}
+  }
 
-.card .card-titulo{
+  .card .card-titulo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,10 +73,9 @@
     height: 20%;
     border-bottom: 2px solid var(--azul-claro);
     color: white;
+  }
 
-}
-
-.card .card-conteudo{
+  .card .card-conteudo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -82,5 +83,5 @@
     height: 80%;
     font-size: 18px;
     color: white;
-}
+  }
 </style>

@@ -1,128 +1,100 @@
 <template lang="">
-
-<Layout>
+  <Layout>
     <template v-slot:conteudo>
-<form @submit.prevent="form.post('/create/paciente/detalhes')" >
+      <form @submit.prevent="form.post('/create/paciente/detalhes')">
+        <div v-if="message" class="notification">
+          {{ message }}
+        </div>
 
-  
-  <div v-if="message" class="notification">
-    {{ message }}
-  </div>
+        <div id="caixa">
+          <div id="lado-esquerdo">
+            <div id="texto-principal">
+              <div id="titulo-texto">
+                <h1>{{ props.paciente.nome }}</h1>
+              </div>
 
-<div id="caixa">
+              <div id="conteiner-texto">
+                <textarea v-model="form.texto_principal"></textarea>
+              </div>
 
-    <div id="lado-esquerdo">
-        <div id="texto-principal">
-            <div id="titulo-texto">
-                    <h1>{{props.paciente.nome}}</h1>
-                    
-                </div>
-
-            <div id="conteiner-texto">
-
-                  <textarea v-model="form.texto_principal" >
-                   
-                  </textarea>
-
-               
-            </div>
-
-            <div id="rodape">
+              <div id="rodape">
                 <button type="submit">Salvar</button>
-               
-                <input @change="armazena"  type="file" name="" value="" style="opacity: 0; position: absolute; z-index: -1;"
-                ref="fileInput">
+                <input
+                  @change="armazena"
+                  type="file"
+                  name=""
+                  value=""
+                  style="opacity: 0; position: absolute; z-index: -1;"
+                  ref="fileInput"
+                />
                 <!--<button type="button" @click="selecionarArquivo">Escolher arquivo</button>-->
                 <a href="#" @click.prevent="abrirModal">Novo</a>
                 <!--<a href="/download/paciente/detalhes">Donwload</a>-->
-            </div> 
+              </div>
+            </div>
+
+            <div
+              class="publicacao"
+              v-for="(tramites) in tramites_paciente"
+              :key="tramites.id"
+            >
+              <div class="publicacao-header">
+                <h3 class="publicacao-titulo">{{ tramites.titulo }}</h3>
+                <span class="publicacao-id">ID: {{ tramites.id }}</span>
+              </div>
+              <div class="publicacao-descricao">
+                <p>{{ tramites.descricao }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="lado-direito">
+            <div class="box-detalhes">
+              <div class="box-info">
+                <p>Paciente Desde:</p>
+                <p>{{ formatarData(props.paciente.created_at) }}</p>
+              </div>
+
+              <div class="box-info">
+                <p>Primeira Consulta:</p>
+                <p>03/10/2024</p>
+              </div>
+
+              <div class="box-info">
+                <p>Ultima Consulta:</p>
+                <p>14/10/2024</p>
+              </div>
+
+              <div class="box-info">
+                <p>Proxima Consulta:</p>
+                <p>20/10/2024</p>
+              </div>
+            </div>
+          </div>
         </div>
+      </form>
 
-
-
-        <div class="publicacao" v-for="(tramites) in tramites_paciente" :key="tramites.id" >
-  <div class="publicacao-header">
-    <h3 class="publicacao-titulo">{{ tramites.titulo }}</h3>
-    <span class="publicacao-id">ID: {{ tramites.id }}</span>
-  </div>
-  <div class="publicacao-descricao">
-    <p>{{ tramites.descricao }}</p>
-  </div>
-</div>
-
-
-
-
-
-
-    </div>
-
-
-
-
-    <div id="lado-direito">
-
-      <div class="box-detalhes" >
-        
-      <div class="box-info">
-        <p>Paciente Desde:</p> <p>{{ formatarData(props.paciente.created_at) }}</p>
+      <div v-if="mostrarModal" class="modal-overlay">
+        <div class="modal-content">
+          <h1>Registro de Consulta</h1>
+          <br />
+          <form @submit.prevent="modal.post('/inserir/tramite')">
+            <div class="form-group">
+              <input v-model="modal.titulo" type="text" id="titulo" placeholder="Título" />
+            </div>
+            <div class="form-group">
+              <textarea v-model="modal.descricao" name="descricao" id="descricao"></textarea>
+            </div>
+            <a href="#" @click.prevent="fecharModal">Fechar</a>
+            <button type="submit">Salvar</button>
+          </form>
+        </div>
       </div>
-
-      <div class="box-info" >
-        <p>Primeira Consulta:</p> <p>03/10/2024</p>
-      </div>
-
-      <div class="box-info" >
-        <p>Ultima Consulta:</p> <p>14/10/2024</p>
-      </div>
-
-      <div class="box-info" >
-        <p>Proxima Consulta:</p> <p>20/10/2024</p>
-      </div>
-
-
-
-      </div>
-
-    </div>
-
-
-</div>
-
-<!--        -->
-
-</form>
-
-
-
-<div v-if="mostrarModal" class="modal-overlay">
-  <div class="modal-content">
-    <h1>Registro de Consulta</h1>
-    <br>
-    <form @submit.prevent="modal.post('/inserir/tramite')">
-      <div class="form-group">
-        <input v-model="modal.titulo" type="text" id="titulo" placeholder="Título">
-      </div>
-      <div class="form-group">
-        <textarea v-model="modal.descricao" name="descricao" id="descricao"></textarea>
-      </div>
-      <a href="#" @click.prevent="fecharModal">Fechar</a>
-      <button type="submit">Salvar</button>
-    </form>
-  </div>
-</div>
-
-
-
-
-
-
     </template>
-</Layout>
-
+  </Layout>
 </template>
 
-<script setup >
+<script setup>
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
@@ -137,15 +109,11 @@ const props = defineProps({
   message: String,
 });
 
-
 function formatarData(data) {
-  const [datePart] = data.split('T'); // Divide a data e a hora
-  const [ano, mes, dia] = datePart.split('-'); // Separa AAAA-MM-DD
+  const [datePart] = data.split("T"); // Divide a data e a hora
+  const [ano, mes, dia] = datePart.split("-"); // Separa AAAA-MM-DD
   return `${dia}/${mes}/${ano}`; // Retorna no formato DD/MM/AAAA
 }
-
-
-
 
 const form = useForm({
   texto_principal: "" || props.detalhes.texto_principal,
@@ -173,8 +141,6 @@ const fecharModal = () => {
   mostrarModal.value = false;
 };
 </script>
-
-
 
 <style scoped>
 .notification {
@@ -218,13 +184,9 @@ const fecharModal = () => {
 }
 </style>
 
-
-
-
 <style>
 .publicacao {
   width: 90%;
-
   border-radius: 8px; /* Borda arredondada mais suave */
   margin-bottom: 15px; /* Espaçamento entre as publicações */
   background-color: #f9f9f9; /* Fundo mais suave */
@@ -262,10 +224,7 @@ const fecharModal = () => {
   color: #555; /* Cor do texto da descrição */
   line-height: 1.5; /* Aumenta a linha para melhorar a legibilidade */
 }
-
 </style>
-
-
 
 <style>
 .modal-overlay {
@@ -293,7 +252,6 @@ const fecharModal = () => {
   text-align: center;
 }
 </style>
-
 
 <style scoped>
 .form-group {
@@ -372,37 +330,37 @@ form {
   margin-bottom: 15px;
   min-height: 340px;
   background-color: #ffffff;
-  border-radius: 05px;
+  border-radius: 5px;
 }
 
 #titulo-texto {
   border-bottom: 1px solid rgba(0, 0, 0, 0.177);
   width: 100%;
   height: 10%;
-  border-radius: 05px 05px 0px 0px;
+  border-radius: 5px 5px 0px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: rgb(0, 0, 0);
   font-size: 1.2rem;
-  padding: 06px;
+  padding: 6px;
 }
 
 button {
   all: unset;
-  padding: 07px 20px 07px 20px;
+  padding: 7px 20px;
   background-color: rgb(0, 97, 0);
   border: 1px solid rgba(255, 255, 255, 0.249);
-  border-radius: 05px;
+  border-radius: 5px;
   color: white;
   margin-right: 10px;
 }
 
 a {
-  padding: 07px 20px 07px 20px;
+  padding: 7px 20px;
   background-color: var(--azul-escuro);
   border: 1px solid rgba(255, 255, 255, 0.249);
-  border-radius: 05px;
+  border-radius: 5px;
   color: white;
   margin-right: 10px;
 }
@@ -410,7 +368,7 @@ a {
 #conteiner-texto {
   width: 100%;
   height: 80%;
-  padding: 09px;
+  padding: 9px;
   font-family: "Times New Roman", Times, serif;
   font-size: 16px;
 }
@@ -419,7 +377,7 @@ textarea {
   width: 100%;
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.229);
-  border-radius: 04px;
+  border-radius: 4px;
   font-size: 16px;
   color: #555;
   padding: 10px;
@@ -431,7 +389,7 @@ textarea {
   align-items: center;
   width: 100%;
   height: 10%;
-  border-radius: 0px 0px 05px 05px;
+  border-radius: 0px 0px 5px 5px;
 }
 
 #rodape input {
@@ -442,7 +400,7 @@ textarea {
 #publicacao {
   width: 90%;
   min-height: 145px;
-  border-radius: 05px;
+  border-radius: 5px;
   margin-bottom: 10px;
   background-color: #ffffff;
 }

@@ -1,259 +1,172 @@
 <template lang="">
-
-
-    <div id="conteiner-geral">
-
-
-<!----------------------------------------------------------------------------------->  
-
-
-
-
-
-
-
-
-<!----------------------------------------------------------------------------------->     
-      <div id="nav" >
-
-      
-
-  <div v-if="mostrarModal" class="modal-overlay">
-  <div class="modal-content">
-    <h1>Adicionar Usuario</h1>
-    <br>
-    <form @submit.prevent="adicionar.post('/create/vinculo/user')">
-
-
-      <div class="input-label">
-        <div class="checkbox-item" v-for="outros in outrosfilial" :key="outros.id">
-                  <label :for="'outros-' + outros.id" >{{ outros.name }}</label>
-                  <input
-                    type="checkbox"
-                    :id="'todos-' + outros.id"
-                    v-model="adicionar.users"
-                    :value="outros.id"
-                    class="custom-checkbox"
-                  />
-                </div>
-                <br> <br>
-                <div class="fechar-salvar-model" >
-                  <a href="#" @click.prevent="fecharModal">Fechar</a>
-                  <button type="submit">Salvar</button>
-                </div>
-      </div>
-     
-
-    </form>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-<div v-if="mostrarModal2" class="modal-overlay">
-  <div class="modal-content">
-    <h1>Adicionar Usuario</h1>
-    <br><br>
-    <form @submit.prevent="remover.post('/remove/vinculo/user')">
-
-
-      <div class="input-label">
-        <div class="checkbox-item" v-for="userfilial in usuariosfilial" :key="userfilial.id">
-                  <label :for="'userfilial-' + userfilial.id" >{{ userfilial.name }}</label>
-                  <label :for="'userfilial-' + userfilial.id" >{{ userfilial.email }}</label>
-                  <input
-                    type="checkbox"
-                    :id="'userfilial-' + userfilial.id"
-                    v-model="remover.users"
-                    :value="userfilial.id"
-                    class="custom-checkbox"
-                  />
-                </div>
-                <br> <br>
-                <div class="fechar-salvar-model" >
-                  <a href="#" @click.prevent="fecharModal2">Fechar</a>
-                  <button type="submit">Salvar</button>
-                </div>
-      </div>
-     
-
-    </form>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-      </div>
-<!----------------------------------------------------------------------------------->  
-        <div id="conteudo">
-          <div class="filial">
-            <form @submit.prevent="form.post('/fili')">
-              <div id="pessoais">
-                <div class="form-group">
-                  <label for="nome">Razão Social</label>
-                  <input
-                    type="text"
-                    id="nome"
-                    v-model="form.razao_social"
-                    placeholder="Nome Completo"
-                  />
-                </div>
-
-
-                <div class="form-group">
-                  <label for="cnpj">CPF/RG</label>
-                  <input
-                    v-model="form.cnpj"
-                    type="number"
-                    id="cnpj"
-                    placeholder="CNPJ:"
-                  />
-                  <p style="color: red; font-size: 13px" v-if="errors.cnpj">
-                    {{ errors.cnpj }}
-                  </p>
-                </div>
-  
-                <div class="form-group">
-                  <label for="telefone">Telefone</label>
-                  <input
-                    v-model="form.telefone"
-                    type="number"
-                    id="telefone"
-                    placeholder="Telefone:"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="email">Endereço</label>
-                  <input
-                    v-model="form.endereco"
-                    type="text"
-                    id="endereco"
-                    placeholder="Endereço"
-                  />
-                </div>
-              </div>
-  
-              <div id="endereco">
-                <div class="form-group">
-                  <label for="endereco">Cidade</label>
-                  <input
-                    v-model="form.cidade"
-                    type="text"
-                    id="cidade"
-                    placeholder="Cidade"
-                  />
-                </div>
-
-
-                <div class="form-group">
-                  <label for="bairro">Bairro</label>
-                  <input
-                    v-model="form.bairro"
-                    type="text"
-                    id="bairro"
-                    placeholder="Bairro"
-                  />
-                </div>
-
-
-
-                <div class="fechar-salvar">
-                  <button type="button" class="fechar">Fechar</button>
-                  <button type="submit" class="salvar">Salvar</button>
-                </div>
-              </div>
-            </form>
-          </div>
-
+  <div id="conteiner-geral">
+    <!----------------------------------------------------------------------------------->
+    <div id="nav">
+      <div v-if="mostrarModal" class="modal-overlay">
+        <div class="modal-content">
+          <h1>Adicionar Usuario</h1>
           <br>
-
-
-
-
-
-<div id="box-usuarios" >
-  <!----------------------------------------------------------------------------------->
-  
-            <div id="usuarios">
-              <div id="titulo-usuarios"><h3>Usuarios Da Filial</h3></div>
-
-              
-  
-              <div class="checkbox" v-for="userfilial in usuariosfilial" :key="userfilial.id">
-  
-                <label :for="'userfilial-' + userfilial.id">{{ userfilial.name }}</label>
-  
-
-
-            </div>
-
-            <br><br>
-            <a href="#" @click.prevent="abrirModal">Adicionar</a>
-  
-                </div>
-  
-  
-  
-  <br>
-  <br>
-  <br>
-  <br>
-  <!----------------------------------------------------------------------------------->
-  
-                <div id="usuarios">
-              <div id="titulo-usuarios"><h3>Outros Usuarios</h3></div>
-  
-              <div class="checkbox" v-for="outros in outrosfilial" :key="outros.id">
-  
+          <form @submit.prevent="adicionar.post('/create/vinculo/user')">
+            <div class="input-label">
+              <div class="checkbox-item" v-for="outros in outrosfilial" :key="outros.id">
                 <label :for="'outros-' + outros.id">{{ outros.name }}</label>
-  
-  
+                <input
+                  type="checkbox"
+                  :id="'todos-' + outros.id"
+                  v-model="adicionar.users"
+                  :value="outros.id"
+                  class="custom-checkbox"
+                />
+              </div>
+              <br><br>
+              <div class="fechar-salvar-model">
+                <a href="#" @click.prevent="fecharModal">Fechar</a>
+                <button type="submit">Salvar</button>
+              </div>
             </div>
-            <br>
-            <a href="#" @click.prevent="abrirModal2">Adicionar</a>
+          </form>
+        </div>
+      </div>
 
-                </div>
-  <!----------------------------------------------------------------------------------->
-</div>
-
-
-
-
-        </div><!-- conteudo -->
-       
-      </div> <!--conteiner-geral-->
-      
-
-
-
+      <div v-if="mostrarModal2" class="modal-overlay">
+        <div class="modal-content">
+          <h1>Adicionar Usuario</h1>
+          <br><br>
+          <form @submit.prevent="remover.post('/remove/vinculo/user')">
+            <div class="input-label">
+              <div class="checkbox-item" v-for="userfilial in usuariosfilial" :key="userfilial.id">
+                <label :for="'userfilial-' + userfilial.id">{{ userfilial.name }}</label>
+                <label :for="'userfilial-' + userfilial.id">{{ userfilial.email }}</label>
+                <input
+                  type="checkbox"
+                  :id="'userfilial-' + userfilial.id"
+                  v-model="remover.users"
+                  :value="userfilial.id"
+                  class="custom-checkbox"
+                />
+              </div>
+              <br><br>
+              <div class="fechar-salvar-model">
+                <a href="#" @click.prevent="fecharModal2">Fechar</a>
+                <button type="submit">Salvar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!----------------------------------------------------------------------------------->
+    <div id="conteudo">
+      <div class="filial">
+        <form @submit.prevent="form.post('/fili')">
+          <div id="pessoais">
+            <div class="form-group">
+              <label for="nome">Razão Social</label>
+              <input
+                type="text"
+                id="nome"
+                v-model="form.razao_social"
+                placeholder="Nome Completo"
+              />
+            </div>
+            <div class="form-group">
+              <label for="cnpj">CPF/RG</label>
+              <input
+                v-model="form.cnpj"
+                type="number"
+                id="cnpj"
+                placeholder="CNPJ:"
+              />
+              <p style="color: red; font-size: 13px" v-if="errors.cnpj">
+                {{ errors.cnpj }}
+              </p>
+            </div>
+            <div class="form-group">
+              <label for="telefone">Telefone</label>
+              <input
+                v-model="form.telefone"
+                type="number"
+                id="telefone"
+                placeholder="Telefone:"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Endereço</label>
+              <input
+                v-model="form.endereco"
+                type="text"
+                id="endereco"
+                placeholder="Endereço"
+              />
+            </div>
+          </div>
+          <div id="endereco">
+            <div class="form-group">
+              <label for="endereco">Cidade</label>
+              <input
+                v-model="form.cidade"
+                type="text"
+                id="cidade"
+                placeholder="Cidade"
+              />
+            </div>
+            <div class="form-group">
+              <label for="bairro">Bairro</label>
+              <input
+                v-model="form.bairro"
+                type="text"
+                id="bairro"
+                placeholder="Bairro"
+              />
+            </div>
+            <div class="fechar-salvar">
+              <button type="button" class="fechar">Fechar</button>
+              <button type="submit" class="salvar">Salvar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <br>
+      <div id="box-usuarios">
+        <!----------------------------------------------------------------------------------->
+        <div id="usuarios">
+          <div id="titulo-usuarios">
+            <h3>Usuarios Da Filial</h3>
+          </div>
+          <div class="checkbox" v-for="userfilial in usuariosfilial" :key="userfilial.id">
+            <label :for="'userfilial-' + userfilial.id">{{ userfilial.name }}</label>
+          </div>
+          <br><br>
+          <a href="#" @click.prevent="abrirModal">Adicionar</a>
+        </div>
+        <br><br><br><br>
+        <!----------------------------------------------------------------------------------->
+        <div id="usuarios">
+          <div id="titulo-usuarios">
+            <h3>Outros Usuarios</h3>
+          </div>
+          <div class="checkbox" v-for="outros in outrosfilial" :key="outros.id">
+            <label :for="'outros-' + outros.id">{{ outros.name }}</label>
+          </div>
+          <br>
+          <a href="#" @click.prevent="abrirModal2">Adicionar</a>
+        </div>
+        <!----------------------------------------------------------------------------------->
+      </div>
+    </div>
+  </div>
 </template>
 
-<script setup >
+<script setup>
 import { ref } from 'vue';
 import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
   filial: Object,
-
   errors: Array,
   usuariosfilial: Array,
   outrosfilial: Array,
 });
-
-
 
 const form = useForm({
   razao_social: props.filial.razao_social,
@@ -262,64 +175,34 @@ const form = useForm({
   cidade: props.filial.cidade,
   endereco: props.filial.endereco,
   telefone: props.filial.telefone,
-
 });
 
 const adicionar = useForm({
- users: [],
+  users: [],
 });
 
 const remover = useForm({
- users: [],
+  users: [],
 });
 
-
-
-const mostrarModal = ref(false); // Usando ref() para reatividade
-
-
+const mostrarModal = ref(false);
 const abrirModal = () => {
   mostrarModal.value = true;
-
 };
-
 const fecharModal = () => {
   mostrarModal.value = false;
-
 };
 
-
-
-
-
-const mostrarModal2 = ref(false); // Usando ref() para reatividade
-
-
+const mostrarModal2 = ref(false);
 const abrirModal2 = () => {
   mostrarModal2.value = true;
-
 };
-
 const fecharModal2 = () => {
   mostrarModal2.value = false;
-
 };
-
-
-
-
-
-
-
-
-
-
 </script>
 
-
-
-<style scoped >
-
+<style scoped>
 a {
   display: flex;
   padding: 07px 20px 07px 20px;
@@ -331,7 +214,6 @@ a {
   height: 35px;
   width: 70px;
   justify-content: center;
-  
 }
 
 .modal-overlay {
@@ -359,26 +241,21 @@ a {
   text-align: center;
 }
 
-
-.checkbox-item{
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-width: 100%;
-
-
+.checkbox-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.input-label{
+.input-label {
   display: flex;
   width: 100%;
   flex-direction: column;
   border-radius: 05px;
-
-
 }
 
-.fechar-salvar-model{
+.fechar-salvar-model {
   display: flex;
   height: 10%;
   width: 100%;
@@ -386,21 +263,15 @@ width: 100%;
   justify-content: right;
   padding-right: 05px;
   align-items: center;
-
 }
-
 </style>
-
 
 <style scoped>
 * {
   box-sizing: border-box;
   padding: 0px;
   margin: 0px;
-  
 }
-
-
 
 :root {
   --azul-escuro: #012841;
@@ -411,7 +282,6 @@ width: 100%;
 #conteiner-geral {
   width: 100%;
   height: 100dvh;
-  
 }
 
 #nav {
@@ -426,10 +296,7 @@ width: 100%;
   height: 95%;
   justify-content: space-around;
   padding-top: 10px;
-
 }
-
-
 
 .filial {
   width: 57%;
@@ -445,10 +312,8 @@ width: 100%;
   width: 50%;
 }
 
-
 #pessoais {
   padding-right: 20px;
-
   width: 50%;
 }
 
@@ -490,7 +355,7 @@ button {
   cursor: pointer;
   height: 35px;
   width: 70px;
-  background-color:green;
+  background-color: green;
   justify-content: center;
 }
 
@@ -505,26 +370,21 @@ button.fechar {
 .fechar-salvar {
   display: flex;
   justify-content: space-between;
-  
 }
 </style>
 
-
 <style>
-
-
 #conteiner-geral {
   width: 100%;
   height: 100dvh;
 }
 
-
 #usuarios {
   width: 100%;
-  background-color: #f4f4f9; /* Cor de fundo clara */
+  background-color: #f4f4f9;
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
 }
@@ -537,7 +397,6 @@ button.fechar {
   font-weight: bold;
 }
 
-/* Lista de checkboxes centralizada */
 .checkbox-list {
   display: flex;
   flex-wrap: wrap;
@@ -555,7 +414,7 @@ button.fechar {
 .custom-checkbox {
   width: 20px;
   height: 20px;
-  accent-color: var(--azul-escuro); /* Cor personalizada do checkbox */
+  accent-color: var(--azul-escuro);
   border-radius: 4px;
 }
 
@@ -565,12 +424,11 @@ button.fechar {
   font-weight: 500;
 }
 
-/* Botões no final, alinhados à direita */
 .action-buttons {
   display: flex;
-  justify-content: flex-end; /* Alinhamento à direita */
-  gap: 10px; /* Espaçamento entre os botões */
-  margin-top: auto; /* Para garantir que os botões fiquem no final */
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: auto;
 }
 
 .btn {
@@ -601,5 +459,4 @@ button.fechar {
 .btn-close:hover {
   background-color: #999;
 }
-
 </style>

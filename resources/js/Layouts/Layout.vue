@@ -1,9 +1,5 @@
 <template>
   <div id="conteiner-geral">
-
-
-
-
     <div v-if="isModalOpen" class="modal-overlay" @click="isModalOpen = false">
       <div class="modal-content" @click.stop>
         <h1 style="font-size: 16px; font-family: 'Times New Roman', Times, serif">
@@ -11,16 +7,12 @@
         </h1>
         <br />
         <div id="selecioneFilial" v-for="filial in $page.props.filiais" :key="filial.id">
-          <Link :href="'/selecione/filial/' + filial.id"
-            >{{ filial.id }} - {{ filial.razao_social }} - {{ filial.cnpj }}
+          <Link :href="'/selecione/filial/' + filial.id">
+            {{ filial.id }} - {{ filial.razao_social }} - {{ filial.cnpj }}
           </Link>
         </div>
       </div>
     </div>
-
-
-
-    
 
     <div id="flex-1">
       <div id="menu-geral" :class="{ reduzido: isReduced }" ref="menu">
@@ -32,63 +24,46 @@
         <!-- topo-menu -->
 
         <div id="links-menu">
-  <Link 
-    href="/dash" 
-    :class="{'active-link': $page.url === '/dash'}">
-    <img src="/images/agenda.png" alt="" /> 
-    <span>Dashboard</span>
-  </Link>
+          <Link href="/dash" :class="{'active-link': $page.url === '/dash'}">
+            <img src="/images/agenda.png" alt="" />
+            <span>Dashboard</span>
+          </Link>
 
-  <Link 
-    href="/pacientes" 
-    :class="{'active-link': $page.url === '/pacientes'}">
-    <img src="/images/paciente.png" alt="" /> 
-    <span>Pacientes</span>
-  </Link>
+          <Link href="/pacientes" :class="{'active-link': $page.url === '/pacientes'}">
+            <img src="/images/paciente.png" alt="" />
+            <span>Pacientes</span>
+          </Link>
 
-  <Link 
-    href="/atendentes" 
-    :class="{'active-link': $page.url === '/atendentes'}">
-    <img src="/images/medico.png" alt="" /> 
-    <span>Atendentes</span>
-  </Link>
+          <Link href="/atendentes" :class="{'active-link': $page.url === '/atendentes'}">
+            <img src="/images/medico.png" alt="" />
+            <span>Atendentes</span>
+          </Link>
 
-  <Link 
-    href="/consultas" 
-    :class="{'active-link': $page.url === '/consultas'}">
-    <img src="/images/pesquisar.png" alt="" /> 
-    <span>Consultas</span>
-  </Link>
+          <Link href="/consultas" :class="{'active-link': $page.url === '/consultas'}">
+            <img src="/images/pesquisar.png" alt="" />
+            <span>Consultas</span>
+          </Link>
 
-  <a href="#" 
-    :class="{'active-link': $page.url === '#'}">
-    <img src="/images/agenda.png" alt="" /> 
-    <span>Agenda</span>
-  </a>
+          <a href="#" :class="{'active-link': $page.url === '#'}">
+            <img src="/images/agenda.png" alt="" />
+            <span>Agenda</span>
+          </a>
 
-  <Link 
-    href="/medicos" 
-    :class="{'active-link': $page.url === '/medicos'}">
-    <img src="/images/medico.png" alt="" /> 
-    <span>Médicos</span>
-  </Link>
+          <Link href="/medicos" :class="{'active-link': $page.url === '/medicos'}">
+            <img src="/images/medico.png" alt="" />
+            <span>Médicos</span>
+          </Link>
 
-  <Link 
-    v-if="$page.props.adm" 
-    href="/gerenciar/filial" 
-    :class="{'active-link': $page.url === '/gerenciar/filial'}">
-    <img src="/images/filial.png" alt="" /> 
-    <span>Gerenciar Filial</span>
-  </Link>
+          <Link v-if="$page.props.adm" href="/gerenciar/filial" :class="{'active-link': $page.url === '/gerenciar/filial'}">
+            <img src="/images/filial.png" alt="" />
+            <span>Gerenciar Filial</span>
+          </Link>
 
-  <Link 
-    href="/logout" 
-    :class="{'active-link': $page.url === '/logout'}">
-    <img src="/images/logout.png" alt="" /> 
-    <span>Sair</span>
-  </Link>
-</div>
-
+          <Link href="/logout" :class="{'active-link': $page.url === '/logout'}">
+            <img src="/images/logout.png" alt="" />
+            <span>Sair</span>
+          </Link>
+        </div>
         <!-- links-menu -->
       </div>
       <!-- menu-geral -->
@@ -149,10 +124,7 @@ function toggleMenu() {
 </script>
 
 <style scoped>
-
-
-
-#links-menu a, 
+#links-menu a,
 #links-menu .active-link {
   text-decoration: none;
   color: #8a8888; /* Cor padrão */
@@ -164,16 +136,6 @@ function toggleMenu() {
   font-weight: bold; /* Deixa o texto mais forte */
   border-radius: 8px; /* Bordas arredondadas */
 }
-
-
-
-
-
-
-
-
-
-
 
 #menu-geral.reduzido {
   width: 60px;
@@ -191,17 +153,13 @@ function toggleMenu() {
 }
 </style>
 
-
-
-
-
 <style>
 #selecioneFilial {
   display: flex;
   justify-content: center;
   border: 1px solid black;
-  border-radius: 05px;
-  margin-bottom: 05px;
+  border-radius: 5px;
+  margin-bottom: 5px;
   background-color: var(--azul-escuro);
 }
 
@@ -292,7 +250,7 @@ function toggleMenu() {
 #topo-menu {
   display: flex;
   width: 100%;
-  height: 08%;
+  height: 8%;
   min-height: 50px;
   max-height: 60px;
   align-items: center;
@@ -358,7 +316,7 @@ function toggleMenu() {
 nav {
   display: flex;
   width: 100%;
-  height: 08%;
+  height: 8%;
   max-height: 60px;
   min-height: 50px;
   justify-content: flex-end;

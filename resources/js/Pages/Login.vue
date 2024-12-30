@@ -1,16 +1,14 @@
 <template lang="">
-<div class="container" id="container">
-
+    <div class="container" id="container">
         <div class="form-container sign-in">
-            <form @submit.prevent="form.post('/login')" >
-                <h1 >Faça Login</h1>
-                <input type="email" placeholder="Email" v-model="form.email" >
-                
-                <input type="password" placeholder="Password" v-model="form.password" >
-                <p style="color: red; font-size:13px; " v-if="errors.email" >{{ errors.email }}</p>
+            <form @submit.prevent="form.post('/login')">
+                <h1>Faça Login</h1>
+                <input type="email" placeholder="Email" v-model="form.email">
+                <input type="password" placeholder="Password" v-model="form.password">
+                <p style="color: red; font-size:13px;" v-if="errors.email">{{ errors.email }}</p>
                 <Link href="#">Esqueci minha Senha?</Link>
                 <button>Login</button>
-                <Link style="padding:10px; border: 1px solid white; border-radius:10px; background-color:#014552;; color: white" href="/form/user/empresas">Novo Usuario</Link>
+                <Link style="padding:10px; border: 1px solid white; border-radius:10px; background-color:#014552; color: white" href="/form/user/empresas">Novo Usuario</Link>
             </form>
         </div>
         <div class="toggle-container">
@@ -24,9 +22,7 @@
     </div>
 </template>
 
-
-
-<script setup >
+<script setup>
 import { defineProps } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 
@@ -35,41 +31,31 @@ const props = defineProps({
 });
 
 const form = useForm({
-  email: '',
-  password: '',
-
+    email: '',
+    password: '',
 });
-
 </script>
 
+<style scoped>
+:root {
+    --azul-escuro: #012841;
+    --azul-claro: #014552;
+    --cinza-escuro: #212529;
+}
 
-
-
-
-
-<style scoped >
-
-   :root {
-        --azul-escuro: #012841;
-        --azul-claro: #014552;
-        --cinza-escuro: #212529;
-      }
-
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-    
 }
 
-h1{
+h1 {
     font-family: 'Times New Roman', Times, serif;
     font-size: 16px;
 }
 
-body{
+body {
     background-color: #c9d6ff;
     background: linear-gradient(to right, #e2e2e2, #c9d6ff);
     display: flex;
@@ -79,7 +65,7 @@ body{
     height: 100vh;
 }
 
-.container{
+.container {
     background-color: #fff;
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
@@ -92,25 +78,25 @@ body{
     left: 26%;
 }
 
-.container p{
+.container p {
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 20px 0;
 }
 
-.container span{
+.container span {
     font-size: 12px;
 }
 
-.container a{
+.container a {
     color: #333;
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
 }
 
-.container button{
+.container button {
     background-color: var(--azul-claro);
     color: #fff;
     font-size: 12px;
@@ -124,12 +110,12 @@ body{
     cursor: pointer;
 }
 
-.container button.hidden{
+.container button.hidden {
     background-color: transparent;
     border-color: #fff;
 }
 
-.container form{
+.container form {
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -139,7 +125,7 @@ body{
     height: 100%;
 }
 
-.container input{
+.container input {
     background-color: #eee;
     border: none;
     margin: 8px 0;
@@ -150,53 +136,53 @@ body{
     outline: none;
 }
 
-.form-container{
+.form-container {
     position: absolute;
     top: 0;
     height: 100%;
     transition: all 0.6s ease-in-out;
 }
 
-.sign-in{
+.sign-in {
     left: 0;
     width: 50%;
     z-index: 2;
 }
 
-.container.active .sign-in{
+.container.active .sign-in {
     transform: translateX(100%);
 }
 
-.sign-up{
+.sign-up {
     left: 0;
     width: 50%;
     opacity: 0;
     z-index: 1;
 }
 
-.container.active .sign-up{
+.container.active .sign-up {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
     animation: move 0.6s;
 }
 
-@keyframes move{
-    0%, 49.99%{
+@keyframes move {
+    0%, 49.99% {
         opacity: 0;
         z-index: 1;
     }
-    50%, 100%{
+    50%, 100% {
         opacity: 1;
         z-index: 5;
     }
 }
 
-.social-icons{
+.social-icons {
     margin: 20px 0;
 }
 
-.social-icons a{
+.social-icons a {
     border: 1px solid #ccc;
     border-radius: 20%;
     display: inline-flex;
@@ -207,7 +193,7 @@ body{
     height: 40px;
 }
 
-.toggle-container{
+.toggle-container {
     position: absolute;
     top: 0;
     left: 50%;
@@ -219,12 +205,12 @@ body{
     z-index: 1000;
 }
 
-.container.active .toggle-container{
+.container.active .toggle-container {
     transform: translateX(-100%);
     border-radius: 0 150px 100px 0;
 }
 
-.toggle{
+.toggle {
     background-color: var(--azul-claro);
     height: 100%;
     background: --;
@@ -237,11 +223,11 @@ body{
     transition: all 0.6s ease-in-out;
 }
 
-.container.active .toggle{
+.container.active .toggle {
     transform: translateX(50%);
 }
 
-.toggle-panel{
+.toggle-panel {
     position: absolute;
     width: 50%;
     height: 100%;
@@ -256,20 +242,20 @@ body{
     transition: all 0.6s ease-in-out;
 }
 
-.toggle-left{
+.toggle-left {
     transform: translateX(-200%);
 }
 
-.container.active .toggle-left{
+.container.active .toggle-left {
     transform: translateX(0);
 }
 
-.toggle-right{
+.toggle-right {
     right: 0;
     transform: translateX(0);
 }
 
-.container.active .toggle-right{
+.container.active .toggle-right {
     transform: translateX(200%);
 }
 </style>
