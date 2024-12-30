@@ -18,6 +18,7 @@
 <th>#</th>
 <th>Nome Paciente</th>
 <th>Nome Medico</th>
+<th>Status</th>
 <th>Data Consulta</th>
 <th>Hora Consulta</th>
 <th>X</th>
@@ -28,6 +29,15 @@
 <td>{{ consulta.id }}</td>
 <td>{{ consulta.nome_paciente }}</td>
 <td>{{ consulta.nome_medico }}</td>
+
+<td style="color: white;" :class="{
+    'status-agendado': consulta.status === 'agendado',
+    'status-cancelado': consulta.status === 'cancelado',
+    'status-concluido': consulta.status === 'concluido'
+}">
+
+    {{ consulta.status }}
+</td>
 <td>{{ consulta.date }}</td>
 <td>{{ consulta.hora }}</td>
 <td><Link id="inserir" :href="'/edit/consulta/' + consulta.id">Delete</Link></td>
@@ -57,5 +67,29 @@ const props = defineProps({
 
 
 <style scoped>
-  @import "..\Components\css\tabelas.css";
+
+
+@import "..\Components\css\tabelas.css";
+
+.status-agendado {
+    background-color: #8db000; 
+   font-weight: 700;
+    
+}
+
+.status-cancelado {
+    background-color: #721c25; 
+    font-weight: 700;
+
+}
+
+.status-concluido {
+    background-color: #009c08;
+    font-weight: 700;
+
+}
+  
+
+
+
 </style>

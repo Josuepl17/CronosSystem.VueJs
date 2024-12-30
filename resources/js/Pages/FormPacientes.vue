@@ -38,6 +38,17 @@
                         <input v-model="form.email" type="email" id="email" placeholder="Email">
                         <p style="color: red; font-size:13px; " v-if="errors.email" >{{ errors.email }}</p>
                     </div>
+
+
+
+
+                    <div class="form-group">
+                        <label for="email">Telefone</label>
+                        <input v-model="form.telefone" type="tel" id="telefone" placeholder="Telefone:">
+                        
+                    </div>
+
+
                   </div>
 
 
@@ -96,6 +107,7 @@ const form = useForm({
   cidade: "",
   password: "",
   bairro: "",
+  telefone: "",
 });
 
 const props = defineProps({

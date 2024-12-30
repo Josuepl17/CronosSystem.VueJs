@@ -26,10 +26,10 @@ class ConsultaPaciente extends Model
 
 
     // Acessor para formatar a data automaticamente ao recuperar
-   // public function getDateAttribute($value)
-  // {
-    //    return Carbon::parse($value)->format('d/m/Y');
-//}
+    public function getDateAttribute($value)
+   {
+        return Carbon::parse($value)->format('d/m/Y');
+}
 
 
 }

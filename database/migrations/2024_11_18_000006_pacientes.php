@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('DataNascimento');
             $table->bigInteger('cpf')->unique();
             $table->string('email')->unique();
+            $table->bigInteger('telefone');
             $table->string('cidade');
             $table->string('bairro');
             $table->string('password');

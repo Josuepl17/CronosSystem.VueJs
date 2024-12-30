@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nome_paciente');
             $table->string('nome_medico');
             $table->string('contato');
+            $table->enum('status', ['Agendado', 'Cancelado', 'Concluido'])->default('Agendado');
 
             
             $table->unsignedBigInteger('paciente_id');

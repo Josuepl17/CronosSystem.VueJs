@@ -23,6 +23,8 @@
       <tr>
         <th>Name</th>
         <th>Email</th>
+       
+        <th>Telefone</th>
         <th>CPF</th>
        <!-- <th>Medico</th>-->
         <th>#</th>
@@ -32,6 +34,7 @@
       <tr v-for="(paciente) in pacientes" :key="paciente.id">
           <td>{{ paciente.nome }}</td>
           <td>{{ paciente.email }}</td>
+          <td>{{ paciente.telefone }}</td>
           <td>{{ paciente.cpf }}</td>
           <!--<td>{{ paciente.Medico }}</td>-->
           <td><Link v-if="$page.props.autorizaMedico"  id="inserir" :href="'/detalhes/paciente/' + paciente.identificacao">Inserir</Link></td>

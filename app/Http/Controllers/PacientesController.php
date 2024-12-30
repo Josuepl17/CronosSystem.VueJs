@@ -113,6 +113,7 @@ class PacientesController extends Controller
     public function createPaciente(ValidateRequest $request)
     {
         $dados = $request->all();
+
         $dados['empresa_id'] = Session::get('empresa_id');
         $paciente =  Paciente::create($dados); // cria o paciente
 
