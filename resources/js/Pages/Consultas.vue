@@ -21,9 +21,9 @@
 <th>Status</th>
 <th>Data Consulta</th>
 <th>Hora Consulta</th>
-<th>X</th>
-<th>X</th>
-<th>X</th>
+<th style="width: 40px;">X</th>
+<th style="width: 40px;">X</th>
+<th style="width: 20px;">X</th>
 </tr>
 </thead>
 <tbody>
@@ -87,7 +87,7 @@ const props = defineProps({
     font-weight: 700;
     padding: 05px;
     color: white;
-
+    border-radius:02px ;
 }
 
 .status-concluido {
@@ -95,6 +95,7 @@ const props = defineProps({
     font-weight: 700;
     padding: 05px;
     color: white;
+    border-radius:02px ;
 }
   
 
