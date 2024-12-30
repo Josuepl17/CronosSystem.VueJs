@@ -81,12 +81,14 @@ class MeuServico
 
 
 
-             public static function Encrypted ($dados){
-                foreach ($dados as $dado) {
-                    $dado->identificacao = Crypt::encrypt($dado->id);
-                    return $dados;
-                }
+             public static function Encrypted($dados)
+             {
+                 foreach ($dados as $dado) {
+                     $dado->identificacao = Crypt::encrypt($dado->id);
+                 }
+                 return $dados;
              }
+             
 
 
 

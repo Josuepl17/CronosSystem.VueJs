@@ -22,6 +22,8 @@
 <th>Data Consulta</th>
 <th>Hora Consulta</th>
 <th>X</th>
+<th>X</th>
+<th>X</th>
 </tr>
 </thead>
 <tbody>
@@ -40,7 +42,10 @@
 </td>
 <td>{{ consulta.date }}</td>
 <td>{{ consulta.hora }}</td>
-<td><Link id="inserir" :href="'/edit/consulta/' + consulta.idcrypto">Delete</Link></td>
+
+<td><Link class="status-concluido" :href="'/concluir/consulta/' + consulta.identificacao">Concluir</Link></td>
+<td><Link class="status-cancelado" :href="'/cancelar/consulta/' + consulta.identificacao">Cancelar</Link></td>
+<td><Link id="inserir" :href="'/delete/consulta/' + consulta.identificacao">X</Link></td>
 </tr>
 </tbody>
 </table>
@@ -80,13 +85,16 @@ const props = defineProps({
 .status-cancelado {
     background-color: #ff0019d5; 
     font-weight: 700;
+    padding: 05px;
+    color: white;
 
 }
 
 .status-concluido {
     background-color: #009c08d9;
     font-weight: 700;
-
+    padding: 05px;
+    color: white;
 }
   
 

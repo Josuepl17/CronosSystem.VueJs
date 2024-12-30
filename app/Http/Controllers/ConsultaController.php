@@ -24,7 +24,6 @@ class ConsultaController extends Controller
         $consultas = ConsultaPaciente::where('empresa_id', Session::get('empresa_id'))->orderBy('date', 'asc')->orderBy('hora', 'asc')->get();
 
         $consultas = MeuServico::Encrypted($consultas);
-        dd($consultas);
         return Inertia::render('Consultas', compact('consultas'));
     }
 
@@ -94,9 +93,26 @@ class ConsultaController extends Controller
 
 
     public function destroyConsulta(Request $request) {
-        ConsultaPaciente::find($request->id)->delete();
+        $id = MeuServico::Decrypted($request->id);
+        ConsultaPaciente::find($id)->delete();
         return redirect('/consultas');
         
+    }
+
+    public function cancelarConsulta(Request $request) {
+        $id = MeuServico::Decrypted($request->id);
+        $consulta = ConsultaPaciente::find($id);
+        $consulta->status = 'Cancelado';
+        $consulta->save();
+        return redirect('/consultas');
+    }
+
+    public function concluirConsulta(Request $request) {
+        $id = MeuServico::Decrypted($request->id);
+        $consulta = ConsultaPaciente::find($id);
+        $consulta->status = 'Concluido';
+        $consulta->save();
+        return redirect('/consultas');
     }
 
 
