@@ -14,7 +14,7 @@
 <div id="tabela">
 <table class="minimal-table">
 <thead>
-<tr>
+<tr style="position: sticky; top: 0; background-color: white;">
 <th>#</th>
 <th>Nome Paciente</th>
 <th>Nome Medico</th>
@@ -31,9 +31,9 @@
 <td>{{ consulta.nome_medico }}</td>
 
 <td style="color: white;" :class="{
-    'status-agendado': consulta.status === 'agendado',
-    'status-cancelado': consulta.status === 'cancelado',
-    'status-concluido': consulta.status === 'concluido'
+    'status-agendado': consulta.status === 'Agendado',
+    'status-cancelado': consulta.status === 'Cancelado',
+    'status-concluido': consulta.status === 'Concluido'
 }">
 
     {{ consulta.status }}
@@ -72,13 +72,13 @@ const props = defineProps({
 @import "..\Components\css\tabelas.css";
 
 .status-agendado {
-    background-color: #8db000; 
+    background-color: #1a0099; 
    font-weight: 700;
     
 }
 
 .status-cancelado {
-    background-color: #721c25; 
+    background-color: #ff0019; 
     font-weight: 700;
 
 }
