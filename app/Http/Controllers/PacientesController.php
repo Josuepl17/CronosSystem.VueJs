@@ -229,10 +229,11 @@ class PacientesController extends Controller
 
         foreach ($arquivos as $arquivo){
 
+            $path = $arquivo->store('uploads', 'public');
+
             ArquivoPaciente::create([
                 'nome' => $arquivo->getClientOriginalName(),
-                 'tipo' => $arquivo->getMimeType(),
-                'conteudo' => file_get_contents($arquivo->getRealPath()),
+                'path' => $path,
                 'paciente_id' => $pacienteId,
                 'empresa_id' => $empresaId,
 
