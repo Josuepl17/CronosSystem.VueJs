@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
+use App\Models\ArquivoPaciente;
 use App\Models\ConsultaPaciente;
 use App\Models\DetalhePaciente;
 use App\Models\Empresa;
@@ -216,6 +217,34 @@ class PacientesController extends Controller
         $dados['medico_id'] = Session::get('id');
         Tramite::create($dados);
         return Inertia::location('/detalhes/paciente'); // faz ele recarregar a pagina
+    }
+
+    public function createArquivos(Request $request)
+    {
+        $arquivos = $request->file('arquivos');
+        $pacienteId = FacadesSession::get('id_paciente');
+
+        $empresaId = Session::get('empresa_id');
+
+
+        foreach ($arquivos as $arquivo){
+
+            ArquivoPaciente::create([
+                'nome' => $arquivo->getClientOriginalName(),
+                 'tipo' => $arquivo->getMimeType(),
+                'conteudo' => file_get_contents($arquivo->getRealPath()),
+                'paciente_id' => $pacienteId,
+                'empresa_id' => $empresaId,
+
+            ]);
+
+
+        }
+
+           dd("deu");
+
+
+        return Inertia::location('/detalhes/paciente');
     }
 
 

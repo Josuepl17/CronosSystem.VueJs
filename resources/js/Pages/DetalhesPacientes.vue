@@ -27,9 +27,10 @@
                   style="opacity: 0; position: absolute; z-index: -1;"
                   ref="fileInput"
                 />
-                <!--<button type="button" @click="selecionarArquivo">Escolher arquivo</button>-->
+              <button type="button" @click="abrirarquivos">Escolher arquivo</button>
+
                 <a href="#" @click.prevent="abrirModal">Novo</a>
-                <!--<a href="/download/paciente/detalhes">Donwload</a>-->
+            
               </div>
             </div>
 
@@ -94,6 +95,61 @@
           </form>
         </div>
       </div>
+
+
+
+
+      <div v-if="mostrararquivos" class="modal-overlay">
+        <div class="modal-content">
+         
+          <div id="tabela">
+            <table class="minimal-table">
+              <thead>
+                <tr style="position: sticky; top: 0; background-color: white;">
+                  <th>#</th>
+                  <th>Arquivo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="arquivo in arquivos " :key="arquivo.id">
+                  <td>{{arquivo.id}}</td>
+                  <td>{{arquivo.nome}}</td>
+                </tr>     
+              </tbody>
+            </table>
+          </div>
+
+          <form @submit.prevent="file.post('/create/arquivos')">
+            <input 
+      type="file" 
+      @change="handleFileChange" 
+      multiple 
+    >
+    <input type="submit" value="Enviar">
+  </form>
+
+          <a href="#" @click.prevent="fechararquivos">Fechar</a>
+          
+
+        
+           
+        </div>
+      </div>
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </template>
   </Layout>
 </template>
@@ -102,9 +158,7 @@
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
-//function selecionarArquivo() {
-//document.querySelector('input[type="file"]').click()
-//}
+
 
 const props = defineProps({
   detalhes: Object,
@@ -112,6 +166,7 @@ const props = defineProps({
   tramites_paciente: Array,
   message: String,
   consultas: Array,
+  arquivos: Array,
 });
 
 function formatarData(data) {
@@ -120,9 +175,19 @@ function formatarData(data) {
   return `${dia}/${mes}/${ano}`; // Retorna no formato DD/MM/AAAA
 }
 
+const arquivosSelecionados = ref([]);
+
+const handleFileChange = (event) => {
+  arquivosSelecionados.value = Array.from(event.target.files); // Converte FileList para Array
+  file.arquivos = arquivosSelecionados.value; // Atualiza o formulário com os arquivos selecionados
+};
+
 const form = useForm({
   texto_principal: "" || props.detalhes.texto_principal,
-  arquivos: null, // Armazena o array de arquivos
+});
+
+const file = useForm({
+  arquivos: [],
 });
 
 const modal = useForm({
@@ -131,9 +196,15 @@ const modal = useForm({
   consulta: [],
 });
 
-const armazena = (event) => {
-  form.arquivos = event.target.files; // Armazenar os arquivos diretamente no formulário
-};
+
+
+
+
+
+
+
+
+
 
 const mostrarModal = ref(false); // Estado da modal, começa fechado
 
@@ -146,9 +217,23 @@ const abrirModal = () => {
 const fecharModal = () => {
   mostrarModal.value = false;
 };
+
+const mostrararquivos = ref(false); // Estado da modal, começa fechado
+
+// Função para abrir a modal
+const abrirarquivos = () => {
+  mostrararquivos.value = true;
+};
+
+// Função para fechar a modal
+const fechararquivos = () => {
+  mostrararquivos.value = false;
+};
 </script>
 
 <style scoped>
+@import "../Components/css/tabelas.css";
+
 .notification {
   position: fixed;
   top: 10px; /* Alinhado ao topo */
