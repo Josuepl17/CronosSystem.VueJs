@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             
             $table->string('nome'); // Nome original do arquivo
-            $table->string('tipo'); // Tipo MIME (ex: image/png)
-            $table->binary('conteudo')->change();
+            $table->string('path'); // Tipo do arquivo (ex.: 'image/jpeg')
 
             $table->unsignedBigInteger('paciente_id');
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade')->onUpdate('cascade');

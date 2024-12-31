@@ -12,8 +12,7 @@ class ArquivoPaciente extends Model
 
     protected $fillable = [
         'nome',
-        'tipo',
-        'conteudo',
+        'path',
         'paciente_id',
         'empresa_id',
     ];
