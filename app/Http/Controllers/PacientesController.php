@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session as FacadesSession;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class PacientesController extends Controller
@@ -164,6 +165,10 @@ class PacientesController extends Controller
         $id_paciente = FacadesSession::get('id_paciente');
         $paciente = Paciente::Find($id_paciente); // nome vue js 
 
+
+        $arquivos = ArquivoPaciente::where('paciente_id', $id_paciente)->get(); 
+
+
         $detalhes = $paciente->detalhespacientes()->where('medico_id', Session::get('id'))->first(); // retona Object
 
         if ($detalhes->texto_principal != null) {
@@ -176,7 +181,7 @@ class PacientesController extends Controller
 
         $tramites_paciente = $paciente->tramites()->where('medico_id', Session::get('id'))->get(); // retorna array 
         
-        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente',  'consultas'));
+        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente',  'consultas', 'arquivos'));
     }
 
 
@@ -242,16 +247,23 @@ class PacientesController extends Controller
 
         }
 
-           dd("deu");
-
 
         return Inertia::location('/detalhes/paciente');
     }
 
 
+public function downloadArquivo(Request $request){
+    $arquivo = ArquivoPaciente::Find($request->id);
 
+    $filePath = realpath(storage_path('/app/public/' . $arquivo->path));
 
+    //dd($filePath);
 
+    return redirect(Storage::disk('public')->url($arquivo->path));
+
+    return response()->download($filePath, $arquivo->nome);
+   
+}
 
 
 

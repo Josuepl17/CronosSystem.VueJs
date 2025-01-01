@@ -108,12 +108,16 @@
                 <tr style="position: sticky; top: 0; background-color: white;">
                   <th>#</th>
                   <th>Arquivo</th>
+                  <th>X</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="arquivo in arquivos " :key="arquivo.id">
                   <td>{{arquivo.id}}</td>
                   <td>{{arquivo.nome}}</td>
+                  <td>
+                    <Link id="inserir" :href="'/download/arquivo/' + arquivo.id">Baixar</Link>
+                  </td>
                 </tr>     
               </tbody>
             </table>

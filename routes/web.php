@@ -45,6 +45,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::post('/inserir/tramite', [PacientesController::class, 'createTramite']);
     Route::post('/busca/atendentes', [PacientesController::class, 'buscaPaciente']);
     Route::post('/create/arquivos', [PacientesController::class, 'createArquivos']);
+    Route::get('/download/arquivo/{id}', [PacientesController::class, 'downloadArquivo']);
 
     // Medicos
     Route::get('/medicos', [MedicosController::class, 'listaMedicos']);
