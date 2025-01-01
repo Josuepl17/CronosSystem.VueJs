@@ -261,22 +261,22 @@ class PacientesController extends Controller
 
     public function downloadArquivo(Request $request)
     {
-        $arquivo = ArquivoPaciente::find($request->id);
+       // $arquivo = ArquivoPaciente::find($request->id);
     
         // Assumindo que 'files/' está incluído no caminho armazenado no banco de dados
-        $filePath = $arquivo->path; 
+        //$filePath = $arquivo->path; 
     
         // Obtém o caminho completo do arquivo usando storage_path()
        // $filePath = storage_path('app/public/' . $filePath); 
       //  $filePath = str_replace('\\', '/', storage_path('app/public/') . $arquivo->path);
         //$filePath = 'C:\Users\Josué Lima\Documents\GitHub\CronosSystem.VueJs\public\storage\files\mvVs08dVzn54ZVydwt8nTlE5x2pNzrBBcXmLrBoL.pdf';
         //$filePath = 'C:/Users/Josué Lima/Documents/GitHub/CronosSystem.VueJs/storage/app/public/files/xiMvemvIKuBhNcUi1kaNjOT6vZ2j2YdPPL5vsWfW.pdf';
-        $filePath = '\Downloads\josue.pdf';
+        //$filePath = '\Downloads\josue.pdf';
 
         
 
        // dd($filePath);
-        return response()->download($filePath);
+        return response()->download("storage/files/LLD0R4b9s6mORZ4XO6vQtaWuJZi9sjc4QNKqUn6N.pdf");
     }
 
 
