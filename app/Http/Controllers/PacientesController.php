@@ -11,6 +11,7 @@ use App\Models\Medico_Paciente;
 use App\Models\Medico;
 use App\Models\Paciente;
 use App\Models\Tramite;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Services\MeuServico;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
@@ -259,25 +260,28 @@ class PacientesController extends Controller
 
 
 
-    public function downloadArquivo(Request $request)
+    
+
+    public function downloadArquivo()
     {
-       // $arquivo = ArquivoPaciente::find($request->id);
+        $filePath = storage_path('app/public/files/LLD0R4b9s6mORZ4XO6vQtaWuJZi9sjc4QNKqUn6N.pdf');
     
-        // Assumindo que 'files/' está incluído no caminho armazenado no banco de dados
-        //$filePath = $arquivo->path; 
+        if (!file_exists($filePath)) {
+            return response()->json(['error' => 'Arquivo não encontrado'], 404);
+        }
     
-        // Obtém o caminho completo do arquivo usando storage_path()
-       // $filePath = storage_path('app/public/' . $filePath); 
-      //  $filePath = str_replace('\\', '/', storage_path('app/public/') . $arquivo->path);
-        //$filePath = 'C:\Users\Josué Lima\Documents\GitHub\CronosSystem.VueJs\public\storage\files\mvVs08dVzn54ZVydwt8nTlE5x2pNzrBBcXmLrBoL.pdf';
-        //$filePath = 'C:/Users/Josué Lima/Documents/GitHub/CronosSystem.VueJs/storage/app/public/files/xiMvemvIKuBhNcUi1kaNjOT6vZ2j2YdPPL5vsWfW.pdf';
-        //$filePath = '\Downloads\josue.pdf';
-
-        
-
-       // dd($filePath);
-        return response()->download("storage/files/LLD0R4b9s6mORZ4XO6vQtaWuJZi9sjc4QNKqUn6N.pdf");
+        return new StreamedResponse(function () use ($filePath) {
+            $stream = fopen($filePath, 'rb');
+            while (!feof($stream)) {
+                echo fread($stream, 1024);
+            }
+            fclose($stream);
+        }, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="josue.pdf"'
+        ]);
     }
+    
 
 
 
