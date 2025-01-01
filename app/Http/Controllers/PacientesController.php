@@ -276,7 +276,7 @@ class PacientesController extends Controller
         
 
        // dd($filePath);
-        return response()->file('C:\Users\Josué Lima\Documents\GitHub\CronosSystem.VueJs\public\storage\files\LLD0R4b9s6mORZ4XO6vQtaWuJZi9sjc4QNKqUn6N.pdf');
+        return response()->file('C:\Users\Josué Lima\Documents\GitHub\CronosSystem.VueJs\public\storage\files\J.pdf');
     }
 
 
