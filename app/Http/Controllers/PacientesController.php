@@ -252,18 +252,30 @@ class PacientesController extends Controller
     }
 
 
-public function downloadArquivo(Request $request){
-    $arquivo = ArquivoPaciente::Find($request->id);
 
-    $filePath = realpath(storage_path('/app/public/' . $arquivo->path));
 
-    //dd($filePath);
 
-    return redirect(Storage::disk('public')->url($arquivo->path));
 
-    return response()->download($filePath, $arquivo->nome);
-   
+
+
+
+public function downloadArquivo(Request $request)
+{
+    $arquivo = ArquivoPaciente::find($request->id);
+
+    // Construir o caminho completo do arquivo, convertendo para barras normais
+  //  $filePath = str_replace('\\', '/', storage_path('app/public/files/' . $arquivo->path));
+    //$filePath = str_replace('\\', '/', storage_path('app/public/') . $arquivo->path);
+
+  //  dd($filePath);
+
+  //$filePath = 'C:\Users\Josué Lima\Documents\GitHub\CronosSystem.VueJs\storage\app\public\files\mvVs08dVzn54ZVydwt8nTlE5x2pNzrBBcXmLrBoL.pdf';
+
+  $filePath = $arquivo->path; 
+    return response()->download(storage_path('app/public/' . $filePath), $arquivo->nome);
+
 }
+
 
 
 
