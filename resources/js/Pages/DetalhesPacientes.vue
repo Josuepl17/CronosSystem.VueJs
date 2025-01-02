@@ -115,8 +115,12 @@
                 <tr v-for="arquivo in arquivos " :key="arquivo.id">
                   <td>{{arquivo.id}}</td>
                   <td>{{arquivo.nome}}</td>
-                  <td>
-                    <a id="inserir" :href="'/download/arquivo/' + arquivo.id">Baixar</a>
+                    <td style="width: 50px;" >
+                    <a :href="'/download/arquivo/' + arquivo.id" style="background-color: white;">
+
+                      <img  src="/images/download.png" alt="" />
+
+                    </a>
                   </td>
                 </tr>     
               </tbody>
@@ -345,6 +349,15 @@ const fechararquivos = () => {
   z-index: 1001;
   transition: ease-in-out 1s;
   text-align: center;
+
+
+
+
+}
+
+img{
+  width: 20px;
+  height: 20px;
 }
 </style>
 
