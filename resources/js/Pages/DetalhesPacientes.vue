@@ -116,7 +116,7 @@
                   <td>{{arquivo.id}}</td>
                   <td>{{arquivo.nome}}</td>
                   <td>
-                    <Link id="inserir" :href="'/download/arquivo/' + arquivo.id">Baixar</Link>
+                    <a id="inserir" :href="'/download/arquivo/' + arquivo.id">Baixar</a>
                   </td>
                 </tr>     
               </tbody>
