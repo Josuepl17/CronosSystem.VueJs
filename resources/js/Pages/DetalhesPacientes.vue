@@ -1,80 +1,76 @@
 <template lang="">
   <Layout>
     <template v-slot:conteudo>
-      <form @submit.prevent="form.post('/create/paciente/detalhes')">
-        <div v-if="message" class="notification">
-          {{ message }}
-        </div>
+      @inertiaHead
+      <title>@yield('title', 'Tetse')</title>
+<!--------------------------------------LADO ESQUERDO---------------------------------------->
 
+      <form @submit.prevent="form.post('/create/paciente/detalhes')">
         <div id="caixa">
           <div id="lado-esquerdo">
             <div id="texto-principal">
               <div id="titulo-texto">
                 <h1>{{ props.paciente.nome }}</h1>
-              </div>
-
+              </div> <!-- /#titulo-texto -->
               <div id="conteiner-texto">
                 <textarea v-model="form.texto_principal"></textarea>
-              </div>
-
+              </div> <!-- /#conteiner-texto -->
               <div id="rodape">
                 <button type="submit">Salvar</button>
                 <input
                   @change="armazena"
                   type="file"
-                  name=""
-                  value=""
                   style="opacity: 0; position: absolute; z-index: -1;"
                   ref="fileInput"
                 />
-              <button type="button" @click="abrirarquivos">Escolher arquivo</button>
-
+                <button type="button" @click="abrirarquivos">Escolher arquivo</button>
                 <a href="#" @click.prevent="abrirModal">Novo</a>
-            
-              </div>
-            </div>
-
-            <div
-              class="publicacao"
-              v-for="(tramites) in tramites_paciente"
-              :key="tramites.id"
-            >
+              </div> <!-- /#rodape -->
+            </div> <!-- /#texto-principal -->
+            <div class="publicacao" v-for="(tramites) in tramites_paciente" :key="tramites.id">
               <div class="publicacao-header">
                 <h3 class="publicacao-titulo">{{ tramites.titulo }}</h3>
                 <span class="publicacao-id">ID: {{ tramites.id }}</span>
-              </div>
+              </div> <!-- /.publicacao-header -->
               <div class="publicacao-descricao">
                 <p>{{ tramites.descricao }}</p>
-              </div>
-            </div>
-          </div>
+              </div> <!-- /.publicacao-descricao -->
+            </div> <!-- /.publicacao -->
+          </div> <!-- /#lado-esquerdo -->
+
+<!--------------------------------------LADO DIREITO---------------------------------------->
 
           <div id="lado-direito">
             <div class="box-detalhes">
               <div class="box-info">
                 <p>Paciente Desde:</p>
                 <p>{{ formatarData(props.paciente.created_at) }}</p>
-              </div>
-
+              </div> <!-- /.box-info -->
               <div class="box-info">
                 <p>Primeira Consulta:</p>
                 <p>03/10/2024</p>
-              </div>
-
+              </div> <!-- /.box-info -->
               <div class="box-info">
                 <p>Ultima Consulta:</p>
                 <p>14/10/2024</p>
-              </div>
-
+              </div> <!-- /.box-info -->
               <div class="box-info">
                 <p>Proxima Consulta:</p>
                 <p>20/10/2024</p>
-              </div>
-            </div>
-          </div>
-        </div>
+              </div> <!-- /.box-info -->
+            </div> <!-- /.box-detalhes -->
+          </div> <!-- /#lado-direito -->
+        </div> <!-- /#caixa -->
       </form>
 
+<!--------------------------------------NOTIFICAÇÃO---------------------------------------->
+
+      <div v-if="message" class="notification">
+        {{ message }}
+      </div> <!-- /.notification -->
+
+<!--------------------------------------MODAL CONSULTA---------------------------------------->
+      
       <div v-if="mostrarModal" class="modal-overlay">
         <div class="modal-content">
           <h1>Registro de Consulta</h1>
@@ -82,26 +78,23 @@
           <form @submit.prevent="modal.post('/inserir/tramite')">
             <div class="form-group">
               <input v-model="modal.titulo" type="text" id="titulo" placeholder="Título" />
-                <div style="padding:05px;" v-for="consulta in consultas" :key="consulta.id">
+              <div style="padding:05px;" v-for="consulta in consultas" :key="consulta.id">
                 <input v-model="modal.consulta" :value="consulta.id" type="checkbox" :name="'checkbox_' + consulta.id" />
-                <p> Consulta dia {{ consulta.date }}</p>
-                </div>
-            </div>
+                <p>Consulta dia {{ consulta.date }}</p>
+              </div> <!-- /.consulta -->
+            </div> <!-- /.form-group -->
             <div class="form-group">
               <textarea v-model="modal.descricao" name="descricao" id="descricao"></textarea>
-            </div>
+            </div> <!-- /.form-group -->
             <a href="#" @click.prevent="fecharModal">Fechar</a>
             <button type="submit">Salvar</button>
           </form>
-        </div>
-      </div>
+        </div> <!-- /.modal-content -->
+      </div> <!-- /.modal-overlay -->
 
-
-
-
+<!--------------------------------------MODAL ARQUIVOS---------------------------------------->
       <div v-if="mostrararquivos" class="modal-overlay">
         <div class="modal-content">
-         
           <div id="tabela">
             <table class="minimal-table">
               <thead>
@@ -112,50 +105,25 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="arquivo in arquivos " :key="arquivo.id">
+                <tr v-for="arquivo in arquivos" :key="arquivo.id">
                   <td>{{arquivo.id}}</td>
                   <td>{{arquivo.nome}}</td>
-                    <td style="width: 50px;" >
+                  <td style="width: 50px;">
                     <a :href="'/download/arquivo/' + arquivo.id" style="background-color: white;">
-
-                      <img  src="/images/download.png" alt="" />
-
+                      <img src="/images/download.png" alt="" />
                     </a>
                   </td>
-                </tr>     
+                </tr>
               </tbody>
             </table>
-          </div>
-
+          </div> <!-- /#tabela -->
           <form @submit.prevent="file.post('/create/arquivos')">
-            <input 
-      type="file" 
-      @change="handleFileChange" 
-      multiple 
-    >
-    <input type="submit" value="Enviar">
-  </form>
-
+            <input type="file" @change="handleFileChange" multiple>
+            <button type="submit">Salvar</button>
+          </form>
           <a href="#" @click.prevent="fechararquivos">Fechar</a>
-          
-
-        
-           
-        </div>
-      </div>
-     
-
-
-
-
-
-
-
-
-
-
-
-
+        </div> <!-- /.modal-content -->
+      </div> <!-- /.modal-overlay -->
 
 
     </template>
@@ -164,9 +132,8 @@
 
 <script setup>
 import { ref } from "vue";
+
 import { useForm } from "@inertiajs/vue3";
-
-
 
 const props = defineProps({
   detalhes: Object,
@@ -178,16 +145,16 @@ const props = defineProps({
 });
 
 function formatarData(data) {
-  const [datePart] = data.split("T"); // Divide a data e a hora
-  const [ano, mes, dia] = datePart.split("-"); // Separa AAAA-MM-DD
-  return `${dia}/${mes}/${ano}`; // Retorna no formato DD/MM/AAAA
+  const [datePart] = data.split("T");
+  const [ano, mes, dia] = datePart.split("-");
+  return `${dia}/${mes}/${ano}`;
 }
 
 const arquivosSelecionados = ref([]);
 
 const handleFileChange = (event) => {
-  arquivosSelecionados.value = Array.from(event.target.files); // Converte FileList para Array
-  file.arquivos = arquivosSelecionados.value; // Atualiza o formulário com os arquivos selecionados
+  arquivosSelecionados.value = Array.from(event.target.files);
+  file.arquivos = arquivosSelecionados.value;
 };
 
 const form = useForm({
@@ -204,36 +171,22 @@ const modal = useForm({
   consulta: [],
 });
 
+const mostrarModal = ref(false);
 
-
-
-
-
-
-
-
-
-
-const mostrarModal = ref(false); // Estado da modal, começa fechado
-
-// Função para abrir a modal
 const abrirModal = () => {
   mostrarModal.value = true;
 };
 
-// Função para fechar a modal
 const fecharModal = () => {
   mostrarModal.value = false;
 };
 
-const mostrararquivos = ref(false); // Estado da modal, começa fechado
+const mostrararquivos = ref(false);
 
-// Função para abrir a modal
 const abrirarquivos = () => {
   mostrararquivos.value = true;
 };
 
-// Função para fechar a modal
 const fechararquivos = () => {
   mostrararquivos.value = false;
 };
@@ -244,22 +197,19 @@ const fechararquivos = () => {
 
 .notification {
   position: fixed;
-  top: 10px; /* Alinhado ao topo */
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   padding: 15px 20px;
-  background-color: #4caf50; /* Verde para sucesso */
+  background-color: #4caf50;
   color: #fff;
   font-weight: bold;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 999;
-
-  /* Animações de entrada e saída */
   animation: slide-down 0.5s ease, fade-out 0.3s ease 2.7s forwards;
 }
 
-/* Animação de entrada de cima para baixo */
 @keyframes slide-down {
   from {
     transform: translateY(-100%) translateX(-50%);
@@ -271,14 +221,13 @@ const fechararquivos = () => {
   }
 }
 
-/* Animação de saída (desaparecer) */
 @keyframes fade-out {
   from {
-    opacity: 1; /* Começa visível */
+    opacity: 1;
   }
   to {
-    opacity: 0; /* Desaparece gradualmente */
-    visibility: hidden; /* Torna invisível após o desaparecimento */
+    opacity: 0;
+    visibility: hidden;
   }
 }
 </style>
@@ -286,42 +235,41 @@ const fechararquivos = () => {
 <style>
 .publicacao {
   width: 90%;
-  border-radius: 8px; /* Borda arredondada mais suave */
-  margin-bottom: 15px; /* Espaçamento entre as publicações */
-  background-color: #f9f9f9; /* Fundo mais suave */
-  padding: 20px; /* Espaçamento interno */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para dar um efeito de profundidade */
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efeito ao passar o mouse sobre a publicação */
 .publicacao:hover {
-  transform: translateY(-5px); /* Levanta a publicação */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra mais intensa */
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .publicacao-header {
   display: flex;
-  justify-content: space-between; /* Distribui o título e o ID de forma alinhada */
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px; /* Espaçamento entre o cabeçalho e o conteúdo */
+  margin-bottom: 10px;
 }
 
 .publicacao-titulo {
-  font-size: 1.2rem; /* Tamanho de fonte do título */
-  font-weight: bold; /* Título em negrito */
-  color: #333; /* Cor do título */
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
 }
 
 .publicacao-id {
-  font-size: 0.9rem; /* Tamanho de fonte do ID */
-  color: #888; /* Cor mais suave para o ID */
+  font-size: 0.9rem;
+  color: #888;
 }
 
 .publicacao-descricao {
-  font-size: 1rem; /* Tamanho de fonte da descrição */
-  color: #555; /* Cor do texto da descrição */
-  line-height: 1.5; /* Aumenta a linha para melhorar a legibilidade */
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
 }
 </style>
 
@@ -349,13 +297,9 @@ const fechararquivos = () => {
   z-index: 1001;
   transition: ease-in-out 1s;
   text-align: center;
-
-
-
-
 }
 
-img{
+img {
   width: 20px;
   height: 20px;
 }
@@ -393,13 +337,13 @@ select {
 }
 
 input:focus {
-  outline: none; /* Remove a borda externa (geralmente mais grossa) */
-  border: 1px solid #ccc; /* Mantém a borda normal */
+  outline: none;
+  border: 1px solid #ccc;
 }
 
 textarea:focus {
-  outline: none; /* Remove a borda externa (geralmente mais grossa) */
-  border: 1px solid #ccc; /* Mantém a borda normal */
+  outline: none;
+  border: 1px solid #ccc;
 }
 
 :root {
@@ -553,22 +497,21 @@ textarea {
 }
 
 ::-webkit-scrollbar {
-  width: 4px; /* Afina a barra de rolagem */
+  width: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #888; /* Cor da parte móvel da barra de rolagem */
-  border-radius: 10px; /* Arredonda as bordas da parte móvel */
+  background-color: #888;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Cor do fundo da barra de rolagem */
-  border-radius: 10px; /* Arredonda as bordas da trilha (opcional) */
+  background-color: #f1f1f1;
+  border-radius: 10px;
 }
 
-/* Para Firefox */
 * {
-  scrollbar-width: thin; /* Afina a barra de rolagem */
-  scrollbar-color: #888 #f1f1f1; /* Cor da parte móvel e do fundo */
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
 }
 </style>

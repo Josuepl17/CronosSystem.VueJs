@@ -1,4 +1,5 @@
 <template lang="">
+
     <div class="container" id="container">
         <div class="form-container sign-in">
             <form @submit.prevent="form.post('/login')">
@@ -25,6 +26,18 @@
 <script setup>
 import { defineProps } from 'vue';
 import { useForm } from '@inertiajs/vue3';
+import { useHead } from '@inertiajs/inertia-vue3';
+
+// Definindo o título da página diretamente
+useHead({
+  title: 'Página Exemplo'
+});
+
+
+
+
+
+
 
 const props = defineProps({
     errors: Array,

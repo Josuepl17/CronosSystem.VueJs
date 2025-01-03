@@ -21,7 +21,11 @@ class LoginController extends Controller
 {
     public function formLogin() // formulario de login
     {
-        return Inertia::render('Login');
+
+        return Inertia::render('Login', [
+            'title' => 'Página Exemplo',  // Passando a propriedade title
+        ]);
+       
     }
 
 
