@@ -8,7 +8,8 @@
 <body>
 
 
-
+<h1>ola</h1>
+<h6>{{ $codigo }}</h6>
 
 
 </body>

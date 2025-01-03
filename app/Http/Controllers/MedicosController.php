@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRequest;
+use App\Mail\MailEnvioEmail;
 use App\Models\Empresa;
 use App\Models\Medico;
 use App\Models\User;
@@ -12,8 +13,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class MedicosController extends Controller
 {
@@ -44,6 +47,13 @@ class MedicosController extends Controller
                 ['cpf' => $request->cpf], // Condição para buscar o médico
                 $dados // Dados para atualizar ou criar
             );
+
+            
+        $senhaAleatoria = Str::random(6);
+
+      //  dd($senhaAleatoria);
+
+            Mail::to($medico->email)->send(new MailEnvioEmail($senhaAleatoria));
         
             // Cria ou atualiza o usuário vinculado ao médico
             $dados2 = [
