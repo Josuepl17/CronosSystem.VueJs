@@ -104,7 +104,7 @@
 
 <script setup>
 import { Link } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const isModalOpen = ref(false);
 
@@ -121,6 +121,53 @@ function toggleMenu() {
     toggleButton.value.style.marginLeft = ""; // Resetando a margem
   }
 }
+
+
+
+
+
+
+
+
+// Função para pré-carregar imagens
+function preloadImages(imageUrls) {
+  const promises = imageUrls.map((url) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = url;
+      img.onload = resolve;
+      img.onerror = reject;
+    });
+  });
+
+  return Promise.all(promises);
+}
+
+// Chamando a função de pré-carregamento no ciclo de vida
+onMounted(async () => {
+  const imageUrls = [
+    "/images/profile.jpg",
+    "/images/agenda.png",
+    "/images/paciente.png",
+    "/images/medico.png",
+    "/images/pesquisar.png",
+    "/images/filial.png",
+    "/images/logout.png",
+    "/images/sino.png",
+    "/images/config.png",
+  ];
+
+  try {
+    await preloadImages(imageUrls);
+    console.log("Todas as imagens foram carregadas com sucesso!");
+  } catch (error) {
+    console.error("Erro ao carregar algumas imagens:", error);
+  }
+});
+
+
+
+
 </script>
 
 <style scoped>
