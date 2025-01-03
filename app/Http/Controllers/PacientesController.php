@@ -210,13 +210,26 @@ class PacientesController extends Controller
 
     public function createTramite(Request $request)
     {
-        $dados = $request->all();
-      //  dd($dados);
-        $id_consulta = $request->consulta;
-        $consulta = ConsultaPaciente::Find($id_consulta)->first();
-        $consulta->status = 'Concluido';
-        $consulta->save();
+        $request->validate([
+            'titulo' => 'required|max:25',
+            'descricao' => 'required',
+        ], [
+            'titulo.required' => 'O título é obrigatório.',
+            'titulo.max' => 'O título não pode ter mais que 255 caracteres.',
+            'descricao.required' => 'A descrição é obrigatória.',
+        ]);
 
+        $dados = $request->all();
+
+
+        $id_consulta = $request->consulta;
+
+        if($id_consulta){
+            $consulta = ConsultaPaciente::Find($id_consulta)->first();
+            $consulta->status = 'Concluido';
+            $consulta->save();
+        }
+        
         $dados['paciente_id'] = FacadesSession::get('id_paciente');
         $dados['empresa_id'] = Session::get('empresa_id');
         $dados['medico_id'] = Session::get('id');
@@ -224,8 +237,22 @@ class PacientesController extends Controller
         return Inertia::location('/detalhes/paciente'); // faz ele recarregar a pagina
     }
 
+
+
+
+
     public function createArquivos(Request $request)
     {
+
+        $request->validate([
+            'arquivos' => 'required',
+
+        ], [
+            'arquivos.required' => 'Os arquivos são obrigatórios.',
+        ]);
+
+        
+    
         $arquivos = $request->file('arquivos');
         $pacienteId = FacadesSession::get('id_paciente');
 

@@ -44,8 +44,6 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
 
-
-
             if (Medico::where('id', Auth::id())->exists() || Atendente::where('id', Auth::id())->exists()) {
                 // se for um medico ou atentende não faz um put de admisnitrador 
             } else {
@@ -54,7 +52,7 @@ class LoginController extends Controller
             }
             Session::put('id', Auth::id());
             Session::put('nome', Auth::user()->name);
-            return redirect()->intended();
+            return redirect('/');
         } else {
             return back()->withErrors([
                 'email' => 'Email Invalido.',

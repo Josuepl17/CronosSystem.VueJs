@@ -49,13 +49,6 @@ class MedicosController extends Controller
             );
 
             
-        $senhaAleatoria = Str::random(6);
-
-      //  dd($senhaAleatoria);
-
-            //Mail::to($medico->email)->send(new MailEnvioEmail($senhaAleatoria));
-        
-            // Cria ou atualiza o usuário vinculado ao médico
             $dados2 = [
                 'name' => $request->nome,
                 'email' => $request->email,
@@ -63,7 +56,6 @@ class MedicosController extends Controller
                 'password' => $request->senha,
             ];
 
-            dd($dados2);
             
             
             $user = User::updateOrCreate(

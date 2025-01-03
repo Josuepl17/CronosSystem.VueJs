@@ -68,6 +68,7 @@
         {{ message }}
       </div> <!-- /.notification -->
 
+
 <!--------------------------------------MODAL CONSULTA---------------------------------------->
       
       <div v-if="mostrarModal" class="modal-overlay">
@@ -76,14 +77,18 @@
           <br />
           <form @submit.prevent="modal.post('/inserir/tramite')">
             <div class="form-group">
-              <input v-model="modal.titulo" type="text" id="titulo" placeholder="Título" />
+              <input v-model="modal.titulo" type="text" id="titulo" placeholder="Título"  />
+              <p style="color: red; font-size:13px;" v-if="errors.titulo">{{ errors.titulo }}</p>
               <div style="padding:05px;" v-for="consulta in consultas" :key="consulta.id">
                 <input v-model="modal.consulta" :value="consulta.id" type="checkbox" :name="'checkbox_' + consulta.id" />
                 <p>Consulta dia {{ consulta.date }}</p>
               </div> <!-- /.consulta -->
             </div> <!-- /.form-group -->
             <div class="form-group">
-              <textarea v-model="modal.descricao" name="descricao" id="descricao"></textarea>
+              <textarea v-model="modal.descricao" name="descricao" id="descricao">
+               
+              </textarea>
+              <p style="color: red; font-size:13px;" v-if="errors.descricao">{{ errors.descricao }}</p>
             </div> <!-- /.form-group -->
             <a href="#" @click.prevent="fecharModal">Fechar</a>
             <button type="submit">Salvar</button>
@@ -95,6 +100,7 @@
       <div v-if="mostrararquivos" class="modal-overlay">
         <div class="modal-content">
           <div id="tabela">
+            
             <table class="minimal-table">
               <thead>
                 <tr style="position: sticky; top: 0; background-color: white;">
@@ -115,11 +121,13 @@
                 </tr>
               </tbody>
             </table>
+            <p style="color: red; font-size: 13px;" v-if="errors.arquivos">{{ errors.arquivos }}</p>
           </div> <!-- /#tabela -->
           <form @submit.prevent="file.post('/create/arquivos')">
             <input type="file" @change="handleFileChange" multiple>
             <button type="submit">Salvar</button>
           </form>
+          
           <a href="#" @click.prevent="fechararquivos">Fechar</a>
         </div> <!-- /.modal-content -->
       </div> <!-- /.modal-overlay -->
@@ -146,6 +154,7 @@ const props = defineProps({
   message: String,
   consultas: Array,
   arquivos: Array,
+  errors:Array
 });
 
 function formatarData(data) {
@@ -234,6 +243,24 @@ const fechararquivos = () => {
     visibility: hidden;
   }
 }
+
+
+
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+
+
+
+
 </style>
 
 <style>
