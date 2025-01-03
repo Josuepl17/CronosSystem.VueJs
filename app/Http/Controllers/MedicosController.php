@@ -60,12 +60,11 @@ class MedicosController extends Controller
                 'name' => $request->nome,
                 'email' => $request->email,
                 'empresa_id' => Session::get('empresa_id'),
+                'password' => $request->senha,
             ];
+
+            dd($dados2);
             
-            // Verifica se a senha foi enviada e não é "semsenha"
-            if ($request->senha !== 'semsenha' && !empty($request->senha)) {
-                $dados2['password'] = Hash::make($request->senha);
-            }
             
             $user = User::updateOrCreate(
                 ['id' => $medico->id], // Condição para buscar o usuário

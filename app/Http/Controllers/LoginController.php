@@ -34,6 +34,7 @@ class LoginController extends Controller
     public function Authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
+
         if (Auth::attempt($credentials)) {
             if (Medico::where('id', Auth::id())->exists() || Atendente::where('id', Auth::id())->exists()) {
                 // se for um medico ou atentende não faz um put de admisnitrador 

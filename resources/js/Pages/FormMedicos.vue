@@ -100,6 +100,7 @@ const form = useForm({
   endereco: props.medico?.endereco || "",
   cidade: props.medico?.cidade || "",
   bairro: props.medico?.bairro || "",
+senha:  "1234",
 
 })
 
