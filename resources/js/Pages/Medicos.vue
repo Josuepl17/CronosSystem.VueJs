@@ -36,6 +36,13 @@
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/vue3';
+import { defineProps } from 'vue';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+    document.title = 'Medicos';
+});
 const props = defineProps({
     medicos: Array,
 });

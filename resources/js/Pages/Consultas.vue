@@ -57,6 +57,11 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+    document.title = 'Consultas';
+});
 
 const props = defineProps({
     consultas: Array,

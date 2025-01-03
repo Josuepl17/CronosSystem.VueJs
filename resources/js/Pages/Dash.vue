@@ -34,7 +34,13 @@
   </Layout>
 </template>
 
-<script>
+<script setup>
+  import { defineProps } from 'vue';
+  import { onMounted } from 'vue';
+
+  onMounted(() => {
+    document.title = 'Dashboard';
+  });
 </script>
 
 <style scoped>

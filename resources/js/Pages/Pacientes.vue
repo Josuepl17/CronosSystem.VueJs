@@ -41,6 +41,11 @@
 import { Link } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 import { useForm } from '@inertiajs/vue3';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  document.title = 'Pacientes';
+});
 
 const props = defineProps({
   pacientes: Array,

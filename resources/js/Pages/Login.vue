@@ -26,11 +26,10 @@
 <script setup>
 import { defineProps } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import { useHead } from '@inertiajs/inertia-vue3';
+import { onMounted } from 'vue';
 
-// Definindo o título da página diretamente
-useHead({
-  title: 'Página Exemplo'
+onMounted(() => {
+  document.title = 'Faça Login';
 });
 
 

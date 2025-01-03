@@ -1,8 +1,7 @@
 <template lang="">
   <Layout>
     <template v-slot:conteudo>
-      @inertiaHead
-      <title>@yield('title', 'Tetse')</title>
+
 <!--------------------------------------LADO ESQUERDO---------------------------------------->
 
       <form @submit.prevent="form.post('/create/paciente/detalhes')">
@@ -134,6 +133,11 @@
 import { ref } from "vue";
 
 import { useForm } from "@inertiajs/vue3";
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  document.title = 'Detalhes do Paciente';
+});
 
 const props = defineProps({
   detalhes: Object,

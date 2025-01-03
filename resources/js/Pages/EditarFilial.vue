@@ -160,6 +160,13 @@
 <script setup>
 import { ref } from 'vue';
 import { useForm } from "@inertiajs/vue3";
+import { defineProps } from "vue";
+import { onMounted } from "vue";
+
+onMounted(() => {
+    document.title = " Editar Filial";
+});
+
 
 const props = defineProps({
   filial: Object,

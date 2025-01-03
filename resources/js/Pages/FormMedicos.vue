@@ -78,6 +78,11 @@
 
 import { defineProps } from 'vue';
 import { useForm } from '@inertiajs/vue3';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  document.title = 'Inserir Medicos';
+});
 
 const props = defineProps({
   errors: Array,

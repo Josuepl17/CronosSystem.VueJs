@@ -6,6 +6,7 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { useForm } from '@inertiajs/vue3';
 import Layout from './Layouts/Layout.vue';
+import { onMounted } from 'vue';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -24,6 +25,7 @@ createInertiaApp({
             .component('Link', Link ) // registrei o componente Link do imnertia 
             .use(ZiggyVue)
             .mount(el);
+    
     },
     progress: {
         color: 'red',

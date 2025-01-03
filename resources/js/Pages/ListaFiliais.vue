@@ -33,6 +33,13 @@
 const props = defineProps({
   todasfiliais: Array,
 });
+
+import { Link } from "vue";
+import { onMounted } from "vue";
+
+onMounted(() => {
+  document.title = "Filiais";
+});
 </script>
 
 <style scoped>
