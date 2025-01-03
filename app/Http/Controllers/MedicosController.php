@@ -53,7 +53,7 @@ class MedicosController extends Controller
 
       //  dd($senhaAleatoria);
 
-            Mail::to($medico->email)->send(new MailEnvioEmail($senhaAleatoria));
+            //Mail::to($medico->email)->send(new MailEnvioEmail($senhaAleatoria));
         
             // Cria ou atualiza o usuário vinculado ao médico
             $dados2 = [

@@ -92,7 +92,7 @@ const props = defineProps({
 const form = useForm({
   id: props.medico?.id || "",
   nome: props.medico?.nome || "",
-  cpf: props.medico?.cpf || "85296374163",
+  cpf: props.medico?.cpf || "",
   crp: props.medico?.crp || "",
   especialidade: props.medico?.especialidade || "",
   telefone: props.medico?.telefone || "",
