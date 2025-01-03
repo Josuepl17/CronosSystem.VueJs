@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id()->unsigned()->primary()->unique();
             $table->string('name');
             $table->string('email')->unique();
+            $table->boolean('primeiro_acesso')->default(true);
             $table->string('password');
             $table->integer('empresa_id'); // apenas para busca da empresa
             $table->timestamps();

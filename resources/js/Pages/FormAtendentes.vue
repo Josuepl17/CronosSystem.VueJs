@@ -37,10 +37,10 @@
                             <label for="bairro">Bairro</label>
                             <input v-model="form.bairro" type="text" id="bairro" placeholder="Bairro">
                         </div>
-                        <div class="form-group">
+                     <!--  <div class="form-group">
                             <label for="senha">Senha</label>
                             <input v-model="form.senha" type="text" id="senha" placeholder="Senha">
-                        </div>
+                        </div> -->
                         <div class="fechar-salvar">
                             <button type="button" class="fechar">Fechar</button>
                             <button type="submit" class="salvar">Salvar</button>
@@ -75,7 +75,7 @@ const form = useForm({
     endereco: props.atendente?.endereco || "",
     cidade: props.atendente?.cidade || "",
     bairro: props.atendente?.bairro || "",
-    senha: props.atendente?.senha || "",
+    senha: "1234" ,
 });
 </script>
 

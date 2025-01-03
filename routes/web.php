@@ -26,6 +26,8 @@ Route::get('/form/user/empresas', [LoginController::class, 'formUserEmpresa']);
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/gerenciar/filial', [LoginController::class, 'gerenciarFiliais']);
 Route::get('/editar/filial/{id}', [LoginController::class, 'editarFilial']);
+Route::get('/atualizar/senha', [LoginController::class, 'formSenha']);
+Route::post('/update/senha', [LoginController::class, 'updateSenha']);
 
 Route::middleware(['auth', 'web'])->group(function () {
 
@@ -99,6 +101,7 @@ Route::get('/gere', function () {
         'name' => "Administrador",
         'email' => "josuep.l@outlook.com",
         'password' => Hash::make(123456),
+        'primeiro_acesso' => false,
         'empresa_id' => $e->id,
     ]);
 
@@ -127,7 +130,8 @@ Route::get('/3', function () {
     $u->id = $d->id;
     $u->name = 'Henriqueone';
     $u->email = 'henrique1@gmail.com';
-    $u->password = bcrypt('123456');
+    $u->primeiro_acesso = true;
+    $u->password = bcrypt('1234');
     $u->empresa_id = 1;
     $u->save();
 

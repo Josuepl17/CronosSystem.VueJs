@@ -35,7 +35,17 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
+       $user =  User::where('email', $request->email)->first();
+
+        if ($user->primeiro_acesso === true) {
+            Session::put('updateSenhaId', $user->id);    
+            return redirect('/atualizar/senha');
+        }
+
         if (Auth::attempt($credentials)) {
+
+
+
             if (Medico::where('id', Auth::id())->exists() || Atendente::where('id', Auth::id())->exists()) {
                 // se for um medico ou atentende não faz um put de admisnitrador 
             } else {
@@ -50,6 +60,27 @@ class LoginController extends Controller
                 'email' => 'Email Invalido.',
             ]);
         }
+    }
+
+    public function formSenha()
+    {
+
+        return Inertia::render('UpdateSenha');
+    }
+
+    public function updateSenha(Request $request)
+    {
+        $user = User::find(Session::get('updateSenhaId'));
+
+        $user->password = Hash::make($request->password);
+        $user->primeiro_acesso = false; 
+        $user->save();
+
+        sleep(2);
+
+        Session::forget('updateSenhaId');
+
+        return redirect('/form/login');
     }
 
 
@@ -93,6 +124,7 @@ class LoginController extends Controller
                 $user = User::create([
                     'name' => "Administrador",
                     'email' => "josuep.l@outlook.com",
+                    'primeiro_acesso' => false,
                     'password' => Hash::make(123456),
                     'empresa_id' => $empresa->id,
                 ]);
