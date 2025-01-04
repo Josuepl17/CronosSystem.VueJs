@@ -70,7 +70,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/form/consultas', [ConsultaController::class, 'formConsultas']);
     Route::post('/create/consulta', [ConsultaController::class, 'createConsultas']);
     Route::get('/delete/consulta/{id}', [ConsultaController::class, 'destroyConsulta']);
-    Route::get('/cancelar/consulta/{id}', [ConsultaController::class, 'cancelarConsulta']);
+    Route::post('/cancelar/consulta', [ConsultaController::class, 'cancelarConsulta']);
     Route::get('/concluir/consulta/{id}', [ConsultaController::class, 'concluirConsulta']);
 });
 

@@ -100,17 +100,20 @@ class ConsultaController extends Controller
     }
 
     public function cancelarConsulta(Request $request) {
-        $id = MeuServico::Decrypted($request->id);
+       // dd($request->all());
+        $id = MeuServico::Decrypted($request->identificacao);
         $consulta = ConsultaPaciente::find($id);
         $consulta->status = 'Cancelado';
+        $consulta->motivo_status = $request->motivo;
         $consulta->save();
-        return redirect('/consultas');
+        return Inertia::location('/consultas');
     }
 
     public function concluirConsulta(Request $request) {
         $id = MeuServico::Decrypted($request->id);
         $consulta = ConsultaPaciente::find($id);
         $consulta->status = 'Concluido';
+        $consulta->motivo_status = "Consulta concluída";
         $consulta->save();
         return redirect('/consultas');
     }
@@ -134,7 +137,8 @@ class ConsultaController extends Controller
                 'empresa_id' => Session::get('empresa_id'),
                 'nome_paciente' => Paciente::find($request->paciente_id)->nome,
                 'nome_medico' => Medico::find($request->medico_id)->nome,
-                'contato' => Paciente::find($request->paciente_id)->email // trocar por telefone
+                'contato' => Paciente::find($request->paciente_id)->email, // trocar por telefone
+                'motivo_status' => "Aguardando atendimento",
             ]
         );
 

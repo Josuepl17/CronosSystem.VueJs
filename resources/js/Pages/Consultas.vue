@@ -15,6 +15,7 @@
                             <th>Status</th>
                             <th>Data Consulta</th>
                             <th>Hora Consulta</th>
+                            <th>Motivo Status</th>
                             <th style="width: 40px;">X</th>
                             <th style="width: 40px;">X</th>
                             <th style="width: 20px;">X</th>
@@ -37,6 +38,7 @@
                             </td>
                             <td>{{ consulta.date }}</td>
                             <td>{{ consulta.hora }}</td>
+                            <td>{{ consulta.motivo_status }}</td>
                             <td>
                                 <Link class="status-concluido" :href="'/concluir/consulta/' + consulta.identificacao">Concluir</Link>
                             </td>
@@ -58,7 +60,7 @@
         <div class="modal-content">
           <h1>Motivo Cancelamento</h1>
           <br />
-          <form @submit.prevent="formcancel.post('/teste')">
+          <form @submit.prevent="formcancel.post('/cancelar/consulta')">
             <div class="form-group">
               <input v-model="formcancel.motivo" type="text" id="motivo" placeholder="Motivo Cancelamento"  />
             </div> <!-- /.form-group -->

@@ -20,7 +20,8 @@ class ConsultaPaciente extends Model
         'empresa_id',
         'nome_paciente',
         'nome_medico',
-        'contato'
+        'contato',
+        'motivo_status',
     ];
 
 
