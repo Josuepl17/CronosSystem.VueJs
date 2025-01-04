@@ -71,7 +71,7 @@
 
 <!--------------------------------------MODAL CONSULTA---------------------------------------->
       
-      <div v-if="mostrarModal" class="modal-overlay">
+      <div v-if="mostrarModal" class="modal-sobreposto">
         <div class="modal-content">
           <h1>Registro de Consulta</h1>
           <br />
@@ -94,10 +94,10 @@
             <button type="submit">Salvar</button>
           </form>
         </div> <!-- /.modal-content -->
-      </div> <!-- /.modal-overlay -->
+      </div> <!-- /.modal-sobreposto -->
 
 <!--------------------------------------MODAL ARQUIVOS---------------------------------------->
-      <div v-if="mostrararquivos" class="modal-overlay">
+      <div v-if="mostrararquivos" class="modal-sobreposto">
         <div class="modal-content">
           <div id="tabela">
             
@@ -130,7 +130,7 @@
           
           <a href="#" @click.prevent="fechararquivos">Fechar</a>
         </div> <!-- /.modal-content -->
-      </div> <!-- /.modal-overlay -->
+      </div> <!-- /.modal-sobreposto -->
 
 
     </template>
