@@ -203,6 +203,7 @@ class PacientesController extends Controller
         Session::put('message', "Criado Com Sucesso ");
 
         return Inertia::location('/detalhes/paciente');
+
     }
 
 
@@ -234,6 +235,9 @@ class PacientesController extends Controller
         $dados['empresa_id'] = Session::get('empresa_id');
         $dados['medico_id'] = Session::get('id');
         Tramite::create($dados);
+
+        Session::put('message', "Criado Com Sucesso ");
+
         return Inertia::location('/detalhes/paciente'); // faz ele recarregar a pagina
     }
 
