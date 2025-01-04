@@ -2,7 +2,7 @@
   <Layout>
     <template v-slot:conteudo>
       <div id="opcoes-conteudo">
-        <Link href="/form/atendentes">Inserir</Link>
+        <Link id="botao_inserir_superior" href="/form/atendentes">Inserir</Link>
       </div>
 
       <div id="tabela">
@@ -49,4 +49,5 @@ const props = defineProps({
 
 <style scoped>
 @import "..\Components\css\tabelas.css";
+@import "..\Components\css\botoes.css";
 </style>

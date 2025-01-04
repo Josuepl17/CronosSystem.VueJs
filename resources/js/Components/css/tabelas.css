@@ -32,6 +32,8 @@ button{
 padding: 08px 12px 08px 12px;
 margin-right: 10px;
 }
+
+
 #opcoes-conteudo {
 display: flex;
 justify-content: flex-end;
@@ -53,13 +55,7 @@ tr a{
 color: black;
 }
 
-#opcoes-conteudo a {
-padding: 08px 29px 08px 29px;
-background-color: rgb(0, 94, 0);
-border-radius: 05px;
-color: white;
-margin-right: 10px;
-}
+
 
 /* Estilo para a tabela minimalista */
 .minimal-table {

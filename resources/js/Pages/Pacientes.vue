@@ -2,7 +2,7 @@
   <Layout>
     <template v-slot:conteudo>
       <div id="opcoes-conteudo">
-        <Link href="/form/paciente">Inserir</Link>
+        <Link id="botao_inserir_superior" href="/form/paciente">Inserir</Link>
         <form @submit.prevent="form.post('/busca/atendentes')">
           <input v-model="form.pesquisa" type="text" placeholder="Search..." />
           <button type="submit">Busca</button>
@@ -58,6 +58,7 @@ const form = useForm({
 
 <style scoped>
 @import "..\Components\css\tabelas.css";
+@import "..\Components\css\botoes.css";
 
 #tipo {
   background-color: rgb(255, 0, 0);

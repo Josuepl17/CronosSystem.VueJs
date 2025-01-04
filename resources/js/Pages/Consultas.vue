@@ -2,7 +2,7 @@
     <Layout>
         <template v-slot:conteudo>
             <div id="opcoes-conteudo">
-                <Link href="/form/consultas">Inserir</Link>
+                <Link id="botao_inserir_superior" href="/form/consultas">Inserir</Link>
             </div>
 
             <div id="tabela">
@@ -111,8 +111,6 @@ const fecharModal = () => {
 
 
 
-
-
 onMounted(() => {
     document.title = 'Consultas';
 });
@@ -125,7 +123,7 @@ const props = defineProps({
 <style scoped>
 @import "../Components/css/tabelas.css";
 @import "../Components/css/modal.css";
-@import "../Components/css/botao_salvar_fechar.css";
+@import "..\Components\css\botoes.css";
 
 
 .status-agendado {
