@@ -2,11 +2,17 @@
   <div id="conteiner-geral">
     <div v-if="isModalOpen" class="modal-overlay" @click="isModalOpen = false">
       <div class="modal-content" @click.stop>
-        <h1 style="font-size: 16px; font-family: 'Times New Roman', Times, serif">
+        <h1
+          style="font-size: 16px; font-family: 'Times New Roman', Times, serif"
+        >
           Selecione Uma Filial
         </h1>
         <br />
-        <div id="selecioneFilial" v-for="filial in $page.props.filiais" :key="filial.id">
+        <div
+          id="selecioneFilial"
+          v-for="filial in $page.props.filiais"
+          :key="filial.id"
+        >
           <Link :href="'/selecione/filial/' + filial.id">
             {{ filial.id }} - {{ filial.razao_social }} - {{ filial.cnpj }}
           </Link>
@@ -19,47 +25,83 @@
         <div id="topo-menu">
           <img src="/images/profile.jpg" alt="" />
           <p>{{ $page.props.nome }}</p>
-          <button class="botao-menu" @click="toggleMenu" ref="toggleButton">☰</button>
+          <button class="botao-menu" @click="toggleMenu" ref="toggleButton">
+            ☰
+          </button>
         </div>
         <!-- topo-menu -->
 
         <div id="links-menu">
-          <Link href="/dash" :class="{'active-link': $page.url === '/dash'}">
+          <Link href="/dash" :class="{ 'active-link': $page.url === '/dash' }">
             <img src="/images/agenda.png" alt="" />
             <span>Dashboard</span>
           </Link>
 
-          <Link href="/pacientes" :class="{'active-link': $page.url === '/pacientes'}">
+          <Link
+            href="/pacientes"
+            :class="{
+              'active-link':
+                $page.url === '/pacientes' ||
+                $page.url === '/detalhes/paciente' ||
+                $page.url === '/form/paciente',
+            }"
+          >
             <img src="/images/paciente.png" alt="" />
             <span>Pacientes</span>
           </Link>
-
-          <Link href="/atendentes" :class="{'active-link': $page.url === '/atendentes'}">
+            <Link
+            href="/atendentes"
+            :class="{
+              'active-link':
+              $page.url.startsWith('/atendentes') || $page.url.startsWith('/form/atendentes') || $page.url.startsWith('/edit/atendentes'),
+            }"
+            >
             <img src="/images/medico.png" alt="" />
             <span>Atendentes</span>
-          </Link>
+            </Link>
 
-          <Link href="/consultas" :class="{'active-link': $page.url === '/consultas'}">
+          <Link
+            href="/consultas"
+            :class="{
+              'active-link':
+                $page.url === '/consultas' || $page.url === '/form/consultas',
+            }"
+          >
             <img src="/images/pesquisar.png" alt="" />
             <span>Consultas</span>
           </Link>
 
-          <a href="#" :class="{'active-link': $page.url === '#'}">
+          <a href="#" :class="{ 'active-link': $page.url === '#' }">
             <img src="/images/agenda.png" alt="" />
             <span>Agenda</span>
           </a>
 
-          <Link href="/medicos" :class="{'active-link': $page.url === '/medicos'}">
+          <Link
+            href="/medicos"
+            :class="{
+              'active-link':
+                $page.url.startsWith('/medicos') ||
+                $page.url.startsWith('/form/medicos') ||
+                $page.url.startsWith('/edit/medico'),
+            }"
+          >
             <img src="/images/medico.png" alt="" />
             <span>Médicos</span>
           </Link>
 
-          <Link v-if="$page.props.adm" href="/gerenciar/filial" :class="{'active-link': $page.url === '/gerenciar/filial'}">
+          <Link
+            v-if="$page.props.adm"
+            href="/gerenciar/filial"
+            :class="{ 'active-link': $page.url === '/gerenciar/filial' }"
+          >
             <img src="/images/filial.png" alt="" />
             <span>Gerenciar Filial</span>
           </Link>
 
-          <Link href="/logout" :class="{'active-link': $page.url === '/logout'}">
+          <Link
+            href="/logout"
+            :class="{ 'active-link': $page.url === '/logout' }"
+          >
             <img src="/images/logout.png" alt="" />
             <span>Sair</span>
           </Link>
@@ -122,13 +164,6 @@ function toggleMenu() {
   }
 }
 
-
-
-
-
-
-
-
 // Função para pré-carregar imagens
 function preloadImages(imageUrls) {
   const promises = imageUrls.map((url) => {
@@ -164,10 +199,6 @@ onMounted(async () => {
     console.error("Erro ao carregar algumas imagens:", error);
   }
 });
-
-
-
-
 </script>
 
 <style scoped>
