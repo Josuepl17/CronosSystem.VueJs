@@ -64,4 +64,11 @@ const form = useForm({
   background-color: rgb(255, 0, 0);
   color: white;
 }
+
+
+input { /* Busca */
+padding: 08px 29px 08px 29px;
+margin-right: 10px;
+}
+
 </style>

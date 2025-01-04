@@ -123,7 +123,7 @@ const props = defineProps({
 <style scoped>
 @import "../Components/css/tabelas.css";
 @import "../Components/css/modal.css";
-@import "..\Components\css\botoes.css";
+@import "..\Components\css\botoes.css"; 
 
 
 .status-agendado {
@@ -145,5 +145,10 @@ const props = defineProps({
 
     color: white;
     border-radius: 2px;
+}
+
+input { /* Busca */
+padding: 08px 29px 08px 29px;
+margin-right: 10px;
 }
 </style>

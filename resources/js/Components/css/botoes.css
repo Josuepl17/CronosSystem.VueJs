@@ -3,24 +3,18 @@ button {
     padding: 7px 20px;
     background-color: rgb(0, 97, 0);
     border: 1px solid rgba(255, 255, 255, 0.249);
-
     color: white;
     margin-right: 10px;
+
   }
   
   a {
-    padding: 7px 20px;
-    background-color: var(--azul-escuro);
+    padding: 5px 15px;
     border: 1px solid rgba(255, 255, 255, 0.249);
-
     color: white;
-    margin-right: 10px;
   }
 
-  .delete{
-    color: white;
-    background-color: red;
-  }
+
 
   #botao_inserir_superior {
     padding: 08px 29px 08px 29px;
@@ -29,3 +23,41 @@ button {
     color: white;
     margin-right: 10px;
     }
+
+    #inserir{
+      color: white; 
+      text-decoration: none;
+      padding: 05px 15px 05px 15px;
+      background-color: green;
+      border-radius: 02px;
+  }
+
+
+  #salvar{
+    all: unset;
+    padding: 7px 20px;
+    background-color: rgb(17, 147, 0);
+    border: 1px solid rgba(255, 255, 255, 0.249);
+    color: white;
+    margin-right: 10px;
+    border-radius: 05px;
+
+  }
+
+  #fechar{
+    all: unset;
+    padding: 7px 20px;
+    background-color: rgb(206, 0, 0);
+    border: 1px solid rgba(255, 255, 255, 0.249);
+    color: white;
+    border-radius: 05px;
+
+  }
+
+
+  .delete{
+    padding: 5px 15px;
+    background-color: red;
+    
+  }
+  

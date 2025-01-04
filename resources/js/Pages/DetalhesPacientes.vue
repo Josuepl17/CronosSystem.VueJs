@@ -15,15 +15,15 @@
                 <textarea v-model="form.texto_principal"></textarea>
               </div> <!-- /#conteiner-texto -->
               <div id="rodape">
-                <button type="submit">Salvar</button>
+                <button id="salvar" type="submit">Salvar</button>
                 <input
                   @change="armazena"
                   type="file"
                   style="opacity: 0; position: absolute; z-index: -1;"
                   ref="fileInput"
                 />
-                <button type="button" @click="abrirarquivos">Escolher arquivo</button>
-                <a href="#" @click.prevent="abrirModal">Novo</a>
+                <button  type="button" @click="abrirarquivos">Escolher arquivo</button>
+                <button type="button" @click.prevent="abrirModal">Novo</button>
               </div> <!-- /#rodape -->
             </div> <!-- /#texto-principal -->
             <div class="publicacao" v-for="(tramites) in tramites_paciente" :key="tramites.id">
@@ -90,8 +90,8 @@
               </textarea>
               <p style="color: red; font-size:13px;" v-if="errors.descricao">{{ errors.descricao }}</p>
             </div> <!-- /.form-group -->
-            <a href="#" @click.prevent="fecharModal">Fechar</a>
-            <button type="submit">Salvar</button>
+            <button id="salvar" type="submit">Salvar</button>
+            <button id="fechar" type="button" @click.prevent="fecharModal">Fechar</button>
           </form>
         </div> <!-- /.modal-content -->
       </div> <!-- /.modal-sobreposto -->
@@ -125,10 +125,10 @@
           </div> <!-- /#tabela -->
           <form @submit.prevent="file.post('/create/arquivos')">
             <input type="file" @change="handleFileChange" multiple>
-            <button type="submit">Salvar</button>
+            <button id="salvar" type="submit">Salvar</button>
           </form>
           
-          <a href="#" @click.prevent="fechararquivos">Fechar</a>
+          <button type="button"  id="fechar"  @click.prevent="fechararquivos">Fechar</button>
         </div> <!-- /.modal-content -->
       </div> <!-- /.modal-sobreposto -->
 
@@ -136,6 +136,7 @@
     </template>
   </Layout>
 </template>
+
 
 <script setup>
 import { ref } from "vue";
@@ -207,7 +208,7 @@ const fechararquivos = () => {
 <style scoped>
 @import "../Components/css/tabelas.css";
 @import "../Components/css/modal.css";
-@import "../Components/css/botao_salvar_fechar.css";
+@import "../Components/css/botoes.css";
 
 .notification {
   position: fixed;

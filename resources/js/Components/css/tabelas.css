@@ -23,16 +23,6 @@
     --cinza-escuro: #212529;
   }
 
-input{
-padding: 08px 29px 08px 29px;
-margin-right: 10px;
-}
-
-button{
-padding: 08px 12px 08px 12px;
-margin-right: 10px;
-}
-
 
 #opcoes-conteudo {
 display: flex;
@@ -41,18 +31,6 @@ align-items: center;
 height: 08%;
 width: 100%;
 min-height: 38px;
-}
-
-#inserir{
-color: white; 
-text-decoration: none;
-padding: 05px 15px 05px 15px;
-background-color: var(--azul-claro);
-border-radius: 02px;
-}
-
-tr a{
-color: black;
 }
 
 
