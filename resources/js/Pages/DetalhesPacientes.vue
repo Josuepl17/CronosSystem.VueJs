@@ -139,7 +139,6 @@
 
 <script setup>
 import { ref } from "vue";
-
 import { useForm } from "@inertiajs/vue3";
 import { onMounted } from 'vue';
 
@@ -208,6 +207,7 @@ const fechararquivos = () => {
 <style scoped>
 @import "../Components/css/tabelas.css";
 @import "../Components/css/modal.css";
+@import "../Components/css/botao_salvar_fechar.css";
 
 .notification {
   position: fixed;
@@ -400,24 +400,7 @@ form {
   padding: 6px;
 }
 
-button {
-  all: unset;
-  padding: 7px 20px;
-  background-color: rgb(0, 97, 0);
-  border: 1px solid rgba(255, 255, 255, 0.249);
-  border-radius: 5px;
-  color: white;
-  margin-right: 10px;
-}
 
-a {
-  padding: 7px 20px;
-  background-color: var(--azul-escuro);
-  border: 1px solid rgba(255, 255, 255, 0.249);
-  border-radius: 5px;
-  color: white;
-  margin-right: 10px;
-}
 
 #conteiner-texto {
   width: 100%;

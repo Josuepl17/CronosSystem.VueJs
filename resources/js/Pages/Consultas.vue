@@ -41,23 +41,75 @@
                                 <Link class="status-concluido" :href="'/concluir/consulta/' + consulta.identificacao">Concluir</Link>
                             </td>
                             <td>
-                                <Link class="status-cancelado" :href="'/cancelar/consulta/' + consulta.identificacao">Cancelar</Link>
+                                <a class="status-cancelado" href="#" @click.prevent="abrirFormulario(consulta.identificacao)"  >Cancelar</a>
                             </td>
                             <td>
-                                <Link id="inserir" :href="'/delete/consulta/' + consulta.identificacao">X</Link>
+                                <Link class="delete" :href="'/delete/consulta/' + consulta.identificacao">X</Link>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+
+
+
+            <div v-if="showForm" class="modal-sobreposto">
+        <div class="modal-content">
+          <h1>Motivo Cancelamento</h1>
+          <br />
+          <form @submit.prevent="formcancel.post('/teste')">
+            <div class="form-group">
+              <input v-model="formcancel.motivo" type="text" id="motivo" placeholder="Motivo Cancelamento"  />
+            </div> <!-- /.form-group -->
+        <br>
+            <a href="#" @click.prevent="fecharModal">Fechar</a>
+            <button type="submit">Salvar</button>
+
+          </form>
+        </div> <!-- /.modal-content -->
+      </div> <!-- /.modal-sobreposto -->
+
+
+
+
+
+
+
         </template>
     </Layout>
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 import { onMounted } from 'vue';
+import { ref } from "vue";
+
+
+const formcancel = useForm({
+    identificacao: '',
+    motivo: '',
+});    
+
+
+
+const showForm = ref(false);
+
+const abrirFormulario = (identificacao) => {
+    showForm.value = true;
+   formcancel.identificacao = identificacao;
+
+};
+
+const fecharModal = () => {
+    showForm.value = false;
+};
+
+
+
+
+
 
 onMounted(() => {
     document.title = 'Consultas';
@@ -70,6 +122,9 @@ const props = defineProps({
 
 <style scoped>
 @import "../Components/css/tabelas.css";
+@import "../Components/css/modal.css";
+@import "../Components/css/botao_salvar_fechar.css";
+
 
 .status-agendado {
     background-color: #1a0099d2;
@@ -79,7 +134,7 @@ const props = defineProps({
 .status-cancelado {
     background-color: #ff0019d5;
     font-weight: 700;
-    padding: 5px;
+
     color: white;
     border-radius: 2px;
 }
@@ -87,7 +142,7 @@ const props = defineProps({
 .status-concluido {
     background-color: #009c08d9;
     font-weight: 700;
-    padding: 5px;
+
     color: white;
     border-radius: 2px;
 }
