@@ -65,8 +65,9 @@
               <input v-model="formcancel.motivo" type="text" id="motivo" placeholder="Motivo Cancelamento"  />
             </div> <!-- /.form-group -->
         <br>
-            <button id="fechar" type="button"  @click.prevent="fecharModal">Fechar</button>
             <button id="salvar" type="submit">Salvar</button>
+            <button id="fechar" type="button"  @click.prevent="fecharModal">Fechar</button>
+            
 
           </form>
         </div> <!-- /.modal-content -->

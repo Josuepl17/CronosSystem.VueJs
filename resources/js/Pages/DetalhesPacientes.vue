@@ -15,15 +15,11 @@
                 <textarea v-model="form.texto_principal"></textarea>
               </div> <!-- /#conteiner-texto -->
               <div id="rodape">
+                
                 <button id="salvar" type="submit">Salvar</button>
-                <input
-                  @change="armazena"
-                  type="file"
-                  style="opacity: 0; position: absolute; z-index: -1;"
-                  ref="fileInput"
-                />
                 <button  type="button" @click="abrirarquivos">Escolher arquivo</button>
                 <button type="button" @click.prevent="abrirModal">Novo</button>
+                
               </div> <!-- /#rodape -->
             </div> <!-- /#texto-principal -->
             <div class="publicacao" v-for="(tramites) in tramites_paciente" :key="tramites.id">
@@ -114,7 +110,7 @@
                   <td>{{arquivo.id}}</td>
                   <td>{{arquivo.nome}}</td>
                   <td style="width: 50px;">
-                    <a :href="'/download/arquivo/' + arquivo.id" style="background-color: white;">
+                    <a :href="'/download/arquivo/' + arquivo.identificacao" style="background-color: white;">
                       <img src="/images/download.png" alt="" />
                     </a>
                   </td>

@@ -22,7 +22,6 @@ class ConsultaController extends Controller
 
     public function listaConsultas() {
         $consultas = ConsultaPaciente::where('empresa_id', Session::get('empresa_id'))->orderBy('date', 'asc')->orderBy('hora', 'asc')->get();
-
         $consultas = MeuServico::Encrypted($consultas);
         return Inertia::render('Consultas', compact('consultas'));
     }

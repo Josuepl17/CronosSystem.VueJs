@@ -43,7 +43,7 @@ class PacientesController extends Controller
             // retorna todos os pacientes da empresa pois caiu no filtro de atendente
         }
 
-        $pacientes = MeuServico::Encrypted($pacientes);
+        $pacientes = MeuServico::formatarDados($pacientes);
 
         MeuServico::Autorizer(); //responsavel para mostrar inserir paciente 
 
@@ -167,6 +167,7 @@ class PacientesController extends Controller
 
 
         $arquivos = ArquivoPaciente::where('paciente_id', $id_paciente)->get(); 
+        $arquivos = MeuServico::Encrypted($arquivos);
 
 
         $detalhes = $paciente->detalhespacientes()->where('medico_id', Session::get('id'))->first(); // retona Object
@@ -176,7 +177,7 @@ class PacientesController extends Controller
             $detalhes->texto_principal = $texto_principal;
         }
 
-        $consultas = $paciente->consultas()->where('medico_id', Session::get('id'))->get(); // retorna array
+        $consultas = $paciente->consultas()->where('medico_id', Session::get('id'))->where('status', "Agendado")->get(); // retorna array
         //dd($consultas);
 
         $tramites_paciente = $paciente->tramites()->where('medico_id', Session::get('id'))->get(); // retorna array 
@@ -263,6 +264,7 @@ class PacientesController extends Controller
         $empresaId = Session::get('empresa_id');
 
 
+
         foreach ($arquivos as $arquivo){
 
             $path = $arquivo->store('files', 'public');
@@ -284,35 +286,13 @@ class PacientesController extends Controller
 
 
 
-
-
-
-
-
-
     public function downloadArquivo(Request $request)
     {
-        $arquivo = ArquivoPaciente::find($request->id);
+        $id = MeuServico::Decrypted($request->id);
+        $arquivo = ArquivoPaciente::find($id);
         $filePath = storage_path('app/public/' . $arquivo->path);
         return response()->download($filePath, $arquivo->nome);
     }
 
 
-
-
-
-
-    /*public function downloadArquivo()
-{
-    // Caminho completo do arquivo
-    $paciente = Detalhes_Pacientes::Find(FacadesSession::get('id_paciente'));
-    $arquivos = $paciente->arquivos;
-    $arquivos = explode(",", $arquivos);
-    print_r($arquivos);
-
-
-        foreach ($arquivos as $arquivo) {
-            return response()->download($arquivo);   
-            }   
-}*/
 }

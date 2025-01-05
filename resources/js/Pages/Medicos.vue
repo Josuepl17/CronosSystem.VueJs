@@ -25,7 +25,7 @@
                             <td>{{ medico.especialidade }}</td>
                             <td>{{ medico.telefone }}</td>
                             <td>
-                                <Link id="inserir" :href="'/edit/medico/' + medico.id">Editar</Link>
+                                <Link id="inserir" :href="'/edit/medico/' + medico.identificacao">Editar</Link>
                             </td>
                         </tr>
                     </tbody>

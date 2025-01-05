@@ -23,7 +23,7 @@
               <td>{{ atendente.email }}</td>
               <td>{{ atendente.cpf }}</td>
               <td>
-                <Link id="inserir" :href="'/edit/atendentes/' + atendente.id">Editar</Link>
+                <Link id="inserir" :href="'/edit/atendentes/' + atendente.identificacao">Editar</Link>
               </td>
             </tr>
           </tbody>

@@ -7,6 +7,7 @@ use App\Models\Atendente;
 use App\Models\Empresa;
 use App\Models\User;
 use App\Models\User_Empresa;
+use App\Services\MeuServico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +19,7 @@ class AtendenteController extends Controller
     public function listaAtendentes() {
         $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id'); // relacionamento empresa user
         $atendentes = Atendente::wherein('id', $users)->get();
+        $atendentes = MeuServico::formatarDados($atendentes);
         return Inertia::render('Atendentes', compact('atendentes'));
     }
 
@@ -73,9 +75,8 @@ class AtendenteController extends Controller
 
 
     public function editAtendente(Request $request) {
-
-        $atendente = Atendente::find($request->id);
-
+        $id = MeuServico::Decrypted($request->id);
+        $atendente = Atendente::find($id);
         return Inertia::render('FormAtendentes', compact('atendente'));
         
     }
