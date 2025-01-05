@@ -4,28 +4,28 @@
       <div id="conteudo-pessoal">
         <div class="card">
           <span class="card-titulo">
-          <!--  <img width="8%" src="images/check.png" alt="">&nbsp; Consultas Marcadas-->
+            <img width="8%" src="check.png" alt="">&nbsp; Consultas Marcadas
           </span>
           <span class="card-conteudo">10</span>
         </div> <!-- card -->
 
         <div class="card">
           <span class="card-titulo">
-         <!--    <img width="8%" src="usuario-ferido.png" alt="">&nbsp; Pacientes Ativos-->
+            <img width="8%" src="usuario-ferido.png" alt="">&nbsp; Pacientes Ativos
           </span>
           <span class="card-conteudo">65</span>
         </div> <!-- card -->
 
         <div class="card">
           <span class="card-titulo">
-           <!--  <img width="8%" src="pendente.png" alt="">&nbsp; Exames Pendentes-->
+            <img width="8%" src="pendente.png" alt="">&nbsp; Exames Pendentes
           </span>
           <span class="card-conteudo">36</span>
         </div> <!-- card -->
 
         <div class="card">
           <span class="card-titulo">
-            <!-- <img width="8%" src="cancelado.png" alt="">&nbsp; Consultas Canceladas-->
+            <img width="8%" src="cancelado.png" alt="">&nbsp; Consultas Canceladas
           </span>
           <span class="card-conteudo">8</span>
         </div> <!-- card -->
