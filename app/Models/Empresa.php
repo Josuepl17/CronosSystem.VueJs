@@ -15,6 +15,8 @@ class Empresa extends Model
         'razao_social',
         'filial_id',
         'cnpj',
+        'ie',
+        'im',
         'bairro',
         'cidade',
         'endereco',

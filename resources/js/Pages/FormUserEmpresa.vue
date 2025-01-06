@@ -8,9 +8,11 @@
 
                 <input type="text" id="razao_social" placeholder="Razão Social:" v-model="form.razao_social">
                 <input type="number" id="cnpj" placeholder="CNPJ:" v-model="form.cnpj">
+                <input type="number" id="ie" placeholder="Inscrição Estadual:" v-model="form.ie">
+                <input type="number" id="im" placeholder="Inscrição Municipal:" v-model="form.im">
                 <input type="number" id="telefone" placeholder="Telefone Empresa:" v-model="form.telefone">
-                <input type="text" id="endereco" placeholder="Endereco Empresa:" v-model="form.endereco">
                 <input type="text" id="cidade" placeholder="Cidade Empresa:" v-model="form.cidade">
+                <input type="text" id="endereco" placeholder="Endereco Empresa:" v-model="form.endereco">
                 <input type="text" id="bairro" placeholder="Bairro Empresa:" v-model="form.bairro">
 
                 <Link href="/form/login">Voltar</Link>
@@ -42,6 +44,8 @@ const form = useForm({
     password: '',
     razao_social: '',
     cnpj: '',
+    ie: '',
+    im: '',
     bairro: '',
     cidade: '',
     endereco: '',

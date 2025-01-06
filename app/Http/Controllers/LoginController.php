@@ -106,6 +106,8 @@ class LoginController extends Controller
             $empresa = Empresa::create([
                 'razao_social' => $request->razao_social,
                 'cnpj' => $request->cnpj,
+                'ie' => $request->ie,
+                'im' => $request->im,
                 'telefone' => $request->telefone,
                 'endereco' => $request->endereco,
                 'cidade' => $request->cidade,

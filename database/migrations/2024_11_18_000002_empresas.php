@@ -17,11 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('razao_social');
             $table->bigInteger('cnpj')->unique();
-
+            $table->bigInteger('ie')->unique()->nullable();
+            $table->bigInteger('im')->unique()->nullable();
             $table->bigInteger('telefone');
             $table->string('endereco');
             $table->string('cidade');
             $table->string('bairro');
+
 
 
             $table->unsignedBigInteger('filial_id')->nullable();

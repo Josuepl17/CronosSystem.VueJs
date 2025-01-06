@@ -24,8 +24,8 @@
                     <div class="form-group"><!-- .form-group -->
                         <label for="especialidade">Especialidade</label>
                         <select v-model="form.especialidade" name="especialidade" id="especialidade">
-                            <option value="Pisicologo">Pisicologo</option>
-                            <option value="Psiquiatra">Psiquiatra</option>
+                            <option value="Pisicologo">Psicólogo</option>
+                            <option value="Psiquiatra">Psiquiatria</option>
                             <option value="Neurologista">Neurologista</option>
                             <option value="Pedriatra">Pedriatra</option>
                         </select>

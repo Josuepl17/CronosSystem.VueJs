@@ -55,6 +55,7 @@ class AtendenteController extends Controller
             [
                 'name' => $request->nome,
                 'email' => $request->email,
+                'primeiro_acesso' => true,
                 'password' => Hash::make($request->senha),
                 'empresa_id' => Session::get('empresa_id'),
             ]

@@ -16,6 +16,7 @@ class User extends Authenticatable
         'id',
         'name',
         'second_name',
+        'primeiro_acesso',
         'email',
         'password',
         'empresa_id', // so para acessar a empresa acessada

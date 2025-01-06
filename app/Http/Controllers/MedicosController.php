@@ -55,6 +55,7 @@ class MedicosController extends Controller
                 'name' => $request->nome,
                 'email' => $request->email,
                 'empresa_id' => Session::get('empresa_id'),
+                'primeiro_acesso' => true,
                 'password' => $request->senha,
             ];
 

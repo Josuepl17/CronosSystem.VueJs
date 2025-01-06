@@ -118,7 +118,9 @@ class PacientesController extends Controller
         $dados = $request->all();
 
         $dados['empresa_id'] = Session::get('empresa_id');
+
         $paciente =  Paciente::create($dados); // cria o paciente
+
 
         foreach ($request->medico as $medico_id) {
 

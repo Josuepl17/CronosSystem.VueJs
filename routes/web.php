@@ -88,13 +88,15 @@ Route::get('/josue', function () {
 
 Route::get('/gere', function () {
     $e = new Empresa();
-    $e->razao_social = 'Integrar Filial';
+    $e->razao_social = 'ESPAÇO INTEGRAR';
     $e->cnpj = rand(1, 100000);
+    $e->ie = rand(1, 100000);
+    $e->im = rand(1, 100000);
     $e->filial_id = 1;
-    $e->telefone = 27996530963;
-    $e->endereco = 'ddddddda';
-    $e->cidade = 'Paffncas';
-    $e->bairro = 'iejfijdi';
+    $e->telefone = 27996550967;
+    $e->endereco = 'CENTRO';
+    $e->cidade = 'BARRA DE SÃO FRANCISCO';
+    $e->bairro = 'VILA LANDINHA';
     $e->save();
 
     User::create([
@@ -115,7 +117,7 @@ Route::get('/gere', function () {
 
 Route::get('/3', function () {
     $d = new Medico();
-    $d->nome = 'Henriqueone';
+    $d->nome = 'Henrique Dias';
     $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT);
     $d->crp = 'CRP-' . rand(1000, 9999);
     $d->especialidade = 'Psicologo';
