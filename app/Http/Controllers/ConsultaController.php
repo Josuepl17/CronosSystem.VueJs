@@ -38,7 +38,8 @@ class ConsultaController extends Controller
             ->orderBy('date', 'asc')
             ->orderBy('hora', 'asc')
             ->get();
-        
+
+            
 
         }else{
             $consultas = ConsultaPaciente::where('empresa_id', Session::get('empresa_id'))->orderBy('date', 'asc')->orderBy('hora', 'asc')->get();

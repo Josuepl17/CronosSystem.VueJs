@@ -284,6 +284,7 @@ const fechararquivos = () => {
 <style>
 .publicacao {
   width: 90%;
+  display: flex;
   border-radius: 8px;
   margin-bottom: 15px;
   background-color: #f9f9f9;
