@@ -255,6 +255,7 @@ class PacientesController extends Controller
         if($id_consulta){
             $consulta = ConsultaPaciente::Find($id_consulta)->first();
             $consulta->status = 'Concluido';
+            $consulta->motivo_status = "Consulta concluída";
             $consulta->save();
         }
         
@@ -280,13 +281,7 @@ class PacientesController extends Controller
         ]);
 
         
-    
         $arquivos = $request->file('arquivos');
-        $pacienteId = FacadesSession::get('id_paciente');
-
-        $empresaId = Session::get('empresa_id');
-
-
 
         foreach ($arquivos as $arquivo){
 
@@ -295,14 +290,11 @@ class PacientesController extends Controller
             ArquivoPaciente::create([
                 'nome' => $arquivo->getClientOriginalName(),
                 'path' => $path,
-                'paciente_id' => $pacienteId,
-                'empresa_id' => $empresaId,
+                'paciente_id' => FacadesSession::get('id_paciente'),
+                'empresa_id' => Session::get('empresa_id'),
 
             ]);
-
-
         }
-
 
         return Inertia::location('/detalhes/paciente');
     }
