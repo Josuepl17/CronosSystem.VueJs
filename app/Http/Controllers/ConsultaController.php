@@ -66,6 +66,7 @@ class ConsultaController extends Controller
 
             $pacientes = $medico->pacientes()->get();
             $medicos = Medico::where('id', $funcionario_id)->get();
+            
         } else {
 
             $pacientes = Paciente::where('empresa_id', Session::get('empresa_id'))->get();

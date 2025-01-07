@@ -93,8 +93,12 @@ class PacientesController extends Controller
 
     public function formPacientes()
     {
-        $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
-        $medicos = Medico::wherein('id', $users)->get(); // todos medicos da empresa logada
+        if ($medico = MeuServico::VerificarMedico()) {
+            $medicos = collect([$medico]);
+        } else {
+            $users_id = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
+            $medicos = Medico::whereIn('id', $users_id)->get();
+        }
         return Inertia::render('FormPacientes', compact('medicos'));
     }
 
