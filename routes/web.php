@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AtendenteController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\DashboardController;
@@ -72,6 +73,11 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/delete/consulta/{id}', [ConsultaController::class, 'destroyConsulta']);
     Route::post('/cancelar/consulta', [ConsultaController::class, 'cancelarConsulta']);
     Route::get('/concluir/consulta/{id}', [ConsultaController::class, 'concluirConsulta']);
+
+    // Agenda
+
+    Route::get('form/agenda', [AgendaController::class, 'formAgenda']);
+    Route::post('create/agenda', [AgendaController::class, 'createAgenda']);
 });
 
 Route::post('/teste', function (Request $request) {
