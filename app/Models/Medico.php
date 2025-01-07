@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ConsultaPaciente;
 
 class Medico extends Model
 {
@@ -31,6 +32,10 @@ class Medico extends Model
 
     public function empresas(){
         return $this->belongsTo(Empresa::class);
+    }
+
+    public function consultas() {
+        return $this->hasMany(ConsultaPaciente::class, 'medico_id', 'id');
     }
     
 }

@@ -15,33 +15,39 @@ use Inertia\Inertia;
 class ConsultaController extends Controller
 {
 
-    public function listaConsultas() {
-        $funcionario_id = Session::get('id');
-        $medico = Medico::find($funcionario_id);
+    public function listaConsultas()
+    {
 
-        if ($medico) {
-            $consultas = ConsultaPaciente::where('empresa_id', Session::get('empresa_id'))
-            ->where('medico_id', $funcionario_id)
-            ->orderByRaw("
-                CASE 
-                    WHEN status = 'Agendado' THEN 1
-                    WHEN status = 'Concluido' THEN 2
-                    WHEN status = 'Cancelado' THEN 3
-                    ELSE 4
-                END
-            ")
-            ->orderBy('date', 'asc')
-            ->orderBy('hora', 'asc')
-            ->get();
+        if ($medico = MeuServico::VerificarMedico()) {
+            $consultas = $medico->consultas()->orderByRaw("
+            CASE 
+                WHEN status = 'Agendado' THEN 1
+                WHEN status = 'Concluido' THEN 2
+                WHEN status = 'Cancelado' THEN 3
+                ELSE 4
+            END
+        ")
+                ->orderBy('date', 'asc')
+                ->orderBy('hora', 'asc')
+                ->get();
+        } else {
 
-        }else{
-            $consultas = ConsultaPaciente::where('empresa_id', Session::get('empresa_id'))->orderBy('date', 'asc')->orderBy('hora', 'asc')->get();
+            $consultas = ConsultaPaciente::where('empresa_id', Session::get('empresa_id'))->orderByRaw("
+            CASE 
+                WHEN status = 'Agendado' THEN 1
+                WHEN status = 'Concluido' THEN 2
+                WHEN status = 'Cancelado' THEN 3
+                ELSE 4
+            END
+        ")
+                ->orderBy('date', 'asc')
+                ->orderBy('hora', 'asc')
+                ->get();
         }
 
-       
 
-       
         $consultas = MeuServico::Encrypted($consultas);
+
         return Inertia::render('Consultas', compact('consultas'));
     }
 
@@ -50,66 +56,69 @@ class ConsultaController extends Controller
 
 
 
-    public function formConsultas() {
-        // Obtém o ID do funcionário logado (médico ou atendente) da sessão
-        $funcionario_id = Session::get('id'); 
-    
-        // Verifica se o funcionário logado é um médico
-        if ($medico = Medico::Find($funcionario_id)) { 
-            // Se for um médico, obtém os pacientes associados a esse médico específico
-            // e que pertencem à empresa selecionada na sessão
-            $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
-            // Obtém os dados do médico logado
+    public function formConsultas()
+    {
+
+        $funcionario_id = Session::get('id');
+
+
+        if ($medico = MeuServico::VerificarMedico()) {
+
+            $pacientes = $medico->pacientes()->get();
             $medicos = Medico::where('id', $funcionario_id)->get();
         } else {
-            // Se não for um médico (provavelmente um atendente), obtém todos os pacientes
-            // que pertencem à empresa selecionada na sessão
+
             $pacientes = Paciente::where('empresa_id', Session::get('empresa_id'))->get();
-            // Obtém os IDs dos usuários associados à empresa selecionada
-            $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
-            // Obtém os dados dos médicos que estão na lista de usuários da empresa
-            $medicos = Medico::wherein('id', $users)->get(); 
+
+            $users_id = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
+
+            $medicos = Medico::wherein('id', $users_id)->get();
         }
 
-// Pega os dados da agenda no banco (considerando que são strings no formato 'H:i')
-$timeInicial = Agenda::where('medico_id', $funcionario_id)->value('timeinicial'); // Exemplo: '08:00'
-$timeFinal = Agenda::where('medico_id', $funcionario_id)->value('timefinal');     // Exemplo: '17:00'
-$tempoDeConsulta = Agenda::where('medico_id', $funcionario_id)->value('tempodeconsulta');
-
-// Converte o tempo de consulta de "H:i" para minutos
-list($hours, $minutes) = explode(':', $tempoDeConsulta);
-$tempoDeConsulta = $hours * 60 + $minutes;
 
 
-// Verifique se todos os valores foram recuperados corretamente
-if (!$timeInicial || !$timeFinal || !$tempoDeConsulta) {
-    return response()->json(['error' => 'Dados não encontrados corretamente.'], 400);
-}
+      /*  $timeInicial = Agenda::where('medico_id', $funcionario_id)->value('timeinicial'); // Exemplo: '08:00'
+        $timeFinal = Agenda::where('medico_id', $funcionario_id)->value('timefinal');     // Exemplo: '17:00'
+        $tempoDeConsulta = Agenda::where('medico_id', $funcionario_id)->value('tempodeconsulta');
+        dd($tempoDeConsulta);
 
-$current = strtotime($timeInicial); 
-$end = strtotime($timeFinal);
-
-
-$horarios = [];
-
-while ($current < $end) {
-    // Adiciona o horário formatado ao array (sem segundos)
-    $horarios[] = date('H:i', $current);
-    
-    // Adiciona o tempo de consulta ao horário atual (em minutos)
-    $current = strtotime("+$tempoDeConsulta minutes", $current);
-    
-    // Verifica se a nova hora é válida
-    if ($current === false) {
-        dd("Erro ao calcular o próximo horário com strtotime()", $current);
-    }
-}
+        // Converte o tempo de consulta de "H:i" para minutos
+        list($hours, $minutes) = explode(':', $tempoDeConsulta);
+        $tempoDeConsulta = $hours * 60 + $minutes;
 
 
+        // Verifique se todos os valores foram recuperados corretamente
+        if (!$timeInicial || !$timeFinal || !$tempoDeConsulta) {
+            return response()->json(['error' => 'Dados não encontrados corretamente.'], 400);
+        }
+
+        $current = strtotime($timeInicial);
+        $end = strtotime($timeFinal);
 
 
+        $horarios = [];
 
+        while ($current < $end) {
+            // Adiciona o horário formatado ao array (sem segundos)
+            $horarios[] = date('H:i', $current);
 
+            // Adiciona o tempo de consulta ao horário atual (em minutos)
+            $current = strtotime("+$tempoDeConsulta minutes", $current);
+
+            // Verifica se a nova hora é válida
+            if ($current === false) {
+                dd("Erro ao calcular o próximo horário com strtotime()", $current);
+            }
+        } */
+
+        
+        $horarios = [
+            '08:00', '08:30', '09:00', '09:30', 
+            '10:00', '10:30', '11:00', '11:30', 
+            '12:00', '12:30', '13:00', '13:30', 
+            '14:00', '14:30', '15:00', '15:30', 
+            '16:00', '16:30', '17:00'
+        ];
 
         return Inertia::render('FormConsultas', compact('medicos', 'pacientes', 'horarios'));
     }
@@ -118,44 +127,18 @@ while ($current < $end) {
 
 
 
-   /* public function editConsulta(Request $request) {
 
 
-
-        $consulta = ConsultaPaciente::find($request->id)->first();
-
-        $funcionario_id = Session::get('id'); 
-    
-        // Verifica se o funcionário logado é um médico
-        if ($medico = Medico::Find($funcionario_id)) { 
-            // Se for um médico, obtém os pacientes associados a esse médico específico
-            // e que pertencem à empresa selecionada na sessão
-            $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
-            // Obtém os dados do médico logado
-            $medicos = Medico::where('id', $funcionario_id)->get();
-        } else {
-            // Se não for um médico (provavelmente um atendente), obtém todos os pacientes
-            // que pertencem à empresa selecionada na sessão
-            $pacientes = Paciente::where('empresa_id', Session::get('empresa_id'))->get();
-            // Obtém os IDs dos usuários associados à empresa selecionada
-            $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
-            // Obtém os dados dos médicos que estão na lista de usuários da empresa
-            $medicos = Medico::wherein('id', $users)->get(); 
-        }
-
-        return Inertia::render('FormConsultas', compact('consulta', 'medicos', 'pacientes'));
-    } */
-
-
-    public function destroyConsulta(Request $request) {
+    public function destroyConsulta(Request $request)
+    {
         $id = MeuServico::Decrypted($request->id);
         ConsultaPaciente::find($id)->delete();
         return redirect('/consultas');
-        
     }
 
-    public function cancelarConsulta(Request $request) {
-       // dd($request->all());
+    public function cancelarConsulta(Request $request)
+    {
+        // dd($request->all());
         $id = MeuServico::Decrypted($request->identificacao);
         $consulta = ConsultaPaciente::find($id);
         $consulta->status = 'Cancelado';
@@ -164,7 +147,8 @@ while ($current < $end) {
         return Inertia::location('/consultas');
     }
 
-    public function concluirConsulta(Request $request) {
+    public function concluirConsulta(Request $request)
+    {
         $id = MeuServico::Decrypted($request->id);
         $consulta = ConsultaPaciente::find($id);
         $consulta->status = 'Concluido';
@@ -178,10 +162,8 @@ while ($current < $end) {
 
 
 
-
-
-
-    public function createConsultas(Request $request) {
+    public function createConsultas(Request $request)
+    {
         $ConsultaPaciente = ConsultaPaciente::updateOrCreate(
             ['id' => $request->id],
             [

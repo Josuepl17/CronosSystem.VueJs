@@ -49,7 +49,7 @@ class MeuServico
 
 
 
-             
+
              public static function Encrypted($dados)
              {
                  foreach ($dados as $dado) {
