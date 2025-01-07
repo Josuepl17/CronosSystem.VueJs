@@ -27,32 +27,25 @@ class PacientesController extends Controller
 
     public function listaPacientes()
     {
-
-        $funcionario_id = Session::get('id'); // Medico ou atendente Logado 
-
-        if ($medico = Medico::Find($funcionario_id)) { // se existir é um medico, entrara em um filtro onde apresentará apenas os pacientes daquele medico especifico, e se for da empresa selecionada.
-
-            $pacientes = $medico->pacientes()->where('pacientes.empresa_id', Session::get('empresa_id'))->get();
-            
-            // Mostra os pacientes com os IDs criptografados
-            // Pelo relacionamento da tabela pivo ele encontra os pacientes relacionados com o medico Logado.
-            // caso um dia precise, para os pacientes seja apresentado onde o medico estiver logado, precisa apemnas remover o where do filtro da empresa
-        } else {
-
-            $pacientes = Paciente::where('empresa_id', Session::get('empresa_id'))->get();
-            // retorna todos os pacientes da empresa pois caiu no filtro de atendente
-        }
-
+        $funcionarioId = Session::get('id'); // Médico ou atendente logado
+        $empresaId = Session::get('empresa_id'); // Empresa selecionada
+    
+        // Obter pacientes com base no tipo de funcionário
+        $pacientes = MeuServico::obterPacientesPorFuncionario($funcionarioId, $empresaId);
+    
+        // Formatar dados dos pacientes
         $pacientes = MeuServico::formatarDados($pacientes);
-
-        MeuServico::Autorizer(); //responsavel para mostrar inserir paciente 
-
+    
+        // Autorizar ações no contexto de pacientes
+        MeuServico::Autorizer();
+    
+        // Retornar a visão com os pacientes
         return Inertia::render('Pacientes', compact('pacientes'));
     }
+    
 
 
-
-
+    
 
 
 
@@ -167,7 +160,6 @@ class PacientesController extends Controller
         $id_paciente = FacadesSession::get('id_paciente');
         $paciente = Paciente::Find($id_paciente); // nome vue js 
 ;
-
 
         $arquivos = ArquivoPaciente::where('paciente_id', $id_paciente)->get(); 
         $arquivos = MeuServico::Encrypted($arquivos);

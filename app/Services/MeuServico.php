@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\caixas;
 use App\Models\Empresa;
 use App\Models\Medico;
+use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
@@ -142,6 +143,26 @@ class MeuServico
                 
             }
 
+
+
+
+
+
+
+            public static function obterPacientesPorFuncionario($funcionarioId, $empresaId)
+            {
+                $medico = Medico::find($funcionarioId);
+            
+                if ($medico) {
+                    // Retorna pacientes específicos do médico
+                    return $medico->pacientes()
+                        ->where('pacientes.empresa_id', $empresaId)
+                        ->get();
+                }
+            
+                // Retorna todos os pacientes da empresa
+                return Paciente::where('empresa_id', $empresaId)->get();
+            }
           
 
 
