@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agenda;
 use App\Models\ConsultaPaciente;
 use App\Models\Empresa;
 use App\Models\Medico;
@@ -44,17 +45,28 @@ class AgendaController extends Controller
 
 public function createAgenda(Request $request) {
 
+    $medico_id = $request->input('medico_id');
+    $empresa_id = Session::get('empresa_id');
 
     $timeInicial = strtotime($request->input('timeinicial'));
     $timeFinal = strtotime($request->input('timefinal'));
     $tempoDeConsulta = (int) $request->input('tempodeconsulta') * 60; // Convert hours to minutes
 
-    $horarios = [];
+   /* $horarios = [];
     for ($time = $timeInicial; $time < $timeFinal; $time += $tempoDeConsulta * 60) {
         $horarios[] = date('H:i', $time);
-    }
+    } */
 
-    dd($horarios);
+    $agenda = new Agenda();
+    $agenda->medico_id = $medico_id;
+    $agenda->empresa_id = $empresa_id;
+    $agenda->timeinicial = $request->input('timeinicial');
+    $agenda->timefinal = $request->input('timefinal');
+    $agenda->tempodeconsulta = $request->input('tempodeconsulta');
+    $agenda->save();
+
+    return redirect('/form/agenda');
+
 
 
 

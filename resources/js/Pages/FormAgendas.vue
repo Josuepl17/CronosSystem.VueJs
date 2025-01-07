@@ -41,11 +41,11 @@
                             <input type="time" id="time" v-model="form.tempodeconsulta" placeholder="Horas">
                         </div> <!-- .form-group -->
 
-                        <div class="form-group"> <!-- .form-group -->
+                      <div class="form-group"> <!-- .form-group -->
                             <label for="time">Horario de almoço</label>
                             <input type="time" id="time" v-model="form.horarioDeParadaInicio" placeholder="Horas"> as
                             <input type="time" id="time" v-model="form.horarioDeParadaFim" placeholder="Horas">
-                        </div> <!-- .form-group -->
+                        </div> <!-- .form-group --> 
 
                         <div class="fechar-salvar"> <!-- .fechar-salvar -->
                             <button type="button" class="fechar">Fechar</button>

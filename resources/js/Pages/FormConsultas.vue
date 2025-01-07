@@ -44,8 +44,14 @@
                         </div> <!-- .form-group -->
 
                         <div class="form-group"> <!-- .form-group -->
-                            <label for="time">Hora</label>
-                            <input v-model="form.hora" type="time" id="time" placeholder="Hora Consulta">
+                            <label for="horario">Horário Disponível</label>
+                            <select v-model="form.hora" id="horario">
+                                <!-- Mostra todos os horários disponíveis -->
+                                <option v-for="horario in horarios" :key="horario" :value="horario">
+                                    {{ horario }}
+                                </option>
+
+                            </select>
                         </div> <!-- .form-group -->
 
                         <div class="fechar-salvar"> <!-- .fechar-salvar -->
@@ -73,6 +79,7 @@ const props = defineProps({
     medicos: Array,
     pacientes: Array,
     consulta: Object,
+    horarios: Array,
 });
 
 const form = useForm({

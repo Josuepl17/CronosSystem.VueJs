@@ -149,19 +149,22 @@ class MeuServico
 
 
 
-            public static function obterPacientesPorFuncionario($funcionarioId, $empresaId)
+            public static function VerificarFuncionario()
             {
-                $medico = Medico::find($funcionarioId);
+                $funcionarioId = session('funcionario_id');
+                $medico = Medico::where('id', $funcionarioId)->first();
+                dd($medico);
             
                 if ($medico) {
-                    // Retorna pacientes específicos do médico
-                    return $medico->pacientes()
-                        ->where('pacientes.empresa_id', $empresaId)
-                        ->get();
+                   
+                    return true;
+                   
+                }else{
+
+                    return false;
+
                 }
             
-                // Retorna todos os pacientes da empresa
-                return Paciente::where('empresa_id', $empresaId)->get();
             }
           
 

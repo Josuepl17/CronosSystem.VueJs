@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agenda;
 use App\Models\ConsultaPaciente;
 use App\Models\Empresa;
 use App\Models\Medico;
@@ -13,12 +14,6 @@ use Inertia\Inertia;
 
 class ConsultaController extends Controller
 {
-
-    
-
-
-
-
 
     public function listaConsultas() {
         $funcionario_id = Session::get('id');
@@ -38,8 +33,6 @@ class ConsultaController extends Controller
             ->orderBy('date', 'asc')
             ->orderBy('hora', 'asc')
             ->get();
-
-            
 
         }else{
             $consultas = ConsultaPaciente::where('empresa_id', Session::get('empresa_id'))->orderBy('date', 'asc')->orderBy('hora', 'asc')->get();
@@ -78,10 +71,47 @@ class ConsultaController extends Controller
             $medicos = Medico::wherein('id', $users)->get(); 
         }
 
+// Pega os dados da agenda no banco (considerando que são strings no formato 'H:i')
+$timeInicial = Agenda::where('medico_id', $funcionario_id)->value('timeinicial'); // Exemplo: '08:00'
+$timeFinal = Agenda::where('medico_id', $funcionario_id)->value('timefinal');     // Exemplo: '17:00'
+$tempoDeConsulta = Agenda::where('medico_id', $funcionario_id)->value('tempodeconsulta');
 
+// Converte o tempo de consulta de "H:i" para minutos
+list($hours, $minutes) = explode(':', $tempoDeConsulta);
+$tempoDeConsulta = $hours * 60 + $minutes;
+
+
+// Verifique se todos os valores foram recuperados corretamente
+if (!$timeInicial || !$timeFinal || !$tempoDeConsulta) {
+    return response()->json(['error' => 'Dados não encontrados corretamente.'], 400);
+}
+
+$current = strtotime($timeInicial); 
+$end = strtotime($timeFinal);
+
+
+$horarios = [];
+
+while ($current < $end) {
+    // Adiciona o horário formatado ao array (sem segundos)
+    $horarios[] = date('H:i', $current);
     
-        
-        return Inertia::render('FormConsultas', compact('medicos', 'pacientes'));
+    // Adiciona o tempo de consulta ao horário atual (em minutos)
+    $current = strtotime("+$tempoDeConsulta minutes", $current);
+    
+    // Verifica se a nova hora é válida
+    if ($current === false) {
+        dd("Erro ao calcular o próximo horário com strtotime()", $current);
+    }
+}
+
+
+
+
+
+
+
+        return Inertia::render('FormConsultas', compact('medicos', 'pacientes', 'horarios'));
     }
 
 

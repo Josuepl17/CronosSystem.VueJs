@@ -23,10 +23,8 @@ class MedicosController extends Controller
     public function listaMedicos() {
      
         $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
-     
         $medicos = Medico::wherein('id', $users)->get();
         $medicos = MeuServico::formatarDados($medicos);
-
 
         return Inertia::render('Medicos', compact('medicos'));
 
@@ -79,9 +77,6 @@ class MedicosController extends Controller
 
     
 
-
-
-    
 
 
 
