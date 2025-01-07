@@ -14,7 +14,8 @@ class ConsultaPaciente extends Model
 
     protected $fillable = [
         'date',
-        'hora',
+        'horafinal',
+        'horainicial',
         'paciente_id',
         'medico_id',
         'empresa_id',

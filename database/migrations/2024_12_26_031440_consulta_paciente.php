@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
 
             $table->date('date');
-            $table->time('hora')->format('H:i');
+            $table->time('horainicial')->format('H:i');
+            $table->time('horafinal')->format('H:i');
             $table->string('nome_paciente');
             $table->string('nome_medico');
             $table->string('contato');

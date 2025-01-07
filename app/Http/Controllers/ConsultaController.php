@@ -121,7 +121,7 @@ class ConsultaController extends Controller
             '16:00', '16:30', '17:00'
         ];
 
-        return Inertia::render('FormConsultas', compact('medicos', 'pacientes', 'horarios'));
+        return Inertia::render('FormConsultas', compact('medicos', 'pacientes'));
     }
 
 
@@ -165,11 +165,24 @@ class ConsultaController extends Controller
 
     public function createConsultas(Request $request)
     {
+
+        $existingConsulta = ConsultaPaciente::where('date', $request->date)
+            ->where('hora', $request->hora)
+            ->where('medico_id', $request->medico_id)
+            ->first();
+
+        if ($existingConsulta) {
+            return back()->withErrors(['hora' => 'Já existe uma consulta agendada para este médico nesta data e hora.'])->withInput();
+        }
+
+
+
         $ConsultaPaciente = ConsultaPaciente::updateOrCreate(
             ['id' => $request->id],
             [
                 'date' => $request->date,
-                'hora' => $request->hora,
+                'horainicial' => $request->horainicial,
+                'horafinal' => $request->horafinal,
                 'paciente_id' => $request->paciente_id,
                 'medico_id' => $request->medico_id,
                 'empresa_id' => Session::get('empresa_id'),

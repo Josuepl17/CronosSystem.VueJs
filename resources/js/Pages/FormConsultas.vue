@@ -44,14 +44,25 @@
                         </div> <!-- .form-group -->
 
                         <div class="form-group"> <!-- .form-group -->
-                            <label for="horario">Horário Disponível</label>
-                            <select v-model="form.hora" id="horario">
-                                <!-- Mostra todos os horários disponíveis -->
+
+
+                            <label for="time">Hora Inicial</label>
+                            <input v-model="form.horainicial" type="time" id="time" placeholder="Hora Consulta" >
+
+                            <label for="time">Hora Final</label>
+                            <input v-model="form.horafinal" type="time" id="time" placeholder="Hora Consulta" >
+
+                        <!--
+                        <select v-model="form.hora" id="horario">
+        
                                 <option v-for="horario in horarios" :key="horario" :value="horario">
                                     {{ horario }}
                                 </option>
+                                 </select>
+                        -->
 
-                            </select>
+
+                           
                         </div> <!-- .form-group -->
 
                         <div class="fechar-salvar"> <!-- .fechar-salvar -->
@@ -61,6 +72,9 @@
                     </div> <!-- #endereco -->
                 </form>
             </div> <!-- .fomulario-usuario -->
+            <p v-if="props.errors.hora" style="color: red;">
+                {{ props.errors.hora }}
+            </p>
         </template>
     </Layout>
 </template>
@@ -79,7 +93,6 @@ const props = defineProps({
     medicos: Array,
     pacientes: Array,
     consulta: Object,
-    horarios: Array,
 });
 
 const form = useForm({
@@ -87,7 +100,8 @@ const form = useForm({
     paciente_id: props.consulta?.paciente_id || '',
     medico_id: props.consulta?.medico_id || '',
     date: props.consulta?.date || '',
-    hora: props.consulta?.hora || '',
+    horainicial: props.consulta?.hora || '',
+    horafinal: ""
 });
 
 // Define as variáveis para médicos e consulta
