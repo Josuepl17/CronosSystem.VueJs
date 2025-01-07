@@ -187,11 +187,14 @@ class PacientesController extends Controller
         $pacienteinfo->aniversario = Carbon::parse($paciente->DataNascimento)->format('d/m/Y');
         $pacienteinfo->ultimaconsulta = $paciente->consultas()->where('medico_id', Session::get('id'))->where('status', "Concluido")->orderBy('date', 'desc')->first()->date ?? null;
 
-       // dd($pacienteinfo);
 
-        
+
         return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente',  'consultas', 'arquivos', 'pacienteinfo'));
     }
+
+
+
+
 
 
 
@@ -217,6 +220,11 @@ class PacientesController extends Controller
 
 
 
+
+
+
+
+    
 
     public function createTramite(Request $request)
     {
