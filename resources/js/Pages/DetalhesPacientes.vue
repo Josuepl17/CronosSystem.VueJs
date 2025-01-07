@@ -22,7 +22,8 @@
                 
               </div> <!-- /#rodape -->
             </div> <!-- /#texto-principal -->
-            <div class="publicacao" v-for="(tramites) in tramites_paciente" :key="tramites.id">
+
+            <div @click="abrirtramite(tramites.id, tramites.titulo, tramites.descricao)" class="publicacao" v-for="(tramites) in tramites_paciente" :key="tramites.id">
               <div class="publicacao-header">
                 <h3 class="publicacao-titulo">{{ tramites.titulo }}</h3>
                 <span class="publicacao-id">ID: {{ tramites.id }}</span>
@@ -32,26 +33,27 @@
               </div> <!-- /.publicacao-descricao -->
             </div> <!-- /.publicacao -->
           </div> <!-- /#lado-esquerdo -->
+  
 
 <!--------------------------------------LADO DIREITO---------------------------------------->
 
           <div id="lado-direito">
             <div class="box-detalhes">
               <div class="box-info">
-                <p>Paciente Desde:</p>
-                <p>{{ formatarData(props.paciente.created_at) }}</p>
+                <p>Idade do Paciente:</p>
+                <p>{{ props.pacienteinfo.idadepaciente }}</p>
               </div> <!-- /.box-info -->
               <div class="box-info">
-                <p>Primeira Consulta:</p>
-                <p>03/10/2024</p>
+                <p>Data Aniversario:</p>
+                <p>{{ props.pacienteinfo.aniversario }}</p>
               </div> <!-- /.box-info -->
               <div class="box-info">
                 <p>Ultima Consulta:</p>
-                <p>14/10/2024</p>
+                <p>{{ props.pacienteinfo.ultimaconsulta }}</p>
               </div> <!-- /.box-info -->
               <div class="box-info">
                 <p>Proxima Consulta:</p>
-                <p>20/10/2024</p>
+                <p>{{ props.pacienteinfo.proximaconsulta }}</p>
               </div> <!-- /.box-info -->
             </div> <!-- /.box-detalhes -->
           </div> <!-- /#lado-direito -->
@@ -67,30 +69,30 @@
 
 <!--------------------------------------MODAL CONSULTA---------------------------------------->
       
-      <div v-if="mostrarModal" class="modal-sobreposto">
-        <div class="modal-content">
-          <h1>Registro de Consulta</h1>
-          <br />
-          <form @submit.prevent="modal.post('/inserir/tramite')">
-            <div class="form-group">
-              <input v-model="modal.titulo" type="text" id="titulo" placeholder="Título"  />
-              <p style="color: red; font-size:13px;" v-if="errors.titulo">{{ errors.titulo }}</p>
-              <div style="padding:05px;" v-for="consulta in consultas" :key="consulta.id">
-                <input v-model="modal.consulta" :value="consulta.id" type="checkbox" :name="'checkbox_' + consulta.id" />
-                <p>Consulta dia {{ consulta.date }}</p>
-              </div> <!-- /.consulta -->
-            </div> <!-- /.form-group -->
-            <div class="form-group">
-              <textarea v-model="modal.descricao" name="descricao" id="descricao">
-               
-              </textarea>
-              <p style="color: red; font-size:13px;" v-if="errors.descricao">{{ errors.descricao }}</p>
-            </div> <!-- /.form-group -->
-            <button id="salvar" type="submit">Salvar</button>
-            <button id="fechar" type="button" @click.prevent="fecharModal">Fechar</button>
-          </form>
-        </div> <!-- /.modal-content -->
-      </div> <!-- /.modal-sobreposto -->
+        <div v-if="mostrarModal" class="modal-sobreposto">
+          <div class="modal-content">
+            <h1>Registro de Consulta</h1>
+            <br />
+            <form @submit.prevent="modal.post('/inserir/tramite')">
+              <div class="form-group">
+                <input v-model="modal.titulo" type="text" id="titulo" placeholder="Título"  />
+                <p style="color: red; font-size:13px;" v-if="errors.titulo">{{ errors.titulo }}</p>
+                <div style="padding:05px;" v-for="consulta in consultas" :key="consulta.id">
+                  <input v-model="modal.consulta" :value="consulta.id" type="checkbox" :name="'checkbox_' + consulta.id" />
+                  <p>Consulta dia {{ consulta.date }}</p>
+                </div> <!-- /.consulta -->
+              </div> <!-- /.form-group -->
+              <div class="form-group">
+                <textarea v-model="modal.descricao" name="descricao" id="descricao">
+        
+                </textarea>
+                <p style="color: red; font-size:13px;" v-if="errors.descricao">{{ errors.descricao }}</p>
+              </div> <!-- /.form-group -->
+              <button id="salvar" type="submit">Salvar</button>
+              <button id="fechar" type="button" @click.prevent="fecharModal">Fechar</button>
+            </form>
+          </div> <!-- /.modal-content -->
+        </div> <!-- /.modal-sobreposto -->
 
 <!--------------------------------------MODAL ARQUIVOS---------------------------------------->
       <div v-if="mostrararquivos" class="modal-sobreposto">
@@ -120,11 +122,15 @@
             <p style="color: red; font-size: 13px;" v-if="errors.arquivos">{{ errors.arquivos }}</p>
           </div> <!-- /#tabela -->
           <form @submit.prevent="file.post('/create/arquivos')">
+            <br>
+
+
             <input type="file" @change="handleFileChange" multiple>
             <button id="salvar" type="submit">Salvar</button>
+            <button type="button"  id="fechar"  @click.prevent="fechararquivos">Fechar</button>
           </form>
-          
-          <button type="button"  id="fechar"  @click.prevent="fechararquivos">Fechar</button>
+
+         
         </div> <!-- /.modal-content -->
       </div> <!-- /.modal-sobreposto -->
 
@@ -150,7 +156,9 @@ const props = defineProps({
   message: String,
   consultas: Array,
   arquivos: Array,
-  errors:Array
+  errors:Array,
+  pacienteinfo: Object,
+
 });
 
 function formatarData(data) {
@@ -158,6 +166,10 @@ function formatarData(data) {
   const [ano, mes, dia] = datePart.split("-");
   return `${dia}/${mes}/${ano}`;
 }
+
+
+
+
 
 const arquivosSelecionados = ref([]);
 
@@ -175,12 +187,20 @@ const file = useForm({
 });
 
 const modal = useForm({
+  id: "",
   titulo: "",
   descricao: "",
   consulta: [],
 });
 
 const mostrarModal = ref(false);
+
+const abrirtramite = (id, titulo, descricao) => {
+  mostrarModal.value = true;
+  modal.id = id;
+  modal.titulo = titulo;
+  modal.descricao = descricao;
+};
 
 const abrirModal = () => {
   mostrarModal.value = true;

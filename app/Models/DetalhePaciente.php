@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class DetalhePaciente extends Model
 {
@@ -29,4 +30,9 @@ class DetalhePaciente extends Model
     public function pacientes(){
         return $this->belongsTo(Paciente::class);
     }
+
+    public function getDateAttribute($value)
+    {
+         return Carbon::parse($value)->format('d/m/Y');
+ }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,4 +41,10 @@ class Paciente extends Model
         return $this->hasMany(ConsultaPaciente::class); // tem muitos
     }
 
+
+
+    public function getDataNascimentottribute($value)
+    {
+        return Carbon::parse($value)->format('d/m/Y');
+    }
 }

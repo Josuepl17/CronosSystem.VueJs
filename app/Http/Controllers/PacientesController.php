@@ -166,6 +166,7 @@ class PacientesController extends Controller
 
         $id_paciente = FacadesSession::get('id_paciente');
         $paciente = Paciente::Find($id_paciente); // nome vue js 
+;
 
 
         $arquivos = ArquivoPaciente::where('paciente_id', $id_paciente)->get(); 
@@ -183,8 +184,17 @@ class PacientesController extends Controller
         //dd($consultas);
 
         $tramites_paciente = $paciente->tramites()->where('medico_id', Session::get('id'))->get(); // retorna array 
+
+        $pacienteinfo = new \stdClass();
+        $pacienteinfo->idadepaciente = Carbon::parse($paciente->DataNascimento)->age;
+        $pacienteinfo->proximaconsulta = $consultas->first() ? $consultas->first()->date : null;
+        $pacienteinfo->aniversario = Carbon::parse($paciente->DataNascimento)->format('d/m/Y');
+        $pacienteinfo->ultimaconsulta = $paciente->consultas()->where('medico_id', Session::get('id'))->where('status', "Concluido")->orderBy('date', 'desc')->first()->date ?? null;
+
+       // dd($pacienteinfo);
+
         
-        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente',  'consultas', 'arquivos'));
+        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente',  'consultas', 'arquivos', 'pacienteinfo'));
     }
 
 
@@ -223,7 +233,17 @@ class PacientesController extends Controller
             'descricao.required' => 'A descrição é obrigatória.',
         ]);
 
+
         $dados = $request->all();
+        $dados['paciente_id'] = FacadesSession::get('id_paciente');
+        $dados['empresa_id'] = Session::get('empresa_id');
+        $dados['medico_id'] = Session::get('id');
+
+
+         Tramite::updateOrCreate(
+            ['id' => $request->id], // Condição para buscar o usuário
+            $dados
+        );
 
 
         $id_consulta = $request->consulta;
@@ -234,10 +254,7 @@ class PacientesController extends Controller
             $consulta->save();
         }
         
-        $dados['paciente_id'] = FacadesSession::get('id_paciente');
-        $dados['empresa_id'] = Session::get('empresa_id');
-        $dados['medico_id'] = Session::get('id');
-        Tramite::create($dados);
+
 
         Session::put('message', "Criado Com Sucesso ");
 

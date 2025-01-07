@@ -33,6 +33,7 @@ class LoginController extends Controller
 
     public function Authenticate(Request $request)
     {
+
         $credentials = $request->only('email', 'password');
 
        $user =  User::where('email', $request->email)->first();
@@ -68,6 +69,10 @@ class LoginController extends Controller
 
     public function updateSenha(Request $request)
     {
+
+
+
+
         $user = User::find(Session::get('updateSenhaId'));
 
         $user->password = Hash::make($request->password);
