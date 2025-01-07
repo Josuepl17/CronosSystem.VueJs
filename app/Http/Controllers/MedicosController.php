@@ -81,10 +81,9 @@ class MedicosController extends Controller
 
 
     public function editMedicos(Request $request) {
+        
        $medico_id =  MeuServico::Decrypted($request->id);
-
        $medico = Medico::find($medico_id);
-
        return Inertia::render('FormMedicos', compact('medico'));
 
 

@@ -24,43 +24,10 @@ class MeuServico
     
 
 
-    // Post de Dados no Formato de Requisição
-    public static function post_filter($request)
-    {
-        // Criação do novo pedido com os dados recebidos
-        $newRequest = new Request(); // Objeto do Tipo Request
-        $newRequest->setMethod('POST');// Method De envio
-        
-        // Adicionando os dados recebidos ao novo pedido
-        $newRequest->request->add([
-            'nome' => $request->nome, // So para Dizimos / Nome dizimista
-            'membro_id' => $request->membro_id, // So para Dizimos / ID do Dizimista
-            'dataini' => $request->dataini,
-            'datafi' => $request->datafi
-        ]);
-
-        return $newRequest;
-
-    }
-
-    public static function verificar_login($request){
-        if (User::where('email', $request->email)->first()){
-            return true;
-        } else{
-            return false;
-        }
-
-    }
 
 
-    public static function verificar_empresa($request){
-        if (Empresa::where('cnpj', $request->cnpj)->first()){
-            return true;
-        } else{
-            return false;
-        }
 
-    }
+
 
 
     public static function Autorizer(){
@@ -82,6 +49,7 @@ class MeuServico
 
 
 
+             
              public static function Encrypted($dados)
              {
                  foreach ($dados as $dado) {
@@ -149,22 +117,15 @@ class MeuServico
 
 
 
-            public static function VerificarFuncionario()
+            public static function VerificarMedico()
             {
-                $funcionarioId = session('funcionario_id');
+                $funcionarioId = Session::get('id');
                 $medico = Medico::where('id', $funcionarioId)->first();
-                dd($medico);
-            
                 if ($medico) {
-                   
-                    return true;
-                   
-                }else{
-
+                    return $medico;
+                } else {
                     return false;
-
                 }
-            
             }
           
 

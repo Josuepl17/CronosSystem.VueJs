@@ -27,19 +27,19 @@ class PacientesController extends Controller
 
     public function listaPacientes()
     {
-        $funcionarioId = Session::get('id'); // Médico ou atendente logado
         $empresaId = Session::get('empresa_id'); // Empresa selecionada
-    
-        // Obter pacientes com base no tipo de funcionário
-        $pacientes = MeuServico::obterPacientesPorFuncionario($funcionarioId, $empresaId);
-    
-        // Formatar dados dos pacientes
+
+        if ($medico = MeuServico::VerificarMedico()){
+            $pacientes = $medico->pacientes()->get();
+        } else {
+            $pacientes = Paciente::where('empresa_id',  $empresaId)->get();
+            
+        }
+
         $pacientes = MeuServico::formatarDados($pacientes);
     
-        // Autorizar ações no contexto de pacientes
         MeuServico::Autorizer();
     
-        // Retornar a visão com os pacientes
         return Inertia::render('Pacientes', compact('pacientes'));
     }
     
