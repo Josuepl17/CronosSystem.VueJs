@@ -3,6 +3,13 @@
         <template v-slot:conteudo>
             <div id="opcoes-conteudo">
                 <Link id="botao_inserir_superior" href="/form/consultas">Inserir</Link>
+
+                <form @submit.prevent="filtro.post('/filtro/consulta')" >
+                    <input v-model="filtro.date" type="date" name="date" id="date">
+                    <input type="submit" value="Pesquisar">
+                </form>
+
+
             </div>
 
             <div id="tabela">
@@ -91,10 +98,19 @@ import { defineProps } from 'vue';
 import { onMounted } from 'vue';
 import { ref } from "vue";
 
+const props = defineProps({
+    consultas: Array,
+    date: String,
+});
+
 
 const formcancel = useForm({
     identificacao: '',
     motivo: '',
+});    
+
+const filtro = useForm({
+    date: props.date || "",
 });    
 
 
@@ -118,9 +134,7 @@ onMounted(() => {
     document.title = 'Consultas';
 });
 
-const props = defineProps({
-    consultas: Array,
-});
+
 </script>
 
 <style scoped>
@@ -150,7 +164,7 @@ const props = defineProps({
     border-radius: 2px;
 }
 
-input { /* Busca */
+input  { /* Busca */
 padding: 08px 29px 08px 29px;
 margin-right: 10px;
 }

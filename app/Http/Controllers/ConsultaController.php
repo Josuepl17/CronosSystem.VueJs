@@ -8,6 +8,7 @@ use App\Models\Empresa;
 use App\Models\Medico;
 use App\Models\Paciente;
 use App\Services\MeuServico;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -15,40 +16,52 @@ use Inertia\Inertia;
 class ConsultaController extends Controller
 {
 
+
+    public function filtroConsulta(Request $request) {
+        Session::put('dataconsulta', $request->date);
+        return redirect('/consultas');
+    }
+
     public function listaConsultas()
     {
+        $date = Session::get('dataconsulta') ?? Carbon::now()->subDay()->toDateString();
+
 
         if ($medico = MeuServico::VerificarMedico()) {
-            $consultas = $medico->consultas()->orderByRaw("
+            $consultas = $medico->consultas()
+            ->whereDate('date', $date)
+            ->orderByRaw("
             CASE 
-                WHEN status = 'Agendado' THEN 1
-                WHEN status = 'Concluido' THEN 2
-                WHEN status = 'Cancelado' THEN 3
-                ELSE 4
+            WHEN status = 'Agendado' THEN 1
+            WHEN status = 'Concluido' THEN 2
+            WHEN status = 'Cancelado' THEN 3
+            ELSE 4
             END
         ")
-                ->orderBy('date', 'asc')
-                ->orderBy('horainicial', 'asc')
-                ->get();
+            ->orderBy('date', 'asc')
+            ->orderBy('horainicial', 'asc')
+            ->get();
         } else {
 
-            $consultas = ConsultaPaciente::where('empresa_id', Session::get('empresa_id'))->orderByRaw("
+            $consultas = ConsultaPaciente::where('empresa_id', Session::get('empresa_id'))
+            ->whereDate('date', $date)
+            ->orderByRaw("
             CASE 
-                WHEN status = 'Agendado' THEN 1
-                WHEN status = 'Concluido' THEN 2
-                WHEN status = 'Cancelado' THEN 3
-                ELSE 4
+            WHEN status = 'Agendado' THEN 1
+            WHEN status = 'Concluido' THEN 2
+            WHEN status = 'Cancelado' THEN 3
+            ELSE 4
             END
         ")
-                ->orderBy('date', 'asc')
-                ->orderBy('horainicial', 'asc')
-                ->get();
+            ->orderBy('date', 'asc')
+            ->orderBy('horainicial', 'asc')
+            ->get();
         }
 
 
         $consultas = MeuServico::Encrypted($consultas);
 
-        return Inertia::render('Consultas', compact('consultas'));
+        return Inertia::render('Consultas', compact('consultas', 'date'));
     }
 
 
