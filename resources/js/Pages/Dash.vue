@@ -4,30 +4,30 @@
       <div id="conteudo-pessoal">
         <div class="card">
           <span class="card-titulo">
-            <img width="8%" src="check.png" alt="">&nbsp; Consultas Marcadas
+            <img width="8%" src="check.png" alt="">&nbsp; Consultas Agendadas
           </span>
-          <span class="card-conteudo">10</span>
+          <span class="card-conteudo">{{ props.consultasAgendadas }}</span>
         </div> <!-- card -->
 
         <div class="card">
           <span class="card-titulo">
             <img width="8%" src="usuario-ferido.png" alt="">&nbsp; Pacientes Ativos
           </span>
-          <span class="card-conteudo">65</span>
+          <span class="card-conteudo">{{ props.pacientes }}</span>
         </div> <!-- card -->
 
         <div class="card">
           <span class="card-titulo">
-            <img width="8%" src="pendente.png" alt="">&nbsp; Exames Pendentes
+            <img width="8%" src="pendente.png" alt="">&nbsp; Consultas Concluidas
           </span>
-          <span class="card-conteudo">36</span>
+          <span class="card-conteudo">{{ props.consultasConcluidos }}</span>
         </div> <!-- card -->
 
         <div class="card">
           <span class="card-titulo">
             <img width="8%" src="cancelado.png" alt="">&nbsp; Consultas Canceladas
           </span>
-          <span class="card-conteudo">8</span>
+          <span class="card-conteudo">{{ props.consultasCanceladas }}</span>
         </div> <!-- card -->
       </div> <!-- conteudo-pessoal -->
     </template>
@@ -41,6 +41,16 @@
   onMounted(() => {
     document.title = 'Dashboard';
   });
+
+const props = defineProps({
+  pacientes: Number,
+  consultasAgendadas: Number,
+  consultasConcluidos: Number,
+  consultasCanceladas: Number,
+})
+
+
+
 </script>
 
 <style scoped>
