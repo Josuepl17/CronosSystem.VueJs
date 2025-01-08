@@ -1,36 +1,14 @@
 <template lang="">
+
     <div class="container" id="container">
         <div class="form-container sign-in">
-            <form @submit.prevent="form.post('/create/user/empresas')">
-                <!-- <input type="text" id="name" placeholder="Nome Usuario:" v-model="form.name">
-                <input type="email" id="email" placeholder="Email Usuario:" v-model="form.email">
-                <input type="password" id="password" placeholder="Senha Usuario:" v-model="form.password">-->
-
-                <input type="text" id="razao_social" placeholder="Razão Social:" v-model="form.razao_social">
-                <input type="text" id="cnpj" placeholder="CNPJ:" v-model="form.cnpj" @input="formatCNPJ">
-                <input type="number" id="ie" placeholder="Inscrição Estadual:" v-model="form.ie">
-                <input type="number" id="im" placeholder="Inscrição Municipal:" v-model="form.im">
-                <input type="text" id="telefone" placeholder="Telefone Empresa:" v-model="form.telefone" @input="formatTelefone">
-                <input type="text" id="cidade" placeholder="Cidade Empresa:" v-model="form.cidade">
-                <input type="text" id="endereco" placeholder="Endereco Empresa:" v-model="form.endereco">
-                <input type="text" id="bairro" placeholder="Bairro Empresa:" v-model="form.bairro">
-                <p style="color: red; font-size:13px;" v-if="errors.razao_social">{{ errors.razao_social }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.cnpj">{{ errors.cnpj }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.ie">{{ errors.ie }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.im">{{ errors.im }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.telefone">{{ errors.telefone }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.cidade">{{ errors.cidade }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.endereco">{{ errors.endereco }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.bairro">{{ errors.bairro }}</p>
-                <Link href="/form/login">Voltar</Link>
-                <button>Cadastrar</button>
-            </form>
+            <a style="padding:10px; border: 1px solid white; border-radius:10px; background-color:#014552; color: white" href="https://w.app/DyF7jh" target="_blank">Entre em Contato</a>
         </div>
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-right">
                     <h1>Ola, Meu Amigo(a)</h1>
-                    <p>Faça O Seu Cadastro para Iniciarmos.</p>
+                    <p>Bem Vindo Ao Cronos, Seu Controle de Consultas.</p>
                 </div>
             </div>
         </div>
@@ -38,52 +16,13 @@
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/vue3';
-import { onMounted } from 'vue';
-import { defineProps } from 'vue';
 
-const props = defineProps({
-    errors: Array,
-})
+import { onMounted } from 'vue';
 
 onMounted(() => {
-    document.title = 'Cadastro de Empresas';
+  document.title = 'Ente em Contato';
 });
 
-const form = useForm({
-    name: '',
-    email: '',
-    password: '',
-    razao_social: '',
-    cnpj: '',
-    ie: '',
-    im: '',
-    bairro: '',
-    cidade: '',
-    endereco: '',
-    telefone: '',
-});
-
-const formatCNPJ = (event) => {
-    let value = event.target.value.replace(/\D/g, '');
-    if (value.length > 14) {
-        value = value.slice(0, 14);
-    }
-    value = value.replace(/^(\d{2})(\d)/, '$1.$2');
-    value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
-    value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
-    value = value.replace(/(\d{4})(\d)/, '$1-$2');
-    event.target.value = value;
-    form.cnpj = value;
-};
-
-const formatTelefone = (event) => {
-    let value = event.target.value.replace(/\D/g, '');
-    value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
-    value = value.replace(/(\d)(\d{4})$/, '$1-$2');
-    event.target.value = value;
-    form.telefone = value;
-};
 
 </script>
 
@@ -99,6 +38,11 @@ const formatTelefone = (event) => {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
 }
 
 body {
@@ -119,9 +63,9 @@ body {
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 600px;
-    top: 50px;
-    left: 25%;
+    min-height: 480px;
+    top: 100px;
+    left: 26%;
 }
 
 .container p {
@@ -183,10 +127,10 @@ body {
 }
 
 .form-container {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    transition: all 0.6s ease-in-out;
+    
+display:  flex;
+justify-content: center;
+align-items: center;
 }
 
 .sign-in {
@@ -214,13 +158,11 @@ body {
 }
 
 @keyframes move {
-    0%,
-    49.99% {
+    0%, 49.99% {
         opacity: 0;
         z-index: 1;
     }
-    50%,
-    100% {
+    50%, 100% {
         opacity: 1;
         z-index: 5;
     }

@@ -19,6 +19,13 @@ use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
+
+
+    public function contato() {
+        return Inertia::render('Contato');
+    }
+
+
     public function formLogin() // formulario de login
     {
 
@@ -61,25 +68,31 @@ class LoginController extends Controller
         }
     }
 
+
+
+
+
+
+
     public function formSenha()
     {
 
         return Inertia::render('UpdateSenha');
     }
 
+
+
+
+
+
+
+
     public function updateSenha(Request $request)
     {
-
-
-
-
         $user = User::find(Session::get('updateSenhaId'));
-
         $user->password = Hash::make($request->password);
         $user->primeiro_acesso = false; 
         $user->save();
-
-        sleep(2);
 
         Session::forget('updateSenhaId');
 
@@ -107,10 +120,31 @@ class LoginController extends Controller
 
     public function createUserEmpresa(Request $request)
     {
+        $request->validate([
+            'razao_social' => 'required|string|max:255',
+            'cnpj' => ['required', 'string', 'unique:empresas,cnpj'],
+            'ie' => 'nullable|max:50',
+            'im' => 'nullable|max:50',
+            'telefone' => 'required|max:20',
+            'endereco' => 'required|string|max:255',
+            'cidade' => 'required|string|max:100',
+            'bairro' => 'required|string|max:100',
+        ], [
+            'razao_social.required' => 'A razão social é obrigatória.',
+            'cnpj.required' => 'O CNPJ é obrigatório.',
+            'cnpj.cnpj' => 'O CNPJ informado não é válido.',
+            'cnpj.unique' => 'O CNPJ informado já está cadastrado.',
+            'telefone.required' => 'O telefone é obrigatório.',
+            'endereco.required' => 'O endereço é obrigatório.',
+            'cidade.required' => 'A cidade é obrigatória.',
+            'bairro.required' => 'O bairro é obrigatório.',
+        ]);
+
+
         DB::transaction(function () use ($request) { // reverte caso algum inserção falhe
             $empresa = Empresa::create([
                 'razao_social' => $request->razao_social,
-                'cnpj' => $request->cnpj,
+                'cnpj' => str_replace(['.', '-', '/'], '', $request->cnpj),
                 'ie' => $request->ie,
                 'im' => $request->im,
                 'telefone' => $request->telefone,
@@ -143,13 +177,18 @@ class LoginController extends Controller
             //   'empresa_id' => $empresa->id,
             //   ]);
 
+
+
             User_Empresa::create([
                 'user_id' => $user->id,
                 'empresa_id' => $empresa->id,
             ]);
         });
 
-        return redirect('/form/login');
+
+
+
+        return redirect('/contato');
     }
 
 

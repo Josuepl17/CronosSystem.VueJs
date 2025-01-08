@@ -29,6 +29,8 @@ Route::get('/gerenciar/filial', [LoginController::class, 'gerenciarFiliais']);
 Route::get('/editar/filial/{id}', [LoginController::class, 'editarFilial']);
 Route::get('/atualizar/senha', [LoginController::class, 'formSenha']);
 Route::post('/update/senha', [LoginController::class, 'updateSenha']);
+Route::get('/contato', [LoginController::class, 'contato']);
+
 
 Route::middleware(['auth', 'web'])->group(function () {
 

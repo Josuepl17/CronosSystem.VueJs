@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('empresas', function (Blueprint $table) {
             $table->id();
             $table->string('razao_social');
-            $table->bigInteger('cnpj')->unique();
+            $table->string('cnpj')->unique();
             $table->bigInteger('ie')->unique()->nullable();
             $table->bigInteger('im')->unique()->nullable();
-            $table->bigInteger('telefone');
+            $table->string('telefone');
             $table->string('endereco');
             $table->string('cidade');
             $table->string('bairro');
