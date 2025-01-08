@@ -238,10 +238,14 @@ class PacientesController extends Controller
         ]);
 
 
+
+
         $dados = $request->all();
+        $dados['descricao'] = Crypt($dados->descricao);
         $dados['paciente_id'] = FacadesSession::get('id_paciente');
         $dados['empresa_id'] = Session::get('empresa_id');
         $dados['medico_id'] = Session::get('id');
+
 
 
          Tramite::updateOrCreate(
