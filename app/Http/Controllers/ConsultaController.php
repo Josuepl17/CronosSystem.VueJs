@@ -28,7 +28,7 @@ class ConsultaController extends Controller
             END
         ")
                 ->orderBy('date', 'asc')
-                ->orderBy('hora', 'asc')
+                ->orderBy('horainicial', 'asc')
                 ->get();
         } else {
 
@@ -41,7 +41,7 @@ class ConsultaController extends Controller
             END
         ")
                 ->orderBy('date', 'asc')
-                ->orderBy('hora', 'asc')
+                ->orderBy('horainicial', 'asc')
                 ->get();
         }
 
@@ -166,10 +166,18 @@ class ConsultaController extends Controller
     public function createConsultas(Request $request)
     {
 
-        $existingConsulta = ConsultaPaciente::where('date', $request->date)
-            ->where('hora', $request->hora)
-            ->where('medico_id', $request->medico_id)
-            ->first();
+            $existingConsulta = ConsultaPaciente::where('date', $request->date)
+                ->where('medico_id', $request->medico_id)
+                ->where('status', 'Agendado')
+                ->where(function ($query) use ($request) {
+                    $query->whereBetween('horainicial', [$request->horainicial, $request->horafinal])
+                          ->orWhereBetween('horafinal', [$request->horainicial, $request->horafinal])
+                          ->orWhere(function ($query) use ($request) {
+                              $query->where('horainicial', '<=', $request->horainicial)
+                                    ->where('horafinal', '>=', $request->horafinal);
+                          });
+                })
+                ->first();
 
         if ($existingConsulta) {
             return back()->withErrors(['hora' => 'Já existe uma consulta agendada para este médico nesta data e hora.'])->withInput();

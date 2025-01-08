@@ -14,7 +14,8 @@
                             <th>Nome Medico</th>
                             <th>Status</th>
                             <th>Data Consulta</th>
-                            <th>Hora Consulta</th>
+                            <th>Hora Inicial</th>
+                            <th>Hora Final</th>
                             <th>Motivo Status</th>
                             <th style="width: 40px;">X</th>
                             <th style="width: 40px;">X</th>
@@ -37,7 +38,8 @@
                                 {{ consulta.status }}
                             </td>
                             <td>{{ consulta.date }}</td>
-                            <td>{{ consulta.hora }}</td>
+                            <td>{{ consulta.horainicial }}</td>
+                            <td>{{ consulta.horafinal }}</td>
                             <td>{{ consulta.motivo_status }}</td>
                             <td>
                                 <Link class="status-concluido" :href="'/concluir/consulta/' + consulta.identificacao">Concluir</Link>

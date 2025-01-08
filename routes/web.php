@@ -149,85 +149,11 @@ Route::get('/3', function () {
     $h->save();
 });
 
-Route::get('/4', function () {
-    $d = new Medico();
-    $d->nome = 'Raianeone';
-    $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT);
-    $d->crp = 'CRP-' . rand(1000, 9999);
-    $d->especialidade = 'Psicologo';
-    $d->telefone = rand(90000, 99999) . rand(1000, 9999);
-    $d->email = 'raiane1@gmail.com';
-    $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
-    $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
-    $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
-    $d->empresa_id = 1;
-    $d->save();
 
-    $u = new User();
-    $u->id = $d->id;
-    $u->name = 'Raianeone';
-    $u->email = 'raiane1@gmail.com';
-    $u->password = bcrypt('123456');
-    $u->empresa_id = 1;
-    $u->save();
 
-    $h = new User_Empresa();
-    $h->user_id = $d->id;
-    $h->empresa_id = 1;
-    $h->save();
-});
 
-Route::get('/1', function () {
-    $d = new Medico();
-    $d->nome = 'Henrique';
-    $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT);
-    $d->crp = 'CRP-' . rand(1000, 9999);
-    $d->especialidade = 'Psicologo';
-    $d->telefone = rand(90000, 99999) . rand(1000, 9999);
-    $d->email = 'henrique@gmail.com';
-    $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
-    $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
-    $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
-    $d->save();
 
-    $u = new User();
-    $u->id = $d->id;
-    $u->name = 'Henrique';
-    $u->email = 'henrique@gmail.com';
-    $u->password = bcrypt('123456');
-    $u->empresa_id = 3;
-    $u->save();
 
-    $h = new User_Empresa();
-    $h->user_id = $d->id;
-    $h->empresa_id = 3;
-    $h->save();
-});
 
-Route::get('/2', function () {
-    $d = new Medico();
-    $d->nome = 'Raiane';
-    $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT);
-    $d->crp = 'CRP-' . rand(1000, 9999);
-    $d->especialidade = 'Psicologo';
-    $d->telefone = rand(90000, 99999) . rand(1000, 9999);
-    $d->email = 'raiane@gmail.com';
-    $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
-    $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
-    $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
-    $d->empresa_id = 1;
-    $d->save();
 
-    $u = new User();
-    $u->id = $d->id;
-    $u->name = 'Raiane';
-    $u->email = 'raiane@gmail.com';
-    $u->password = bcrypt('123456');
-    $u->empresa_id = 1;
-    $u->save();
 
-    $h = new User_Empresa();
-    $h->user_id = $d->id;
-    $h->empresa_id = 1;
-    $h->save();
-});
