@@ -71,10 +71,6 @@
             <span>Consultas</span>
           </Link>
 
-          <a href="#" :class="{ 'active-link': $page.url === '#' }">
-            <img src="/images/agenda.png" alt="" />
-            <span>Agenda</span>
-          </a>
 
           <Link
             href="/medicos"

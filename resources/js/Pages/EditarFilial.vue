@@ -58,7 +58,7 @@
     <!----------------------------------------------------------------------------------->
     <div id="conteudo">
       <div class="filial">
-        <form @submit.prevent="form.post('/fili')">
+        <form @submit.prevent="form.post('/update/filial')">
           <div id="pessoais">
             <div class="form-group">
               <label for="nome">Razão Social</label>
@@ -115,7 +115,6 @@
             <div class="form-group">
               <label for="telefone">Telefone</label>
               <input
-                @input="formatTelefone"
                 v-model="form.telefone"
                 type="number"
                 id="telefone"
@@ -158,7 +157,7 @@
               />
             </div>
             <div class="fechar-salvar">
-              <button type="button" class="fechar">Fechar</button>
+              <Link href="/gerenciar/filial">Voltar</Link>
               <button type="submit" class="salvar">Salvar</button>
             </div>
           </div>
@@ -214,6 +213,7 @@ const props = defineProps({
 });
 
 const form = useForm({
+  id: props.filial.id,
   razao_social: props.filial.razao_social,
   cnpj: props.filial.cnpj,
   bairro: props.filial.bairro,

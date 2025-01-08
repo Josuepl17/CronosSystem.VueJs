@@ -260,10 +260,28 @@ class LoginController extends Controller
 
         $filial = Empresa::find($request->id); // Dados para alterar informações da empresa
 
+        return Inertia::render('EditarFilial', compact('filial', 'outrosfilial', 'usuariosfilial'));
+    }
+
+
+    public function updateFilial (Request $request) {
+        
+        $empresa = Empresa::find($request->id);
+
+        $empresa->update($request->only([
+            'razao_social',
+            'cnpj',
+            'ie',
+            'im',
+            'telefone',
+            'endereco',
+            'cidade',
+            'bairro'
+        ]));
+
+        return redirect('/gerenciar/filial');
         
 
-
-        return Inertia::render('EditarFilial', compact('filial', 'outrosfilial', 'usuariosfilial'));
     }
 
 

@@ -27,6 +27,7 @@ Route::get('/form/user/empresas', [LoginController::class, 'formUserEmpresa']);
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/gerenciar/filial', [LoginController::class, 'gerenciarFiliais']);
 Route::get('/editar/filial/{id}', [LoginController::class, 'editarFilial']);
+Route::post('/update/filial', [LoginController::class, 'updateFilial']);
 Route::get('/atualizar/senha', [LoginController::class, 'formSenha']);
 Route::post('/update/senha', [LoginController::class, 'updateSenha']);
 Route::get('/contato', [LoginController::class, 'contato']);

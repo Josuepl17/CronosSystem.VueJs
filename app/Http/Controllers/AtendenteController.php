@@ -66,7 +66,7 @@ class AtendenteController extends Controller
             ['user_id' => $user->id, 'empresa_id' => $user->empresa_id]
         );
     
-        return $this->listaAtendentes();
+        return redirect('/atendentes');
 
     }
 

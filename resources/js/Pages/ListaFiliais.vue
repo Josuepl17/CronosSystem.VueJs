@@ -1,6 +1,8 @@
 <template>
   <div id="conteiner-geral">
-    <div id="nav"></div>
+    <div id="nav">
+      <Link href="/dash">Voltar</Link>
+    </div>
     <div id="conteudo">
       <div class="filial">
         <h2>Lista de Filiais</h2>
@@ -9,8 +11,8 @@
             <tr>
               <th>ID</th>
               <th>Nome</th>
-              <th>Localização</th>
-              <th>Ação</th>
+              <th>CNPJ</th>
+              <th>X</th>
             </tr>
           </thead>
           <tbody>
@@ -51,6 +53,15 @@ onMounted(() => {
   margin: 0px;
 }
 
+a{
+margin-left: 05px;
+color: rgb(0, 0, 0);
+padding: 05px;
+background: white;
+border-radius: 04px ;
+
+}
+
 :root {
   --azul-escuro: #012841;
   --azul-claro: #00657c;
@@ -63,6 +74,9 @@ onMounted(() => {
 }
 
 #nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   height: 8%;
   background-color: var(--azul-escuro);
 }

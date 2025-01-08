@@ -24,8 +24,8 @@
             </div>
 
             <div class="form-group">
-              <label for="cpf">CPF/RG</label>
-              <input v-model="form.cpf" type="text" id="cpf" placeholder="CPF/RG">
+              <label for="cpf">CPF</label>
+              <input v-model="form.cpf" type="text" id="cpf" placeholder="CPF" >
               <p style="color: red; font-size:13px;" v-if="errors.cpf">{{ errors.cpf }}</p>
             </div>
 
@@ -94,6 +94,20 @@ const props = defineProps({
   errors: Array,
   medicos: Array,
 });
+
+
+function formatCPF() {
+  form.cpf.value = cpf.value
+    .replace(/\D/g, '') // Remove tudo que não é número
+    .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o primeiro ponto
+    .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o segundo ponto
+    .replace(/(\d{3})(\d{1,2})$/, '$1-$2') // Adiciona o traço
+    .slice(0, 14); // Limita o tamanho ao formato do CPF
+}
+
+
+
+
 </script>
 
 <style scoped>
