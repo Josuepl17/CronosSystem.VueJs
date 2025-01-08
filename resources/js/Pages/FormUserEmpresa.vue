@@ -1,27 +1,17 @@
 <template lang="">
+
     <div class="container" id="container">
         <div class="form-container sign-in">
-            <form @submit.prevent="form.post('/create/user/empresas')">
-                <!-- <input type="text" id="name" placeholder="Nome Usuario:" v-model="form.name">
-                <input type="email" id="email" placeholder="Email Usuario:" v-model="form.email">
-                <input type="password" id="password" placeholder="Senha Usuario:" v-model="form.password">-->
-
+            <form @submit.prevent="submitForm">
                 <input type="text" id="razao_social" placeholder="Razão Social:" v-model="form.razao_social">
-                <input type="text" id="cnpj" placeholder="CNPJ:" v-model="form.cnpj" @input="formatCNPJ">
+                <input type="text" id="cnpj" placeholder="CNPJ:" v-model="formattedCNPJ" @input="formatCNPJ">
                 <input type="number" id="ie" placeholder="Inscrição Estadual:" v-model="form.ie">
                 <input type="number" id="im" placeholder="Inscrição Municipal:" v-model="form.im">
-                <input type="text" id="telefone" placeholder="Telefone Empresa:" v-model="form.telefone" @input="formatTelefone">
+                <input type="text" id="telefone" placeholder="Telefone Empresa:" v-model="formattedTelefone" @input="formatTelefone">
                 <input type="text" id="cidade" placeholder="Cidade Empresa:" v-model="form.cidade">
                 <input type="text" id="endereco" placeholder="Endereco Empresa:" v-model="form.endereco">
                 <input type="text" id="bairro" placeholder="Bairro Empresa:" v-model="form.bairro">
-                <p style="color: red; font-size:13px;" v-if="errors.razao_social">{{ errors.razao_social }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.cnpj">{{ errors.cnpj }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.ie">{{ errors.ie }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.im">{{ errors.im }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.telefone">{{ errors.telefone }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.cidade">{{ errors.cidade }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.endereco">{{ errors.endereco }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.bairro">{{ errors.bairro }}</p>
+
                 <Link href="/form/login">Voltar</Link>
                 <button>Cadastrar</button>
             </form>
@@ -35,11 +25,21 @@
             </div>
         </div>
     </div>
+
+                <p style="color: red; font-size:13px;" v-if="errors.razao_social">{{ errors.razao_social }}</p>
+                <p style="color: red; font-size:13px;" v-if="errors.cnpj">{{ errors.cnpj }}</p>
+                <p style="color: red; font-size:13px;" v-if="errors.ie">{{ errors.ie }}</p>
+                <p style="color: red; font-size:13px;" v-if="errors.im">{{ errors.im }}</p>
+                <p style="color: red; font-size:13px;" v-if="errors.telefone">{{ errors.telefone }}</p>
+                <p style="color: red; font-size:13px;" v-if="errors.cidade">{{ errors.cidade }}</p>
+                <p style="color: red; font-size:13px;" v-if="errors.endereco">{{ errors.endereco }}</p>
+                <p style="color: red; font-size:13px;" v-if="errors.bairro">{{ errors.bairro }}</p>
+
 </template>
 
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { defineProps } from 'vue';
 
 const props = defineProps({
@@ -64,6 +64,9 @@ const form = useForm({
     telefone: '',
 });
 
+const formattedCNPJ = ref('');
+const formattedTelefone = ref('');
+
 const formatCNPJ = (event) => {
     let value = event.target.value.replace(/\D/g, '');
     if (value.length > 14) {
@@ -74,7 +77,8 @@ const formatCNPJ = (event) => {
     value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
     value = value.replace(/(\d{4})(\d)/, '$1-$2');
     event.target.value = value;
-    form.cnpj = value;
+    formattedCNPJ.value = value;
+    form.cnpj = event.target.value.replace(/\D/g, '');
 };
 
 const formatTelefone = (event) => {
@@ -82,9 +86,13 @@ const formatTelefone = (event) => {
     value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
     value = value.replace(/(\d)(\d{4})$/, '$1-$2');
     event.target.value = value;
-    form.telefone = value;
+    formattedTelefone.value = value;
+    form.telefone = event.target.value.replace(/\D/g, '');
 };
 
+const submitForm = () => {
+    form.post('/create/user/empresas');
+};
 </script>
 
 <style scoped>

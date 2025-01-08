@@ -30,12 +30,14 @@
 </template>
 
 <script setup>
+import { Link } from "@inertiajs/vue3";
+import { onMounted } from "vue";
+
 const props = defineProps({
   todasfiliais: Array,
 });
 
-import { Link } from "vue";
-import { onMounted } from "vue";
+
 
 onMounted(() => {
   document.title = "Filiais";

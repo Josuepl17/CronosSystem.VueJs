@@ -2,50 +2,62 @@
 
     <div class="container" id="container">
         <div class="form-container sign-in">
-            <a style="padding:10px; border: 1px solid white; border-radius:10px; background-color:#014552; color: white" href="https://w.app/DyF7jh" target="_blank">Entre em Contato</a>
+            <form>
+                
+                <a style="padding:20px; border: 1px solid white; border-radius:10px; background-color:#014552; color: white" href="https://w.app/DyF7jh" target="_blank">Entre em Contato</a>
+
+                <Link style="padding:10px; border: 1px solid white; border-radius:10px; background-color:#014552; color: white" href="/form/login">Volte ao Login</Link>
+  
+            </form>
         </div>
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-right">
-                    <h1>Ola, Meu Amigo(a)</h1>
-                    <p>Bem Vindo Ao Cronos, Seu Controle de Consultas.</p>
+                    <h1>Ola, Meu Amigo(a) Tudo Bem ?</h1>
+                    <p>Voce Criou um Cadastro Com o Novo Sofware, Para ter Acesso, Entre em contato pelo Whatsapp, pelo botão ao Lado e já começe a usar.</p>
                 </div>
             </div>
         </div>
     </div>
-</template>
+  </template>
+  
+  <script setup>
+  import { defineProps } from 'vue';
+  import { onMounted } from 'vue';
+  
+  onMounted(() => {
+  document.title = 'Entre em Contato';
+  });
+  
+  const props = defineProps({
+    errors: Array,
+  });
+  
+  
 
-<script setup>
-
-import { onMounted } from 'vue';
-
-onMounted(() => {
-  document.title = 'Ente em Contato';
-});
-
-
-</script>
-
-<style scoped>
-:root {
+  
+  </script>
+  
+  <style scoped>
+  :root {
     --azul-escuro: #012841;
     --azul-claro: #014552;
     --cinza-escuro: #212529;
-}
-
-* {
+  }
+  
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-}
-
-h1 {
+  }
+  
+  h1 {
     font-family: 'Times New Roman', Times, serif;
     font-size: 16px;
-}
-
-body {
+  }
+  
+  body {
     background-color: #c9d6ff;
     background: linear-gradient(to right, #e2e2e2, #c9d6ff);
     display: flex;
@@ -53,9 +65,9 @@ body {
     justify-content: center;
     flex-direction: column;
     height: 100vh;
-}
-
-.container {
+  }
+  
+  .container {
     background-color: #fff;
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
@@ -66,27 +78,27 @@ body {
     min-height: 480px;
     top: 100px;
     left: 26%;
-}
-
-.container p {
+  }
+  
+  .container p {
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 20px 0;
-}
-
-.container span {
+  }
+  
+  .container span {
     font-size: 12px;
-}
-
-.container a {
+  }
+  
+  .container a {
     color: #333;
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
-}
-
-.container button {
+  }
+  
+  .container button {
     background-color: var(--azul-claro);
     color: #fff;
     font-size: 12px;
@@ -98,14 +110,14 @@ body {
     text-transform: uppercase;
     margin-top: 10px;
     cursor: pointer;
-}
-
-.container button.hidden {
+  }
+  
+  .container button.hidden {
     background-color: transparent;
     border-color: #fff;
-}
-
-.container form {
+  }
+  
+  .container form {
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -113,9 +125,9 @@ body {
     flex-direction: column;
     padding: 0 40px;
     height: 100%;
-}
-
-.container input {
+  }
+  
+  .container input {
     background-color: #eee;
     border: none;
     margin: 8px 0;
@@ -124,40 +136,40 @@ body {
     border-radius: 8px;
     width: 100%;
     outline: none;
-}
-
-.form-container {
-    
-display:  flex;
-justify-content: center;
-align-items: center;
-}
-
-.sign-in {
+  }
+  
+  .form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+  }
+  
+  .sign-in {
     left: 0;
     width: 50%;
     z-index: 2;
-}
-
-.container.active .sign-in {
+  }
+  
+  .container.active .sign-in {
     transform: translateX(100%);
-}
-
-.sign-up {
+  }
+  
+  .sign-up {
     left: 0;
     width: 50%;
     opacity: 0;
     z-index: 1;
-}
-
-.container.active .sign-up {
+  }
+  
+  .container.active .sign-up {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
     animation: move 0.6s;
-}
-
-@keyframes move {
+  }
+  
+  @keyframes move {
     0%, 49.99% {
         opacity: 0;
         z-index: 1;
@@ -166,13 +178,13 @@ align-items: center;
         opacity: 1;
         z-index: 5;
     }
-}
-
-.social-icons {
+  }
+  
+  .social-icons {
     margin: 20px 0;
-}
-
-.social-icons a {
+  }
+  
+  .social-icons a {
     border: 1px solid #ccc;
     border-radius: 20%;
     display: inline-flex;
@@ -181,9 +193,9 @@ align-items: center;
     margin: 0 3px;
     width: 40px;
     height: 40px;
-}
-
-.toggle-container {
+  }
+  
+  .toggle-container {
     position: absolute;
     top: 0;
     left: 50%;
@@ -193,14 +205,14 @@ align-items: center;
     transition: all 0.6s ease-in-out;
     border-radius: 150px 0 0 100px;
     z-index: 1000;
-}
-
-.container.active .toggle-container {
+  }
+  
+  .container.active .toggle-container {
     transform: translateX(-100%);
     border-radius: 0 150px 100px 0;
-}
-
-.toggle {
+  }
+  
+  .toggle {
     background-color: var(--azul-claro);
     height: 100%;
     background: --;
@@ -211,13 +223,13 @@ align-items: center;
     width: 200%;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
-}
-
-.container.active .toggle {
+  }
+  
+  .container.active .toggle {
     transform: translateX(50%);
-}
-
-.toggle-panel {
+  }
+  
+  .toggle-panel {
     position: absolute;
     width: 50%;
     height: 100%;
@@ -230,22 +242,24 @@ align-items: center;
     top: 0;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
-}
-
-.toggle-left {
+  }
+  
+  .toggle-left {
     transform: translateX(-200%);
-}
-
-.container.active .toggle-left {
+  }
+  
+  .container.active .toggle-left {
     transform: translateX(0);
-}
-
-.toggle-right {
+  }
+  
+  .toggle-right {
     right: 0;
     transform: translateX(0);
-}
-
-.container.active .toggle-right {
+  }
+  
+  .container.active .toggle-right {
     transform: translateX(200%);
-}
-</style>
+  }
+  </style>
+  
+  

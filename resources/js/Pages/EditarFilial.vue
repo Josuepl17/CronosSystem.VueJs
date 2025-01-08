@@ -70,26 +70,65 @@
               />
             </div>
             <div class="form-group">
-              <label for="cnpj">CPF/RG</label>
+              <label for="cnpj">CNPJ</label>
               <input
                 v-model="form.cnpj"
                 type="number"
                 id="cnpj"
                 placeholder="CNPJ:"
+
               />
               <p style="color: red; font-size: 13px" v-if="errors.cnpj">
                 {{ errors.cnpj }}
               </p>
             </div>
+
+
+            <div class="form-group">
+              <label for="ie">Inscrição Estadual:</label>
+              <input
+                v-model="form.ie"
+                type="number"
+                id="ie"
+                placeholder="Inscrição Estadual:"
+              />
+              <p style="color: red; font-size: 13px" v-if="errors.ie">
+                {{ errors.ie }}
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label for="im">Inscrição Municipal:</label>
+              <input
+              v-model="form.im"
+              type="number"
+              id="im"
+              placeholder="Inscrição Municipal:"
+              />
+              <p style="color: red; font-size: 13px" v-if="errors.im">
+              {{ errors.im }}
+              </p>
+            </div>
+
+
+
             <div class="form-group">
               <label for="telefone">Telefone</label>
               <input
+                @input="formatTelefone"
                 v-model="form.telefone"
                 type="number"
                 id="telefone"
                 placeholder="Telefone:"
               />
             </div>
+           
+          </div>
+
+
+
+          <div id="endereco">
+
             <div class="form-group">
               <label for="email">Endereço</label>
               <input
@@ -99,8 +138,7 @@
                 placeholder="Endereço"
               />
             </div>
-          </div>
-          <div id="endereco">
+
             <div class="form-group">
               <label for="endereco">Cidade</label>
               <input
@@ -182,7 +220,12 @@ const form = useForm({
   cidade: props.filial.cidade,
   endereco: props.filial.endereco,
   telefone: props.filial.telefone,
+  ie: props.filial.ie,
+  im: props.filial.im,
 });
+
+
+
 
 const adicionar = useForm({
   users: [],

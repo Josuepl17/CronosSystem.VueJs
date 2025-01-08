@@ -120,9 +120,10 @@ class LoginController extends Controller
 
     public function createUserEmpresa(Request $request)
     {
+
         $request->validate([
             'razao_social' => 'required|string|max:255',
-            'cnpj' => ['required', 'string', 'unique:empresas,cnpj'],
+            'cnpj' => 'required|unique:empresas,cnpj|min:10',
             'ie' => 'nullable|max:50',
             'im' => 'nullable|max:50',
             'telefone' => 'required|max:20',
@@ -147,7 +148,7 @@ class LoginController extends Controller
                 'cnpj' => str_replace(['.', '-', '/'], '', $request->cnpj),
                 'ie' => $request->ie,
                 'im' => $request->im,
-                'telefone' => $request->telefone,
+                'telefone' => str_replace(['(', ')', ' ', '-'], '', $request->telefone),
                 'endereco' => $request->endereco,
                 'cidade' => $request->cidade,
                 'bairro' => $request->bairro,
@@ -215,10 +216,8 @@ class LoginController extends Controller
     // altera a filial selecionada na cluna do usuario registra na sessão na proxima função.
     public function mudarFilial(Request $request)
     {
-
         \App\Models\User::where('id', Auth::id())
             ->update(['empresa_id' => $request->id]);
-
         return redirect('/');
     }
 
@@ -234,6 +233,7 @@ class LoginController extends Controller
         $empresa = Empresa::find($empresa_id);
         $filial_id = $empresa->filial_id;
         $todasfiliais = Empresa::where('filial_id', $filial_id)->get(); // Busca todas as empresas que tiverem filial_id da  minha empresa selecionada, Isso trará a matriz de todas as filiais.
+       // dd($todasfiliais);
         return Inertia::render('ListaFiliais', compact('todasfiliais'));
     }
 
@@ -259,6 +259,8 @@ class LoginController extends Controller
         Session::put('empresa_selecionada', $request->id);
 
         $filial = Empresa::find($request->id); // Dados para alterar informações da empresa
+
+        
 
 
         return Inertia::render('EditarFilial', compact('filial', 'outrosfilial', 'usuariosfilial'));
