@@ -181,6 +181,13 @@ class PacientesController extends Controller
 
         $tramites_paciente = $paciente->tramites()->where('medico_id', Session::get('id'))->get(); // retorna array 
 
+        foreach ($tramites_paciente as $tramite) {
+            $tramite->descricao = Crypt::decrypt($tramite->descricao);
+        }
+
+       // dd($tramite);
+
+
         $pacienteinfo = new \stdClass();
         $pacienteinfo->idadepaciente = Carbon::parse($paciente->DataNascimento)->age;
         $pacienteinfo->proximaconsulta = $consultas->first() ? $consultas->first()->date : null;
@@ -241,7 +248,7 @@ class PacientesController extends Controller
 
 
         $dados = $request->all();
-        $dados['descricao'] = Crypt($dados->descricao);
+        $dados['descricao'] = Crypt::encrypt($dados['descricao']);
         $dados['paciente_id'] = FacadesSession::get('id_paciente');
         $dados['empresa_id'] = Session::get('empresa_id');
         $dados['medico_id'] = Session::get('id');
@@ -265,7 +272,7 @@ class PacientesController extends Controller
         
 
 
-        Session::put('message', "Criado Com Sucesso ");
+        Session::flash('message', "Criado Com Sucesso ");
 
         return Inertia::location('/detalhes/paciente'); // faz ele recarregar a pagina
     }
