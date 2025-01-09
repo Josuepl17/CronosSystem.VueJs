@@ -7,6 +7,7 @@ use App\Models\ArquivoPaciente;
 use App\Models\ConsultaPaciente;
 use App\Models\DetalhePaciente;
 use App\Models\Empresa;
+use App\Models\Medicamento_Paciente;
 use App\Models\Medico_Paciente;
 use App\Models\Medico;
 use App\Models\Paciente;
@@ -185,7 +186,7 @@ class PacientesController extends Controller
             $tramite->descricao = Crypt::decrypt($tramite->descricao);
         }
 
-       // dd($tramite);
+        $medicamentos = Medicamento_Paciente::where('paciente_id', $id_paciente)->get();
 
 
         $pacienteinfo = new \stdClass();
@@ -196,7 +197,7 @@ class PacientesController extends Controller
 
 
 
-        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente',  'consultas', 'arquivos', 'pacienteinfo'));
+        return Inertia::render('DetalhesPacientes', compact('detalhes', 'tramites_paciente', 'paciente',  'consultas', 'arquivos', 'pacienteinfo', 'medicamentos'));
     }
 
 
@@ -223,6 +224,27 @@ class PacientesController extends Controller
 
         return Inertia::location('/detalhes/paciente');
 
+    }
+
+
+    public function createMedicamentos(Request $request) {
+
+        $dados = $request->all();
+        $dados['paciente_id'] = Session::get('id_paciente');
+        $dados['empresa_id'] = Session::get('empresa_id');
+        $dados['medico_id'] = Session::get('id');
+
+        Medicamento_Paciente::create($dados);
+
+        return redirect('/detalhes/paciente');
+        
+
+    }
+
+
+    public function deleteMedicamentos(Request $request) {
+        Medicamento_Paciente::destroy($request->id);
+        return redirect('/detalhes/paciente');
     }
 
 

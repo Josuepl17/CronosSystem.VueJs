@@ -26,8 +26,9 @@
             <div @click="abrirtramite(tramites.id, tramites.titulo, tramites.descricao)" class="publicacao" v-for="(tramites) in tramites_paciente" :key="tramites.id">
               <div class="publicacao-header">
                 <h3 class="publicacao-titulo">{{ tramites.titulo }}</h3>
-                <span class="publicacao-id">ID: {{ tramites.id }}</span>
+                
               </div> <!-- /.publicacao-header -->
+
               <div class="publicacao-descricao">
                 <p>{{ tramites.descricao }}</p>
               </div> <!-- /.publicacao-descricao -->
@@ -38,6 +39,9 @@
 <!--------------------------------------LADO DIREITO---------------------------------------->
 
           <div id="lado-direito">
+
+
+            
             <div class="box-detalhes">
               <div class="box-info">
                 <p>Idade do Paciente:</p>
@@ -56,6 +60,44 @@
                 <p>{{ props.pacienteinfo.proximaconsulta }}</p>
               </div> <!-- /.box-info -->
             </div> <!-- /.box-detalhes -->
+
+            <div style="height: 330px;" class="box-detalhes">
+
+              <div class="box-info">
+              <div id="tabela"> 
+              <table class="minimal-table"> 
+                <thead> 
+                <tr style="position: sticky; top: 0; background-color: white;">
+                <th>#</th> 
+                <th >Medicamento Prescrito:</th>
+                <th >X</th>  
+                </tr> 
+                </thead> 
+                <tbody> 
+                <tr v-for="(medicamento) in medicamentos" :key="medicamento.id"> 
+                <td>{{ medicamento.id }}</td> 
+                <td>{{ medicamento.medicamento }}</td> 
+                <td><Link class="delete" :href="'/delete/medicamento/' + medicamento.id" style="font-size: 12px; padding: 2px 5px;">X</Link></td>
+                </tr> 
+                </tbody> 
+              </table> 
+              </div> <!-- /#tabela -->
+              </div> <!-- /.box-info -->
+
+              <form @submit.prevent="formMedicamento.post('/create/medicamento')">
+            <div class="form-group">
+              <input v-model="formMedicamento.medicamento" type="text" id="motivo" placeholder="Medicamento"/>
+            </div> <!-- /.form-group -->
+            <button id="salvar" type="submit">Salvar</button>
+            
+            
+
+            </form>
+              
+            </div> <!-- /.box-detalhes -->
+
+
+
           </div> <!-- /#lado-direito -->
         </div> <!-- /#caixa -->
       </form>
@@ -143,10 +185,10 @@
 <script setup>
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
-import { onMounted } from 'vue';
+import { onMounted } from "vue";
 
 onMounted(() => {
-  document.title = 'Detalhes do Paciente';
+  document.title = "Detalhes do Paciente";
 });
 
 const props = defineProps({
@@ -156,9 +198,13 @@ const props = defineProps({
   message: String,
   consultas: Array,
   arquivos: Array,
-  errors:Array,
+  errors: Array,
   pacienteinfo: Object,
+  medicamentos: Array,
+});
 
+const formMedicamento = useForm({
+  medicamento: "",
 });
 
 function formatarData(data) {
@@ -166,10 +212,6 @@ function formatarData(data) {
   const [ano, mes, dia] = datePart.split("-");
   return `${dia}/${mes}/${ano}`;
 }
-
-
-
-
 
 const arquivosSelecionados = ref([]);
 
@@ -262,9 +304,6 @@ const fechararquivos = () => {
   }
 }
 
-
-
-
 @keyframes fade-out {
   from {
     opacity: 1;
@@ -274,11 +313,6 @@ const fechararquivos = () => {
     visibility: hidden;
   }
 }
-
-
-
-
-
 </style>
 
 <style>
@@ -286,6 +320,7 @@ const fechararquivos = () => {
   width: 90%;
   display: flex;
   border-radius: 8px;
+  flex-direction: column;
   margin-bottom: 15px;
   background-color: #f9f9f9;
   padding: 20px;
@@ -418,8 +453,6 @@ form {
   padding: 6px;
 }
 
-
-
 #conteiner-texto {
   width: 100%;
   height: 80%;
@@ -464,20 +497,22 @@ textarea {
   display: flex;
   width: 34%;
   height: 100%;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 
 .box-detalhes {
   width: 100%;
-  height: 200px;
+  height: 230px;
   background-color: #ffffff;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   gap: 8px;
+  margin-bottom: 10px;
 }
 
 .box-info {
@@ -488,6 +523,9 @@ textarea {
   color: #333;
   border-bottom: 1px solid #f0f0f0;
   padding: 5px 0;
+  flex-direction: column;
+  overflow: auto;
+  height: 100%;
 }
 
 .box-info:last-child {
