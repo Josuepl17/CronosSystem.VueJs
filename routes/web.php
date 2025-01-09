@@ -32,6 +32,8 @@ Route::get('/atualizar/senha', [LoginController::class, 'formSenha']);
 Route::post('/update/senha', [LoginController::class, 'updateSenha']);
 Route::get('/contato', [LoginController::class, 'contato']);
 
+Route::get('/form/verificar/consulta', [ConsultaController::class, 'formVerificarConsulta']); // LiNK para Paciente
+Route::post('/verificar/consulta', [ConsultaController::class, 'VerificarConsulta']); // LiNK para Paciente
 
 Route::middleware(['auth', 'web'])->group(function () {
 
