@@ -2,6 +2,19 @@
   <Layout>
     <template v-slot:conteudo>
 
+<nav>
+
+  <div class="dropdown">
+    <button class="dropdown-button">Opções</button>
+    <div class="dropdown-content">
+      <a href="#opcao1">Opção 1</a>
+      <a href="#opcao2">Opção 2</a>
+      <a href="#opcao3">Opção 3</a>
+    </div>
+  </div>
+
+</nav>
+
 <!--------------------------------------LADO ESQUERDO---------------------------------------->
 
       <form @submit.prevent="form.post('/create/paciente/detalhes')">
@@ -61,7 +74,7 @@
               </div> <!-- /.box-info -->
             </div> <!-- /.box-detalhes -->
 
-            <div style="height: 330px;" class="box-detalhes">
+            <div style="height: 300px;" class="box-detalhes">
 
               <div class="box-info">
               <div id="tabela"> 
@@ -263,10 +276,74 @@ const fechararquivos = () => {
 };
 </script>
 
+
+<style scoped >
+
+
+.dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-button {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .dropdown-button:hover {
+      background-color: #0056b3;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #ffffff;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .dropdown-content a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+</style>
+
 <style scoped>
 @import "../Components/css/tabelas.css";
 @import "../Components/css/modal.css";
 @import "../Components/css/botoes.css";
+
+
+nav{
+  display: flex;
+  height: 02%;
+  width: 100%;
+  border-radius: 03px;
+
+}
 
 .notification {
   position: fixed;
@@ -428,8 +505,9 @@ form {
   flex-direction: column;
   align-items: center;
   width: 65%;
-  height: 100%;
+  height: 98%;
   overflow: auto;
+  margin-top: 10px;
 }
 
 #texto-principal {
@@ -496,9 +574,10 @@ textarea {
 #lado-direito {
   display: flex;
   width: 34%;
-  height: 100%;
+  height: 98%;
   justify-content: flex-start;
   flex-direction: column;
+  margin-top: 10px;
 }
 
 .box-detalhes {
