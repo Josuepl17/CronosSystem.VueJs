@@ -142,6 +142,23 @@ class PacientesController extends Controller
 
 
 
+    public function editarPacinte(Request $request) {
+        $id = MeuServico::Decrypted($request->id);
+        $paciente = Paciente::find($id);
+        $medico = Medico_Paciente::where('paciente_id', $id)->pluck('medico_id');
+        $medicosSelect = Medico::wherein('id', $medico)->get();
+     
+
+        $users_id = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
+        $medicos = Medico::whereIn('id', $users_id)->get();
+
+        return Inertia::render('FormPacientes', compact('medicosSelect', 'paciente', 'medicos'));
+
+        
+    }
+
+
+
 
 
 

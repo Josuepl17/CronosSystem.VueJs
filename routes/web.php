@@ -48,6 +48,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::post('/create/paciente', [PacientesController::class, 'createPaciente']);
     Route::get('/detalhes/paciente/{id}', [PacientesController::class, 'sessionPaciente']);
     Route::get('/detalhes/paciente', [PacientesController::class, 'detalhesPacientes']);
+    Route::get('/editar/paciente/{id}', [PacientesController::class, 'editarPacinte']);
     Route::post('/create/paciente/detalhes', [PacientesController::class, 'createDetalhesPacientes']);
     Route::post('/create/medicamento', [PacientesController::class, 'createMedicamentos']);
     Route::get('/delete/medicamento/{id}', [PacientesController::class, 'deleteMedicamentos']);

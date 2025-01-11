@@ -1,124 +1,112 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receituário</title>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
         }
 
-        .receituario {
-            width: 210mm;
-            height: 297mm;
-            padding: 20mm;
-            margin: auto;
-            border: 1px solid #000;
+        .container {
+            width: 800px;
+            height: 100vh;
+            border: 1px solid black;        
+            padding: 20px;
+            position: relative;
             box-sizing: border-box;
+            margin: auto;
         }
 
         .header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 30px;
-            border: 1px solid black;
-            padding: 10px;
-            margin-top: -60px;
+            text-align: center;
+            margin-bottom: 50px;
         }
 
+        .header img {
+            width: 80px;
+            height: auto;
+        }
 
-        .header div {
-            text-align: center;
+        .header h1 {
+            font-size: 24px;
+            margin: 10px 0 5px;
+            color: #004d40;
+        }
+
+        .header p {
             font-size: 14px;
-            line-height: 1.4;
-        }
-
-        .header div strong {
-            display: block;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 20px;
-            margin: 10px 0;
-            border: 1px solid black;
-            padding: 10px;
+            color: #bdbdbd;
         }
 
         .content {
-            font-size: 16px;
-            margin-bottom: 30px;
-            border: 1px solid black;
-            padding: 10px;
-        }
-
-        .content p {
-            margin: 5px 0;
-        }
-
-        .content ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .content ul li {
-            margin-bottom: 10px;
+            width: 80%;
+            height: calc(100% - 150px);
+            margin: 0 auto;
         }
 
         .footer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 90px;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 12px;
+            color: #004d40;
         }
 
-        .footer div {
-            text-align: center;
-            font-size: 14px;
+        .footer .contact-info {
+            margin-bottom: 5px;
         }
 
-        .footer div span {
-            display: block;
-            margin-top: 10px;
-            border-top: 1px solid #000;
-            width: 200px;
-            margin-left: auto;
-            margin-right: auto;
+        .content h1{
+            text-align: end;
         }
+
+
+
     </style>
 </head>
 <body>
-    <div class="receituario">
+    <div class="container">
         <div class="header">
-
-            <div>
-                <strong>SISTEMA ÚNICO DE SAÚDE</strong>
-                GOVERNO DO ESTADO DO ESPÍRITO SANTO
-            </div>
-
+            
+            <h1>Dra. Daniela Santos Barreto</h1>
+            <p>Médica Neurologista - CRM 00.000</p>
         </div>
-        <h1>RECEITUÁRIO</h1>
         <div class="content">
-            <p><strong>PACIENTE:</strong> ADRIANA GABRIELA DA SILVA DE OLIVEIRA</p>
-            <ul>
-                <li>1. ENALAPRIL MALEATO 10MG .............................. 60 COMPRIMIDOS</li>
-                <li>01 (DOSE) 2 VEZES AO DIA / ORAL</li>
-                <li>PERÍODO INDETERMINADO</li>
-            </ul>
+
+            <p>Prescrição:</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto animi omnis autem harum libero, impedit corrupti maxime. Hic, sint nesciunt. Nesciunt excepturi fuga quam inventore facere velit aut quaerat ad.</p>
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <h6>____________________________________________</h6>
+            <p style="color: black;" >Assinatura/Carimbo</p>
+
         </div>
         <div class="footer">
-            <div>
-                <p>DATA: 04/12/2023</p>
+            <div class="contact-info">
+                <p>📞 (00) 3300-0000 | 📱 (00) 99900-0000</p>
+                <p>✉️ atendimento@multiclinic.com</p>
             </div>
-
-            
-            <div>
-                <span>MÉDICO: CARIMBO-CRM</span>
-            </div>
-
+            <p>📍 Rua Brasil, 123 - Centro - Cidade/BR</p>
         </div>
     </div>
 </body>

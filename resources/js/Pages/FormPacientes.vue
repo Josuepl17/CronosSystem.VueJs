@@ -2,7 +2,7 @@
   <Layout>
     <template v-slot:conteudo>
       <div class="fomulario-usuario">
-        <form @submit.prevent="form.post('/create/paciente')">
+        <form @submit.prevent="form.post('/teste')">
           <div id="pessoais">
             <div class="form-group">
               <label for="nome">Nome Completo</label>
@@ -17,11 +17,22 @@
             <div class="form-group">
               <label for="Medico">Médico(s) Responsável(is)</label>
               <select v-model="form.medico" id="medico" multiple>
+
                 <option v-for="medico in props.medicos" :key="medico.id" :value="medico.id">
                   {{ medico.nome }} ({{ medico.especialidade }})
                 </option>
+
+                <option  v-for="medicos in props.medicosSelect" :key="medicos.id" :value="medicos.id" selected >
+                  {{ medicos.nome }} ({{ medicos.especialidade }})
+                </option>
+
               </select>
             </div>
+
+
+
+            
+
 
             <div class="form-group">
               <label for="cpf">CPF</label>
@@ -78,22 +89,26 @@ onMounted(() => {
   document.title = "Inserir Pacientes";
 });
 
-const form = useForm({
-  nome: "",
-  DataNascimento: "",
-  medico: [],
-  cpf: "",
-  email: "",
-  cidade: "",
-  password: "",
-  bairro: "",
-  telefone: "",
-});
-
 const props = defineProps({
   errors: Array,
   medicos: Array,
+  paciente: Object,
+  medicosSelect: Array,
 });
+
+const form = useForm({
+  nome: "" || props.paciente.nome,
+  DataNascimento: "" || props.paciente.DataNascimento,
+  medico: [] ,
+  cpf: "" || props.paciente.cpf,
+  email: "" || props.paciente.email,
+  cidade: "" || props.paciente.cidade,
+  password: "" || props.paciente.password,
+  bairro: "" || props.paciente.bairro,
+  telefone: "" || props.paciente.telefone,
+});
+
+
 
 
 function formatCPF() {

@@ -18,6 +18,7 @@
               <th>Telefone</th>
               <th>CPF</th>
               <th>#</th>
+              <th>#</th>
             </tr>
           </thead>
           <tbody>
@@ -28,6 +29,9 @@
               <td>{{ paciente.cpf }}</td>
               <td>
                 <Link v-if="$page.props.autorizaMedico" id="inserir" :href="'/detalhes/paciente/' + paciente.identificacao">Inserir</Link>
+              </td>
+              <td>
+                <Link v-if="$page.props.autorizaMedico" id="inserir" :href="'/editar/paciente/' + paciente.identificacao">Editar</Link>
               </td>
             </tr>
           </tbody>
