@@ -4,16 +4,10 @@
 
 <nav>
 
-  <div class="dropdown">
-    <button class="dropdown-button">Opções</button>
-    <div class="dropdown-content">
-      <a href="#opcao1">Opção 1</a>
-      <a href="#opcao2">Opção 2</a>
-      <a href="#opcao3">Opção 3</a>
-    </div>
-  </div>
+  <button id="salvar" type="submit">Relatorio</button>
 
 </nav>
+
 
 <!--------------------------------------LADO ESQUERDO---------------------------------------->
 
@@ -277,61 +271,13 @@ const fechararquivos = () => {
 </script>
 
 
-<style scoped >
 
 
-.dropdown {
-      position: relative;
-      display: inline-block;
-    }
 
-    .dropdown-button {
-      background-color: #007BFF;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
 
-    .dropdown-button:hover {
-      background-color: #0056b3;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #ffffff;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      min-width: 160px;
-      z-index: 1;
-    }
-
-    .dropdown-content a {
-      color: black;
-      padding: 10px 15px;
-      text-decoration: none;
-      display: block;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .dropdown-content a:last-child {
-      border-bottom: none;
-    }
-
-    .dropdown-content a:hover {
-      background-color: #f1f1f1;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-</style>
 
 <style scoped>
+
 @import "../Components/css/tabelas.css";
 @import "../Components/css/modal.css";
 @import "../Components/css/botoes.css";
