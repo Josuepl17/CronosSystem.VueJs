@@ -2,7 +2,7 @@
   <Layout>
     <template v-slot:conteudo>
       <div class="fomulario-usuario">
-        <form @submit.prevent="form.post('/teste')">
+        <form @submit.prevent="form.post('/create/paciente')">
           <div id="pessoais">
             <div class="form-group">
               <label for="nome">Nome Completo</label>
@@ -61,11 +61,6 @@
               <input v-model="form.bairro" type="text" id="bairro" placeholder="Bairro">
             </div>
 
-            <div class="form-group">
-              <label for="password">Senha Pessoal</label>
-              <input v-model="form.password" type="password" id="password" placeholder="Senha Pessoal">
-              <p style="color: red; font-size:13px;" v-if="errors.password">{{ errors.password }}</p>
-            </div>
 
             <div class="fechar-salvar">
               <button type="button" class="fechar">Fechar</button>
@@ -90,20 +85,23 @@ onMounted(() => {
 const props = defineProps({
   errors: Array,
   medicos: Array,
-  paciente: Object,
+  paciente: {
+    type: Object,
+    default: () => ({})
+  },
   medicosSelect: Array,
 });
 
 const form = useForm({
-  nome: "" || props.paciente.nome,
-  DataNascimento: "" || props.paciente.DataNascimento,
-  medico: props.medicosSelect,
-  cpf: "" || props.paciente.cpf,
-  email: "" || props.paciente.email,
-  cidade: "" || props.paciente.cidade,
-  password: "" || props.paciente.password,
-  bairro: "" || props.paciente.bairro,
-  telefone: "" || props.paciente.telefone,
+  id: props.paciente.id || "",
+  nome: props.paciente.nome || "",
+  DataNascimento: props.paciente.DataNascimento || "",
+  medico: props.medicosSelect || [],
+  cpf: props.paciente.cpf || "",
+  email: props.paciente.email || "",
+  cidade: props.paciente.cidade || "",
+  bairro: props.paciente.bairro || "",
+  telefone: props.paciente.telefone || "",
 });
 
 

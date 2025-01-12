@@ -18,7 +18,6 @@ class Paciente extends Model
         'cpf',
         'email',
         'cidade',
-        'password',
         'bairro',
         'empresa_id',
         'telefone'

@@ -199,7 +199,7 @@ onMounted(() => {
 });
 
 const props = defineProps({
-  detalhes: Object,
+  texto_principal: Object,
   paciente: Object,
   tramites_paciente: Array,
   message: String,
@@ -228,7 +228,7 @@ const handleFileChange = (event) => {
 };
 
 const form = useForm({
-  texto_principal: "" || props.detalhes.texto_principal,
+  texto_principal: props.texto_principal || "",
 });
 
 const file = useForm({

@@ -17,8 +17,8 @@
               <th>Email</th>
               <th>Telefone</th>
               <th>CPF</th>
-              <th>#</th>
-              <th>#</th>
+              <th style="width: 20px;" >#</th>
+              <th style="width: 20px;" >#</th>
             </tr>
           </thead>
           <tbody>

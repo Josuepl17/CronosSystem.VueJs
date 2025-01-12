@@ -14,11 +14,6 @@ return new class extends Migration
         Schema::create('detalhe_pacientes', function (Blueprint $table) {
             $table->id();
             $table->text('texto_principal')->nullable();
-            $table->string('arquivos')->nullable();
-            $table->date('date_cad')->nullable(); // data cadastro
-            $table->date('date_pc')->nullable(); // primeira consulta 
-            $table->date('date_uc')->nullable(); // ultima consulta 
-            $table->date('date_pxc')->nullable(); // proxima consulta 
 
             $table->unsignedBigInteger('medico_id');
             $table->foreign('medico_id')->references('id')->on('medicos')->onDelete('cascade')->onUpdate('cascade');
