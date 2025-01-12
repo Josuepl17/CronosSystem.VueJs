@@ -264,6 +264,11 @@ class LoginController extends Controller
     }
 
 
+
+
+    
+
+
     public function updateFilial (Request $request) {
         
         $empresa = Empresa::find($request->id);
@@ -303,6 +308,9 @@ class LoginController extends Controller
 
         return redirect('/gerenciar/filial');
     }
+
+
+
 
 
 

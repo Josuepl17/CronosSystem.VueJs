@@ -16,15 +16,13 @@
 
             <div class="form-group">
               <label for="Medico">Médico(s) Responsável(is)</label>
-              <select v-model="form.medico" id="medico" multiple>
+              <select v-model="form.medico" id="medico" multiple name="medico" >
 
                 <option v-for="medico in props.medicos" :key="medico.id" :value="medico.id">
                   {{ medico.nome }} ({{ medico.especialidade }})
                 </option>
 
-                <option  v-for="medicos in props.medicosSelect" :key="medicos.id" :value="medicos.id" selected >
-                  {{ medicos.nome }} ({{ medicos.especialidade }})
-                </option>
+
 
               </select>
             </div>
@@ -99,7 +97,7 @@ const props = defineProps({
 const form = useForm({
   nome: "" || props.paciente.nome,
   DataNascimento: "" || props.paciente.DataNascimento,
-  medico: [] ,
+  medico: props.medicosSelect,
   cpf: "" || props.paciente.cpf,
   email: "" || props.paciente.email,
   cidade: "" || props.paciente.cidade,
