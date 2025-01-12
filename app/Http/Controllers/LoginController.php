@@ -45,10 +45,18 @@ class LoginController extends Controller
 
        $user =  User::where('email', $request->email)->first();
 
+       if ($user) {
         if ($user->primeiro_acesso === true) {
             Session::put('updateSenhaId', $user->id);    
             return redirect('/atualizar/senha');
         }
+    } else {
+        // Retornar mensagem de erro
+        return redirect()->back()->withErrors(['email' => 'Usuário não encontrado. Verifique os dados inseridos.']);
+    }
+    
+
+
 
         if (Auth::attempt($credentials)) {
 

@@ -114,40 +114,9 @@ class PacientesController extends Controller
     public function createPaciente(ValidateRequest $request)
     {
 
-
-
-
-
-
         $dados = $request->except('medico');
 
-        $validatedData = $request->validate([
-            'nome' => 'required|string|max:255',
-            'DataNascimento' => 'required|date|before:today',
-            'cpf' => 'required|string|size:11|unique:users,cpf', // CPF deve ter 11 caracteres e ser único
-            'email' => 'required|email|unique:users,email',
-            'cidade' => 'required|string|max:100',
-            'bairro' => 'required|string|max:100',
-            'telefone' => 'required|string|min:10|max:15',
-        ], [
-            'nome.required' => 'O campo Nome é obrigatório.',
-            'DataNascimento.required' => 'O campo Data de Nascimento é obrigatório.',
-            'DataNascimento.date' => 'A Data de Nascimento deve ser válida.',
-            'DataNascimento.before' => 'A Data de Nascimento deve ser anterior a hoje.',
-            'cpf.required' => 'O campo CPF é obrigatório.',
-            'cpf.size' => 'O CPF deve ter 11 caracteres.',
-            'cpf.unique' => 'Este CPF já está cadastrado.',
-            'email.required' => 'O campo E-mail é obrigatório.',
-            'email.email' => 'Informe um endereço de e-mail válido.',
-            'email.unique' => 'Este e-mail já está cadastrado.',
-            'cidade.required' => 'O campo Cidade é obrigatório.',
-            'bairro.required' => 'O campo Bairro é obrigatório.',
-            'empresa_id.required' => 'O campo Empresa é obrigatório.',
-            'empresa_id.exists' => 'A Empresa selecionada não é válida.',
-            'telefone.required' => 'O campo Telefone é obrigatório.',
-            'telefone.min' => 'O Telefone deve ter pelo menos 10 caracteres.',
-            'telefone.max' => 'O Telefone não pode exceder 15 caracteres.',
-        ]);
+
 
         $dados['empresa_id'] = Session::get('empresa_id');
 
@@ -156,7 +125,7 @@ class PacientesController extends Controller
             $dados
         );
 
-       Medico_Paciente::where('paciente_id', $paciente->id)->delete();
+      // Medico_Paciente::where('paciente_id', $paciente->id)->delete();
 
         foreach ($request->medico as $medico_id) {
 

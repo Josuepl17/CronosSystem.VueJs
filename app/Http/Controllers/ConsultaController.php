@@ -40,9 +40,11 @@ class ConsultaController extends Controller
         return redirect('/consultas');
     }
 
+
+
     public function listaConsultas()
     {
-        $date = Session::get('dataconsulta') ?? Carbon::now()->subDay()->toDateString();
+        $date = Session::get('dataconsulta') ?? Carbon::now()->toDateString();
 
 
         if ($medico = MeuServico::VerificarMedico()) {

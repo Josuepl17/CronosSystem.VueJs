@@ -8,8 +8,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MedicosController;
 use App\Http\Controllers\PacientesController;
 use App\Http\Middleware\AuthMiddleware;
+use App\Models\Atendente;
 use App\Models\Empresa;
 use App\Models\Medico;
+use App\Models\Medico_Paciente;
+use App\Models\Paciente;
 use App\Models\User;
 use App\Models\User_Empresa;
 use Illuminate\Http\Request;
@@ -132,24 +135,99 @@ Route::get('/gere', function () {
 });
 
 Route::get('/3', function () {
-    $d = new Medico();
-    $d->nome = 'Henrique Dias';
-    $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT);
-    $d->crp = 'CRP-' . rand(1000, 9999);
-    $d->especialidade = 'Psicologo';
-    $d->telefone = rand(90000, 99999) . rand(1000, 9999);
-    $d->email = 'henrique1@gmail.com';
-    $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
-    $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
-    $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
-    $d->save();
+    $quantidade = 15; // Defina o número de registros que deseja criar
+
+    for ($i = 0; $i < $quantidade; $i++) {
+        // Criando um médico
+        $d = new Medico();
+        $d->nome = 'Henrique Dias ' . $i;
+        $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT);
+        $d->crp = 'CRP-' . rand(1000, 9999);
+        $d->especialidade = 'Psicologo';
+        $d->telefone = rand(90000, 99999) . rand(1000, 9999);
+        $d->email = 'henrique' . $i . '@gmail.com';
+        $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
+        $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
+        $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
+        $d->save();
+
+        // Criando um usuário relacionado ao médico
+        $u = new User();
+        $u->id = $d->id; // Relaciona o mesmo ID do médico ao usuário
+        $u->name = 'Henriqueone ' . $i;
+        $u->email = 'henrique' . $i . '@gmail.com';
+        $u->primeiro_acesso = true;
+        $u->password = Hash::make('1234');
+        $u->empresa_id = 1;
+        $u->save();
+
+        // Criando o relacionamento entre usuário e empresa
+        $h = new User_Empresa();
+        $h->user_id = $d->id;
+        $h->empresa_id = 1;
+        $h->save();
+    }
+
+    return 'Registros criados com sucesso!';
+});
+
+
+
+
+
+Route::get('/4', function () {
+    $quantidade = 15; // Defina o número de registros que deseja criar
+
+    for ($i = 0; $i < $quantidade; $i++) {
+        // Criando um paciente
+        $d = new Paciente();
+        $d->nome = 'Josue Lima ' . $i;
+        $d->DataNascimento = now()->subYears(rand(18, 80))->format('Y-m-d'); // Data de nascimento aleatória
+        $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF aleatório
+        $d->email = 'josue' . $i . '@exemplo.com'; // E-mail único
+        $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
+        $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
+        $d->empresa_id = 1; // ID da empresa aleatório
+        $d->telefone = rand(90000, 99999) . rand(1000, 9999); // Telefone aleatório
+        $d->save();
+
+        Medico_Paciente::create([ // faz o relacionamento dos medicos selecionados com o paciente criado
+            'paciente_id' => $d->id,
+            'medico_id' => 1000,
+            'empresa_id' => 1,
+        ]);
+
+
+    }
+
+
+    return 'Registros criados com sucesso!';
+});
+
+
+
+Route::get('/5', function () {
+    $quantidade = 15; // Defina o número de registros que deseja criar
+
+    for ($i = 0; $i < $quantidade; $i++) {
+        // Criando um paciente
+        $d = new Atendente();
+        $d->nome = 'Atendente ' . $i; // Nome único
+        $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF aleatório com 11 dígitos
+        $d->telefone = rand(90000, 99999) . rand(1000, 9999); // Telefone aleatório
+        $d->email = 'Atendente' . $i . '@exemplo.com'; // E-mail único
+        $d->endereco = 'Rua Exemplo, ' . rand(1, 100); // Endereço fictício
+        $d->cidade = 'Cidade Exemplo ' . rand(1, 5); // Cidade fictícia
+        $d->bairro = 'Bairro Exemplo ' . rand(1, 5); // Bairro fictício
+        $d->save();
+    }
 
     $u = new User();
-    $u->id = $d->id;
-    $u->name = 'Henriqueone';
-    $u->email = 'henrique1@gmail.com';
+    $u->id = $d->id; // Relaciona o mesmo ID do médico ao usuário
+    $u->name = 'Atendente ' . $i;
+    $u->email = 'Atendente' . $i . '@gmail.com';
     $u->primeiro_acesso = true;
-    $u->password = bcrypt('1234');
+    $u->password = Hash::make('1234');
     $u->empresa_id = 1;
     $u->save();
 
@@ -157,7 +235,10 @@ Route::get('/3', function () {
     $h->user_id = $d->id;
     $h->empresa_id = 1;
     $h->save();
+
+    return 'Registros criados com sucesso!';
 });
+
 
 
 

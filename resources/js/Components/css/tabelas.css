@@ -34,6 +34,11 @@ width: 100%;
 min-height: 38px;
 }
 
+thead tr{
+  position: sticky;
+   top: 0;
+}
+
 
 
 /* Estilo para a tabela minimalista */
