@@ -120,12 +120,16 @@ class PacientesController extends Controller
 
         $dados['empresa_id'] = Session::get('empresa_id');
 
+        
+
+
       $paciente =   Paciente::updateOrCreate(
             ['id' => $request->id], // Condição para buscar o usuário
             $dados
         );
 
-      // Medico_Paciente::where('paciente_id', $paciente->id)->delete();
+
+       Medico_Paciente::where('paciente_id', $paciente->id)->delete();
 
         foreach ($request->medico as $medico_id) {
 
@@ -215,9 +219,9 @@ class PacientesController extends Controller
         $pacienteinfo->aniversario = Carbon::parse($paciente->DataNascimento)->format('d/m/Y');
         $pacienteinfo->ultimaconsulta = $paciente->consultas()->where('medico_id', Session::get('id'))->where('status', "Concluido")->orderBy('date', 'desc')->first()->date ?? null;
 
+        $csrf_token = csrf_token();
 
-
-        return Inertia::render('DetalhesPacientes', compact('texto_principal', 'tramites_paciente', 'paciente',  'consultas', 'arquivos', 'pacienteinfo', 'medicamentos'));
+        return Inertia::render('DetalhesPacientes', compact('texto_principal', 'tramites_paciente', 'paciente',  'consultas', 'arquivos', 'pacienteinfo', 'medicamentos', 'csrf_token'));
     }
 
 

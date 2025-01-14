@@ -189,20 +189,66 @@
           <div class="modal-content">
             <h1>Receituario</h1>
             <br />
-            <form @submit.prevent="receituario.post('/pdf')">
-              
-              <div class="form-group">
-                <textarea v-model="receituario.prescricao" name="prescricao" id="prescricao">
-  
-                </textarea>
-                <p style="color: red; font-size:13px;" v-if="errors.descricao">{{ errors.descricao }}</p>
-              </div> <!-- /.form-group -->
-              <button id="salvar" type="submit">Salvar</button>
-              <button id="fechar" type="button" @click.prevent="fecharReceituario">Fechar</button>
-            </form>
+            
+
+            <form action="/pdf" method="POST">
+              <input type="hidden" name="_token" :value="csrfToken" />
+
+
+              <div class="form-group"> <!-- .form-group -->
+                      
+                            <select v-model="receituario.tipoDocumento" name="tipoDocumento" id="tipoDocumento">
+
+                              <option :value="Receituário">Receituário</option>
+                              <option :value="Encaminhamento">Encaminhamento</option>
+                              <option :value="Avaliação">Avaliação</option>
+
+                            </select>
+                        </div> <!-- .form-group -->
+
+
+  <div class="form-group">
+    <textarea v-model="receituario.prescricao" name="prescricao" id="prescricao"></textarea>
+    <p style="color: red; font-size:13px;" v-if="errors.descricao">{{ errors.descricao }}</p>
+  </div>
+  <button id="salvar" type="submit">Gerar Documento</button>
+  <button id="salvar" type="submit">Salvar</button>
+  <button id="fechar" type="button" @click.prevent="fecharReceituario">Fechar</button>
+</form>
           </div> <!-- /.modal-content -->
         </div> <!-- /.modal-sobreposto -->
 
+<!--------------------------------------MODAL PDF Receituario tabela---------------------------------------->
+
+<div v-if="mostrararquivos" class="modal-sobreposto">
+        <div class="modal-content">
+          <div id="tabela">
+            
+            <table class="minimal-table">
+              <thead>
+                <tr style="position: sticky; top: 0; background-color: white;">
+                  <th>#</th>
+                  <th>tipo Documento</th>
+                  <th>Prescrição</th>
+                  <th>X</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="relatorio in relatorios" :key="relatorio.id">
+                  <td>{{relatorio.id}}</td>
+                  <td>{{relatorio.tipoDocumento}}</td>
+                  <td>{{relatorio.prescricao}}</td>
+                  <td style="width: 50px;">
+                   
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div> <!-- /#tabela -->
+         
+        </div> <!-- /.modal-content -->
+      </div> <!-- /.modal-sobreposto -->
 
 
 
@@ -215,6 +261,8 @@
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { onMounted } from "vue";
+import { usePage } from '@inertiajs/vue3';
+
 
 onMounted(() => {
   document.title = "Detalhes do Paciente";
@@ -230,10 +278,14 @@ const props = defineProps({
   errors: Array,
   pacienteinfo: Object,
   medicamentos: Array,
+  csrf_token: String,
 });
+
+const csrfToken = usePage().props.csrf_token;
 
 const receituario = useForm({
   prescricao: "",
+  tipoDocumento: "",
 });
 
 const formMedicamento = useForm({
@@ -295,8 +347,6 @@ const fechararquivos = () => {
   mostrararquivos.value = false;
 };
 
-
-
 const mostrarReceituario = ref(false);
 
 const AbrirReceituario = () => {
@@ -306,9 +356,6 @@ const AbrirReceituario = () => {
 const fecharReceituario = () => {
   mostrarReceituario.value = false;
 };
-
-
-
 </script>
 
 
@@ -318,18 +365,15 @@ const fecharReceituario = () => {
 
 
 <style scoped>
-
 @import "../Components/css/tabelas.css";
 @import "../Components/css/modal.css";
 @import "../Components/css/botoes.css";
 
-
-nav{
+nav {
   display: flex;
   height: 02%;
   width: 100%;
   border-radius: 03px;
-
 }
 
 .notification {

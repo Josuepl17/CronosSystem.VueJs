@@ -106,28 +106,28 @@
         <div class="header">
             <img src="logo.png" alt="Logo da Empresa" class="logo">
             <div class="company-info">
-                <h1>Clínica Vida e Saúde</h1>
-                <p>Rua Exemplo, 123 - Centro</p>
-                <p>Telefone: (11) 98765-4321</p>
+                <h1>{{ $empresa->razao_social }}</h1>
+                <p>{{ $empresa->endereco . " - " . $empresa->cidade }}</p>
+                <p>Telefone: {{ $empresa->telefone }}</p>
                 <p>Email: contato@clinicavida.com.br</p>
             </div>
         </div>
 
         <div class="doctor-info">
-            <h2>Dr(a). Maria Silva</h2>
-            <p>CRM: 12345/SP</p>
-            <p>Especialidade: Clínica Geral</p>
+            <h2>Dr(a). {{ $medico->nome }}</h2>
+            <p>CRM/CRP: {{ $medico->crp }}</p>
+            <p>Especialidade: {{ $medico->especialidade }} </p>
         </div>
 
         <div class="content">
-            <p><strong>Receita:</strong></p>
+            <p><strong>{{ $tipoDocumento }}</strong></p>
             <p>{{ $prescricao }}<br></p>
         </div>
 
         <div class="footer">
             <div class="signature">
                 <hr>
-                <p>Assinatura do Médico</p>
+                <p>Assinatura do Médico(a)</p>
             </div>
         </div>
     </div>

@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 // Padrão Nomes Funções, primeira letra Minuscula e as Demais Maiusculas.
 // Padrão Rotas, Form para Formularios, create, delete, edit, update para funções
@@ -39,15 +40,18 @@ Route::get('/contato', [LoginController::class, 'contato']);
 Route::get('/form/verificar/consulta', [ConsultaController::class, 'formVerificarConsulta']); // LiNK para Paciente
 Route::post('/verificar/consulta', [ConsultaController::class, 'VerificarConsulta']); // LiNK para Paciente
 
+
+
+
 Route::post('/pdf', function ( Request $request) {
-return redirect('/pdf2');
-});
-
-
-Route::get('/pdf2', function ( Request $request) {
     $data = [ 
         'prescricao' => $request->prescricao,
+        'medico' => Medico::Find(Session::get('id')),
+        'empresa' => Empresa::find(Session::get('empresa_id')),
+        'tipoDocumento' => $request->tipoDocumento,
     ];
+
+
 
     $pdf = Pdf::loadView('pdfreceituario', $data);
     return $pdf->download('documento.pdf');
