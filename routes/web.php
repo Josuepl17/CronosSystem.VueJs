@@ -15,6 +15,7 @@ use App\Models\Medico_Paciente;
 use App\Models\Paciente;
 use App\Models\User;
 use App\Models\User_Empresa;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -37,6 +38,26 @@ Route::get('/contato', [LoginController::class, 'contato']);
 
 Route::get('/form/verificar/consulta', [ConsultaController::class, 'formVerificarConsulta']); // LiNK para Paciente
 Route::post('/verificar/consulta', [ConsultaController::class, 'VerificarConsulta']); // LiNK para Paciente
+
+Route::post('/pdf', function ( Request $request) {
+return redirect('/pdf2');
+});
+
+
+Route::get('/pdf2', function ( Request $request) {
+    $data = [ 
+        'prescricao' => $request->prescricao,
+    ];
+
+    $pdf = Pdf::loadView('pdfreceituario', $data);
+    return $pdf->download('documento.pdf');
+});
+
+
+
+
+
+
 
 Route::middleware(['auth', 'web'])->group(function () {
 
@@ -89,8 +110,7 @@ Route::middleware(['auth', 'web'])->group(function () {
 
     // Agenda
 
-    Route::get('form/agenda', [AgendaController::class, 'formAgenda']);
-    Route::post('create/agenda', [AgendaController::class, 'createAgenda']);
+
 });
 
 Route::post('/teste', function (Request $request) {

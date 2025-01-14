@@ -4,7 +4,7 @@
 
 <nav>
 
-  <button id="salvar" type="submit">Relatorio</button>
+  <button @click="AbrirReceituario" id="salvar" type="submit">Relatorio</button>
 
 </nav>
 
@@ -116,7 +116,7 @@
       </div> <!-- /.notification -->
 
 
-<!--------------------------------------MODAL CONSULTA---------------------------------------->
+<!--------------------------------------MODAL TRAMITE---------------------------------------->
       
         <div v-if="mostrarModal" class="modal-sobreposto">
           <div class="modal-content">
@@ -183,6 +183,28 @@
         </div> <!-- /.modal-content -->
       </div> <!-- /.modal-sobreposto -->
 
+<!--------------------------------------MODAL PDF Receituario---------------------------------------->
+
+      <div v-if="mostrarReceituario" class="modal-sobreposto">
+          <div class="modal-content">
+            <h1>Receituario</h1>
+            <br />
+            <form @submit.prevent="receituario.post('/pdf')">
+              
+              <div class="form-group">
+                <textarea v-model="receituario.prescricao" name="prescricao" id="prescricao">
+  
+                </textarea>
+                <p style="color: red; font-size:13px;" v-if="errors.descricao">{{ errors.descricao }}</p>
+              </div> <!-- /.form-group -->
+              <button id="salvar" type="submit">Salvar</button>
+              <button id="fechar" type="button" @click.prevent="fecharReceituario">Fechar</button>
+            </form>
+          </div> <!-- /.modal-content -->
+        </div> <!-- /.modal-sobreposto -->
+
+
+
 
     </template>
   </Layout>
@@ -208,6 +230,10 @@ const props = defineProps({
   errors: Array,
   pacienteinfo: Object,
   medicamentos: Array,
+});
+
+const receituario = useForm({
+  prescricao: "",
 });
 
 const formMedicamento = useForm({
@@ -268,6 +294,21 @@ const abrirarquivos = () => {
 const fechararquivos = () => {
   mostrararquivos.value = false;
 };
+
+
+
+const mostrarReceituario = ref(false);
+
+const AbrirReceituario = () => {
+  mostrarReceituario.value = true;
+};
+
+const fecharReceituario = () => {
+  mostrarReceituario.value = false;
+};
+
+
+
 </script>
 
 
