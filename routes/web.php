@@ -13,11 +13,13 @@ use App\Models\Empresa;
 use App\Models\Medico;
 use App\Models\Medico_Paciente;
 use App\Models\Paciente;
+use App\Models\RelatoriosPaciente;
 use App\Models\User;
 use App\Models\User_Empresa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -43,14 +45,18 @@ Route::post('/verificar/consulta', [ConsultaController::class, 'VerificarConsult
 
 
 
-Route::post('/pdf', function ( Request $request) {
+Route::get('/pdf/{id}', function ( Request $request) {
+
+    $relatorio =  RelatoriosPaciente::find($request->id);
+
+
+
     $data = [ 
-        'prescricao' => $request->prescricao,
+        'prescricao' => Crypt::decrypt($relatorio->prescricao),
         'medico' => Medico::Find(Session::get('id')),
         'empresa' => Empresa::find(Session::get('empresa_id')),
-        'tipoDocumento' => $request->tipoDocumento,
+        'tipoDocumento' => $relatorio->tipo_documento,
     ];
-
 
 
     $pdf = Pdf::loadView('pdfreceituario', $data);
@@ -80,6 +86,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::post('/create/paciente/detalhes', [PacientesController::class, 'createDetalhesPacientes']);
     Route::post('/create/medicamento', [PacientesController::class, 'createMedicamentos']);
     Route::get('/delete/medicamento/{id}', [PacientesController::class, 'deleteMedicamentos']);
+    Route::post('/create/relatorio', [PacientesController::class, 'createRelatorio']);
 
     // Route::get('/download/paciente/detalhes', [PacientesController::class, 'downloadArquivo']);
     Route::post('/inserir/tramite', [PacientesController::class, 'createTramite']);
@@ -159,7 +166,7 @@ Route::get('/gere', function () {
 });
 
 Route::get('/3', function () {
-    $quantidade = 15; // Defina o número de registros que deseja criar
+    $quantidade = 3; // Defina o número de registros que deseja criar
 
     for ($i = 0; $i < $quantidade; $i++) {
         // Criando um médico
@@ -200,7 +207,7 @@ Route::get('/3', function () {
 
 
 Route::get('/4', function () {
-    $quantidade = 15; // Defina o número de registros que deseja criar
+    $quantidade = 2; // Defina o número de registros que deseja criar
 
     for ($i = 0; $i < $quantidade; $i++) {
         // Criando um paciente

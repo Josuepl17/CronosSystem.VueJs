@@ -4,7 +4,7 @@
 
 <nav>
 
-  <button @click="AbrirReceituario" id="salvar" type="submit">Relatorio</button>
+  <button @click="AbrirRelatorios" id="salvar" type="submit">Relatorio</button>
 
 </nav>
 
@@ -186,41 +186,30 @@
 <!--------------------------------------MODAL PDF Receituario---------------------------------------->
 
       <div v-if="mostrarReceituario" class="modal-sobreposto">
-          <div class="modal-content">
-            <h1>Receituario</h1>
-            <br />
-            
+        <div class="modal-content">
+          <h1>Receituario</h1>
+          <br />
+          <form @submit.prevent="receituario.post('/create/relatorio')">
+            <div class="form-group">
+              <select  v-model="receituario.tipo_documento" name="tipo_documento" id="tipo_documento" placeholder="Selecione o tipo de documento">
+                <option value="" disabled selected>Selecione o tipo de documento</option>
+                <option value="Receituário">Receituário</option>
+                <option value="Encaminhamento">Encaminhamento</option>
+                <option value="Avaliação">Avaliação</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <textarea v-model="receituario.prescricao" name="prescricao" id="prescricao"></textarea>
+              <p style="color: red; font-size:13px;" v-if="errors.descricao">{{ errors.descricao }}</p>
+            </div>
+            <a :href="'/pdf/' + receituario.id" id="salvar" class="button">Gerar Documento</a>
+            <button id="salvar" type="submit">Salvar</button>
+            <button id="fechar" type="button" @click.prevent="fecharReceituario">Fechar</button>
+          </form>
+        </div>
+      </div><!--------------------------------------MODAL PDF Receituario tabela---------------------------------------->
 
-            <form action="/pdf" method="POST">
-              <input type="hidden" name="_token" :value="csrfToken" />
-
-
-              <div class="form-group"> <!-- .form-group -->
-                      
-                            <select v-model="receituario.tipoDocumento" name="tipoDocumento" id="tipoDocumento">
-
-                              <option :value="Receituário">Receituário</option>
-                              <option :value="Encaminhamento">Encaminhamento</option>
-                              <option :value="Avaliação">Avaliação</option>
-
-                            </select>
-                        </div> <!-- .form-group -->
-
-
-  <div class="form-group">
-    <textarea v-model="receituario.prescricao" name="prescricao" id="prescricao"></textarea>
-    <p style="color: red; font-size:13px;" v-if="errors.descricao">{{ errors.descricao }}</p>
-  </div>
-  <button id="salvar" type="submit">Gerar Documento</button>
-  <button id="salvar" type="submit">Salvar</button>
-  <button id="fechar" type="button" @click.prevent="fecharReceituario">Fechar</button>
-</form>
-          </div> <!-- /.modal-content -->
-        </div> <!-- /.modal-sobreposto -->
-
-<!--------------------------------------MODAL PDF Receituario tabela---------------------------------------->
-
-<div v-if="mostrararquivos" class="modal-sobreposto">
+<div v-if="mostrarRelatorios" class="modal-sobreposto">
         <div class="modal-content">
           <div id="tabela">
             
@@ -229,24 +218,23 @@
                 <tr style="position: sticky; top: 0; background-color: white;">
                   <th>#</th>
                   <th>tipo Documento</th>
-                  <th>Prescrição</th>
                   <th>X</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="relatorio in relatorios" :key="relatorio.id">
                   <td>{{relatorio.id}}</td>
-                  <td>{{relatorio.tipoDocumento}}</td>
-                  <td>{{relatorio.prescricao}}</td>
+                  <td>{{relatorio.tipo_documento}}</td>
                   <td style="width: 50px;">
-                   
+                    <button @click.prevent="visualizarRelatorio(relatorio.id, relatorio.tipo_documento, relatorio.prescricao)" id="salvar" type="submit">Visualizar</button>
                   </td>
                 </tr>
               </tbody>
             </table>
-
+            
           </div> <!-- /#tabela -->
-         
+          <button @click="AbrirReceituario" id="salvar" type="submit">Novo</button>
+          <button id="fechar" type="button" @click.prevent="FecharRelatorios">Fechar</button>
         </div> <!-- /.modal-content -->
       </div> <!-- /.modal-sobreposto -->
 
@@ -279,13 +267,15 @@ const props = defineProps({
   pacienteinfo: Object,
   medicamentos: Array,
   csrf_token: String,
+  relatorios: Array,
 });
 
 const csrfToken = usePage().props.csrf_token;
 
 const receituario = useForm({
+  id: "",
   prescricao: "",
-  tipoDocumento: "",
+  tipo_documento: "",
 });
 
 const formMedicamento = useForm({
@@ -350,12 +340,41 @@ const fechararquivos = () => {
 const mostrarReceituario = ref(false);
 
 const AbrirReceituario = () => {
+  mostrarRelatorios.value = false;
   mostrarReceituario.value = true;
 };
 
 const fecharReceituario = () => {
+
   mostrarReceituario.value = false;
+  mostrarRelatorios.value = true;
 };
+
+
+
+const mostrarRelatorios = ref(false);
+
+const AbrirRelatorios = () => {
+  mostrarRelatorios.value = true;
+};
+
+const FecharRelatorios = () => {
+  mostrarRelatorios.value = false;
+};
+
+
+
+const visualizarRelatorio = (id, tipo_documento, prescricao) => {
+  mostrarRelatorios.value = false;
+  mostrarReceituario.value = true;
+  receituario.id = id;
+  receituario.tipo_documento = tipo_documento;
+  receituario.prescricao = prescricao;
+
+};
+
+
+
 </script>
 
 

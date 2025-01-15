@@ -11,6 +11,7 @@ use App\Models\Medicamento_Paciente;
 use App\Models\Medico_Paciente;
 use App\Models\Medico;
 use App\Models\Paciente;
+use App\Models\RelatoriosPaciente;
 use App\Models\Tramite;
 use App\Services\MeuServico;
 use Carbon\Carbon;
@@ -221,7 +222,12 @@ class PacientesController extends Controller
 
         $csrf_token = csrf_token();
 
-        return Inertia::render('DetalhesPacientes', compact('texto_principal', 'tramites_paciente', 'paciente',  'consultas', 'arquivos', 'pacienteinfo', 'medicamentos', 'csrf_token'));
+        $relatorios = RelatoriosPaciente::where('paciente_id', $id_paciente)->get();
+        foreach ($relatorios as $relatorio) {
+            $relatorio->prescricao = Crypt::decrypt($relatorio->prescricao);
+        }
+
+        return Inertia::render('DetalhesPacientes', compact('texto_principal', 'tramites_paciente', 'paciente',  'consultas', 'arquivos', 'pacienteinfo', 'medicamentos', 'csrf_token', 'relatorios'));
     }
 
 
@@ -368,6 +374,23 @@ class PacientesController extends Controller
         $filePath = storage_path('app/public/' . $arquivo->path);
         return response()->download($filePath, $arquivo->nome);
     }
+
+
+
+    public function createRelatorio(Request $request) {
+
+        RelatoriosPaciente::create([
+            'tipo_documento' => $request->tipo_documento,
+            'prescricao' => Crypt::encrypt($request->prescricao),
+            'paciente_id' => FacadesSession::get('id_paciente'),
+            'empresa_id' => Session::get('empresa_id'),
+            'medico_id' => Session::get('id'),
+        ]);
+
+        return redirect('/detalhes/paciente');
+    }
+
+
 
 
 }
