@@ -82,7 +82,7 @@
             }"
           >
             <img src="/images/medico.png" alt="" />
-            <span>Médicos</span>
+            <span>Profissional</span>
           </Link>
 
           <Link
