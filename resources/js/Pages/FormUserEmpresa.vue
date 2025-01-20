@@ -4,7 +4,7 @@
         <div class="form-container sign-in">
             <form @submit.prevent="submitForm">
                 <input type="text" id="razao_social" placeholder="Razão Social:" v-model="form.razao_social">
-                <input type="text" id="cnpj" placeholder="CNPJ:" v-model="formattedCNPJ" @input="formatCNPJ">
+                <input type="text" id="cnpj" placeholder="CNPJ/CPF:" v-model="formattedCNPJ" @input="formatCNPJ">
                 <input type="number" id="ie" placeholder="Inscrição Estadual:" v-model="form.ie">
                 <input type="number" id="im" placeholder="Inscrição Municipal:" v-model="form.im">
                 <input type="text" id="telefone" placeholder="Telefone Empresa:" v-model="formattedTelefone" @input="formatTelefone">
@@ -69,18 +69,30 @@ const formattedTelefone = ref('');
 
 const formatCNPJ = (event) => {
     let value = event.target.value.replace(/\D/g, '');
-    if (value.length > 14) {
-        value = value.slice(0, 14);
+    
+    if (value.length <= 11) {
+        // Formato CPF: 000.000.000-00
+        if (value.length > 11) {
+            value = value.slice(0, 11);
+        }
+        value = value.replace(/^(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
+        value = value.replace(/\.(\d{3})(\d)/, '.$1-$2');
+    } else {
+        // Formato CNPJ: 00.000.000/0000-00
+        if (value.length > 14) {
+            value = value.slice(0, 14);
+        }
+        value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+        value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+        value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
+        value = value.replace(/(\d{4})(\d)/, '$1-$2');
     }
-    value = value.replace(/^(\d{2})(\d)/, '$1.$2');
-    value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
-    value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
-    value = value.replace(/(\d{4})(\d)/, '$1-$2');
+    
     event.target.value = value;
     formattedCNPJ.value = value;
     form.cnpj = event.target.value.replace(/\D/g, '');
 };
-
 const formatTelefone = (event) => {
     let value = event.target.value.replace(/\D/g, '');
     value = value.replace(/^(\d{2})(\d)/g, '($1) $2');

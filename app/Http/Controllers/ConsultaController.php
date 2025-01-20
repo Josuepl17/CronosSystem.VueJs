@@ -109,42 +109,6 @@ class ConsultaController extends Controller
             $medicos = Medico::wherein('id', $users_id)->get();
         }
 
-
-
-      /*  $timeInicial = Agenda::where('medico_id', $funcionario_id)->value('timeinicial'); // Exemplo: '08:00'
-        $timeFinal = Agenda::where('medico_id', $funcionario_id)->value('timefinal');     // Exemplo: '17:00'
-        $tempoDeConsulta = Agenda::where('medico_id', $funcionario_id)->value('tempodeconsulta');
-        dd($tempoDeConsulta);
-
-        // Converte o tempo de consulta de "H:i" para minutos
-        list($hours, $minutes) = explode(':', $tempoDeConsulta);
-        $tempoDeConsulta = $hours * 60 + $minutes;
-
-
-        // Verifique se todos os valores foram recuperados corretamente
-        if (!$timeInicial || !$timeFinal || !$tempoDeConsulta) {
-            return response()->json(['error' => 'Dados não encontrados corretamente.'], 400);
-        }
-
-        $current = strtotime($timeInicial);
-        $end = strtotime($timeFinal);
-
-
-        $horarios = [];
-
-        while ($current < $end) {
-            // Adiciona o horário formatado ao array (sem segundos)
-            $horarios[] = date('H:i', $current);
-
-            // Adiciona o tempo de consulta ao horário atual (em minutos)
-            $current = strtotime("+$tempoDeConsulta minutes", $current);
-
-            // Verifica se a nova hora é válida
-            if ($current === false) {
-                dd("Erro ao calcular o próximo horário com strtotime()", $current);
-            }
-        } */
-
         
         $horarios = [
             '08:00', '08:30', '09:00', '09:30', 
