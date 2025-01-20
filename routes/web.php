@@ -49,8 +49,6 @@ Route::get('/pdf/{id}', function ( Request $request) {
 
     $relatorio =  RelatoriosPaciente::find($request->id);
 
-
-
     $data = [ 
         'prescricao' => Crypt::decrypt($relatorio->prescricao),
         'medico' => Medico::Find(Session::get('id')),
@@ -66,14 +64,13 @@ Route::get('/pdf/{id}', function ( Request $request) {
 
 
 
-
+Route::get('/', [DashboardController::class, 'index']);
 
 
 Route::middleware(['auth', 'web'])->group(function () {
 
-    // Dashboard
-    Route::get('/dash', [DashboardController::class, 'index']);
-    Route::get('/', [LoginController::class, 'definirFilial']);
+    Route::get('/dash', [DashboardController::class, 'dahsboard']);
+    Route::get('/definir/filial', [LoginController::class, 'definirFilial']);
     Route::get('/selecione/filial/{id}', [LoginController::class, 'mudarFilial']);
 
     // Pacientes

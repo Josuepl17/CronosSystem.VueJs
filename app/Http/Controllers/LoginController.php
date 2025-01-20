@@ -68,7 +68,8 @@ class LoginController extends Controller
             }
             Session::put('id', Auth::id());
             Session::put('nome', Auth::user()->name);
-            return redirect('/');
+            
+            return redirect('/definir/filial');
         } else {
             return back()->withErrors([
                 'email' => 'Email Invalido.',

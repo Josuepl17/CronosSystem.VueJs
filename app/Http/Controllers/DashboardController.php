@@ -15,7 +15,7 @@ use App\Models\User;
 
 class DashboardController extends Controller{
 
-    public function index() {
+    public function dahsboard() {
         $id = Session::get('empresa_id');
         
         $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id'); // relacionamento empresa user
@@ -24,5 +24,10 @@ class DashboardController extends Controller{
         $consultasConcluidos = ConsultaPaciente::where('empresa_id', $id)->where('status', 'Concluido')->get()->count();
         $consultasCanceladas = ConsultaPaciente::where('empresa_id', $id)->where('status', 'Cancelado')->get()->count();
         return Inertia::render('Dash', compact('pacientes', 'consultasAgendadas', 'consultasConcluidos', 'consultasCanceladas'));
+    }
+    
+
+    public function index() {
+        return Inertia::render('index');
     }
 }
