@@ -135,13 +135,14 @@ body {
     background-color: #fff;
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    position: relative;
+    position: absolute;
     overflow: hidden;
     width: 768px;
-    max-width: 100%;
+    max-width: 90%;
     min-height: 600px;
-    top: 50px;
-    left: 25%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .container p {

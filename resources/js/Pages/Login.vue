@@ -1,5 +1,4 @@
 <template lang="">
-
     <div class="container" id="container">
         <div class="form-container sign-in">
             <form @submit.prevent="form.post('/login')">
@@ -31,12 +30,6 @@ import { onMounted } from 'vue';
 onMounted(() => {
   document.title = 'Faça Login';
 });
-
-
-
-
-
-
 
 const props = defineProps({
     errors: Array,
@@ -86,8 +79,10 @@ body {
     width: 768px;
     max-width: 100%;
     min-height: 480px;
-    top: 100px;
-    left: 26%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .container p {
