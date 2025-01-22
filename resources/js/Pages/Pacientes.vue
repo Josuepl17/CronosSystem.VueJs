@@ -2,7 +2,7 @@
   <Layout>
     <template v-slot:conteudo>
       <div id="opcoes-conteudo">
-        <Link id="botao_inserir_superior" href="/form/paciente">Inserir</Link>
+        <Link v-if="$page.props.inserir_paciente" id="botao_inserir_superior" href="/form/paciente">Inserir</Link>
         <form @submit.prevent="form.post('/busca/atendentes')">
           <input v-model="form.pesquisa" type="text" placeholder="Search..." />
           <button type="submit">Busca</button>
@@ -31,7 +31,7 @@
                 <Link v-if="$page.props.autorizaMedico" id="inserir" :href="'/detalhes/paciente/' + paciente.identificacao">Inserir</Link>
               </td>
               <td>
-                <Link v-if="$page.props.autorizaMedico" id="inserir" :href="'/editar/paciente/' + paciente.identificacao">Editar</Link>
+                <Link v-if="$page.props.editar_paciente"  id="inserir" :href="'/editar/paciente/' + paciente.identificacao">Editar</Link>
               </td>
             </tr>
           </tbody>

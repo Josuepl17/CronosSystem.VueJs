@@ -123,6 +123,13 @@ Route::middleware(['auth', 'web'])->group(function () {
 
 Route::post('/teste', function (Request $request) {
     dd($request->all());
+    
+});
+
+Route::get('/teste2', function () {
+    $teste = Auth::user()->permissoes->acessar_pacientes;
+    dd($teste);
+    
 });
 
 Route::get('/josue', function () {

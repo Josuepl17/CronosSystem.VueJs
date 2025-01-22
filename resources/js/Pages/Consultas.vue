@@ -2,7 +2,7 @@
     <Layout>
         <template v-slot:conteudo>
             <div id="opcoes-conteudo">
-                <Link id="botao_inserir_superior" href="/form/consultas">Inserir</Link>
+                <Link v-if="$page.props.inserir_consulta" id="botao_inserir_superior" href="/form/consultas">Inserir</Link>
 
                 <form @submit.prevent="filtro.post('/filtro/consulta')" >
                     <input v-model="filtro.date" type="date" name="date" id="date">
@@ -49,13 +49,13 @@
                             <td>{{ consulta.horafinal }}</td>
                             <td>{{ consulta.motivo_status }}</td>
                             <td>
-                                <Link class="status-concluido" :href="'/concluir/consulta/' + consulta.identificacao">Concluir</Link>
+                                <Link v-if="$page.props.concluir_consulta" class="status-concluido" :href="'/concluir/consulta/' + consulta.identificacao">Concluir</Link>
                             </td>
                             <td>
-                                <a class="status-cancelado" href="#" @click.prevent="abrirFormulario(consulta.identificacao)"  >Cancelar</a>
+                                <a v-if="$page.props.cancelar_consulta" class="status-cancelado" href="#" @click.prevent="abrirFormulario(consulta.identificacao)"  >Cancelar</a>
                             </td>
                             <td>
-                                <Link class="delete" :href="'/delete/consulta/' + consulta.identificacao">X</Link>
+                                <Link v-if="$page.props.apagar_consulta" class="delete" :href="'/delete/consulta/' + consulta.identificacao">X</Link>
                             </td>
                         </tr>
                     </tbody>

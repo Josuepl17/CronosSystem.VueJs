@@ -30,4 +30,8 @@ class User extends Authenticatable
     public function medicos() {
         return $this->hasMany(Medico::class);
     }
+
+    public function permissoes() {
+        return $this->hasOne(Permissao::class);
+    }
 }

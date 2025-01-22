@@ -37,7 +37,7 @@
             <span>Dashboard</span>
           </Link>
 
-          <Link
+          <Link  v-if="$page.props.acessar_pacientes"
             href="/pacientes"
             :class="{
               'active-link':
@@ -49,7 +49,8 @@
             <img src="/images/paciente.png" alt="" />
             <span>Pacientes</span>
           </Link>
-            <Link
+
+            <Link v-if="$page.props.acessar_atendentes"
             href="/atendentes"
             :class="{
               'active-link':
@@ -60,7 +61,7 @@
             <span>Atendentes</span>
             </Link>
 
-          <Link
+          <Link v-if="$page.props.acessar_consultas"
             href="/consultas"
             :class="{
               'active-link':
@@ -72,7 +73,7 @@
           </Link>
 
 
-          <Link
+          <Link v-if="$page.props.acessar_medicos"
             href="/medicos"
             :class="{
               'active-link':
@@ -86,7 +87,7 @@
           </Link>
 
           <Link
-            v-if="$page.props.adm"
+            v-if="$page.props.acessar_filial"
             href="/gerenciar/filial"
             :class="{ 'active-link': $page.url === '/gerenciar/filial' }"
           >

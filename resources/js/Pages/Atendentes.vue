@@ -2,7 +2,7 @@
   <Layout>
     <template v-slot:conteudo>
       <div id="opcoes-conteudo">
-        <Link id="botao_inserir_superior" href="/form/atendentes">Inserir</Link>
+        <Link v-if="$page.props.inserir_atendente" id="botao_inserir_superior" href="/form/atendentes">Inserir</Link>
       </div>
 
       <div id="tabela">
@@ -23,7 +23,7 @@
               <td>{{ atendente.email }}</td>
               <td>{{ atendente.cpf }}</td>
               <td>
-                <Link id="inserir" :href="'/edit/atendentes/' + atendente.identificacao">Editar</Link>
+                <Link v-if="$page.props.editar_atendente" id="inserir" :href="'/edit/atendentes/' + atendente.identificacao">Editar</Link>
               </td>
             </tr>
           </tbody>

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use App\Http\Requests\ValidateRequest;
 use App\Models\Atendente;
+use App\Models\Permissao;
 use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
@@ -57,7 +58,6 @@ class LoginController extends Controller
     
 
 
-
         if (Auth::attempt($credentials)) {
 
             if (Medico::where('id', Auth::id())->exists() || Atendente::where('id', Auth::id())->exists()) {
@@ -69,6 +69,7 @@ class LoginController extends Controller
             Session::put('id', Auth::id());
             Session::put('nome', Auth::user()->name);
             
+
             return redirect('/definir/filial');
         } else {
             return back()->withErrors([
@@ -177,6 +178,11 @@ class LoginController extends Controller
                     'password' => Hash::make(123456),
                     'empresa_id' => $empresa->id,
                 ]);
+
+                $Permissao = new Permissao();
+                $Permissao->user_id = $user->id;
+                $Permissao->save();
+
             }
 
 // Realizada alteração para quepossa ter apenas um administrador que sou eupara todas as empresas para administrara criaçãode novas empresas filiais e usuários iniciais , Caso precise reverter também terá quemexer no Vue js 
@@ -186,6 +192,7 @@ class LoginController extends Controller
             //   'password' => Hash::make($request->password),
             //   'empresa_id' => $empresa->id,
             //   ]);
+
 
 
 
