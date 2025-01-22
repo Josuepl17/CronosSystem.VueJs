@@ -16,7 +16,6 @@
                 <table class="minimal-table">
                     <thead>
                         <tr style="position: sticky; top: 0; background-color: white;">
-                            <th>#</th>
                             <th>Nome Paciente</th>
                             <th>Nome Medico</th>
                             <th>Status</th>
@@ -24,14 +23,13 @@
                             <th>Hora Inicial</th>
                             <th>Hora Final</th>
                             <th>Motivo Status</th>
-                            <th style="width: 40px;">X</th>
+                            <th  style="width: 40px;">X</th>
                             <th style="width: 40px;">X</th>
                             <th style="width: 20px;">X</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(consulta) in consultas" :key="consulta.id">
-                            <td>{{ consulta.id }}</td>
                             <td>{{ consulta.nome_paciente }}</td>
                             <td>{{ consulta.nome_medico }}</td>
                             <td

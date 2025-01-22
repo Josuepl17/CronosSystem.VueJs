@@ -9,7 +9,6 @@
         <table class="minimal-table">
           <thead>
             <tr>
-              <th>#</th>
               <th>Name</th>
               <th>Email</th>
               <th>CPF</th>
@@ -18,7 +17,6 @@
           </thead>
           <tbody>
             <tr v-for="(atendente) in atendentes" :key="atendente.id">
-              <td>{{ atendente.id }}</td>
               <td>{{ atendente.nome }}</td>
               <td>{{ atendente.email }}</td>
               <td>{{ atendente.cpf }}</td>

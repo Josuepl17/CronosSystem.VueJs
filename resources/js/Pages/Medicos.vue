@@ -9,7 +9,6 @@
                 <table class="minimal-table">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Medico</th>
                             <th>Email</th>
                             <th>Especialidade</th>
@@ -19,7 +18,6 @@
                     </thead>
                     <tbody>
                         <tr v-for="(medico) in medicos" :key="medico.id">
-                            <td>{{ medico.id }}</td>
                             <td>{{ medico.nome }}</td>
                             <td>{{ medico.email }}</td>
                             <td>{{ medico.especialidade }}</td>
