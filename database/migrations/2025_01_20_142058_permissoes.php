@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,44 +14,37 @@ return new class extends Migration
     {
         Schema::create('permissoes', function (Blueprint $table) {
             $table->id();
-
-            $table->boolean('acessar_pacientes')->default(false);
-            $table->boolean('inserir_paciente')->default(false);
-            $table->boolean('editar_paciente')->default(false);
-
-
-            $table->boolean('acessar_medicos')->default(false);
-            $table->boolean('inserir_medico')->default(false);
-            $table->boolean('editar_medico')->default(false);
-
-
-            $table->boolean('acessar_consultas')->default(false);
-            $table->boolean('inserir_consulta')->default(false);
-            $table->boolean('cancelar_consulta')->default(false);
-            $table->boolean('concluir_consulta')->default(false);
-            $table->boolean('apagar_consulta')->default(false);
-
-
-            
-            $table->boolean('acessar_atendentes')->default(false);
-            $table->boolean('editar_atendente')->default(false);
-            $table->boolean('inserir_atendente')->default(false);
-
-            
-            
-            
-            $table->boolean('inserir_empresa')->default(false); // a fazer
-            $table->boolean('acessar_empresas')->default(false); 
-            $table->boolean('editar_empresa')->default(false); // a fazer
-            
-
-            
-
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('descricao');
             $table->timestamps();
         });
-    }
+
+        // Inserindo dados automaticamente
+        $permissoes = [
+            'acessar_pacientes',
+            'acessar_medicos',
+            'acessar_consultas',
+            'acessar_empresas',
+            'acessar_atendentes',
+            'inserir_paciente',
+            'inserir_medico',
+            'inserir_consulta',
+            'inserir_empresa',
+            'inserir_atendente',
+            'editar_paciente',
+            'editar_medico',
+            'editar_empresa',
+            'editar_atendente',
+            'cancelar_consulta',
+            'concluir_consulta'
+        ];
+
+        foreach ($permissoes as $permissao) {
+            DB::table('permissoes')->insert([
+                'descricao' => $permissao,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        }    }
 
     /**
      * Reverse the migrations.

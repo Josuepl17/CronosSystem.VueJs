@@ -53,11 +53,17 @@
                     <div class="form-group"><!-- .form-group -->
                         <label for="bairro">Bairro</label>
                         <input v-model="form.bairro" type="text" id="bairro" placeholder="Bairro">
-                    </div><!-- .form-group -->
-                <!--    <div class="form-group"><!-- .form-group -->
-                    <!--     <label for="senha">Senha</label>
-                        <input v-model="form.senha" type="password" id="senha" placeholder="Senha">
-                    </div> .form-group -->      
+                    </div>
+
+                  <div class="form-group">
+                      <label for="Medico">Permissões Do Usuario</label>
+                      <select v-model="form.permissoes" id="permissoes" multiple name="permissoes">
+
+                          <option v-for="permissao in props.permissoes" :key="permissao.id" :value="permissao.id">{{ permissao.descricao }}</option>
+                    
+                      </select>
+                  </div>
+
 
                     <div class="fechar-salvar"><!-- .fechar-salvar -->
                         <button type="button" class="fechar">Fechar</button>
@@ -75,19 +81,19 @@
 </template>
 
 <script setup>
-
-import { defineProps } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import { onMounted } from 'vue';
+import { defineProps } from "vue";
+import { useForm } from "@inertiajs/vue3";
+import { onMounted } from "vue";
 
 onMounted(() => {
-  document.title = 'Inserir Medicos';
+  document.title = "Inserir Medicos";
 });
 
 const props = defineProps({
   errors: Array,
   medico: Array,
-})
+  permissoes: Array,
+});
 
 const form = useForm({
   id: props.medico?.id || "",
@@ -100,10 +106,8 @@ const form = useForm({
   endereco: props.medico?.endereco || "",
   cidade: props.medico?.cidade || "",
   bairro: props.medico?.bairro || "",
-senha:  "1234",
-
-})
-
+  permissoes:[],
+});
 </script>
 
 <style scoped>

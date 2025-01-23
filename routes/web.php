@@ -13,6 +13,7 @@ use App\Models\Empresa;
 use App\Models\Medico;
 use App\Models\Medico_Paciente;
 use App\Models\Paciente;
+use App\Models\Permissao;
 use App\Models\RelatoriosPaciente;
 use App\Models\User;
 use App\Models\User_Empresa;
@@ -153,7 +154,7 @@ Route::get('/gere', function () {
     $e->bairro = 'VILA LANDINHA';
     $e->save();
 
-    User::create([
+   $user =  User::create([
         'name' => "Administrador",
         'email' => "josuep.l@outlook.com",
         'password' => Hash::make(123456),
@@ -165,6 +166,7 @@ Route::get('/gere', function () {
     $r->user_id = 1;
     $r->empresa_id = $e->id;
     $r->save();
+
 
     return redirect('/dash');
 });

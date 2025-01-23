@@ -179,9 +179,7 @@ class LoginController extends Controller
                     'empresa_id' => $empresa->id,
                 ]);
 
-                $Permissao = new Permissao();
-                $Permissao->user_id = $user->id;
-                $Permissao->save();
+
 
             }
 

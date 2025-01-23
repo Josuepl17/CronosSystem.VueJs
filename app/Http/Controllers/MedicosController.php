@@ -6,6 +6,7 @@ use App\Http\Requests\ValidateRequest;
 use App\Mail\MailEnvioEmail;
 use App\Models\Empresa;
 use App\Models\Medico;
+use App\Models\Permissao;
 use App\Models\User;
 use App\Models\User_Empresa;
 use App\Services\MeuServico;
@@ -31,13 +32,21 @@ class MedicosController extends Controller
     }
 
     public function formMedicos() {
-        return Inertia::render('FormMedicos');
+        $permissoes = Permissao::all();
+        dd($permissoes);
+        return Inertia::render('FormMedicos', compact('permissoes'));
     }
 
 
 
     public function createMedicos(ValidateRequest $request) 
     {
+
+
+        $permissoesRecebidas  = $request->permissoes;
+        
+dd($permissoesRecebidas);
+
         DB::transaction(function () use ($request) {
             // Extrai os dados, exceto a senha, para uso no Medico
             $dados = $request->except('senha');
@@ -54,7 +63,7 @@ class MedicosController extends Controller
                 'email' => $request->email,
                 'empresa_id' => Session::get('empresa_id'),
                 'primeiro_acesso' => true,
-                'password' => $request->senha,
+                'password' => "123456",
             ];
 
             
@@ -69,7 +78,20 @@ class MedicosController extends Controller
                 ['user_id' => $user->id, 'empresa_id' => Session::get('empresa_id')], // Condição para buscar
                 ['user_id' => $user->id, 'empresa_id' => Session::get('empresa_id')] // Dados para atualizar ou criar
             );
+
+
+          
+
+
+
+
+
+
         });
+
+
+
+        
     
         return redirect('/medicos')->with('success', 'Médico criado ou atualizado com sucesso!');
     }
@@ -84,6 +106,8 @@ class MedicosController extends Controller
         
        $medico_id =  MeuServico::Decrypted($request->id);
        $medico = Medico::find($medico_id);
+        
+
        return Inertia::render('FormMedicos', compact('medico'));
 
 
