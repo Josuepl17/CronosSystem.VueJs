@@ -9,26 +9,12 @@ class Permissao extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'acessar_pacientes',
-        'acessar_medicos',
-        'acessar_consultas',
-        'acessar_empresas',
-        'acessar_atendentes',
-        'inserir_paciente',
-        'inserir_medico',
-        'inserir_consulta',
-        'inserir_empresa',
-        'inserir_atendente',
-        'editar_paciente',
-        'editar_medico',
-        'editar_empresa',
-        'editar_atendente',
-        'cancelar_consulta',
-        'concluir_consulta',
+        'chave',
+        'descricao',
     ];
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function users(){
+        return $this->belongsToMany(User::class, 'user_permissoes', 'permissao_id', 'user_id');
     }
 
     protected $table = 'permissoes';

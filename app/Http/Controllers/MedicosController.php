@@ -9,6 +9,7 @@ use App\Models\Medico;
 use App\Models\Permissao;
 use App\Models\User;
 use App\Models\User_Empresa;
+use App\Models\User_Permissao;
 use App\Services\MeuServico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,6 @@ class MedicosController extends Controller
 
     public function formMedicos() {
         $permissoes = Permissao::all();
-        dd($permissoes);
         return Inertia::render('FormMedicos', compact('permissoes'));
     }
 
@@ -43,9 +43,9 @@ class MedicosController extends Controller
     {
 
 
-        $permissoesRecebidas  = $request->permissoes;
         
-dd($permissoesRecebidas);
+        
+        
 
         DB::transaction(function () use ($request) {
             // Extrai os dados, exceto a senha, para uso no Medico
@@ -80,10 +80,14 @@ dd($permissoesRecebidas);
             );
 
 
-          
+            $permissoesRecebidas  = $request->permissoes;
 
-
-
+            foreach ($permissoesRecebidas as $permissoesRecebida) {
+                $permissao = new User_Permissao();
+                $permissao->permissao_id = $permissoesRecebida;
+                $permissao->user_id = $user->id;
+                $permissao->save();
+            }
 
 
 

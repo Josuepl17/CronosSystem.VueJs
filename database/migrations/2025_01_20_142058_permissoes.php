@@ -14,37 +14,41 @@ return new class extends Migration
     {
         Schema::create('permissoes', function (Blueprint $table) {
             $table->id();
+            $table->string('chave');
             $table->string('descricao');
             $table->timestamps();
         });
 
         // Inserindo dados automaticamente
         $permissoes = [
-            'acessar_pacientes',
-            'acessar_medicos',
-            'acessar_consultas',
-            'acessar_empresas',
-            'acessar_atendentes',
-            'inserir_paciente',
-            'inserir_medico',
-            'inserir_consulta',
-            'inserir_empresa',
-            'inserir_atendente',
-            'editar_paciente',
-            'editar_medico',
-            'editar_empresa',
-            'editar_atendente',
-            'cancelar_consulta',
-            'concluir_consulta'
+            'acessar_pacientes' => 'Acessar Pacientes',
+            'acessar_medicos' => 'Acessar Médicos',
+            'acessar_consultas' => 'Acessar Consultas',
+            'acessar_empresas' => 'Acessar Empresas',
+            'acessar_atendentes' => 'Acessar Atendentes',
+            'inserir_paciente' => 'Inserir Paciente',
+            'inserir_medico' => 'Inserir Médico',
+            'inserir_consulta' => 'Inserir Consulta',
+            'inserir_empresa' => 'Inserir Empresa',
+            'inserir_atendente' => 'Inserir Atendente',
+            'editar_paciente' => 'Editar Paciente',
+            'editar_medico' => 'Editar Médico',
+            'editar_empresa' => 'Editar Empresa',
+            'editar_atendente' => 'Editar Atendente',
+            'cancelar_consulta' => 'Cancelar Consulta',
+            'concluir_consulta' => 'Concluir Consulta'
         ];
 
-        foreach ($permissoes as $permissao) {
+        foreach ($permissoes as $chave => $descricao) {
             DB::table('permissoes')->insert([
-                'descricao' => $permissao,
+                'descricao' => $descricao,
+                'chave' => $chave,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
-        }    }
+
+        }        } 
+       
 
     /**
      * Reverse the migrations.

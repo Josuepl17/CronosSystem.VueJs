@@ -66,6 +66,7 @@ class LoginController extends Controller
                 Session::put('adm', "adm"); // id para apresentar gerenciamento de filial
 
             }
+
             Session::put('id', Auth::id());
             Session::put('nome', Auth::user()->name);
             
@@ -198,6 +199,14 @@ class LoginController extends Controller
                 'user_id' => $user->id,
                 'empresa_id' => $empresa->id,
             ]);
+
+
+
+
+
+
+
+
         });
 
 

@@ -128,7 +128,7 @@ Route::post('/teste', function (Request $request) {
 });
 
 Route::get('/teste2', function () {
-    $teste = Auth::user()->permissoes->acessar_pacientes;
+    $teste = Auth::user()->permissoes->pluck('chave');
     dd($teste);
     
 });

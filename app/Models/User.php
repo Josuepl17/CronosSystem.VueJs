@@ -31,7 +31,9 @@ class User extends Authenticatable
         return $this->hasMany(Medico::class);
     }
 
-    public function permissoes() {
-        return $this->hasOne(Permissao::class);
+
+
+    public function permissoes(){
+        return $this->belongsToMany(Permissao::class, 'user_permissoes', 'user_id', 'permissao_id');
     }
 }
