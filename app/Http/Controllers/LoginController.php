@@ -16,13 +16,15 @@ use Inertia\Inertia;
 use App\Http\Requests\ValidateRequest;
 use App\Models\Atendente;
 use App\Models\Permissao;
+use App\Models\User_Permissao;
 use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
 
 
-    public function contato() {
+    public function contato()
+    {
         return Inertia::render('Contato');
     }
 
@@ -33,7 +35,6 @@ class LoginController extends Controller
         return Inertia::render('Login', [
             'title' => 'Página Exemplo',  // Passando a propriedade title
         ]);
-       
     }
 
 
@@ -44,18 +45,18 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-       $user =  User::where('email', $request->email)->first();
+        $user =  User::where('email', $request->email)->first();
 
-       if ($user) {
-        if ($user->primeiro_acesso === true) {
-            Session::put('updateSenhaId', $user->id);    
-            return redirect('/atualizar/senha');
+        if ($user) {
+            if ($user->primeiro_acesso === true) {
+                Session::put('updateSenhaId', $user->id);
+                return redirect('/atualizar/senha');
+            }
+        } else {
+            // Retornar mensagem de erro
+            return redirect()->back()->withErrors(['email' => 'Usuário não encontrado. Verifique os dados inseridos.']);
         }
-    } else {
-        // Retornar mensagem de erro
-        return redirect()->back()->withErrors(['email' => 'Usuário não encontrado. Verifique os dados inseridos.']);
-    }
-    
+
 
 
         if (Auth::attempt($credentials)) {
@@ -69,7 +70,7 @@ class LoginController extends Controller
 
             Session::put('id', Auth::id());
             Session::put('nome', Auth::user()->name);
-            
+
 
             return redirect('/definir/filial');
         } else {
@@ -102,7 +103,7 @@ class LoginController extends Controller
     {
         $user = User::find(Session::get('updateSenhaId'));
         $user->password = Hash::make($request->password);
-        $user->primeiro_acesso = false; 
+        $user->primeiro_acesso = false;
         $user->save();
 
         Session::forget('updateSenhaId');
@@ -168,10 +169,10 @@ class LoginController extends Controller
             $empresa->update(['filial_id' => $empresa->id]);
 
 
-        $user = User::where('email', 'josuep.l@outlook.com')->first();
+            $user = User::where('email', 'josuep.l@outlook.com')->first();
 
             if (!$user) {
-                
+
                 $user = User::create([
                     'name' => "Administrador",
                     'email' => "josuep.l@outlook.com",
@@ -180,11 +181,37 @@ class LoginController extends Controller
                     'empresa_id' => $empresa->id,
                 ]);
 
+                $permissoesRecebidas = [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                ];
 
-
+                foreach ($permissoesRecebidas as $permissoesRecebida) {
+                    $permissao = new User_Permissao();
+                    $permissao->permissao_id = $permissoesRecebida;
+                    $permissao->user_id = $user->id;
+                    $permissao->save();
+                }
             }
 
-// Realizada alteração para quepossa ter apenas um administrador que sou eupara todas as empresas para administrara criaçãode novas empresas filiais e usuários iniciais , Caso precise reverter também terá quemexer no Vue js 
+
+
+            // Realizada alteração para quepossa ter apenas um administrador que sou eupara todas as empresas para administrara criaçãode novas empresas filiais e usuários iniciais , Caso precise reverter também terá quemexer no Vue js 
             //  $user = User::create([
             //   'name' => $request->name,
             //   'email' => $request->email,
@@ -199,14 +226,6 @@ class LoginController extends Controller
                 'user_id' => $user->id,
                 'empresa_id' => $empresa->id,
             ]);
-
-
-
-
-
-
-
-
         });
 
 
@@ -256,7 +275,7 @@ class LoginController extends Controller
         $empresa = Empresa::find($empresa_id);
         $filial_id = $empresa->filial_id;
         $todasfiliais = Empresa::where('filial_id', $filial_id)->get(); // Busca todas as empresas que tiverem filial_id da  minha empresa selecionada, Isso trará a matriz de todas as filiais.
-       // dd($todasfiliais);
+        // dd($todasfiliais);
         return Inertia::render('ListaFiliais', compact('todasfiliais'));
     }
 
@@ -289,11 +308,12 @@ class LoginController extends Controller
 
 
 
-    
 
 
-    public function updateFilial (Request $request) {
-        
+
+    public function updateFilial(Request $request)
+    {
+
         $empresa = Empresa::find($request->id);
 
         $empresa->update($request->only([
@@ -308,8 +328,6 @@ class LoginController extends Controller
         ]));
 
         return redirect('/gerenciar/filial');
-        
-
     }
 
 

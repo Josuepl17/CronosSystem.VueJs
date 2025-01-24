@@ -37,10 +37,25 @@
                             <label for="bairro">Bairro</label>
                             <input v-model="form.bairro" type="text" id="bairro" placeholder="Bairro">
                         </div>
-                     <!--  <div class="form-group">
-                            <label for="senha">Senha</label>
-                            <input v-model="form.senha" type="text" id="senha" placeholder="Senha">
-                        </div> -->
+
+
+
+
+                        <div class="form-group">
+                      <label for="Medico">Permissões Do Usuario</label>
+                      <div style="height: 150px; border: 1px solid #ccc; overflow-y: auto;">
+                          <div v-for="permissao in props.permissoes" 
+                               :key="permissao.id" 
+                               @click="form.permissoes.includes(permissao.id) ? form.permissoes = form.permissoes.filter(id => id !== permissao.id) : form.permissoes.push(permissao.id)"
+                               :style="{ padding: '5px 10px', cursor: 'pointer', backgroundColor: form.permissoes.includes(permissao.id) ? '#e0e0e0' : 'white' }">
+                              {{ permissao.descricao }}
+                          </div>
+                      </div>
+                  </div>
+
+
+
+
                         <div class="fechar-salvar">
                             <button type="button" class="fechar">Fechar</button>
                             <button type="submit" class="salvar">Salvar</button>
@@ -64,6 +79,8 @@ onMounted(() => {
 const props = defineProps({
     errors: Array,
     atendente: Object,
+    permissoes: Array,
+    idPermissaoSelect: Array,
 });
 
 const form = useForm({
@@ -75,7 +92,8 @@ const form = useForm({
     endereco: props.atendente?.endereco || "",
     cidade: props.atendente?.cidade || "",
     bairro: props.atendente?.bairro || "",
-    senha: "1234" ,
+    senha: "1234",
+    permissoes: props.idPermissaoSelect || [],
 });
 </script>
 

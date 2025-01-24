@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ValidateRequest;
 use App\Models\Atendente;
 use App\Models\Empresa;
+use App\Models\Permissao;
 use App\Models\User;
 use App\Models\User_Empresa;
+use App\Models\User_Permissao;
 use App\Services\MeuServico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +32,8 @@ class AtendenteController extends Controller
     
 
     public function formAtendentes() {
-        return Inertia::render('FormAtendentes');
+        $permissoes = Permissao::all();
+        return Inertia::render('FormAtendentes', compact('permissoes'));
     }
 
 
@@ -65,6 +68,17 @@ class AtendenteController extends Controller
         $userEmpresa = User_Empresa::firstOrCreate(
             ['user_id' => $user->id, 'empresa_id' => $user->empresa_id]
         );
+
+        $permissoesRecebidas  = $request->permissoes;
+
+        User_Permissao::where('user_id', $user->id)->delete();
+
+        foreach ($permissoesRecebidas as $permissoesRecebida) {
+            $permissao = new User_Permissao();
+            $permissao->permissao_id = $permissoesRecebida;
+            $permissao->user_id = $user->id;
+            $permissao->save();
+        }
     
         return redirect('/atendentes');
 
@@ -78,7 +92,10 @@ class AtendenteController extends Controller
     public function editAtendente(Request $request) {
         $id = MeuServico::Decrypted($request->id);
         $atendente = Atendente::find($id);
-        return Inertia::render('FormAtendentes', compact('atendente'));
+        $user = User::find($id);
+        $permissoes = Permissao::all();
+        $idPermissaoSelect = $user->permissoes()->pluck('permissao_id')->toArray();
+        return Inertia::render('FormAtendentes', compact('atendente', 'idPermissaoSelect', 'permissoes'));
         
     }
 }

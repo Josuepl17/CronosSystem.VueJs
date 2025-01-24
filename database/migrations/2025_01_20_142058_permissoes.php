@@ -36,7 +36,8 @@ return new class extends Migration
             'editar_empresa' => 'Editar Empresa',
             'editar_atendente' => 'Editar Atendente',
             'cancelar_consulta' => 'Cancelar Consulta',
-            'concluir_consulta' => 'Concluir Consulta'
+            'concluir_consulta' => 'Concluir Consulta',
+            'apagar_consulta' => 'Apagar Consulta',
         ];
 
         foreach ($permissoes as $chave => $descricao) {

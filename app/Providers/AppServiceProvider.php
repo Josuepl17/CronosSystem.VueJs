@@ -46,7 +46,8 @@ class AppServiceProvider extends ServiceProvider
                     'editar_empresa' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('editar_empresa') : false,
                     'editar_atendente' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('editar_atendente') : false,
                     'cancelar_consulta' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('cancelar_consulta') : false,
-                    'concluir_consulta' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('concluir_consulta') : false,   
+                    'concluir_consulta' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('concluir_consulta') : false,  
+                    'apagar_consulta' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('apagar_consulta') : false,    
                 
                 ]);
                 Vite::prefetch(concurrency: 3);

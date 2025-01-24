@@ -57,13 +57,15 @@
 
                   <div class="form-group">
                       <label for="Medico">Permissões Do Usuario</label>
-                      <select v-model="form.permissoes" id="permissoes" multiple name="permissoes">
-
-                          <option v-for="permissao in props.permissoes" :key="permissao.id" :value="permissao.id">{{ permissao.descricao }}</option>
-                    
-                      </select>
+                      <div style="height: 150px; border: 1px solid #ccc; overflow-y: auto;">
+                          <div v-for="permissao in props.permissoes" 
+                               :key="permissao.id" 
+                               @click="form.permissoes.includes(permissao.id) ? form.permissoes = form.permissoes.filter(id => id !== permissao.id) : form.permissoes.push(permissao.id)"
+                               :style="{ padding: '5px 10px', cursor: 'pointer', backgroundColor: form.permissoes.includes(permissao.id) ? '#e0e0e0' : 'white' }">
+                              {{ permissao.descricao }}
+                          </div>
+                      </div>
                   </div>
-
 
                     <div class="fechar-salvar"><!-- .fechar-salvar -->
                         <button type="button" class="fechar">Fechar</button>
@@ -93,6 +95,7 @@ const props = defineProps({
   errors: Array,
   medico: Array,
   permissoes: Array,
+  idPermissaoSelect: Array,
 });
 
 const form = useForm({
@@ -106,7 +109,7 @@ const form = useForm({
   endereco: props.medico?.endereco || "",
   cidade: props.medico?.cidade || "",
   bairro: props.medico?.bairro || "",
-  permissoes:[],
+  permissoes: props.idPermissaoSelect || [],
 });
 </script>
 

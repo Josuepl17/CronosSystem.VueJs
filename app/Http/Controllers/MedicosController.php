@@ -42,11 +42,6 @@ class MedicosController extends Controller
     public function createMedicos(ValidateRequest $request) 
     {
 
-
-        
-        
-        
-
         DB::transaction(function () use ($request) {
             // Extrai os dados, exceto a senha, para uso no Medico
             $dados = $request->except('senha');
@@ -79,8 +74,11 @@ class MedicosController extends Controller
                 ['user_id' => $user->id, 'empresa_id' => Session::get('empresa_id')] // Dados para atualizar ou criar
             );
 
+            
 
             $permissoesRecebidas  = $request->permissoes;
+
+            User_Permissao::where('user_id', $user->id)->delete();
 
             foreach ($permissoesRecebidas as $permissoesRecebida) {
                 $permissao = new User_Permissao();
@@ -88,7 +86,6 @@ class MedicosController extends Controller
                 $permissao->user_id = $user->id;
                 $permissao->save();
             }
-
 
 
         });
@@ -110,9 +107,10 @@ class MedicosController extends Controller
         
        $medico_id =  MeuServico::Decrypted($request->id);
        $medico = Medico::find($medico_id);
-        
-
-       return Inertia::render('FormMedicos', compact('medico'));
+       $user = User::find($medico_id);
+       $permissoes = Permissao::all();
+       $idPermissaoSelect = $user->permissoes()->pluck('permissao_id')->toArray();
+       return Inertia::render('FormMedicos', compact('medico' , 'permissoes', 'idPermissaoSelect'));
 
 
     }
