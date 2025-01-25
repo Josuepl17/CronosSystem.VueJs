@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Stmt\If_;
 
-class MeuServico
+class ServicesPaciente
 {
 
 
@@ -132,20 +132,20 @@ class MeuServico
 
     public static function listarPacientes($empresaId)
     {
-        if ($medico = MeuServico::VerificarMedico()) {
+        if ($medico = ServicesPaciente::VerificarMedico()) {
             $pacientes = $medico->pacientes()->get();
-            MeuServico::Autorizer();
+            ServicesPaciente::Autorizer();
         } else {
             $pacientes = Paciente::where('empresa_id',  $empresaId)->get();
         }
 
-          return  $pacientes = MeuServico::formatarTelefoneCPF($pacientes);
+          return  $pacientes = ServicesPaciente::formatarTelefoneCPF($pacientes);
     }
 
 
 
     public static function getMedicoLogadoOuTodos() {
-        if ($medico = MeuServico::VerificarMedico()) {
+        if ($medico = ServicesPaciente::VerificarMedico()) {
             $medicos = collect([$medico]);
         } else {
             $users_id = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
@@ -187,7 +187,7 @@ class MeuServico
 
 
 
-    
+
 
 
     public static function concluirConsulta($id_consulta){

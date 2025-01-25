@@ -14,7 +14,7 @@ use App\Models\Medico;
 use App\Models\Paciente;
 use App\Models\RelatoriosPaciente;
 use App\Models\Tramite;
-use App\Services\MeuServico;
+use App\Services\ServicesPaciente;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -31,7 +31,7 @@ class PacientesController extends Controller
     public function listaPacientes()
     {
         $empresaId = Session::get('empresa_id'); // Empresa selecionada
-        $pacientes =  MeuServico::listarPacientes($empresaId);
+        $pacientes =  ServicesPaciente::listarPacientes($empresaId);
         return Inertia::render('Pacientes', compact('pacientes'));
     }
     
@@ -65,8 +65,8 @@ class PacientesController extends Controller
         
         }
     
-        $pacientes = MeuServico::Encrypted($pacientes);
-        MeuServico::Autorizer(); // Responsável por mostrar ou inserir paciente
+        $pacientes = ServicesPaciente::Encrypted($pacientes);
+        ServicesPaciente::Autorizer(); // Responsável por mostrar ou inserir paciente
     
         return Inertia::render('Pacientes', compact('pacientes'));
     }
@@ -81,7 +81,7 @@ class PacientesController extends Controller
 
     public function formPacientes()
     {
-        $medicos = MeuServico::getMedicoLogadoOuTodos();
+        $medicos = ServicesPaciente::getMedicoLogadoOuTodos();
         return Inertia::render('FormPacientes', compact('medicos'));
     }
 
@@ -99,7 +99,7 @@ class PacientesController extends Controller
         $pacienteId = $request->id;
 
         // Chama o service para salvar o paciente e seus relacionamentos
-        MeuServico::salvarPaciente($dados, $pacienteId, $medicos);
+        ServicesPaciente::salvarPaciente($dados, $pacienteId, $medicos);
 
         // Redireciona após o salvamento
         return redirect('/pacientes');
@@ -127,7 +127,7 @@ class PacientesController extends Controller
 
     public function sessionPaciente(Request $request)
     {
-        FacadesSession::put('id_paciente', MeuServico::Decrypted($request->id));
+        FacadesSession::put('id_paciente', ServicesPaciente::Decrypted($request->id));
         Session::forget('message');
         return redirect('/detalhes/paciente');
     }
@@ -146,7 +146,7 @@ class PacientesController extends Controller
 /*/////////////////////////////////////////////////////////////////////*/        
 
         $arquivos = ArquivoPaciente::where('paciente_id', $id_paciente)->get(); 
-        $arquivos = MeuServico::Encrypted($arquivos);
+        $arquivos = ServicesPaciente::Encrypted($arquivos);
 
 /*/////////////////////////////////////////////////////////////////////*/
         $detalhes = $paciente->detalhespacientes()->where('medico_id', Session::get('id'))->first(); // retona Object
@@ -281,7 +281,7 @@ class PacientesController extends Controller
 
         $id_consulta = $request->consulta;
 
-        MeuServico::concluirConsulta($id_consulta);
+        ServicesPaciente::concluirConsulta($id_consulta);
     
         Session::flash('message', "Criado Com Sucesso ");
 
@@ -325,7 +325,7 @@ class PacientesController extends Controller
 
     public function downloadArquivo(Request $request)
     {
-        $id = MeuServico::Decrypted($request->id);
+        $id = ServicesPaciente::Decrypted($request->id);
         $arquivo = ArquivoPaciente::find($id);
         $filePath = storage_path('app/public/' . $arquivo->path);
         return response()->download($filePath, $arquivo->nome);
