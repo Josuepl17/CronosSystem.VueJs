@@ -10,8 +10,10 @@ use App\Models\User;
 use App\Models\User_Empresa;
 use App\Models\User_Permissao;
 use App\Services\MeuServico;
+use App\Services\ServiceGeral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -21,7 +23,7 @@ class AtendenteController extends Controller
     public function listaAtendentes() {
         $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id'); // relacionamento empresa user
         $atendentes = Atendente::wherein('id', $users)->get();
-        $atendentes = MeuServico::formatarDados($atendentes);
+        $atendentes = ServiceGeral::formatarTelefoneCPF($atendentes);
         return Inertia::render('Atendentes', compact('atendentes'));
     }
 
@@ -71,14 +73,7 @@ class AtendenteController extends Controller
 
         $permissoesRecebidas  = $request->permissoes;
 
-        User_Permissao::where('user_id', $user->id)->delete();
-
-        foreach ($permissoesRecebidas as $permissoesRecebida) {
-            $permissao = new User_Permissao();
-            $permissao->permissao_id = $permissoesRecebida;
-            $permissao->user_id = $user->id;
-            $permissao->save();
-        }
+        ServiceGeral::CriarPermissoes($request->permissoes, $user);
     
         return redirect('/atendentes');
 
@@ -90,7 +85,7 @@ class AtendenteController extends Controller
 
 
     public function editAtendente(Request $request) {
-        $id = MeuServico::Decrypted($request->id);
+        $id = Crypt::decrypt($request->id);
         $atendente = Atendente::find($id);
         $user = User::find($id);
         $permissoes = Permissao::all();

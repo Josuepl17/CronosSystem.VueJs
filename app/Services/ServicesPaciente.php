@@ -66,48 +66,9 @@ class ServicesPaciente
 
 
 
-    public static function Decrypted($dados)
-    {
-
-        $dados = Crypt::decrypt($dados);
-        return $dados;
-    }
 
 
-    public static function formatarTelefoneCPF($dados)
-    {
-        foreach ($dados as $dado) {
-            // Remove caracteres não numéricos
-            $numero = preg_replace('/\D/', '', $dado->telefone);
-
-            // Verifica o tamanho do número e formata de acordo
-            if (strlen($numero) == 10) {
-                // Formato (XX) XXXX-XXXX
-                $dado->telefone = preg_replace('/(\d{2})(\d{4})(\d{4})/', '($1) $2-$3', $numero);
-            } elseif (strlen($numero) == 11) {
-                // Formato (XX) XXXXX-XXXX
-                $dado->telefone = preg_replace('/(\d{2})(\d{5})(\d{4})/', '($1) $2-$3', $numero);
-            } else {
-                // Mantém o número original se não tiver 10 ou 11 dígitos
-                $dado->telefone = $numero;
-            }
-
-            $cpf = preg_replace('/\D/', '', $dado->cpf);
-
-            if (strlen($cpf) == 11) {
-                // Formato XXX.XXX.XXX-XX
-                $dado->cpf = preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $cpf);
-            } else {
-                // Mantém o CPF original se não tiver 11 dígitos
-                $dado->cpf = $cpf;
-            }
-
-            foreach ($dados as $dado) {
-                $dado->identificacao = Crypt::encrypt($dado->id);
-            }
-        }
-        return $dados;
-    }
+    
 
 
 
@@ -139,7 +100,7 @@ class ServicesPaciente
             $pacientes = Paciente::where('empresa_id',  $empresaId)->get();
         }
 
-          return  $pacientes = ServicesPaciente::formatarTelefoneCPF($pacientes);
+          return  $pacientes = ServiceGeral::formatarTelefoneCPF($pacientes);
     }
 
 

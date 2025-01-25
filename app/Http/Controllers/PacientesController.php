@@ -127,7 +127,7 @@ class PacientesController extends Controller
 
     public function sessionPaciente(Request $request)
     {
-        FacadesSession::put('id_paciente', ServicesPaciente::Decrypted($request->id));
+        FacadesSession::put('id_paciente', Crypt::decrypt($request->id));
         Session::forget('message');
         return redirect('/detalhes/paciente');
     }
@@ -325,7 +325,7 @@ class PacientesController extends Controller
 
     public function downloadArquivo(Request $request)
     {
-        $id = ServicesPaciente::Decrypted($request->id);
+        $id = Crypt::decrypt($request->id);
         $arquivo = ArquivoPaciente::find($id);
         $filePath = storage_path('app/public/' . $arquivo->path);
         return response()->download($filePath, $arquivo->nome);
