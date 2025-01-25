@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePacienteRequest;
 use App\Http\Requests\ValidateRequest;
 use App\Models\ArquivoPaciente;
 use App\Models\ConsultaPaciente;
@@ -30,28 +31,13 @@ class PacientesController extends Controller
     public function listaPacientes()
     {
         $empresaId = Session::get('empresa_id'); // Empresa selecionada
-
-        if ($medico = MeuServico::VerificarMedico()){
-            $pacientes = $medico->pacientes()->get();
-        } else {
-            $pacientes = Paciente::where('empresa_id',  $empresaId)->get();
-            
-        }
-
-        $pacientes = MeuServico::formatarDados($pacientes);
-    
-        MeuServico::Autorizer();
-    
+        $pacientes =  MeuServico::listarPacientes($empresaId);
         return Inertia::render('Pacientes', compact('pacientes'));
     }
     
 
 
     
-
-
-
-
 
 
     public function buscaPaciente(Request $request) 
@@ -95,12 +81,7 @@ class PacientesController extends Controller
 
     public function formPacientes()
     {
-        if ($medico = MeuServico::VerificarMedico()) {
-            $medicos = collect([$medico]);
-        } else {
-            $users_id = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
-            $medicos = Medico::whereIn('id', $users_id)->get();
-        }
+        $medicos = MeuServico::getMedicoLogadoOuTodos();
         return Inertia::render('FormPacientes', compact('medicos'));
     }
 
@@ -110,44 +91,24 @@ class PacientesController extends Controller
 
 
 
-
-
-    public function createPaciente(ValidateRequest $request)
+    public function createPaciente(CreatePacienteRequest $request)
     {
-
+        // Extrai os dados e os IDs dos médicos
         $dados = $request->except('medico');
+        $medicos = $request->medico;
+        $pacienteId = $request->id;
 
+        // Chama o service para salvar o paciente e seus relacionamentos
+        MeuServico::salvarPaciente($dados, $pacienteId, $medicos);
 
-
-        $dados['empresa_id'] = Session::get('empresa_id');
-
-        
-
-
-      $paciente =   Paciente::updateOrCreate(
-            ['id' => $request->id], // Condição para buscar o usuário
-            $dados
-        );
-
-
-       Medico_Paciente::where('paciente_id', $paciente->id)->delete();
-
-        foreach ($request->medico as $medico_id) {
-
-            Medico_Paciente::create([ // faz o relacionamento dos medicos selecionados com o paciente criado
-                'paciente_id' => $paciente->id,
-                'medico_id' => $medico_id,
-                'empresa_id' => Session::get('empresa_id'),
-            ]);
-
-        }
+        // Redireciona após o salvamento
         return redirect('/pacientes');
     }
 
 
 
     public function editarPacinte(Request $request) {
-        $id = MeuServico::Decrypted($request->id);
+        $id = Crypt::decrypt($request->id);
         $paciente = Paciente::find($id);
         $medico_id = Medico_Paciente::where('paciente_id', $id)->pluck('medico_id');
         $medicosSelect = Medico::wherein('id', $medico_id)->pluck('id');
@@ -160,10 +121,6 @@ class PacientesController extends Controller
 
         
     }
-
-
-
-
 
 
 
@@ -185,12 +142,13 @@ class PacientesController extends Controller
 
         $id_paciente = FacadesSession::get('id_paciente');
         $paciente = Paciente::Find($id_paciente); // nome vue js 
-;
+
+/*/////////////////////////////////////////////////////////////////////*/        
 
         $arquivos = ArquivoPaciente::where('paciente_id', $id_paciente)->get(); 
         $arquivos = MeuServico::Encrypted($arquivos);
 
-
+/*/////////////////////////////////////////////////////////////////////*/
         $detalhes = $paciente->detalhespacientes()->where('medico_id', Session::get('id'))->first(); // retona Object
 
         if ($detalhes != null) {
@@ -200,19 +158,20 @@ class PacientesController extends Controller
             $texto_principal = $detalhes;
         }
 
-        
+   /*/////////////////////////////////////////////////////////////////////*/     
 
         $consultas = $paciente->consultas()->where('medico_id', Session::get('id'))->where('status', "Agendado")->get(); // retorna array
         //dd($consultas);
-
+/*/////////////////////////////////////////////////////////////////////*/
         $tramites_paciente = $paciente->tramites()->where('medico_id', Session::get('id'))->get(); // retorna array 
 
         foreach ($tramites_paciente as $tramite) {
             $tramite->descricao = Crypt::decrypt($tramite->descricao);
         }
-
+/*/////////////////////////////////////////////////////////////////////*/
         $medicamentos = Medicamento_Paciente::where('paciente_id', $id_paciente)->get();
 
+/*/////////////////////////////////////////////////////////////////////*/
 
         $pacienteinfo = new \stdClass();
         $pacienteinfo->idadepaciente = Carbon::parse($paciente->DataNascimento)->age;
@@ -222,10 +181,13 @@ class PacientesController extends Controller
 
         $csrf_token = csrf_token();
 
+/*/////////////////////////////////////////////////////////////////////*/        
+
         $relatorios = RelatoriosPaciente::where('paciente_id', $id_paciente)->get();
         foreach ($relatorios as $relatorio) {
             $relatorio->prescricao = Crypt::decrypt($relatorio->prescricao);
         }
+/*/////////////////////////////////////////////////////////////////////*/        
 
         return Inertia::render('DetalhesPacientes', compact('texto_principal', 'tramites_paciente', 'paciente',  'consultas', 'arquivos', 'pacienteinfo', 'medicamentos', 'csrf_token', 'relatorios'));
     }
@@ -319,14 +281,8 @@ class PacientesController extends Controller
 
         $id_consulta = $request->consulta;
 
-        if($id_consulta){
-            $consulta = ConsultaPaciente::Find($id_consulta)->first();
-            $consulta->status = 'Concluido';
-            $consulta->motivo_status = "Consulta concluída";
-            $consulta->save();
-        }
+        MeuServico::concluirConsulta($id_consulta);
     
-
         Session::flash('message', "Criado Com Sucesso ");
 
         return Inertia::location('/detalhes/paciente'); // faz ele recarregar a pagina
