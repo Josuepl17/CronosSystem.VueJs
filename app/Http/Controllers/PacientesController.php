@@ -14,6 +14,7 @@ use App\Models\Medico;
 use App\Models\Paciente;
 use App\Models\RelatoriosPaciente;
 use App\Models\Tramite;
+use App\Services\ServiceGeral;
 use App\Services\ServicesPaciente;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
@@ -31,7 +32,7 @@ class PacientesController extends Controller
     public function listaPacientes()
     {
         $empresaId = Session::get('empresa_id'); // Empresa selecionada
-        $pacientes =  ServicesPaciente::listarPacientes($empresaId);
+        $pacientes =  ServiceGeral::listarPacientes($empresaId);
         return Inertia::render('Pacientes', compact('pacientes'));
     }
     
@@ -65,7 +66,7 @@ class PacientesController extends Controller
         
         }
     
-        $pacientes = ServicesPaciente::Encrypted($pacientes);
+        $pacientes = ServiceGeral::CriptograrArrayID($pacientes);
         ServicesPaciente::Autorizer(); // Responsável por mostrar ou inserir paciente
     
         return Inertia::render('Pacientes', compact('pacientes'));
@@ -146,7 +147,7 @@ class PacientesController extends Controller
 /*/////////////////////////////////////////////////////////////////////*/        
 
         $arquivos = ArquivoPaciente::where('paciente_id', $id_paciente)->get(); 
-        $arquivos = ServicesPaciente::Encrypted($arquivos);
+        $arquivos = ServiceGeral::CriptograrArrayID($arquivos);
 
 /*/////////////////////////////////////////////////////////////////////*/
         $detalhes = $paciente->detalhespacientes()->where('medico_id', Session::get('id'))->first(); // retona Object

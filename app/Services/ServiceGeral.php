@@ -2,8 +2,13 @@
 
 namespace App\Services;
 
+use App\Models\ConsultaPaciente;
+use App\Models\Empresa;
+use App\Models\Medico;
+use App\Models\Paciente;
 use App\Models\User_Permissao;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Session;
 
 class ServiceGeral
 {
@@ -69,6 +74,76 @@ class ServiceGeral
         return $dados;
     }
 
+
+    public static function VerificarMedico()
+    {
+        $funcionarioId = Session::get('id');
+
+        $medico = Medico::where('id', $funcionarioId)->first();
+        if ($medico) {
+            return $medico;
+        } else {
+            return false;
+        }
+    }
+
+    public static function getMedicoLogadoOuTodos() {
+        if ($medico = ServiceGeral::VerificarMedico()) {
+            $medicos = collect([$medico]);
+        } else {
+            $users_id = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
+            $medicos = Medico::whereIn('id', $users_id)->get();
+        }
+
+        return  $medicos;
+    }
+
+
+
+
+    public static function listarPacientes($empresaId)
+    {
+        if ($medico = ServiceGeral::VerificarMedico()) {
+            $pacientes = $medico->pacientes()->get();
+            ServicesPaciente::Autorizer();
+        } else {
+            $pacientes = Paciente::where('empresa_id',  $empresaId)->get();
+        }
+
+          return  $pacientes = ServiceGeral::formatarTelefoneCPF($pacientes);
+    }
+
+
+
+
+
+
+    public static function CriptograrArrayID($dados)
+    {
+        foreach ($dados as $dado) {
+            $dado->identificacao = Crypt::encrypt($dado->id);
+        }
+        return $dados;
+    }
+
+
+
+    public static function VerificarAgendamento($request) {
+      return   $existingConsulta = ConsultaPaciente::where('date', $request->date)
+        ->where('medico_id', $request->medico_id)
+        ->where('status', 'Agendado')
+        ->where(function ($query) use ($request) {
+            $query->whereBetween('horainicial', [$request->horainicial, $request->horafinal])
+                ->orWhereBetween('horafinal', [$request->horainicial, $request->horafinal])
+                ->orWhere(function ($query) use ($request) {
+                    $query->where('horainicial', '<=', $request->horainicial)
+                        ->where('horafinal', '>=', $request->horafinal);
+                });
+        })
+        ->first();
+
+
+    }
 
 
 }

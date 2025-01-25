@@ -52,13 +52,7 @@ class ServicesPaciente
 
 
 
-    public static function Encrypted($dados)
-    {
-        foreach ($dados as $dado) {
-            $dado->identificacao = Crypt::encrypt($dado->id);
-        }
-        return $dados;
-    }
+
 
 
 
@@ -76,45 +70,9 @@ class ServicesPaciente
 
 
 
-    public static function VerificarMedico()
-    {
-        $funcionarioId = Session::get('id');
-
-        $medico = Medico::where('id', $funcionarioId)->first();
-        if ($medico) {
-            return $medico;
-        } else {
-            return false;
-        }
-    }
 
 
 
-
-    public static function listarPacientes($empresaId)
-    {
-        if ($medico = ServicesPaciente::VerificarMedico()) {
-            $pacientes = $medico->pacientes()->get();
-            ServicesPaciente::Autorizer();
-        } else {
-            $pacientes = Paciente::where('empresa_id',  $empresaId)->get();
-        }
-
-          return  $pacientes = ServiceGeral::formatarTelefoneCPF($pacientes);
-    }
-
-
-
-    public static function getMedicoLogadoOuTodos() {
-        if ($medico = ServicesPaciente::VerificarMedico()) {
-            $medicos = collect([$medico]);
-        } else {
-            $users_id = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
-            $medicos = Medico::whereIn('id', $users_id)->get();
-        }
-
-        return  $medicos;
-    }
 
 
 
