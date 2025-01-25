@@ -82,7 +82,7 @@ class PacientesController extends Controller
 
     public function formPacientes()
     {
-        $medicos = ServicesPaciente::getMedicoLogadoOuTodos();
+        $medicos = ServiceGeral::getMedicoLogadoOuTodos();
         return Inertia::render('FormPacientes', compact('medicos'));
     }
 

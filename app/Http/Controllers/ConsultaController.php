@@ -119,7 +119,7 @@ class ConsultaController extends Controller
 
         $medico = Medico::find($request->medico_id);
 
-       $existeCosnulta =  ServiceGeral::VerificarAgendamento($request);
+       $existeCosnulta =  ServicesConsulta::VerificarAgendamento($request);
        
        if ($existeCosnulta) {
         return back()->withErrors(['hora' => 'Já existe uma consulta agendada para este médico nesta data e hora.'])->withInput();

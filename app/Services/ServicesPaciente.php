@@ -22,16 +22,6 @@ class ServicesPaciente
 {
 
 
-
-
-
-
-
-
-
-
-
-
     public static function Autorizer()
     {
 
@@ -48,29 +38,6 @@ class ServicesPaciente
             return;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
 
 
 
@@ -107,15 +74,13 @@ class ServicesPaciente
 
 
 
-
-
-    public static function concluirConsulta($id_consulta){
-        if($id_consulta){
+    public static function concluirConsulta($id_consulta)
+    {
+        if ($id_consulta) {
             $consulta = ConsultaPaciente::Find($id_consulta)->first();
             $consulta->status = 'Concluido';
             $consulta->motivo_status = "Consulta concluída";
             $consulta->save();
         }
     }
-
 }

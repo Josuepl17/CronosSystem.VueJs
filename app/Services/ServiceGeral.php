@@ -128,22 +128,7 @@ class ServiceGeral
 
 
 
-    public static function VerificarAgendamento($request) {
-      return   $existingConsulta = ConsultaPaciente::where('date', $request->date)
-        ->where('medico_id', $request->medico_id)
-        ->where('status', 'Agendado')
-        ->where(function ($query) use ($request) {
-            $query->whereBetween('horainicial', [$request->horainicial, $request->horafinal])
-                ->orWhereBetween('horafinal', [$request->horainicial, $request->horafinal])
-                ->orWhere(function ($query) use ($request) {
-                    $query->where('horainicial', '<=', $request->horainicial)
-                        ->where('horafinal', '>=', $request->horafinal);
-                });
-        })
-        ->first();
 
-
-    }
 
 
 }
