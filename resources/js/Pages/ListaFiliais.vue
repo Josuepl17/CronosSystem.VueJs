@@ -12,7 +12,7 @@
               <th>ID</th>
               <th>Nome</th>
               <th>CNPJ</th>
-              <th v-if="$page.props.editar_empresa" >X</th>
+              <th v-if="$page.props.adm" >X</th>
             </tr>
           </thead>
           <tbody>
@@ -20,7 +20,7 @@
               <td>{{ filial.id }}</td>
               <td>{{ filial.razao_social }}</td>
               <td>{{ filial.cnpj }}</td>
-              <td v-if="$page.props.editar_empresa" >
+              <td v-if="$page.props.adm" >
                 <Link   :href="'/editar/filial/' + filial.id">Editar</Link>
               </td>
             </tr>

@@ -41,7 +41,7 @@
 
 
 
-                        <div class="form-group">
+                        <div v-if="$page.props.adm" class="form-group">
                       <label for="Medico">Permissões Do Usuario</label>
                       <div style="height: 150px; border: 1px solid #ccc; overflow-y: auto;">
                           <div v-for="permissao in props.permissoes" 

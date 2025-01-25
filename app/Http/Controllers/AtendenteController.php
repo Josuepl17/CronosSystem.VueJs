@@ -60,11 +60,16 @@ class AtendenteController extends Controller
             [
                 'name' => $request->nome,
                 'email' => $request->email,
-                'primeiro_acesso' => true,
+                'primeiro_acesso' => false,
                 'password' => Hash::make($request->senha),
                 'empresa_id' => Session::get('empresa_id'),
             ]
         );
+
+        if ($user->wasRecentlyCreated) {
+            $user->primeiro_acesso = true; // Define como verdadeiro se for criação
+            $user->save(); // Salva a alteração no banco
+        }
     
         // Verifica se já existe uma relação entre o usuário e a empresa na tabela User_Empresa
         $userEmpresa = User_Empresa::firstOrCreate(

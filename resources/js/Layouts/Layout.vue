@@ -87,7 +87,7 @@
           </Link>
 
           <Link
-            v-if="$page.props.acessar_empresas"
+            v-if="$page.props.adm"
             href="/gerenciar/filial"
             :class="{ 'active-link': $page.url === '/gerenciar/filial' }"
           >

@@ -29,6 +29,9 @@ class LoginController extends Controller
     }
 
 
+
+
+
     public function formLogin() // formulario de login
     {
 
@@ -36,6 +39,11 @@ class LoginController extends Controller
             'title' => 'Página Exemplo',  // Passando a propriedade title
         ]);
     }
+
+
+
+
+
 
 
 
@@ -133,6 +141,7 @@ class LoginController extends Controller
     public function createUserEmpresa(Request $request)
     {
 
+
         $request->validate([
             'razao_social' => 'required|string|max:255',
             'cnpj' => 'required|unique:empresas,cnpj|min:10',
@@ -169,15 +178,15 @@ class LoginController extends Controller
             $empresa->update(['filial_id' => $empresa->id]);
 
 
-            $user = User::where('email', 'josuep.l@outlook.com')->first();
+          //  $user = User::where('email', 'josuep.l@outlook.com')->first();
 
-            if (!$user) {
+         //   if (!$user) {
 
                 $user = User::create([
                     'name' => "Administrador",
-                    'email' => "josuep.l@outlook.com",
+                    'email' => $request->email,
                     'primeiro_acesso' => false,
-                    'password' => Hash::make(123456),
+                    'password' => Hash::make($request->password),
                     'empresa_id' => $empresa->id,
                 ]);
 
@@ -196,9 +205,6 @@ class LoginController extends Controller
                     12,
                     13,
                     14,
-                    15,
-                    16,
-                    17,
                 ];
 
                 foreach ($permissoesRecebidas as $permissoesRecebida) {
@@ -207,7 +213,7 @@ class LoginController extends Controller
                     $permissao->user_id = $user->id;
                     $permissao->save();
                 }
-            }
+       //     }
 
 
 
