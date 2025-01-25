@@ -1,6 +1,6 @@
 {
   "resources/js/Pages/Agendas.vue": {
-    "file": "assets/Agendas-CLZLv6lE.js",
+    "file": "assets/Agendas-BNY-xY19.js",
     "name": "Agendas",
     "src": "resources/js/Pages/Agendas.vue",
     "isDynamicEntry": true,
@@ -12,7 +12,7 @@
     ]
   },
   "resources/js/Pages/Atendentes.vue": {
-    "file": "assets/Atendentes-C2ISCCKU.js",
+    "file": "assets/Atendentes-CxDD_DqN.js",
     "name": "Atendentes",
     "src": "resources/js/Pages/Atendentes.vue",
     "isDynamicEntry": true,
@@ -20,11 +20,11 @@
       "resources/js/app.js"
     ],
     "css": [
-      "assets/Atendentes-DfEzq9dl.css"
+      "assets/Atendentes-CoBo27eL.css"
     ]
   },
   "resources/js/Pages/Consultas.vue": {
-    "file": "assets/Consultas-BhpChubK.js",
+    "file": "assets/Consultas-CmMFUkTo.js",
     "name": "Consultas",
     "src": "resources/js/Pages/Consultas.vue",
     "isDynamicEntry": true,
@@ -32,11 +32,11 @@
       "resources/js/app.js"
     ],
     "css": [
-      "assets/Consultas-QbsBC6G3.css"
+      "assets/Consultas-Ow0usjJu.css"
     ]
   },
   "resources/js/Pages/Contato.vue": {
-    "file": "assets/Contato-BMWhhesT.js",
+    "file": "assets/Contato-DIyPsHJl.js",
     "name": "Contato",
     "src": "resources/js/Pages/Contato.vue",
     "isDynamicEntry": true,
@@ -48,7 +48,7 @@
     ]
   },
   "resources/js/Pages/Dash.vue": {
-    "file": "assets/Dash-Bdi8IJ2V.js",
+    "file": "assets/Dash-9MCrKHp6.js",
     "name": "Dash",
     "src": "resources/js/Pages/Dash.vue",
     "isDynamicEntry": true,
@@ -60,7 +60,7 @@
     ]
   },
   "resources/js/Pages/DetalhesPacientes.vue": {
-    "file": "assets/DetalhesPacientes-Ci0tq25y.js",
+    "file": "assets/DetalhesPacientes-BRbPG89v.js",
     "name": "DetalhesPacientes",
     "src": "resources/js/Pages/DetalhesPacientes.vue",
     "isDynamicEntry": true,
@@ -72,7 +72,7 @@
     ]
   },
   "resources/js/Pages/EditarFilial.vue": {
-    "file": "assets/EditarFilial-Bs6jIEcZ.js",
+    "file": "assets/EditarFilial-D0LR9-Zh.js",
     "name": "EditarFilial",
     "src": "resources/js/Pages/EditarFilial.vue",
     "isDynamicEntry": true,
@@ -84,7 +84,7 @@
     ]
   },
   "resources/js/Pages/FormAgendas.vue": {
-    "file": "assets/FormAgendas-BpNGA-7b.js",
+    "file": "assets/FormAgendas-CHbdSh-R.js",
     "name": "FormAgendas",
     "src": "resources/js/Pages/FormAgendas.vue",
     "isDynamicEntry": true,
@@ -96,7 +96,7 @@
     ]
   },
   "resources/js/Pages/FormAtendentes.vue": {
-    "file": "assets/FormAtendentes-BuU-VCwL.js",
+    "file": "assets/FormAtendentes-CetQ5d8G.js",
     "name": "FormAtendentes",
     "src": "resources/js/Pages/FormAtendentes.vue",
     "isDynamicEntry": true,
@@ -104,11 +104,11 @@
       "resources/js/app.js"
     ],
     "css": [
-      "assets/FormAtendentes-CfPWPyfM.css"
+      "assets/FormAtendentes-4-v844PO.css"
     ]
   },
   "resources/js/Pages/FormConsultas.vue": {
-    "file": "assets/FormConsultas-Bg9T2ZwK.js",
+    "file": "assets/FormConsultas-BJRRferl.js",
     "name": "FormConsultas",
     "src": "resources/js/Pages/FormConsultas.vue",
     "isDynamicEntry": true,
@@ -120,7 +120,7 @@
     ]
   },
   "resources/js/Pages/FormMedicos.vue": {
-    "file": "assets/FormMedicos-CUyJXMCE.js",
+    "file": "assets/FormMedicos-B-vaSisD.js",
     "name": "FormMedicos",
     "src": "resources/js/Pages/FormMedicos.vue",
     "isDynamicEntry": true,
@@ -128,11 +128,11 @@
       "resources/js/app.js"
     ],
     "css": [
-      "assets/FormMedicos-BJA4lL1s.css"
+      "assets/FormMedicos-Ciw07OJr.css"
     ]
   },
   "resources/js/Pages/FormPacientes.vue": {
-    "file": "assets/FormPacientes-CjOgGMkx.js",
+    "file": "assets/FormPacientes-jxRtm8Xg.js",
     "name": "FormPacientes",
     "src": "resources/js/Pages/FormPacientes.vue",
     "isDynamicEntry": true,
@@ -144,7 +144,7 @@
     ]
   },
   "resources/js/Pages/FormUserEmpresa.vue": {
-    "file": "assets/FormUserEmpresa-Cmg8rqXM.js",
+    "file": "assets/FormUserEmpresa-BSftdmJG.js",
     "name": "FormUserEmpresa",
     "src": "resources/js/Pages/FormUserEmpresa.vue",
     "isDynamicEntry": true,
@@ -152,11 +152,11 @@
       "resources/js/app.js"
     ],
     "css": [
-      "assets/FormUserEmpresa-DYVI4lXg.css"
+      "assets/FormUserEmpresa-5DmWOagR.css"
     ]
   },
   "resources/js/Pages/ListaFiliais.vue": {
-    "file": "assets/ListaFiliais-D_p599kh.js",
+    "file": "assets/ListaFiliais-CRuKW741.js",
     "name": "ListaFiliais",
     "src": "resources/js/Pages/ListaFiliais.vue",
     "isDynamicEntry": true,
@@ -164,11 +164,11 @@
       "resources/js/app.js"
     ],
     "css": [
-      "assets/ListaFiliais-DD32o0Tu.css"
+      "assets/ListaFiliais-CqeCgKcs.css"
     ]
   },
   "resources/js/Pages/Login.vue": {
-    "file": "assets/Login-OwlmaTLW.js",
+    "file": "assets/Login-DhmuOe72.js",
     "name": "Login",
     "src": "resources/js/Pages/Login.vue",
     "isDynamicEntry": true,
@@ -176,11 +176,11 @@
       "resources/js/app.js"
     ],
     "css": [
-      "assets/Login-BV9R_AGK.css"
+      "assets/Login-DYg4XDjh.css"
     ]
   },
   "resources/js/Pages/Medicos.vue": {
-    "file": "assets/Medicos-CHX4aByv.js",
+    "file": "assets/Medicos-BSkVyegb.js",
     "name": "Medicos",
     "src": "resources/js/Pages/Medicos.vue",
     "isDynamicEntry": true,
@@ -188,11 +188,11 @@
       "resources/js/app.js"
     ],
     "css": [
-      "assets/Medicos-DXAM0sk5.css"
+      "assets/Medicos-DBWT45oQ.css"
     ]
   },
   "resources/js/Pages/Pacientes.vue": {
-    "file": "assets/Pacientes-DsCYk6H7.js",
+    "file": "assets/Pacientes-BypzCVxM.js",
     "name": "Pacientes",
     "src": "resources/js/Pages/Pacientes.vue",
     "isDynamicEntry": true,
@@ -200,23 +200,11 @@
       "resources/js/app.js"
     ],
     "css": [
-      "assets/Pacientes-Gu9C5Djt.css"
-    ]
-  },
-  "resources/js/Pages/Receituario.vue": {
-    "file": "assets/Receituario-jOP--VdU.js",
-    "name": "Receituario",
-    "src": "resources/js/Pages/Receituario.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.js"
-    ],
-    "css": [
-      "assets/Receituario-CnF51oaJ.css"
+      "assets/Pacientes-mTAtwmK_.css"
     ]
   },
   "resources/js/Pages/UpdateSenha.vue": {
-    "file": "assets/UpdateSenha-C4mW1X7A.js",
+    "file": "assets/UpdateSenha-W5XjLKQ-.js",
     "name": "UpdateSenha",
     "src": "resources/js/Pages/UpdateSenha.vue",
     "isDynamicEntry": true,
@@ -228,7 +216,7 @@
     ]
   },
   "resources/js/Pages/VerificarConsulta.vue": {
-    "file": "assets/VerificarConsulta-5LzP2ZwP.js",
+    "file": "assets/VerificarConsulta-97V3z9wE.js",
     "name": "VerificarConsulta",
     "src": "resources/js/Pages/VerificarConsulta.vue",
     "isDynamicEntry": true,
@@ -239,8 +227,20 @@
       "assets/VerificarConsulta-BhsKgBtq.css"
     ]
   },
+  "resources/js/Pages/index.vue": {
+    "file": "assets/index-JksSA4V6.js",
+    "name": "index",
+    "src": "resources/js/Pages/index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "css": [
+      "assets/index-DAu9q_ww.css"
+    ]
+  },
   "resources/js/app.js": {
-    "file": "assets/app-hUv39q4F.js",
+    "file": "assets/app-Bf_Pnv30.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -262,12 +262,12 @@
       "resources/js/Pages/Login.vue",
       "resources/js/Pages/Medicos.vue",
       "resources/js/Pages/Pacientes.vue",
-      "resources/js/Pages/Receituario.vue",
       "resources/js/Pages/UpdateSenha.vue",
-      "resources/js/Pages/VerificarConsulta.vue"
+      "resources/js/Pages/VerificarConsulta.vue",
+      "resources/js/Pages/index.vue"
     ],
     "css": [
-      "assets/app-D4xCcthl.css"
+      "assets/app-Dhzi_nTE.css"
     ]
   }
 }
