@@ -237,7 +237,7 @@ class LoginController extends Controller
 
 
 
-        return redirect('/contato');
+        return redirect('/form/login');
     }
 
 
