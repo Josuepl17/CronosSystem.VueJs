@@ -11,7 +11,7 @@ class CreatePacienteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,6 @@ class CreatePacienteRequest extends FormRequest
             'email' => 'required|email|unique:users,email,' . intval($id),
             'cidade' => 'required|string',
             'bairro' => 'required|string',
-            'empresa_id' => 'required|exists:empresas,id',
             'telefone' => 'required|string',
         ];
     }
@@ -49,7 +48,6 @@ class CreatePacienteRequest extends FormRequest
             'email.unique' => 'Este e-mail já está cadastrado.',
             'cidade.required' => 'A cidade é obrigatória.',
             'bairro.required' => 'O bairro é obrigatório.',
-            'empresa_id.required' => 'A empresa é obrigatória.',
             'empresa_id.exists' => 'A empresa selecionada não existe.',
             'telefone.required' => 'O telefone é obrigatório.',
         ];

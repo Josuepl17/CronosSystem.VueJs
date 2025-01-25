@@ -91,7 +91,7 @@ class PacientesController extends Controller
 
 
 
-    public function createPaciente(CreatePacienteRequest $request)
+    public function createPaciente(Request $request)
     {
         // Extrai os dados e os IDs dos médicos
         $dados = $request->except('medico');

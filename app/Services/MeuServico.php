@@ -184,6 +184,12 @@ class MeuServico
     }
 
 
+
+
+
+    
+
+
     public static function concluirConsulta($id_consulta){
         if($id_consulta){
             $consulta = ConsultaPaciente::Find($id_consulta)->first();
