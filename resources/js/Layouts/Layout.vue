@@ -161,41 +161,44 @@ function toggleMenu() {
   }
 }
 
+
+
+const isLoading = ref(true); // Controle do estado de carregamento
+
+// Lista de URLs das imagens a serem pré-carregadas
+const imageUrls = [
+  "/images/logout.png",
+  "/images/agenda.png",
+  "/images/medico.png",
+  "/images/paciente.png",
+  "/images/pesquisar.png",
+  "/images/sino.png",
+  "/images/config.png",
+  "/images/filial.png",
+  "/images/profile.jpg",
+  "/images/logo.png",
+  "/images/pesquisar.png",
+];
+
 // Função para pré-carregar imagens
-function preloadImages(imageUrls) {
+const preloadImages = () => {
   const promises = imageUrls.map((url) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const img = new Image();
       img.src = url;
       img.onload = resolve;
-      img.onerror = reject;
+      img.onerror = resolve; // Mesmo em caso de erro, resolve para evitar travamento
     });
   });
-
   return Promise.all(promises);
-}
+};
 
-// Chamando a função de pré-carregamento no ciclo de vida
+// Quando o componente é montado, pré-carregar as imagens
 onMounted(async () => {
-  const imageUrls = [
-    "/images/profile.jpg",
-    "/images/agenda.png",
-    "/images/paciente.png",
-    "/images/medico.png",
-    "/images/pesquisar.png",
-    "/images/filial.png",
-    "/images/logout.png",
-    "/images/sino.png",
-    "/images/config.png",
-  ];
-
-  try {
-    await preloadImages(imageUrls);
-    console.log("Todas as imagens foram carregadas com sucesso!");
-  } catch (error) {
-    console.error("Erro ao carregar algumas imagens:", error);
-  }
+  await preloadImages();
+  isLoading.value = false; // Após carregar as imagens, desativar o estado de carregamento
 });
+
 </script>
 
 <style scoped>
