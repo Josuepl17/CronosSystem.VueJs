@@ -54,22 +54,20 @@ class AtendenteController extends Controller
             $dados // Dados a serem atualizados ou criados
         );
     
+
         // Verifica se o usuário com o mesmo ID do atendente já existe
         $user = User::updateOrCreate(
             ['id' => $atendente->id], // Critério de busca
             [
                 'name' => $request->nome,
                 'email' => $request->email,
-                'primeiro_acesso' => false,
-                'password' => Hash::make($request->senha),
+                'primeiro_acesso' => $request->primeiro_acesso,
+                'password' => Hash::make(123456),
                 'empresa_id' => Session::get('empresa_id'),
             ]
         );
 
-        if ($user->wasRecentlyCreated) {
-            $user->primeiro_acesso = true; // Define como verdadeiro se for criação
-            $user->save(); // Salva a alteração no banco
-        }
+
     
         // Verifica se já existe uma relação entre o usuário e a empresa na tabela User_Empresa
         $userEmpresa = User_Empresa::firstOrCreate(

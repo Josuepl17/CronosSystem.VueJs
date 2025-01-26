@@ -70,6 +70,11 @@
                       </div>
                   </div>
 
+                  <div class="form-group"><!-- .form-group -->
+                        <label for="bairro">Primeiro Acesso</label>
+                        <input v-model="form.primeiro_acesso" type="checkbox" id="bairro" placeholder="Primeiro Acesso">
+                    </div>
+
                     <div class="fechar-salvar"><!-- .fechar-salvar -->
                         <button type="button" class="fechar">Fechar</button>
                         <button type="submit" class="salvar">Salvar</button>
@@ -113,6 +118,7 @@ const form = useForm({
   cidade: props.medico?.cidade || "",
   bairro: props.medico?.bairro || "",
   permissoes: props.idPermissaoSelect || [],
+  primeiro_acesso: "" || false,
 });
 </script>
 

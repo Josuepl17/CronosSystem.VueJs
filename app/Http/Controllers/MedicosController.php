@@ -63,9 +63,13 @@ class MedicosController extends Controller
                 'name' => $request->nome,
                 'email' => $request->email,
                 'empresa_id' => $empresaId,
-                'primeiro_acesso' => false,
+                'primeiro_acesso' => $request->primeiro_acesso,
                 'password' => bcrypt("123456"), // Senha temporária (melhor usar bcrypt)
             ];
+
+
+
+
     
             // Cria ou atualiza o usuário
             $user = User::updateOrCreate(
@@ -73,10 +77,6 @@ class MedicosController extends Controller
                 $dados2
             );
 
-            if ($user->wasRecentlyCreated) {
-                $user->primeiro_acesso = true; // Define como verdadeiro se for criação
-                $user->save(); // Salva a alteração no banco
-            }
     
             // Cria ou atualiza a relação do usuário com a empresa
             User_Empresa::updateOrCreate(

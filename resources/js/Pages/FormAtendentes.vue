@@ -54,7 +54,10 @@
                   </div>
 
 
-
+                  <div class="form-group"><!-- .form-group -->
+                        <label for="bairro">Primeiro Acesso</label>
+                        <input v-model="form.primeiro_acesso" type="checkbox" id="bairro" placeholder="Primeiro Acesso">
+                    </div>
 
                         <div class="fechar-salvar">
                             <button type="button" class="fechar">Fechar</button>
@@ -94,6 +97,7 @@ const form = useForm({
     bairro: props.atendente?.bairro || "",
     senha: "1234",
     permissoes: props.idPermissaoSelect || [],
+    primeiro_acesso: "" || false,
 });
 </script>
 
