@@ -17,8 +17,8 @@
                         <p style="color: red; font-size:13px;" v-if="errors.cpf">{{ errors.cpf }}</p>
                     </div><!-- .form-group -->
                     <div class="form-group"><!-- .form-group -->
-                        <label for="crp">CRP</label>
-                        <input v-model="form.crp" type="text" id="crp" placeholder="CRP">
+                        <label for="crp">CRP/CRM</label>
+                        <input v-model="form.crp" type="text" id="crp" placeholder="CRP/CRM:">
                         <p style="color: red; font-size:13px;" v-if="errors.crp">{{ errors.crp }}</p>
                     </div><!-- .form-group -->
                     <div class="form-group"><!-- .form-group -->
@@ -42,14 +42,17 @@
                 </div><!-- #pessoais -->
 
                 <div id="endereco"><!-- #endereco -->
+                    
                     <div class="form-group"><!-- .form-group -->
-                        <label for="endereco">Endereco</label>
-                        <input v-model="form.endereco" type="text" id="Endereco" placeholder="Endereco">
-                    </div><!-- .form-group -->
-                    <div class="form-group"><!-- .form-group -->
+                        <div class="form-group"><!-- .form-group -->
                         <label for="cidade">Cidade</label>
                         <input v-model="form.cidade" type="text" id="cidade" placeholder="Cidade">
                     </div><!-- .form-group -->
+
+                        <label for="endereco">Endereco</label>
+                        <input v-model="form.endereco" type="text" id="Endereco" placeholder="Endereco">
+                    </div><!-- .form-group -->
+
                     <div class="form-group"><!-- .form-group -->
                         <label for="bairro">Bairro</label>
                         <input v-model="form.bairro" type="text" id="bairro" placeholder="Bairro">
