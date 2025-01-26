@@ -1,5 +1,4 @@
 <template lang="">
-
     <div class="container" id="container">
         <div class="form-container sign-in">
             <form @submit.prevent="submitForm">
@@ -28,15 +27,14 @@
         </div>
     </div>
 
-                <p style="color: red; font-size:13px;" v-if="errors.razao_social">{{ errors.razao_social }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.cnpj">{{ errors.cnpj }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.ie">{{ errors.ie }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.im">{{ errors.im }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.telefone">{{ errors.telefone }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.cidade">{{ errors.cidade }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.endereco">{{ errors.endereco }}</p>
-                <p style="color: red; font-size:13px;" v-if="errors.bairro">{{ errors.bairro }}</p>
-
+    <p style="color: red; font-size:13px;" v-if="errors.razao_social">{{ errors.razao_social }}</p>
+    <p style="color: red; font-size:13px;" v-if="errors.cnpj">{{ errors.cnpj }}</p>
+    <p style="color: red; font-size:13px;" v-if="errors.ie">{{ errors.ie }}</p>
+    <p style="color: red; font-size:13px;" v-if="errors.im">{{ errors.im }}</p>
+    <p style="color: red; font-size:13px;" v-if="errors.telefone">{{ errors.telefone }}</p>
+    <p style="color: red; font-size:13px;" v-if="errors.cidade">{{ errors.cidade }}</p>
+    <p style="color: red; font-size:13px;" v-if="errors.endereco">{{ errors.endereco }}</p>
+    <p style="color: red; font-size:13px;" v-if="errors.bairro">{{ errors.bairro }}</p>
 </template>
 
 <script setup>
@@ -75,7 +73,6 @@ const formatCNPJ = (event) => {
     let value = event.target.value.replace(/\D/g, '');
     
     if (value.length <= 11) {
-        // Formato CPF: 000.000.000-00
         if (value.length > 11) {
             value = value.slice(0, 11);
         }
@@ -83,7 +80,6 @@ const formatCNPJ = (event) => {
         value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
         value = value.replace(/\.(\d{3})(\d)/, '.$1-$2');
     } else {
-        // Formato CNPJ: 00.000.000/0000-00
         if (value.length > 14) {
             value = value.slice(0, 14);
         }
@@ -97,6 +93,7 @@ const formatCNPJ = (event) => {
     formattedCNPJ.value = value;
     form.cnpj = event.target.value.replace(/\D/g, '');
 };
+
 const formatTelefone = (event) => {
     let value = event.target.value.replace(/\D/g, '');
     value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
@@ -132,21 +129,55 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 .container {
     background-color: #fff;
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    position: absolute;
+    position: relative;
     overflow: hidden;
-    width: 768px;
-    max-width: 90%;
+    width: 100%;
+    max-width: 768px;
     min-height: 650px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .container {
+        min-height: auto;
+        padding: 20px;
+    }
+
+    .toggle-container {
+        display: none;
+    }
+
+    .form-container {
+        position: relative !important;
+        width: 100% !important;
+        padding: 20px;
+    }
+
+    .sign-in {
+        width: 100%;
+    }
+
+    .container form {
+        padding: 0 20px;
+    }
+
+    .container input {
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+
+    .container button {
+        width: 100%;
+        margin: 10px 0;
+    }
 }
 
 .container p {
@@ -165,6 +196,7 @@ body {
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
+    display: inline-block;
 }
 
 .container button {
@@ -220,52 +252,6 @@ body {
     z-index: 2;
 }
 
-.container.active .sign-in {
-    transform: translateX(100%);
-}
-
-.sign-up {
-    left: 0;
-    width: 50%;
-    opacity: 0;
-    z-index: 1;
-}
-
-.container.active .sign-up {
-    transform: translateX(100%);
-    opacity: 1;
-    z-index: 5;
-    animation: move 0.6s;
-}
-
-@keyframes move {
-    0%,
-    49.99% {
-        opacity: 0;
-        z-index: 1;
-    }
-    50%,
-    100% {
-        opacity: 1;
-        z-index: 5;
-    }
-}
-
-.social-icons {
-    margin: 20px 0;
-}
-
-.social-icons a {
-    border: 1px solid #ccc;
-    border-radius: 20%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 3px;
-    width: 40px;
-    height: 40px;
-}
-
 .toggle-container {
     position: absolute;
     top: 0;
@@ -278,15 +264,9 @@ body {
     z-index: 1000;
 }
 
-.container.active .toggle-container {
-    transform: translateX(-100%);
-    border-radius: 0 150px 100px 0;
-}
-
 .toggle {
     background-color: var(--azul-claro);
     height: 100%;
-    background: --;
     color: #fff;
     position: relative;
     left: -100%;
@@ -294,10 +274,6 @@ body {
     width: 200%;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
-}
-
-.container.active .toggle {
-    transform: translateX(50%);
 }
 
 .toggle-panel {
@@ -315,20 +291,18 @@ body {
     transition: all 0.6s ease-in-out;
 }
 
-.toggle-left {
-    transform: translateX(-200%);
-}
-
-.container.active .toggle-left {
-    transform: translateX(0);
-}
-
 .toggle-right {
     right: 0;
     transform: translateX(0);
 }
 
-.container.active .toggle-right {
-    transform: translateX(200%);
+@media (min-width: 769px) {
+    .container {
+        display: flex;
+    }
+    
+    .form-container {
+        flex: 1;
+    }
 }
 </style>

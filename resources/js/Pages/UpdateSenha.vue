@@ -1,5 +1,4 @@
 <template lang="">
-
   <div class="container" id="container">
       <div class="form-container sign-in">
           <form @submit.prevent="form.post('/update/senha')">
@@ -64,24 +63,24 @@ h1 {
 body {
   background-color: #c9d6ff;
   background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  height: 100vh;
 }
 
 .container {
   background-color: #fff;
   border-radius: 30px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-  position: relative;
+  position: absolute;
   overflow: hidden;
-  width: 768px;
-  max-width: 100%;
+  width: 90%;
+  max-width: 768px;
   min-height: 480px;
-  top: 100px;
-  left: 26%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .container p {
@@ -264,5 +263,22 @@ body {
 .container.active .toggle-right {
   transform: translateX(200%);
 }
-</style>
 
+@media (max-width: 768px) {
+  .container {
+    min-height: 400px;
+  }
+  
+  .toggle-container {
+    display: none;
+  }
+  
+  .sign-in {
+    width: 100%;
+  }
+  
+  .container form {
+    padding: 0 20px;
+  }
+}
+</style>

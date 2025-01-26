@@ -1,21 +1,23 @@
 <template lang="">
-    <div class="container" id="container">
-        <div class="form-container sign-in">
-            <form @submit.prevent="form.post('/login')">
-                <h1>Faça Login</h1>
-                <input type="email" placeholder="Email" v-model="form.email">
-                <input type="password" placeholder="Password" v-model="form.password">
-                <p style="color: red; font-size:13px;" v-if="errors.email">{{ errors.email }}</p>
-                <Link href="#">Esqueci minha Senha?</Link>
-                <button>Login</button>
-                <Link style="padding:10px; border: 1px solid white; border-radius:10px; background-color:#014552; color: white" href="/form/user/empresas">Novo Usuario</Link>
-            </form>
-        </div>
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-right">
-                    <h1>Ola, Meu Amigo(a)</h1>
-                    <p>Bem Vindo Ao Cronos, Seu Controle de Consultas.</p>
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="container" id="container">
+            <div class="form-container sign-in">
+                <form @submit.prevent="form.post('/login')">
+                    <h1>Faça Login</h1>
+                    <input type="email" placeholder="Email" v-model="form.email">
+                    <input type="password" placeholder="Password" v-model="form.password">
+                    <p style="color: red; font-size:13px;" v-if="errors.email">{{ errors.email }}</p>
+                    <Link href="#">Esqueci minha Senha?</Link>
+                    <button>Login</button>
+                    <Link class="novo-usuario" href="/form/user/empresas">Novo Usuario</Link>
+                </form>
+            </div>
+            <div class="toggle-container">
+                <div class="toggle">
+                    <div class="toggle-panel toggle-right">
+                        <h1>Ola, Meu Amigo(a)</h1>
+                        <p>Bem Vindo Ao Cronos, Seu Controle de Consultas.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,17 +59,29 @@ const form = useForm({
 
 h1 {
     font-family: 'Times New Roman', Times, serif;
-    font-size: 16px;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 body {
     background-color: #c9d6ff;
     background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+}
+
+.min-h-screen {
+    min-height: 100vh;
+}
+
+.flex {
     display: flex;
+}
+
+.items-center {
     align-items: center;
+}
+
+.justify-center {
     justify-content: center;
-    flex-direction: column;
-    height: 100vh;
 }
 
 .container {
@@ -76,18 +90,14 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     position: relative;
     overflow: hidden;
-    width: 768px;
-    max-width: 100%;
+    width: 90%;
+    max-width: 768px;
     min-height: 480px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .container p {
     font-size: 14px;
-    line-height: 20px;
+    line-height: 1.5;
     letter-spacing: 0.3px;
     margin: 20px 0;
 }
@@ -103,6 +113,14 @@ body {
     margin: 15px 0 10px;
 }
 
+.novo-usuario {
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: #014552;
+    color: white !important;
+}
+
 .container button {
     background-color: var(--azul-claro);
     color: #fff;
@@ -115,11 +133,8 @@ body {
     text-transform: uppercase;
     margin-top: 10px;
     cursor: pointer;
-}
-
-.container button.hidden {
-    background-color: transparent;
-    border-color: #fff;
+    width: 100%;
+    max-width: 200px;
 }
 
 .container form {
@@ -128,8 +143,9 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0 40px;
+    padding: 20px;
     height: 100%;
+    width: 100%;
 }
 
 .container input {
@@ -140,6 +156,7 @@ body {
     font-size: 13px;
     border-radius: 8px;
     width: 100%;
+    max-width: 300px;
     outline: none;
 }
 
@@ -152,117 +169,82 @@ body {
 
 .sign-in {
     left: 0;
-    width: 50%;
+    width: 100%;
     z-index: 2;
 }
 
-.container.active .sign-in {
-    transform: translateX(100%);
-}
-
-.sign-up {
-    left: 0;
-    width: 50%;
-    opacity: 0;
-    z-index: 1;
-}
-
-.container.active .sign-up {
-    transform: translateX(100%);
-    opacity: 1;
-    z-index: 5;
-    animation: move 0.6s;
-}
-
-@keyframes move {
-    0%, 49.99% {
-        opacity: 0;
-        z-index: 1;
-    }
-    50%, 100% {
-        opacity: 1;
-        z-index: 5;
-    }
-}
-
-.social-icons {
-    margin: 20px 0;
-}
-
-.social-icons a {
-    border: 1px solid #ccc;
-    border-radius: 20%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 3px;
-    width: 40px;
-    height: 40px;
-}
-
 .toggle-container {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    transition: all 0.6s ease-in-out;
-    border-radius: 150px 0 0 100px;
-    z-index: 1000;
+    display: none;
 }
 
-.container.active .toggle-container {
-    transform: translateX(-100%);
-    border-radius: 0 150px 100px 0;
+@media (min-width: 768px) {
+    .sign-in {
+        width: 50%;
+    }
+
+    .toggle-container {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        transition: all 0.6s ease-in-out;
+        border-radius: 150px 0 0 100px;
+        z-index: 1000;
+    }
+
+    .toggle {
+        background-color: var(--azul-claro);
+        height: 100%;
+        color: #fff;
+        position: relative;
+        left: -100%;
+        height: 100%;
+        width: 200%;
+        transform: translateX(0);
+        transition: all 0.6s ease-in-out;
+    }
+
+    .toggle-panel {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 30px;
+        text-align: center;
+        top: 0;
+        transform: translateX(0);
+        transition: all 0.6s ease-in-out;
+    }
+
+    .toggle-right {
+        right: 0;
+        transform: translateX(0);
+    }
 }
 
-.toggle {
-    background-color: var(--azul-claro);
-    height: 100%;
-    background: --;
-    color: #fff;
-    position: relative;
-    left: -100%;
-    height: 100%;
-    width: 200%;
-    transform: translateX(0);
-    transition: all 0.6s ease-in-out;
-}
+@media (max-width: 480px) {
+    .container {
+        margin: 10px;
+        min-height: 400px;
+    }
 
-.container.active .toggle {
-    transform: translateX(50%);
-}
+    .container form {
+        padding: 15px;
+    }
 
-.toggle-panel {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 30px;
-    text-align: center;
-    top: 0;
-    transform: translateX(0);
-    transition: all 0.6s ease-in-out;
-}
+    h1 {
+        font-size: 1.2rem;
+    }
 
-.toggle-left {
-    transform: translateX(-200%);
-}
-
-.container.active .toggle-left {
-    transform: translateX(0);
-}
-
-.toggle-right {
-    right: 0;
-    transform: translateX(0);
-}
-
-.container.active .toggle-right {
-    transform: translateX(200%);
+    .container input,
+    .container button {
+        font-size: 12px;
+    }
 }
 </style>
