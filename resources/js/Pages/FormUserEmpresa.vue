@@ -143,7 +143,7 @@ body {
     overflow: hidden;
     width: 768px;
     max-width: 90%;
-    min-height: 600px;
+    min-height: 650px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
