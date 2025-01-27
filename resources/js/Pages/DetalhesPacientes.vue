@@ -5,6 +5,7 @@
 <nav>
 
   <button @click="AbrirRelatorios" id="salvar" type="submit">Relatorio</button>
+  
 
 </nav>
 
@@ -19,13 +20,14 @@
                 <h1>{{ props.paciente.nome }}</h1>
               </div> <!-- /#titulo-texto -->
               <div id="conteiner-texto">
-                <textarea v-model="form.texto_principal"></textarea>
+                <textarea @input="editando" v-model="form.texto_principal"></textarea>
               </div> <!-- /#conteiner-texto -->
               <div id="rodape">
-                
-                <button id="salvar" type="submit">Salvar</button>
+                <p v-if="editado" style="color: white; margin-right: 20px; font-style: italic; padding: 05px; background: red; border-radius: 5px;">Texto Não salvo</p>               
+                 <button id="salvar"  type="submit">Salvar</button>
                 <button  type="button" @click="abrirarquivos">Escolher arquivo</button>
                 <button type="button" @click.prevent="abrirModal">Novo</button>
+                
                 
               </div> <!-- /#rodape -->
             </div> <!-- /#texto-principal -->
@@ -255,6 +257,12 @@ import { usePage } from '@inertiajs/vue3';
 onMounted(() => {
   document.title = "Detalhes do Paciente";
 });
+
+const editado = ref(false);
+
+const editando = () => {
+   editado.value = true; // Define como "não salvo" ao editar
+    };
 
 const props = defineProps({
   texto_principal: Object,
