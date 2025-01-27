@@ -24,9 +24,17 @@ class ConsultaController extends Controller
         return Inertia::render('VerificarConsulta');
     }
 
+
+
+
+
+
+
     public function VerificarConsulta(Request $request)
     {
-        $paciente = Paciente::where('cpf', $request->cpf)->first();
+        $dados = preg_replace('/[^0-9]/', '', $request->cpf);
+        
+           $paciente = Paciente::where('cpf', $dados)->first();
 
         if (!$paciente) {
             return back()->withErrors(['cpf' => 'CPF não encontrado.'])->withInput();
@@ -35,6 +43,12 @@ class ConsultaController extends Controller
         $consultas = ConsultaPaciente::where('paciente_id', $paciente->id)->where('status', 'Agendado')->get();
         return Inertia::render('VerificarConsulta', compact('consultas'));
     }
+
+
+
+
+
+
 
 
 
