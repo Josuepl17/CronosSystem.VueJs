@@ -54,7 +54,7 @@ class AtendenteController extends Controller
             $dados // Dados a serem atualizados ou criados
         );
     
-
+ 
         // Verifica se o usuário com o mesmo ID do atendente já existe
         $user = User::updateOrCreate(
             ['id' => $atendente->id], // Critério de busca
