@@ -20,7 +20,8 @@ class Paciente extends Model
         'cidade',
         'bairro',
         'empresa_id',
-        'telefone'
+        'telefone',
+        'endereco',
     ];
 
     public function medicos(){

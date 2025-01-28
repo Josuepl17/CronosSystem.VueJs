@@ -21,6 +21,7 @@ return new class extends Migration
             $table->bigInteger('telefone');
             $table->string('cidade');
             $table->string('bairro');
+            $table->string('endereco');
 
             $table->unsignedBigInteger('empresa_id');
             $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade')->onUpdate('cascade');

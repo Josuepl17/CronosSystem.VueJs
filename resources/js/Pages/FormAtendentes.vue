@@ -25,14 +25,17 @@
                     </div>
 
                     <div id="endereco">
-                        <div class="form-group">
-                            <label for="endereco">Endereço</label>
-                            <input v-model="form.endereco" type="text" id="endereco" placeholder="Endereço">
-                        </div>
+
                         <div class="form-group">
                             <label for="cidade">Cidade</label>
                             <input v-model="form.cidade" type="text" id="cidade" placeholder="Cidade">
                         </div>
+
+                        <div class="form-group">
+                            <label for="endereco">Endereço</label>
+                            <input v-model="form.endereco" type="text" id="endereco" placeholder="Endereço">
+                        </div>
+
                         <div class="form-group">
                             <label for="bairro">Bairro</label>
                             <input v-model="form.bairro" type="text" id="bairro" placeholder="Bairro">

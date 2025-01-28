@@ -6,12 +6,12 @@
           <div id="pessoais">
             <div class="form-group">
               <label for="nome">Nome Completo</label>
-              <input type="text" id="nome" v-model="form.nome" placeholder="Nome Completo">
+              <input type="text" id="nome" v-model="form.nome" placeholder="Nome Completo" required >
             </div>
 
             <div class="form-group">
               <label for="DataNascimento">Data Nascimento</label>
-              <input type="date" id="DataNascimento" v-model="form.DataNascimento" placeholder="Data Nascimento">
+              <input type="date" id="DataNascimento" v-model="form.DataNascimento" placeholder="Data Nascimento" required >
             </div>
 
             <div class="form-group">
@@ -34,31 +34,38 @@
 
             <div class="form-group">
               <label for="cpf">CPF</label>
-              <input v-model="form.cpf" type="text" id="cpf" placeholder="CPF" >
+              <input v-model="form.cpf" type="text" id="cpf" placeholder="CPF" required >
               <p style="color: red; font-size:13px;" v-if="errors.cpf">{{ errors.cpf }}</p>
             </div>
 
             <div class="form-group">
               <label for="email">Email</label>
-              <input v-model="form.email" type="email" id="email" placeholder="Email">
+              <input v-model="form.email" type="email" id="email" placeholder="Email" required >
               <p style="color: red; font-size:13px;" v-if="errors.email">{{ errors.email }}</p>
             </div>
 
             <div class="form-group">
               <label for="telefone">Telefone</label>
-              <input v-model="form.telefone" type="tel" id="telefone" placeholder="Telefone:">
+              <input v-model="form.telefone" type="tel" id="telefone" placeholder="Telefone:" required>
+  
             </div>
           </div>
 
           <div id="endereco">
             <div class="form-group">
               <label for="cidade">Cidade</label>
-              <input v-model="form.cidade" type="text" id="cidade" placeholder="Cidade">
+              <input v-model="form.cidade" type="text" id="cidade" placeholder="Cidade" required>
+            </div>
+
+
+            <div class="form-group">
+              <label for="endereco">Endereço</label>
+              <input v-model="form.endereco" type="text" id="endereco" placeholder="Endereço" required>
             </div>
 
             <div class="form-group">
               <label for="bairro">Bairro</label>
-              <input v-model="form.bairro" type="text" id="bairro" placeholder="Bairro">
+              <input v-model="form.bairro" type="text" id="bairro" placeholder="Bairro" required >
             </div>
 
 
@@ -102,6 +109,7 @@ const form = useForm({
   cidade: props.paciente.cidade || "",
   bairro: props.paciente.bairro || "",
   telefone: props.paciente.telefone || "",
+  endereco: props.paciente.endereco || "",
 });
 
 

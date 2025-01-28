@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePacienteRequest;
+use App\Http\Requests\RequestPacintes;
 use App\Http\Requests\ValidateRequest;
 use App\Models\ArquivoPaciente;
 use App\Models\ConsultaPaciente;
@@ -201,10 +202,10 @@ class PacientesController extends Controller
 
 
 
-    public function createDetalhesPacientes(Request $request)
+    public function createDetalhesPacientes(RequestPacintes $request)
     {
 
-        $pacienteId = FacadesSession::get('id_paciente');
+    $pacienteId = FacadesSession::get('id_paciente');
 
     DetalhePaciente::updateOrCreate(
         [

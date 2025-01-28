@@ -43,7 +43,8 @@
               'active-link':
                 $page.url === '/pacientes' ||
                 $page.url === '/detalhes/paciente' ||
-                $page.url === '/form/paciente',
+                $page.url === '/form/paciente' ||
+                $page.url.startsWith('/editar/paciente'),
             }"
           >
             <img src="/images/paciente.png" alt="" />
