@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MedicosController;
 use App\Http\Controllers\PacientesController;
 use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\PermissoesMiddleware;
 use App\Models\Atendente;
 use App\Models\Empresa;
 use App\Models\Medico;
@@ -75,8 +76,8 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/selecione/filial/{id}', [LoginController::class, 'mudarFilial']);
 
     // Pacientes
-    Route::get('/pacientes', [PacientesController::class, 'listaPacientes']);
-    Route::get('/form/paciente', [PacientesController::class, 'formPacientes']);
+    Route::get('/pacientes', [PacientesController::class, 'listaPacientes'])->middleware(PermissoesMiddleware::class);
+    Route::get('/form/paciente', [PacientesController::class, 'formPacientes'])->middleware(PermissoesMiddleware::class);
     Route::post('/create/paciente', [PacientesController::class, 'createPaciente']);
     Route::get('/detalhes/paciente/{id}', [PacientesController::class, 'sessionPaciente']);
     Route::get('/detalhes/paciente', [PacientesController::class, 'detalhesPacientes']);
@@ -93,13 +94,13 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/download/arquivo/{id}', [PacientesController::class, 'downloadArquivo']);
 
     // Medicos
-    Route::get('/medicos', [MedicosController::class, 'listaMedicos']);
+    Route::get('/medicos', [MedicosController::class, 'listaMedicos'])->middleware(PermissoesMiddleware::class);
     Route::get('/form/medicos', [MedicosController::class, 'formMedicos']);
     Route::post('/create/medico', [MedicosController::class, 'createMedicos']);
     Route::get('/edit/medico/{id}', [MedicosController::class, 'editMedicos']);
 
     // Atendentes
-    Route::get('/atendentes', [AtendenteController::class, 'listaAtendentes']);
+    Route::get('/atendentes', [AtendenteController::class, 'listaAtendentes'])->middleware(PermissoesMiddleware::class);
     Route::get('/form/atendentes', [AtendenteController::class, 'formAtendentes']);
     Route::post('/create/atendentes', [AtendenteController::class, 'createAtendente']);
     Route::get('/edit/atendentes/{id}', [AtendenteController::class, 'editAtendente']);
@@ -109,7 +110,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::post('/remove/vinculo/user', [LoginController::class, 'removeVinculoUser']);
 
     // Consultas
-    Route::get('/consultas', [ConsultaController::class, 'listaConsultas']);
+    Route::get('/consultas', [ConsultaController::class, 'listaConsultas'])->middleware(PermissoesMiddleware::class);
     Route::post('/filtro/consulta', [ConsultaController::class, 'filtroConsulta']);
     Route::get('/form/consultas', [ConsultaController::class, 'formConsultas']);
     Route::post('/create/consulta', [ConsultaController::class, 'createConsultas']);

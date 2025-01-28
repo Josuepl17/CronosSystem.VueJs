@@ -16,30 +16,32 @@ return new class extends Migration
             $table->id();
             $table->string('chave');
             $table->string('descricao');
+            $table->string('rota');
             $table->timestamps();
         });
 
         // Inserindo dados automaticamente
         $permissoes = [
-            'acessar_pacientes' => 'Acessar Pacientes',
-            'acessar_medicos' => 'Acessar Médicos',
-            'acessar_consultas' => 'Acessar Consultas',
-            'acessar_atendentes' => 'Acessar Atendentes',
-            'inserir_paciente' => 'Inserir Paciente',
-            'inserir_medico' => 'Inserir Médico',
-            'inserir_consulta' => 'Inserir Consulta',
-            'inserir_atendente' => 'Inserir Atendente',
-            'editar_paciente' => 'Editar Paciente',
-            'editar_medico' => 'Editar Médico',
-            'editar_atendente' => 'Editar Atendente',
-            'cancelar_consulta' => 'Cancelar Consulta',
-            'concluir_consulta' => 'Concluir Consulta',
-            'apagar_consulta' => 'Apagar Consulta',
+            'acessar_pacientes' => ['Acessar Pacientes', 'pacientes'],
+            'acessar_medicos' => ['Acessar Médicos', 'medicos'],
+            'acessar_consultas' => ['Acessar Consultas', 'consultas'],
+            'acessar_atendentes' => ['Acessar Atendentes', 'atendentes'],
+            'inserir_paciente' => ['Inserir Paciente', 'form/paciente'],
+            'inserir_medico' => ['Inserir Médico', 'form/medicos'],
+            'inserir_consulta' => ['Inserir Consulta', 'form/consultas'],
+            'inserir_atendente' => ['Inserir Atendente', 'form/atendentes'],
+            'editar_paciente' => ['Editar Paciente', 'editar/paciente/{id}'],
+            'editar_medico' => ['Editar Médico', 'edit/medico/{id}'],
+            'editar_atendente' => ['Editar Atendente', 'edit/atendentes/{id}'],
+            'cancelar_consulta' => ['Cancelar Consulta', 'cancelar/consulta'],
+            'concluir_consulta' => ['Concluir Consulta', 'concluir/consulta/{id}'],
+            'apagar_consulta' => ['Apagar Consulta', 'delete/consulta/{id}'],
         ];
 
-        foreach ($permissoes as $chave => $descricao) {
+        foreach ($permissoes as $chave => $valor) {
             DB::table('permissoes')->insert([
-                'descricao' => $descricao,
+                'descricao' => $valor[0],
+                'rota' => $valor[1],
                 'chave' => $chave,
                 'created_at' => now(),
                 'updated_at' => now()
