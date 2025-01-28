@@ -225,9 +225,6 @@ class LoginController extends Controller
             //   'empresa_id' => $empresa->id,
             //   ]);
 
-
-
-
             User_Empresa::create([
                 'user_id' => $user->id,
                 'empresa_id' => $empresa->id,
@@ -237,7 +234,8 @@ class LoginController extends Controller
 
 
 
-        return redirect('/form/login');
+        //return redirect('/form/login');
+        return Inertia::location('https://mpago.la/2dxwrqN');
     }
 
 
