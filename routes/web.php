@@ -89,7 +89,7 @@ Route::middleware(['auth', 'web'])->group(function () {
 
     // Route::get('/download/paciente/detalhes', [PacientesController::class, 'downloadArquivo']);
     Route::post('/inserir/tramite', [PacientesController::class, 'createTramite']);
-    Route::post('/busca/atendentes', [PacientesController::class, 'buscaPaciente']);
+    Route::post('/busca/pacientes', [PacientesController::class, 'buscaPaciente']);
     Route::post('/create/arquivos', [PacientesController::class, 'createArquivos']);
     Route::get('/download/arquivo/{id}', [PacientesController::class, 'downloadArquivo']);
 
@@ -123,16 +123,9 @@ Route::middleware(['auth', 'web'])->group(function () {
 
 });
 
-Route::post('/teste', function (Request $request) {
-    dd($request->all());
-    
-});
 
-Route::get('/teste2', function () {
-    $teste = Auth::user()->permissoes->pluck('chave');
-    dd($teste);
-    
-});
+
+
 
 Route::get('/josue', function () {
     $filial_id = 2;

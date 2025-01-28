@@ -16,12 +16,16 @@ class PermissoesMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $rotasPermitidas = Auth::user()->permissoes->pluck('rota');
-       // dd($rotasPermitidas);
-        $rotaAtual = $request->path();
+        $rotasPermitidas = Auth::user()->permissoes->pluck('rota')->map(function ($rota) {
+            return implode('/', array_slice(explode('/', $rota), 0, 2)) . '/';
+        });
+
+        
+        $rotaAtual = implode('/', array_slice(explode('/', $request->path()), 0, 2)) . '/';
 
         foreach ($rotasPermitidas as $rota) {
-            if ($rota === $rotaAtual) {
+
+            if (str_starts_with($rotaAtual, $rota)) {
                 return $next($request);
             }
         }

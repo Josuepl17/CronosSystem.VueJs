@@ -202,8 +202,10 @@ class PacientesController extends Controller
 
 
 
-    public function createDetalhesPacientes(RequestPacintes $request)
+    public function createDetalhesPacientes(Request $request)
     {
+
+
 
     $pacienteId = FacadesSession::get('id_paciente');
 
@@ -337,7 +339,8 @@ class PacientesController extends Controller
 
     public function createRelatorio(Request $request) {
 
-        RelatoriosPaciente::create([
+
+       $user =  RelatoriosPaciente::create([
             'tipo_documento' => $request->tipo_documento,
             'prescricao' => Crypt::encrypt($request->prescricao),
             'paciente_id' => FacadesSession::get('id_paciente'),
@@ -345,7 +348,8 @@ class PacientesController extends Controller
             'medico_id' => Session::get('id'),
         ]);
 
-        return redirect('/detalhes/paciente');
+
+        return Inertia::location('/detalhes/paciente');
     }
 
 

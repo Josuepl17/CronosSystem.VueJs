@@ -3,7 +3,7 @@
     <template v-slot:conteudo>
       <div id="opcoes-conteudo">
         <Link v-if="$page.props.inserir_paciente" id="botao_inserir_superior" href="/form/paciente">Inserir</Link>
-        <form @submit.prevent="form.post('/busca/atendentes')">
+        <form @submit.prevent="form.post('/busca/pacientes')">
           <input v-model="form.pesquisa" type="text" placeholder="Search..." />
           <button type="submit">Busca</button>
         </form>

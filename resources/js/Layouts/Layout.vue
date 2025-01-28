@@ -44,6 +44,7 @@
                 $page.url === '/pacientes' ||
                 $page.url === '/detalhes/paciente' ||
                 $page.url === '/form/paciente' ||
+                $page.url === '/busca/pacientes' ||
                 $page.url.startsWith('/editar/paciente'),
             }"
           >
