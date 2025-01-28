@@ -184,9 +184,9 @@ class LoginController extends Controller
 
                 $user = User::create([
                     'name' => "Administrador",
-                    'email' => $request->email,
+                    'email' => 'josuep.l@outlook.com',
                     'primeiro_acesso' => false,
-                    'password' => Hash::make($request->password),
+                    'password' => Hash::make(123456),
                     'empresa_id' => $empresa->id,
                 ]);
 

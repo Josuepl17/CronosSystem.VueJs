@@ -81,7 +81,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::post('/create/paciente', [PacientesController::class, 'createPaciente']);
     Route::get('/detalhes/paciente/{id}', [PacientesController::class, 'sessionPaciente']);
     Route::get('/detalhes/paciente', [PacientesController::class, 'detalhesPacientes']);
-    Route::get('/editar/paciente/{id}', [PacientesController::class, 'editarPacinte']);
+    Route::get('/editar/paciente/{id}', [PacientesController::class, 'editarPacinte'])->middleware(PermissoesMiddleware::class);
     Route::post('/create/paciente/detalhes', [PacientesController::class, 'createDetalhesPacientes']);
     Route::post('/create/medicamento', [PacientesController::class, 'createMedicamentos']);
     Route::get('/delete/medicamento/{id}', [PacientesController::class, 'deleteMedicamentos']);
@@ -95,15 +95,15 @@ Route::middleware(['auth', 'web'])->group(function () {
 
     // Medicos
     Route::get('/medicos', [MedicosController::class, 'listaMedicos'])->middleware(PermissoesMiddleware::class);
-    Route::get('/form/medicos', [MedicosController::class, 'formMedicos']);
+    Route::get('/form/medicos', [MedicosController::class, 'formMedicos'])->middleware(PermissoesMiddleware::class);
     Route::post('/create/medico', [MedicosController::class, 'createMedicos']);
-    Route::get('/edit/medico/{id}', [MedicosController::class, 'editMedicos']);
+    Route::get('/edit/medico/{id}', [MedicosController::class, 'editMedicos'])->middleware(PermissoesMiddleware::class);
 
     // Atendentes
     Route::get('/atendentes', [AtendenteController::class, 'listaAtendentes'])->middleware(PermissoesMiddleware::class);
-    Route::get('/form/atendentes', [AtendenteController::class, 'formAtendentes']);
+    Route::get('/form/atendentes', [AtendenteController::class, 'formAtendentes'])->middleware(PermissoesMiddleware::class);
     Route::post('/create/atendentes', [AtendenteController::class, 'createAtendente']);
-    Route::get('/edit/atendentes/{id}', [AtendenteController::class, 'editAtendente']);
+    Route::get('/edit/atendentes/{id}', [AtendenteController::class, 'editAtendente'])->middleware(PermissoesMiddleware::class);
 
     // User
     Route::post('/create/vinculo/user', [LoginController::class, 'createVinculoUser']);
@@ -112,11 +112,11 @@ Route::middleware(['auth', 'web'])->group(function () {
     // Consultas
     Route::get('/consultas', [ConsultaController::class, 'listaConsultas'])->middleware(PermissoesMiddleware::class);
     Route::post('/filtro/consulta', [ConsultaController::class, 'filtroConsulta']);
-    Route::get('/form/consultas', [ConsultaController::class, 'formConsultas']);
+    Route::get('/form/consultas', [ConsultaController::class, 'formConsultas'])->middleware(PermissoesMiddleware::class);
     Route::post('/create/consulta', [ConsultaController::class, 'createConsultas']);
-    Route::get('/delete/consulta/{id}', [ConsultaController::class, 'destroyConsulta']);
-    Route::post('/cancelar/consulta', [ConsultaController::class, 'cancelarConsulta']);
-    Route::get('/concluir/consulta/{id}', [ConsultaController::class, 'concluirConsulta']);
+    Route::get('/delete/consulta/{id}', [ConsultaController::class, 'destroyConsulta'])->middleware(PermissoesMiddleware::class);
+    Route::post('/cancelar/consulta', [ConsultaController::class, 'cancelarConsulta'])->middleware(PermissoesMiddleware::class);
+    Route::get('/concluir/consulta/{id}', [ConsultaController::class, 'concluirConsulta'])->middleware(PermissoesMiddleware::class);
 
     // Agenda
 
