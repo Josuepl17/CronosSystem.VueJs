@@ -104,7 +104,6 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="logo.png" alt="Logo da Empresa" class="logo">
             <div class="company-info">
                 <h1>{{ $empresa->razao_social }}</h1>
                 <p>{{ $empresa->endereco . " - " . $empresa->cidade }}</p>
