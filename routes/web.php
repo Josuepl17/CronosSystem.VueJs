@@ -4,6 +4,7 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AtendenteController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GerenciaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MedicosController;
 use App\Http\Controllers\PacientesController;
@@ -118,7 +119,8 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::post('/cancelar/consulta', [ConsultaController::class, 'cancelarConsulta'])->middleware(PermissoesMiddleware::class);
     Route::get('/concluir/consulta/{id}', [ConsultaController::class, 'concluirConsulta'])->middleware(PermissoesMiddleware::class);
 
-    // Agenda
+    // Gerencia
+    Route::get('/gerencia', [GerenciaController::class, 'gerencia'])->middleware(PermissoesMiddleware::class);
 
 
 });

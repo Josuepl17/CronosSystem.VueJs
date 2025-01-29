@@ -89,6 +89,14 @@
           </Link>
 
           <Link
+            href="/gerencia"
+            :class="{ 'active-link': $page.url === '/gerencia' }"
+          >
+            <img src="/images/filial.png" alt="" />
+            <span>Gerencia</span>
+          </Link>
+
+          <Link
             v-if="$page.props.adm"
             href="/gerenciar/filial"
             :class="{ 'active-link': $page.url === '/gerenciar/filial' }"

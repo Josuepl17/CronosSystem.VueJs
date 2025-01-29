@@ -234,8 +234,8 @@ class LoginController extends Controller
 
 
 
-        //return redirect('/form/login');
-        return Inertia::location('https://mpago.la/2dxwrqN');
+        return redirect('/form/login');
+       // return Inertia::location('https://mpago.la/2dxwrqN');
     }
 
 

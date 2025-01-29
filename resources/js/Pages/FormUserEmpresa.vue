@@ -4,15 +4,14 @@
             <form @submit.prevent="submitForm">
                <!-- <input type="text" id="name" placeholder="Email Administrador:" v-model="form.email">
                 <input type="password" id="password" placeholder="Senha:" v-model="form.password"> -->
-                <input type="text" id="razao_social" placeholder="Razão Social:" v-model="form.razao_social">
-                <input type="text" id="cnpj" placeholder="CNPJ/CPF:" v-model="formattedCNPJ" @input="formatCNPJ">
-                <input type="number" id="ie" placeholder="Inscrição Estadual:" v-model="form.ie">
-                <input type="number" id="im" placeholder="Inscrição Municipal:" v-model="form.im">
-                <input type="text" id="telefone" placeholder="Telefone Empresa:" v-model="formattedTelefone" @input="formatTelefone">
-                <input type="text" id="cidade" placeholder="Cidade Empresa:" v-model="form.cidade">
-                <input type="text" id="endereco" placeholder="Endereco Empresa:" v-model="form.endereco">
-                <input type="text" id="bairro" placeholder="Bairro Empresa:" v-model="form.bairro">
-
+                <input type="text" id="razao_social" placeholder="Razão Social:" v-model="form.razao_social" required>
+                <input type="text" id="cnpj" placeholder="CNPJ/CPF:" v-model="formattedCNPJ" @input="formatCNPJ" required>
+                <input type="number" id="ie" placeholder="Inscrição Estadual:" v-model="form.ie" >
+                <input type="number" id="im" placeholder="Inscrição Municipal:" v-model="form.im" >
+                <input type="text" id="telefone" placeholder="Telefone Empresa:" v-model="formattedTelefone" @input="formatTelefone" required>
+                <input type="text" id="cidade" placeholder="Cidade Empresa:" v-model="form.cidade" required>
+                <input type="text" id="endereco" placeholder="Endereco Empresa:" v-model="form.endereco" required>
+                <input type="text" id="bairro" placeholder="Bairro Empresa:" v-model="form.bairro" required>
                 <Link href="/form/login">Voltar</Link>
                 <button>Cadastrar</button>
             </form>

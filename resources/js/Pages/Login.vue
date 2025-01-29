@@ -4,7 +4,7 @@
             <div class="form-container sign-in">
                 <form @submit.prevent="form.post('/login')">
                     <h1>Faça Login</h1>
-                    <input type="email" placeholder="Email" v-model="form.email">
+                    <input type="email" placeholder="Email" v-model="form.email" required>
                     <input type="password" placeholder="Password" v-model="form.password">
                     <p style="color: red; font-size:13px;" v-if="errors.email">{{ errors.email }}</p>
                     <button>Login</button>

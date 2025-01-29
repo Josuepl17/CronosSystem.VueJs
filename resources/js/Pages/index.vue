@@ -5,10 +5,10 @@
                     <img style="width: 200px;" src="/images/CronosSystem.png" alt="" />
                 </div>
                 <div id="links">
-                    <a href="#">Sobre-Nos</a>
+                    <a href="#sobre-nos" @click.prevent="scrollToElement('sobre-nos')">Sobre-Nos</a>
                     <a href="#">Suporte</a>
                     <a href="/form/verificar/consulta">Verificar Consulta</a>
-                    <a href="/dash">Entre Ou Cadastre-se</a>
+                    <a href="/dash">Faça Login</a>
                 </div>
             </nav>
 
@@ -38,16 +38,39 @@
                     <p>
                         Diga adeus às receitas manuais! Nossa ferramenta
                         possibilita a emissão de prescrições de forma prática e
-                        personalizada, com acesso a uma base de medicamentos
-                        atualizada. Mais agilidade para o médico e mais
+                        personalizada, Mais agilidade para o médico e mais
                         segurança para o paciente.
                     </p>
                 </div>
+            </div>
+
+            <div id="sobre-nos" class="sobre-nos">
+                <h2>Sobre Nós</h2>
+                <p>
+                    A Cronos System é uma empresa inovadora especializada em soluções tecnológicas para a área da saúde. 
+                    Fundada com a missão de transformar a gestão médica, desenvolvemos sistemas intuitivos e eficientes 
+                    que facilitam o dia a dia de clínicas e consultórios.
+                </p>
+                <p>
+                    Nossa equipe é composta por profissionais apaixonados por tecnologia e comprometidos com a excelência. 
+                    Trabalhamos constantemente para oferecer as melhores soluções, garantindo praticidade, segurança e 
+                    eficiência para nossos clientes.
+                </p>
+                <p>
+                    Com anos de experiência no mercado, nos orgulhamos de contribuir para a modernização do setor médico, 
+                    sempre priorizando a satisfação de nossos usuários e a qualidade de nossos serviços.
+                </p>
             </div>
         </div>
 </template>
 
 <script setup>
+const scrollToElement = (elementId) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    }
+};
 </script>
 
 <style scoped>
@@ -62,6 +85,7 @@
                 margin: 0;
                 padding: 0;
                 font-family: "Arial", sans-serif;
+                scroll-behavior: smooth;
             }
 
             #conteiner-Geral {
@@ -98,9 +122,6 @@
                             }
                         }
             
-
-
-
             nav a {
                 text-decoration: none;
                 color: white;
@@ -165,6 +186,29 @@
                 height: auto;
             }
 
+            .sobre-nos {
+                padding: 40px;
+                background-color: rgba(255, 255, 255, 0.9);
+                margin: 20px;
+                border-radius: 10px;
+                text-align: center;
+                width: 50%;
+                margin: 0 auto;
+            }
+
+            .sobre-nos h2 {
+                color: var(--azul-escuro);
+                margin-bottom: 20px;
+                font-size: 2em;
+            }
+
+            .sobre-nos p {
+                color: var(--cinza-escuro);
+                margin-bottom: 15px;
+                line-height: 1.6;
+                font-size: 1.1em;
+            }
+
             @media (max-width: 768px) {
                 nav {
                     flex-direction: column;
@@ -188,6 +232,11 @@
 
                 #texto img {
                     max-width: 150px;
+                }
+
+                .sobre-nos {
+                    margin: 10px;
+                    padding: 20px;
                 }
             }
 </style>
