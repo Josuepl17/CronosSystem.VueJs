@@ -89,8 +89,8 @@
           </Link>
 
           <Link
-            href="/gerencia"
-            :class="{ 'active-link': $page.url === '/gerencia' }"
+            href="/gerente"
+            :class="{ 'active-link': $page.url === '/gerente' }"
           >
             <img src="/images/filial.png" alt="" />
             <span>Gerencia</span>

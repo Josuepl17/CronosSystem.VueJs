@@ -5,6 +5,7 @@ use App\Http\Controllers\AtendenteController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GerenciaController;
+use App\Http\Controllers\GerentesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MedicosController;
 use App\Http\Controllers\PacientesController;
@@ -120,7 +121,10 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/concluir/consulta/{id}', [ConsultaController::class, 'concluirConsulta'])->middleware(PermissoesMiddleware::class);
 
     // Gerencia
-    Route::get('/gerencia', [GerenciaController::class, 'gerencia'])->middleware(PermissoesMiddleware::class);
+    Route::get('/gerente', [GerentesController::class, 'gerencia']);
+    Route::get('/form/gerente', [GerentesController::class, 'formGerencia']);
+    Route::post('/create/gerente', [GerentesController::class, 'createGerente']);
+    Route::get('/edit/gerente/{id}', [GerentesController::class, 'editGerente']);
 
 
 });

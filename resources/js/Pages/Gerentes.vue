@@ -2,7 +2,7 @@
     <Layout>
         <template v-slot:conteudo>
             <div id="opcoes-conteudo">
-                <Link v-if="$page.props.inserir_gerente" id="botao_inserir_superior" href="/form/gerencia">Inserir</Link>
+                <Link  id="botao_inserir_superior" href="/form/gerente">Inserir</Link>
             </div>
 
             <div id="tabela">
@@ -18,10 +18,10 @@
                     <tbody>
                         <tr v-for="(gerente) in gerentes" :key="gerente.id">
                             <td>{{ gerente.nome }}</td>
-                            <td>{{ gerente.especialidade }}</td>
+                            <td>{{ gerente.email }}</td>
                             <td>{{ gerente.telefone }}</td>
                             <td>
-                                <Link v-if="$page.props.editar_gerente" id="inserir" :href="'/edit/medico/' + gerente.identificacao">Editar</Link>
+                                <Link  id="inserir" :href="'/edit/gerente/' + gerente.id">Editar</Link>
                             </td>
                         </tr>
                     </tbody>

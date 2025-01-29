@@ -25,7 +25,7 @@ class ServiceGeral
 
 
     public static function CriarPermissoes($permissoesRecebidas, $user) {
-
+     //   dd($permissoesRecebidas);
         User_Permissao::where('user_id', $user->id)->delete();
 
         foreach ($permissoesRecebidas as $permissoesRecebida) {
