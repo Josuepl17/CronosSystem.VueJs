@@ -72,7 +72,7 @@ class LoginController extends Controller
             if (Medico::where('id', Auth::id())->exists() || Atendente::where('id', Auth::id())->exists()) {
                 // se for um medico ou atentende não faz um put de admisnitrador 
             } else {
-                Session::put('adm', "adm"); // id para apresentar gerenciamento de filial
+                Session::put('adm', "adm"); // acessos de ADMMINISTRADOR e gerente 
 
             }
 

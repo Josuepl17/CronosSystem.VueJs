@@ -89,6 +89,7 @@
           </Link>
 
           <Link
+          v-if="$page.props.adm"
             href="/gerente"
             :class="{ 'active-link': $page.url === '/gerente' }"
           >

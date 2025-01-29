@@ -1,0 +1,38 @@
+ADM = Dono do projeto
+
+Gerente = Gerente do da Clinica
+
+Atendente = Atendente da Clinica
+
+Medico = Medico da Clinica
+
+
+ADM Acessos
+- Totas as Permissoes + Tela gerencia + Tela Filial
+
+Gerente Acessos
+- Todas as Permissoes
+
+Atendente Acessos e Medico Acessos
+- Acessos dado Pela Gerencia
+
+
+Permissoes editar Apenas ADM e Gerente
+
+        $permissoes = [
+            'acessar_pacientes' => ['Acessar Pacientes', 'pacientes'],
+            'acessar_medicos' => ['Acessar Médicos', 'medicos'],
+            'acessar_consultas' => ['Acessar Consultas', 'consultas'],
+            'acessar_atendentes' => ['Acessar Atendentes', 'atendentes'],
+            'inserir_paciente' => ['Inserir Paciente', 'form/paciente'],
+            'inserir_medico' => ['Inserir Médico', 'form/medicos'],
+            'inserir_consulta' => ['Inserir Consulta', 'form/consultas'],
+            'inserir_atendente' => ['Inserir Atendente', 'form/atendentes'],
+            'editar_paciente' => ['Editar Paciente', 'editar/paciente/{id}'],
+            'editar_medico' => ['Editar Médico', 'edit/medico/{id}'],
+            'editar_atendente' => ['Editar Atendente', 'edit/atendentes/{id}'],
+            'cancelar_consulta' => ['Cancelar Consulta', 'cancelar/consulta'],
+            'concluir_consulta' => ['Concluir Consulta', 'concluir/consulta/{id}'],
+            'apagar_consulta' => ['Apagar Consulta', 'delete/consulta/{id}'],
+        ];
+
