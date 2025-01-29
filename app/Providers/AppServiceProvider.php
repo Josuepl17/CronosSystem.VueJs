@@ -31,6 +31,8 @@ class AppServiceProvider extends ServiceProvider
                     'adm' => fn() => Session::get('adm'),
                     'message' => fn() => Session::get('message'),
 
+                    
+
                     'acessar_pacientes' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('acessar_pacientes') : false,
                     'acessar_medicos' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('acessar_medicos') : false,
                     'acessar_consultas' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('acessar_consultas') : false,
