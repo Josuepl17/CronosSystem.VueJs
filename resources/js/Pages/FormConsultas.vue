@@ -7,7 +7,7 @@
 
                         <div class="form-group"> <!-- .form-group -->
                             <label for="Medico">Médico(s) Responsável(is)</label>
-                            <select v-model="form.medico_id" id="medico">
+                            <select v-model="form.medico_id" id="medico" required >
                                 <!-- Mostra todos os médicos disponíveis -->
                                 <option v-for="medico in medicos" :key="medico.id" :value="medico.id">
                                     {{ medico.nome }} ({{ medico.especialidade }})
@@ -22,7 +22,7 @@
 
                         <div class="form-group"> <!-- .form-group -->
                             <label for="Paciente">Paciente(s)</label>
-                            <select v-model="form.paciente_id" id="paciente">
+                            <select v-model="form.paciente_id" id="paciente" required >>
                                 <!-- Mostra todos os pacientes disponíveis -->
                                 <option v-for="paciente in pacientes" :key="paciente.id" :value="paciente.id">
                                     {{ paciente.nome }}
@@ -39,18 +39,18 @@
 
                     <div id="endereco"> <!-- #endereco -->
                         <div class="form-group"> <!-- .form-group -->
-                            <label for="date">Data</label>
-                            <input v-model="form.date" type="date" id="date" placeholder="Data Consulta">
+                            <label for="date">Data</label  >
+                            <input v-model="form.date" type="date" id="date" placeholder="Data Consulta" required >
                         </div> <!-- .form-group -->
 
                         <div class="form-group"> <!-- .form-group -->
 
 
                             <label for="time">Hora Inicial</label>
-                            <input v-model="form.horainicial" type="time" id="time" placeholder="Hora Consulta" >
+                            <input v-model="form.horainicial" type="time" id="time" placeholder="Hora Consulta" required >
 
                             <label for="time">Hora Final</label>
-                            <input v-model="form.horafinal" type="time" id="time" placeholder="Hora Consulta" >
+                            <input v-model="form.horafinal" type="time" id="time" placeholder="Hora Consulta" required >
 
                         <!--
                         <select v-model="form.hora" id="horario">
