@@ -103,7 +103,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/concluir/consulta/{id}', [ConsultaController::class, 'concluirConsulta'])->middleware(PermissoesMiddleware::class);
 
     // Gerencia
-    Route::get('/gerente', [GerentesController::class, 'gerencia']);
+    Route::get('/gerentes', [GerentesController::class, 'gerencia']);
     Route::get('/form/gerente', [GerentesController::class, 'formGerencia']);
     Route::post('/create/gerente', [GerentesController::class, 'createGerente']);
     Route::get('/edit/gerente/{id}', [GerentesController::class, 'editGerente']);

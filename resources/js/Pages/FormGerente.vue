@@ -50,7 +50,7 @@
                     </div>
 
                         <div class="fechar-salvar">
-                            <button type="button" class="fechar">Fechar</button>
+                            <Link href="/gerentes" class="fechar">Fechar</Link>
                             <button type="submit" class="salvar">Salvar</button>
                         </div>
                     </div>

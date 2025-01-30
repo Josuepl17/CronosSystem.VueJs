@@ -63,7 +63,7 @@
                     </div>
 
                         <div class="fechar-salvar">
-                            <button type="button" class="fechar">Fechar</button>
+                            <Link href="/atendentes" class="fechar">Fechar</Link>
                             <button type="submit" class="salvar">Salvar</button>
                         </div>
                     </div>

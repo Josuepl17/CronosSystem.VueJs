@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="fechar-salvar"><!-- .fechar-salvar -->
-                        <button type="button" class="fechar">Fechar</button>
+                        <Link href="/medicos" class="fechar">Fechar</Link>
                         <button type="submit" class="salvar">Salvar</button>
                     </div><!-- .fechar-salvar -->
 

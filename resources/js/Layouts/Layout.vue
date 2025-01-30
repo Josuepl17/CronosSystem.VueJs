@@ -90,8 +90,12 @@
 
           <Link
           v-if="$page.props.adm"
-            href="/gerente"
-            :class="{ 'active-link': $page.url === '/gerente' }"
+            href="/gerentes"
+            :class="{ 'active-link':
+             $page.url === '/gerentes' ||
+             $page.url.startsWith('/form/gerente') ||
+             $page.url.startsWith('/edit/gerente'),
+             }"
           >
             <img src="/images/filial.png" alt="" />
             <span>Gerencia</span>
