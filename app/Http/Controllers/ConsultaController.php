@@ -6,6 +6,7 @@ use App\Models\Agenda;
 use App\Models\ConsultaPaciente;
 use App\Models\Empresa;
 use App\Models\Medico;
+use App\Models\Medico_Paciente;
 use App\Models\Paciente;
 use App\Services\MeuServico;
 use App\Services\ServiceGeral;
@@ -83,7 +84,8 @@ class ConsultaController extends Controller
         $funcionario_id = Session::get('id');
         $medicos = ServiceGeral::getMedicoLogadoOuTodos();
         $pacientes = ServiceGeral::listarPacientes(Session::get('empresa_id'));
-        return Inertia::render('FormConsultas', compact('medicos', 'pacientes'));
+        $relacoes = Medico_Paciente::all();
+        return Inertia::render('FormConsultas', compact('medicos', 'pacientes',  'relacoes'));;
     }
 
 

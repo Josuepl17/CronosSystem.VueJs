@@ -204,7 +204,7 @@
               <textarea v-model="receituario.prescricao" name="prescricao" id="prescricao" required ></textarea>
               <p style="color: red; font-size:13px;" v-if="errors.descricao">{{ errors.descricao }}</p>
             </div>
-            <a :href="'/pdf/' + receituario.id" id="salvar" class="button">Gerar Documento</a>
+            
             <button id="salvar" type="submit">Salvar</button>
             <button id="fechar" type="button" @click.prevent="fecharReceituario">Fechar</button>
           </form>
@@ -220,16 +220,19 @@
                 <tr style="position: sticky; top: 0; background-color: white;">
                   <th>#</th>
                   <th>tipo Documento</th>
-                  <th>X</th>
-                </tr>
+                  <th style="width: 50px;">X</th>
+                  <th style="width: 50px;">X</th>                </tr>
               </thead>
               <tbody>
                 <tr v-for="relatorio in relatorios" :key="relatorio.id">
                   <td>{{relatorio.id}}</td>
                   <td>{{relatorio.tipo_documento}}</td>
                   <td style="width: 50px;">
-                    <button @click.prevent="visualizarRelatorio(relatorio.id, relatorio.tipo_documento, relatorio.prescricao)" id="salvar" type="submit">Visualizar</button>
+                    <button @click.prevent="visualizarRelatorio(relatorio.id, relatorio.tipo_documento, relatorio.prescricao)" id="salvar" type="submit">Ver</button>
                   </td>
+                                  <td>
+                                    <a :href="'/pdf/' + receituario.id" id="salvar" class="button">Gerar</a>
+                                  </td>
                 </tr>
               </tbody>
             </table>
@@ -350,6 +353,10 @@ const mostrarReceituario = ref(false);
 const AbrirReceituario = () => {
   mostrarRelatorios.value = false;
   mostrarReceituario.value = true;
+  receituario.id = null;
+  receituario.tipo_documento = null;
+  receituario.prescricao = null;
+
 };
 
 const fecharReceituario = () => {
