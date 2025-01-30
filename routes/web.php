@@ -31,6 +31,9 @@ use Illuminate\Support\Facades\Session;
 // Padrão Nomes Funções, primeira letra Minuscula e as Demais Maiusculas.
 // Padrão Rotas, Form para Formularios, create, delete, edit, update para funções
 
+Route::get('/', [DashboardController::class, 'index']);
+
+
 Route::post('/create/user/empresas', [LoginController::class, 'createUserEmpresa']);
 Route::post('/login', [LoginController::class, 'Authenticate']);
 Route::get('/form/login', [LoginController::class, 'formLogin'])->name('login');
@@ -42,33 +45,12 @@ Route::post('/update/filial', [LoginController::class, 'updateFilial']);
 Route::get('/atualizar/senha', [LoginController::class, 'formSenha']);
 Route::post('/update/senha', [LoginController::class, 'updateSenha']);
 Route::get('/contato', [LoginController::class, 'contato']);
-
 Route::get('/form/verificar/consulta', [ConsultaController::class, 'formVerificarConsulta']); // LiNK para Paciente
 Route::post('/verificar/consulta', [ConsultaController::class, 'VerificarConsulta']); // LiNK para Paciente
 
 
 
 
-Route::get('/pdf/{id}', function ( Request $request) {
-
-    $relatorio =  RelatoriosPaciente::find($request->id);
-
-    $data = [ 
-        'prescricao' => Crypt::decrypt($relatorio->prescricao),
-        'medico' => Medico::Find(Session::get('id')),
-        'empresa' => Empresa::find(Session::get('empresa_id')),
-        'tipoDocumento' => $relatorio->tipo_documento,
-    ];
-
-
-    $pdf = Pdf::loadView('pdfreceituario', $data);
-    return $pdf->download('documento.pdf');
-});
-
-
-
-
-Route::get('/', [DashboardController::class, 'index']);
 
 
 Route::middleware(['auth', 'web'])->group(function () {
@@ -126,6 +108,24 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::post('/create/gerente', [GerentesController::class, 'createGerente']);
     Route::get('/edit/gerente/{id}', [GerentesController::class, 'editGerente']);
 
+    // Funções
+
+    Route::get('/pdf/{id}', function ( Request $request) {
+
+        $relatorio =  RelatoriosPaciente::find($request->id);
+    
+        $data = [ 
+            'prescricao' => Crypt::decrypt($relatorio->prescricao),
+            'medico' => Medico::Find(Session::get('id')),
+            'empresa' => Empresa::find(Session::get('empresa_id')),
+            'tipoDocumento' => $relatorio->tipo_documento,
+        ];
+    
+    
+        $pdf = Pdf::loadView('pdfreceituario', $data);
+        return $pdf->download('documento.pdf');
+    });
+
 
 });
 
@@ -133,148 +133,16 @@ Route::middleware(['auth', 'web'])->group(function () {
 
 
 
-Route::get('/josue', function () {
-    $filial_id = 2;
-    $empresa_id = Empresa::where('filial_id', $filial_id)->pluck('id');
-    $user_id = User_Empresa::whereIn('empresa_id', $empresa_id)->pluck('user_id');
-    dd($user_id);
-    $usuarios = Medico::whereIn('id', $user_id)->get();
-});
-
-Route::get('/gere', function () {
-    $e = new Empresa();
-    $e->razao_social = 'ESPAÇO INTEGRAR';
-    $e->cnpj = rand(1, 100000);
-    $e->ie = rand(1, 100000);
-    $e->im = rand(1, 100000);
-    $e->filial_id = 1;
-    $e->telefone = 27996550967;
-    $e->endereco = 'CENTRO';
-    $e->cidade = 'BARRA DE SÃO FRANCISCO';
-    $e->bairro = 'VILA LANDINHA';
-    $e->save();
-
-   $user =  User::create([
-        'name' => "Administrador",
-        'email' => "josuep.l@outlook.com",
-        'password' => Hash::make(123456),
-        'primeiro_acesso' => false,
-        'empresa_id' => $e->id,
-    ]);
-
-    $r = new User_Empresa();
-    $r->user_id = 1;
-    $r->empresa_id = $e->id;
-    $r->save();
-
-
-    return redirect('/dash');
-});
-
-Route::get('/3', function () {
-    $quantidade = 3; // Defina o número de registros que deseja criar
-
-    for ($i = 0; $i < $quantidade; $i++) {
-        // Criando um médico
-        $d = new Medico();
-        $d->nome = 'Henrique Dias ' . $i;
-        $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT);
-        $d->crp = 'CRP-' . rand(1000, 9999);
-        $d->especialidade = 'Psicologo';
-        $d->telefone = rand(90000, 99999) . rand(1000, 9999);
-        $d->email = 'henrique' . $i . '@gmail.com';
-        $d->endereco = 'Rua Exemplo, ' . rand(1, 100);
-        $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
-        $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
-        $d->save();
-
-        // Criando um usuário relacionado ao médico
-        $u = new User();
-        $u->id = $d->id; // Relaciona o mesmo ID do médico ao usuário
-        $u->name = 'Henriqueone ' . $i;
-        $u->email = 'henrique' . $i . '@gmail.com';
-        $u->primeiro_acesso = true;
-        $u->password = Hash::make('1234');
-        $u->empresa_id = 1;
-        $u->save();
-
-        // Criando o relacionamento entre usuário e empresa
-        $h = new User_Empresa();
-        $h->user_id = $d->id;
-        $h->empresa_id = 1;
-        $h->save();
-    }
-
-    return 'Registros criados com sucesso!';
-});
 
 
 
 
 
-Route::get('/4', function () {
-    $quantidade = 2; // Defina o número de registros que deseja criar
-
-    for ($i = 0; $i < $quantidade; $i++) {
-        // Criando um paciente
-        $d = new Paciente();
-        $d->nome = 'Josue Lima ' . $i;
-        $d->DataNascimento = now()->subYears(rand(18, 80))->format('Y-m-d'); // Data de nascimento aleatória
-        $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF aleatório
-        $d->email = 'josue' . $i . '@exemplo.com'; // E-mail único
-        $d->cidade = 'Cidade Exemplo ' . rand(1, 5);
-        $d->bairro = 'Bairro Exemplo ' . rand(1, 5);
-        $d->empresa_id = 1; // ID da empresa aleatório
-        $d->telefone = rand(90000, 99999) . rand(1000, 9999); // Telefone aleatório
-        $d->save();
-
-        Medico_Paciente::create([ // faz o relacionamento dos medicos selecionados com o paciente criado
-            'paciente_id' => $d->id,
-            'medico_id' => 1000,
-            'empresa_id' => 1,
-        ]);
-
-
-    }
-
-
-    return 'Registros criados com sucesso!';
-});
 
 
 
-Route::get('/5', function () {
-    $quantidade = 15; // Defina o número de registros que deseja criar
 
-    for ($i = 0; $i < $quantidade; $i++) {
-        // Criando um paciente
-        $d = new Atendente();
-        $d->nome = 'Atendente ' . $i; // Nome único
-        $d->cpf = str_pad(rand(1, 99999999999), 11, '0', STR_PAD_LEFT); // CPF aleatório com 11 dígitos
-        $d->telefone = rand(90000, 99999) . rand(1000, 9999); // Telefone aleatório
-        $d->email = 'Atendente' . $i . '@exemplo.com'; // E-mail único
-        $d->endereco = 'Rua Exemplo, ' . rand(1, 100); // Endereço fictício
-        $d->cidade = 'Cidade Exemplo ' . rand(1, 5); // Cidade fictícia
-        $d->bairro = 'Bairro Exemplo ' . rand(1, 5); // Bairro fictício
-        $d->save();
-    }
 
-    $u = new User();
-    $u->id = $d->id; // Relaciona o mesmo ID do médico ao usuário
-    $u->name = 'Atendente ' . $i;
-    $u->email = 'Atendente' . $i . '@gmail.com';
-    $u->primeiro_acesso = true;
-    $u->password = Hash::make('1234');
-    $u->empresa_id = 1;
-    $u->save();
-
-    $h = new User_Empresa();
-    $h->user_id = $d->id;
-    $h->empresa_id = 1;
-    $h->save();
-
-    return 'Registros criados com sucesso!';
-});
 
 
 
