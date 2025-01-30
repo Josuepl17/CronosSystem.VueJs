@@ -20,7 +20,7 @@
                 <h1>{{ props.paciente.nome }}</h1>
               </div> <!-- /#titulo-texto -->
               <div id="conteiner-texto">
-                <textarea @input="editando" v-model="form.texto_principal"></textarea>
+                <textarea required @input="editando" v-model="form.texto_principal"></textarea>
               </div> <!-- /#conteiner-texto -->
               <div id="rodape">
                 <p v-if="editado" style="color: white; margin-right: 20px; font-style: italic; padding: 05px; background: red; border-radius: 5px;">Texto Não salvo</p>               
@@ -126,7 +126,7 @@
             <br />
             <form @submit.prevent="modal.post('/inserir/tramite')">
               <div class="form-group">
-                <input v-model="modal.titulo" type="text" id="titulo" placeholder="Título"  />
+                <input v-model="modal.titulo" type="text" id="titulo" placeholder="Título"  required />
                 <p style="color: red; font-size:13px;" v-if="errors.titulo">{{ errors.titulo }}</p>
                 <div style="padding:05px;" v-for="consulta in consultas" :key="consulta.id">
                   <input v-model="modal.consulta" :value="consulta.id" type="checkbox" :name="'checkbox_' + consulta.id" />
@@ -134,7 +134,7 @@
                 </div> <!-- /.consulta -->
               </div> <!-- /.form-group -->
               <div class="form-group">
-                <textarea v-model="modal.descricao" name="descricao" id="descricao">
+                <textarea v-model="modal.descricao" name="descricao" id="descricao" placeholder="Descrição" required>
         
                 </textarea>
                 <p style="color: red; font-size:13px;" v-if="errors.descricao">{{ errors.descricao }}</p>
@@ -193,7 +193,7 @@
           <br />
           <form @submit.prevent="receituario.post('/create/relatorio')">
             <div class="form-group">
-              <select  v-model="receituario.tipo_documento" name="tipo_documento" id="tipo_documento" placeholder="Selecione o tipo de documento">
+              <select required  v-model="receituario.tipo_documento" name="tipo_documento" id="tipo_documento" placeholder="Selecione o tipo de documento">
                 <option value="" disabled selected>Selecione o tipo de documento</option>
                 <option value="Receituário">Receituário</option>
                 <option value="Encaminhamento">Encaminhamento</option>
@@ -201,7 +201,7 @@
               </select>
             </div>
             <div class="form-group">
-              <textarea v-model="receituario.prescricao" name="prescricao" id="prescricao"></textarea>
+              <textarea v-model="receituario.prescricao" name="prescricao" id="prescricao" required ></textarea>
               <p style="color: red; font-size:13px;" v-if="errors.descricao">{{ errors.descricao }}</p>
             </div>
             <a :href="'/pdf/' + receituario.id" id="salvar" class="button">Gerar Documento</a>
