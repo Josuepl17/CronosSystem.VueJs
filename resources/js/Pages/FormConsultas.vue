@@ -103,3 +103,4 @@ const pacientesFiltrados = computed(() => {
 <style scoped>
     @import "..\Components\css\formularios.css";
 </style>
+
