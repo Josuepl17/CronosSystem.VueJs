@@ -2,11 +2,10 @@
 <div id="conteiner-Geral">
             <nav>
                 <div id="texto">
-                    <img style="width: 150px;" src="/images/CronosSystem.png" alt="" />
+                    <img src="/images/CronosSystem.png" alt="" />
                 </div>
                 <div id="links">
-                    <a href="#sobre-nos" @click.prevent="scrollToElement('sobre-nos')">Sobre-Nos</a>
-                    <a href="#">Suporte</a>
+                    <a href="https://wa.me/5527996550967" target="_blank">Suporte</a>
                     <a href="/form/verificar/consulta">Verificar Consulta</a>
                     <a href="/dash">Faça Login</a>
                 </div>
@@ -101,7 +100,7 @@ const scrollToElement = (elementId) => {
                             }
 
                             nav{
-                                min-height: 20vh;
+                                min-height: 04vh;
                             }
                         }
             
@@ -164,8 +163,9 @@ const scrollToElement = (elementId) => {
             }
 
             #texto img {
-                max-width: 200px;
-                width: 100%;
+                width: 18%;
+                margin-left: 35px;
+                margin-top: 10px;
                 height: auto;
             }
 

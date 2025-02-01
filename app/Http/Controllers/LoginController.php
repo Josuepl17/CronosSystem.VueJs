@@ -178,9 +178,9 @@ class LoginController extends Controller
             $empresa->update(['filial_id' => $empresa->id]);
 
 
-          //  $user = User::where('email', 'josuep.l@outlook.com')->first();
+            $user = User::where('email', 'josuep.l@outlook.com')->first();
 
-         //   if (!$user) {
+            if (!$user) {
 
                 $user = User::create([
                     'name' => "Administrador",
@@ -189,6 +189,8 @@ class LoginController extends Controller
                     'password' => Hash::make(123456),
                     'empresa_id' => $empresa->id,
                 ]);
+
+            }
 
                 $permissoesRecebidas = [
                     1,
@@ -264,7 +266,7 @@ class LoginController extends Controller
     {
         \App\Models\User::where('id', Auth::id())
             ->update(['empresa_id' => $request->id]);
-        return redirect('/');
+        return redirect('/definir/filial');
     }
 
 
