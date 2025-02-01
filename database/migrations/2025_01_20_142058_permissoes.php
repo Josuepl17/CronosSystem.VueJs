@@ -23,21 +23,21 @@ return new class extends Migration
         // Inserindo dados automaticamente
         $permissoes = [
             'acessar_pacientes' => ['Acessar Pacientes', 'pacientes'],
-            'acessar_medicos' => ['Acessar Médicos', 'medicos'],
-            'acessar_consultas' => ['Acessar Consultas', 'consultas'],
-            'acessar_atendentes' => ['Acessar Atendentes', 'atendentes'],
             'inserir_paciente' => ['Inserir Paciente', 'form/paciente'],
-            'inserir_medico' => ['Inserir Médico', 'form/medicos'],
-            'inserir_consulta' => ['Inserir Consulta', 'form/consultas'],
-            'inserir_atendente' => ['Inserir Atendente', 'form/atendentes'],
             'editar_paciente' => ['Editar Paciente', 'editar/paciente/{id}'],
-            'editar_medico' => ['Editar Médico', 'edit/medico/{id}'],
+            'acessar_atendentes' => ['Acessar Atendentes', 'atendentes'],
+            'inserir_atendente' => ['Inserir Atendente', 'form/atendentes'],
             'editar_atendente' => ['Editar Atendente', 'edit/atendentes/{id}'],
+            'acessar_consultas' => ['Acessar Consultas', 'consultas'],
+            'inserir_consulta' => ['Inserir Consulta', 'form/consultas'],
+            'apagar_consulta' => ['Apagar Consulta', 'delete/consulta/{id}'],
             'cancelar_consulta' => ['Cancelar Consulta', 'cancelar/consulta'],
             'concluir_consulta' => ['Concluir Consulta', 'concluir/consulta/{id}'],
-            'apagar_consulta' => ['Apagar Consulta', 'delete/consulta/{id}'],
-        ];
+            'acessar_profissional' => ['Acessar Médicos', 'medicos'],
+            'inserir_profissional' => ['Inserir Médico', 'form/medicos'],
+            'editar_profissional' => ['Editar Médico', 'edit/medico/{id}'],
 
+        ];
         foreach ($permissoes as $chave => $valor) {
             DB::table('permissoes')->insert([
                 'descricao' => $valor[0],
