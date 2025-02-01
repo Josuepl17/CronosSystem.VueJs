@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->boolean('primeiro_acesso');
             $table->string('password');
-            $table->integer('empresa_id'); // apenas para busca da empresa
+            $table->integer('empresa_id')->nullable(); // apenas para busca da empresa
             $table->timestamps();
         });
 

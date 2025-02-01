@@ -249,10 +249,12 @@ class LoginController extends Controller
     //Lista todas as empresas ligadas ao usuario logado.
     public function definirFilial()
     {
+      //  dd("teste");
         $user = User::find(Auth::id());
         $filiais = $user->empresas()->get();
         Session::put('filiais', $filiais);
         $empresa = Empresa::find(Auth::user()->empresa_id);
+        
         Session::put('razao_social', $empresa->razao_social);
         Session::put('empresa_id', Auth::user()->empresa_id);
         return redirect('/dash');
@@ -292,23 +294,25 @@ class LoginController extends Controller
 
     public function editarFilial(Request $request)
     {
+       // 
 
         $empresa_id = Auth::user()->empresa_id;
         $empresa = Empresa::find($empresa_id);
         $filial_id = $empresa->filial_id;
         $todasfiliais = Empresa::where('filial_id', $filial_id)->pluck('id');
 
-        $user_id = User_Empresa::wherein('empresa_id', $todasfiliais)->pluck('user_id'); // User_id de todas Minhas filiais
-        $user_id_filial = User_Empresa::wherein('empresa_id', [$request->id])->pluck('user_id'); // User_id apenas da filial Selcionada 
+        
 
-        $outrosfilial = User::wherein('id', $user_id)->whereNotIn('id', $user_id_filial)->get(); // A partir dos ideias que eu peguei acima eu recupero todos os usuários que não pertencem a empresas selecionadas
-        $usuariosfilial = User::whereIn('id', $user_id_filial)->get(); // A parte do meu ID que eu peguei acima recupero todos os meus usuários que pertencem à empresa selecionada.
+        $user_id_filial = User_Empresa::wherein('empresa_id', [$request->id])->pluck('user_id'); // User_id apenas da filial Selcionada 
+        $user_id = User_Empresa::wherein('empresa_id', $todasfiliais)->pluck('user_id'); // User_id de todas Minhas filiais
+        $usuariosFiliais = User::wherein('id', $user_id)->get(); // A partir dos ideias que eu peguei acima eu recupero todos os usuários que não pertencem a empresas selecionadas
+        $usuariosfilialselect = User::whereIn('id', $user_id_filial)->pluck('id'); // A parte do meu ID que eu peguei acima recupero todos os meus usuários que pertencem à empresa selecionada.
 
         Session::put('empresa_selecionada', $request->id);
 
         $filial = Empresa::find($request->id); // Dados para alterar informações da empresa
 
-        return Inertia::render('EditarFilial', compact('filial', 'outrosfilial', 'usuariosfilial'));
+        return Inertia::render('EditarFilial', compact('filial', 'usuariosFiliais', 'usuariosfilialselect'));
     }
 
 
@@ -319,6 +323,9 @@ class LoginController extends Controller
 
     public function updateFilial(Request $request)
     {
+  
+
+
 
         $empresa = Empresa::find($request->id);
 
@@ -333,17 +340,14 @@ class LoginController extends Controller
             'bairro'
         ]));
 
-        return redirect('/gerenciar/filial');
-    }
+        $dados = $request->input('users', []); // Retorna um array vazio se não existir
 
 
+        
 
-
-
-    public function createVinculoUser(Request $request)
-    {
-
-        $dados = $request->users;
+     User_Empresa::where('empresa_id', Session::get('empresa_selecionada'))->delete();
+    // $user = User::wherein( 'id', $dados)->update(['empresa_id' => null]);
+    // dd($user);
 
         foreach ($dados as $dado) {
 
@@ -353,20 +357,6 @@ class LoginController extends Controller
             $user_empresa->save();
         }
 
-        return redirect('/gerenciar/filial');
-    }
-
-
-
-
-
-
-    public function removeVinculoUser(Request $request)
-    {
-
-        $dados = $request->users;
-
-        User_Empresa::wherein('user_id',  $dados)->where('user_id', '!=', Auth::id())->where('empresa_id', Session::get('empresa_selecionada'))->delete(); // não deteta o usuario logado, que no caso é somente o adm
 
 
         return redirect('/gerenciar/filial');
@@ -376,17 +366,17 @@ class LoginController extends Controller
 
 
 
-
-
-
+   
 
 
 
 
     public function logout()
     {
+
         Session::flush();
         Auth::logout();
+// caso usuario seja removido dos vinculos, ele não acesse mais a empresa
         return redirect('/form/login');
     }
 }

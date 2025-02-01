@@ -165,30 +165,22 @@
       </div>
       <br>
       <div id="box-usuarios">
-        <!----------------------------------------------------------------------------------->
-        <div id="usuarios">
-          <div id="titulo-usuarios">
-            <h3>Usuarios Da Filial</h3>
-          </div>
-          <div class="checkbox" v-for="userfilial in usuariosfilial" :key="userfilial.id">
-            <label :for="'userfilial-' + userfilial.id">{{ userfilial.name }}</label>
-          </div>
-          <br><br>
-          <a href="#" @click.prevent="abrirModal">Adicionar</a>
-        </div>
-        <br><br><br><br>
-        <!----------------------------------------------------------------------------------->
-        <div id="usuarios">
-          <div id="titulo-usuarios">
-            <h3>Outros Usuarios</h3>
-          </div>
-          <div class="checkbox" v-for="outros in outrosfilial" :key="outros.id">
-            <label :for="'outros-' + outros.id">{{ outros.name }}</label>
-          </div>
-          <br>
-          <a href="#" @click.prevent="abrirModal2">Adicionar</a>
-        </div>
-        <!----------------------------------------------------------------------------------->
+      
+
+
+        <div v-if="$page.props.adm" class="form-group">
+                      <label for="Medico">Usuarios</label>
+                      <div style="height: 300px; border: 1px solid #ccc; overflow-y: auto;">
+                          <div v-for="users in props.usuariosFiliais" 
+                               :key="users.id" 
+                               @click="form.users.includes(users.id) ? form.users = form.users.filter(id => id !== users.id) : form.users.push(users.id)"
+                               :style="{ padding: '5px 10px', cursor: 'pointer', backgroundColor: form.users.includes(users.id) ? '#e0e0e0' : 'white' }">
+                              {{ users.name }}
+                          </div>
+                      </div>
+                  </div>
+
+
       </div>
     </div>
   </div>
@@ -208,8 +200,8 @@ onMounted(() => {
 const props = defineProps({
   filial: Object,
   errors: Array,
-  usuariosfilial: Array,
-  outrosfilial: Array,
+  usuariosFiliais: Array,
+  usuariosfilialselect: Array,
 });
 
 const form = useForm({
@@ -222,99 +214,19 @@ const form = useForm({
   telefone: props.filial.telefone,
   ie: props.filial.ie,
   im: props.filial.im,
+  users: props.usuariosfilialselect,
 });
 
 
 
 
-const adicionar = useForm({
-  users: [],
-});
 
-const remover = useForm({
-  users: [],
-});
 
-const mostrarModal = ref(false);
-const abrirModal = () => {
-  mostrarModal.value = true;
-};
-const fecharModal = () => {
-  mostrarModal.value = false;
-};
 
-const mostrarModal2 = ref(false);
-const abrirModal2 = () => {
-  mostrarModal2.value = true;
-};
-const fecharModal2 = () => {
-  mostrarModal2.value = false;
-};
+
 </script>
 
-<style scoped>
-a {
-  display: flex;
-  padding: 07px 20px 07px 20px;
-  background-color: var(--azul-escuro);
-  border: 1px solid rgba(255, 255, 255, 0.249);
-  border-radius: 05px;
-  color: white;
-  margin-right: 10px;
-  height: 35px;
-  width: 70px;
-  justify-content: center;
-}
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 600px;
-  height: 450px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1001;
-  transition: ease-in-out 1s;
-  text-align: center;
-}
-
-.checkbox-item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.input-label {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  border-radius: 05px;
-}
-
-.fechar-salvar-model {
-  display: flex;
-  height: 10%;
-  width: 100%;
-  flex-direction: row;
-  justify-content: right;
-  padding-right: 05px;
-  align-items: center;
-}
-</style>
 
 <style scoped>
 * {
@@ -328,6 +240,15 @@ a {
   --azul-claro: #00657c;
   --cinza-escuro: #212529;
 }
+
+#box-usuarios{
+  width: 30%;
+}
+
+.form-group{
+  width: 100%;
+}
+
 
 #conteiner-geral {
   width: 100%;
