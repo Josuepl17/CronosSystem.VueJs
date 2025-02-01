@@ -40,6 +40,7 @@ class GerentesController extends Controller
             $dados // Dados a serem atualizados ou criados
         );
     
+
  
         // Verifica se o usuário com o mesmo ID do atendente já existe
         $user = User::updateOrCreate(
@@ -83,7 +84,7 @@ class GerentesController extends Controller
 
         ServiceGeral::CriarPermissoes($permissoesRecebidas, $user);
     
-        return redirect('/gerente');
+        return redirect('/gerentes');
 
     }
 

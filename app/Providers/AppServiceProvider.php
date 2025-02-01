@@ -34,15 +34,15 @@ class AppServiceProvider extends ServiceProvider
                     
 
                     'acessar_pacientes' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('acessar_pacientes') : false,
-                    'acessar_medicos' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('acessar_medicos') : false,
+                    'acessar_profissional' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('acessar_profissional') : false,
                     'acessar_consultas' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('acessar_consultas') : false,
                     'acessar_atendentes' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('acessar_atendentes') : false,
                     'inserir_paciente' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('inserir_paciente') : false,
-                    'inserir_medico' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('inserir_medico') : false,
+                    'inserir_profissional' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('inserir_profissional') : false,
                     'inserir_consulta' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('inserir_consulta') : false,
                     'inserir_atendente' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('inserir_atendente') : false,
                     'editar_paciente' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('editar_paciente') : false,
-                    'editar_medico' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('editar_medico') : false,
+                    'editar_profissional' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('editar_profissional') : false,
                     'editar_atendente' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('editar_atendente') : false,
                     'cancelar_consulta' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('cancelar_consulta') : false,
                     'concluir_consulta' => fn() => Auth::user() ? Auth::user()->permissoes->pluck('chave')->contains('concluir_consulta') : false,  

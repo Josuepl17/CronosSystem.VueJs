@@ -75,7 +75,7 @@
           </Link>
 
 
-          <Link v-if="$page.props.acessar_medicos"
+          <Link v-if="$page.props.acessar_profissional"
             href="/medicos"
             :class="{
               'active-link':

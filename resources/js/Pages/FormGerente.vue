@@ -45,8 +45,8 @@
 
 
                   <div class="form-group"><!-- .form-group -->
-                        <label for="bairro">Primeiro Acesso</label>
-                        <input v-model="form.primeiro_acesso" type="checkbox" id="bairro" placeholder="Primeiro Acesso">
+                        <label for="primeiro_acesso">Primeiro Acesso</label>
+                        <input v-model="form.primeiro_acesso" type="checkbox" id="primeiro_acesso" placeholder="Primeiro Acesso">
                     </div>
 
                         <div class="fechar-salvar">

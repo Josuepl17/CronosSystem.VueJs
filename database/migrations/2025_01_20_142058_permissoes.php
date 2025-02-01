@@ -33,9 +33,9 @@ return new class extends Migration
             'apagar_consulta' => ['Apagar Consulta', 'delete/consulta/{id}'],
             'cancelar_consulta' => ['Cancelar Consulta', 'cancelar/consulta'],
             'concluir_consulta' => ['Concluir Consulta', 'concluir/consulta/{id}'],
-            'acessar_profissional' => ['Acessar Médicos', 'medicos'],
-            'inserir_profissional' => ['Inserir Médico', 'form/medicos'],
-            'editar_profissional' => ['Editar Médico', 'edit/medico/{id}'],
+            'acessar_profissional' => ['Acessar Profissional', 'medicos'],
+            'inserir_profissional' => ['Inserir Profissional', 'form/medicos'],
+            'editar_profissional' => ['Editar Profissional', 'edit/medico/{id}'],
 
         ];
         foreach ($permissoes as $chave => $valor) {
