@@ -11,13 +11,6 @@
 
 
 
-
-
-
-
-
-
-
   <div id="conteiner-geral">
     <div v-if="isModalOpen" class="modal-overlay" @click="isModalOpen = false">
       <div class="modal-content" @click.stop>
