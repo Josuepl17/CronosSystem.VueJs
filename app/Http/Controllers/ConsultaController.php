@@ -57,7 +57,8 @@ class ConsultaController extends Controller
 
     public function filtroConsulta(Request $request)
     {
-        Session::put('dataconsulta', $request->date);
+        Session::put('date_inicial', $request->date_inicial);
+        Session::put('date_final', $request->date_final);
         return redirect('/consultas');
     }
 
@@ -65,12 +66,13 @@ class ConsultaController extends Controller
 
     public function listaConsultas()
     {
-        $date = Session::get('dataconsulta') ?? Carbon::now()->toDateString();
+        $date_inicial = Session::get('date_inicial') ?? Carbon::now()->toDateString();
+        $date_final = Session::get('date_final') ?? Carbon::now()->toDateString();
         
-        $consultas =  ServicesConsulta::ListarConsultas($date);
+        $consultas =  ServicesConsulta::ListarConsultas($date_inicial, $date_final);
         $consultas = ServiceGeral::CriptograrArrayID($consultas);
 
-        return Inertia::render('Consultas', compact('consultas', 'date'));
+        return Inertia::render('Consultas', compact('consultas', 'date_inicial', 'date_final'));
     }
 
 

@@ -324,9 +324,6 @@ class LoginController extends Controller
     public function updateFilial(Request $request)
     {
   
-
-
-
         $empresa = Empresa::find($request->id);
 
         $empresa->update($request->only([
@@ -342,8 +339,6 @@ class LoginController extends Controller
 
         $dados = $request->input('users', []); // Retorna um array vazio se não existir
 
-
-        
 
      User_Empresa::where('empresa_id', Session::get('empresa_selecionada'))->delete();
     // $user = User::wherein( 'id', $dados)->update(['empresa_id' => null]);

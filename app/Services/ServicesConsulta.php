@@ -18,7 +18,7 @@ class ServicesConsulta
 
 
 
-    public static function ListarConsultas($date) {
+    public static function ListarConsultas($date_incial, $date_final) {
         // Inicia a consulta base
         $consultasQuery = null;
     
@@ -31,7 +31,7 @@ class ServicesConsulta
     
         // Aplica o filtro 'whereDate' e as ordenações
         $consultas = $consultasQuery
-            ->whereDate('date', $date) // Aplica o filtro 'whereDate'
+            ->whereBetween('date', [$date_incial, $date_final])
             ->orderByRaw("
                 CASE 
                     WHEN status = 'Agendado' THEN 1
@@ -45,7 +45,6 @@ class ServicesConsulta
     
         return $consultas;
     }
-
 
 
     public static function VerificarAgendamento($request) {

@@ -46,7 +46,7 @@
 
             <div class="form-group">
               <label for="telefone">Telefone</label>
-              <input v-model="form.telefone" type="tel" id="telefone" placeholder="Telefone:" required>
+              <input v-model="form.telefone" type="number" id="telefone" placeholder="Telefone:" required>
   
             </div>
           </div>

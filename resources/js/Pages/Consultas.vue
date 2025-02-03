@@ -5,7 +5,9 @@
                 <Link v-if="$page.props.inserir_consulta" id="botao_inserir_superior" href="/form/consultas">Inserir</Link>
 
                 <form @submit.prevent="filtro.post('/filtro/consulta')" >
-                    <input v-model="filtro.date" type="date" name="date" id="date">
+                    <input v-model="filtro.date_inicial" type="date" name="date" id="date">
+                    <input v-model="filtro.date_final" type="date" name="date" id="date">
+
                     <input type="submit" value="Pesquisar">
                 </form>
 
@@ -98,7 +100,8 @@ import { ref } from "vue";
 
 const props = defineProps({
     consultas: Array,
-    date: String,
+    date_inicial: String,
+    date_final: String,
 });
 
 
@@ -108,7 +111,8 @@ const formcancel = useForm({
 });    
 
 const filtro = useForm({
-    date: props.date || "",
+    date_inicial: props.date_inicial || '',
+    date_final: props.date_final || '',
 });    
 
 
