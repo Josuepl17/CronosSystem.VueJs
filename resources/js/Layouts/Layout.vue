@@ -1,4 +1,23 @@
+
+
 <template>
+
+
+
+<div v-if="isPopupOpen" ref="popupRef" class="popup">
+        <p>Você tem 3 novas notificações!</p>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
   <div id="conteiner-geral">
     <div v-if="isModalOpen" class="modal-overlay" @click="isModalOpen = false">
       <div class="modal-content" @click.stop>
@@ -123,23 +142,42 @@
       <!-- menu-geral -->
 
       <div id="ajuste-2">
-        <nav>
-          <a href="#"><img src="/images/sino.png" alt="" /></a>
-          <a href="#"><img src="/images/config.png" alt="" /></a>
 
-          <button
-            @click="isModalOpen = true"
-            style="
-              background-color: var(--azul-claro);
-              padding: 10px;
-              border-radius: 10px;
-              color: white;
-              border: none;
-            "
-          >
-            {{ $page.props.razao_social }}
-          </button>
-        </nav>
+
+        <nav>
+    <div class="notification-wrapper">
+      <!-- Ícone do Sino -->
+      <a href="#">
+        <img
+          src="/images/sino.png"
+          alt="Notificações"
+          ref="iconRef"
+          @click="togglePopup"
+          class="notification-icon"
+        />
+      </a>
+
+      <!-- Popup de Notificações -->
+
+    </div>
+
+    <a href="#"><img src="/images/config.png" alt="Configurações" /></a>
+
+    <button
+      @click="isModalOpen = true"
+      style="
+        background-color: var(--azul-claro);
+        padding: 10px;
+        border-radius: 10px;
+        color: white;
+        border: none;
+      "
+    >
+      {{ $page.props.razao_social }}
+    </button>
+  </nav>
+
+
 
         <div id="ajuste-3">
           <div id="conteudo">
@@ -157,8 +195,47 @@
 </template>
 
 <script setup>
+
+
+
+
+
+import { ref, onMounted, onUnmounted } from "vue";
+
+const isPopupOpen = ref(false);
+const popupRef = ref(null);
+const iconRef = ref(null);
+
+// Função para alternar o popup
+const togglePopup = () => {
+  isPopupOpen.value = !isPopupOpen.value;
+};
+
+// Fecha o popup se clicar fora
+const handleClickOutside = (event) => {
+  if (
+    popupRef.value &&
+    !popupRef.value.contains(event.target) &&
+    iconRef.value &&
+    !iconRef.value.contains(event.target)
+  ) {
+    isPopupOpen.value = false;
+  }
+};
+
+// Adiciona/remover evento ao montar/desmontar o componente
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+onUnmounted(() => {
+  document.removeEventListener("click", handleClickOutside);
+});
+
+
+
+
 import { Link } from "@inertiajs/vue3";
-import { ref, onMounted } from "vue";
+
 
 const isModalOpen = ref(false);
 
@@ -217,6 +294,38 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+/* Posicionamento correto do popup abaixo do sino */
+.notification-wrapper {
+  position: relative;
+  display: inline-block;
+  z-index: 900;
+}
+
+.notification-icon {
+  cursor: pointer;
+}
+
+/* Popup de Notificações */
+.popup {
+  position: absolute;
+  top: 40px; /* Ajuste para ficar logo abaixo do sino */
+  left: 50%;
+  transform: translateX(-50%); /* Centraliza o popup em relação ao sino */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  z-index: 1000;
+  text-align: center;
+}
+</style>
+
+<style scoped>
+
+
+
 #links-menu a,
 #links-menu .active-link {
   text-decoration: none;
