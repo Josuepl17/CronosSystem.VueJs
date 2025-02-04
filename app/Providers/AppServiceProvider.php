@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
                     'message' => fn() => Session::get('message'),
 
                     
-                    Session::get('tempo_proxima_consulta') => fn() => Session::get('tempo_proxima_consulta'),
+                    'tempo_proxima_consulta' => fn() => Session::get('tempo_proxima_consulta'),
                     
 
                     
