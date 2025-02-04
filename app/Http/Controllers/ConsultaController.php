@@ -72,6 +72,8 @@ class ConsultaController extends Controller
         $consultas =  ServicesConsulta::ListarConsultas($date_inicial, $date_final);
         $consultas = ServiceGeral::CriptograrArrayID($consultas);
 
+        Session::put('tempo_proxima_consulta', "55");
+
         return Inertia::render('Consultas', compact('consultas', 'date_inicial', 'date_final'));
     }
 

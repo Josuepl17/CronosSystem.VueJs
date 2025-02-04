@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\ConsultaPaciente;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Vite;
@@ -30,6 +31,10 @@ class AppServiceProvider extends ServiceProvider
                     'autorizaMedico' => fn() => Session::get('autorizaMedico'),
                     'adm' => fn() => Session::get('adm'),
                     'message' => fn() => Session::get('message'),
+
+                    
+                    Session::get('tempo_proxima_consulta') => fn() => Session::get('tempo_proxima_consulta'),
+                    
 
                     
 

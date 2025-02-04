@@ -5,7 +5,9 @@
 
 
 <div v-if="isPopupOpen" ref="popupRef" class="popup">
-        <p>Você tem 3 novas notificações!</p>
+
+        <p>{{$page.props.tempo_proxima_consulta}}</p>
+
       </div>
 
 
@@ -35,7 +37,7 @@
     <div id="flex-1">
       <div id="menu-geral" :class="{ reduzido: isReduced }" ref="menu">
         <div id="topo-menu">
-          <img src="/images/profile.jpg" alt="" />
+          <img src="/images/CronosSystem.png" alt="" />
           <p>{{ $page.props.nome }}</p>
           <button class="botao-menu" @click="toggleMenu" ref="toggleButton">
             ☰
@@ -301,15 +303,15 @@ onMounted(async () => {
 /* Popup de Notificações */
 .popup {
   position: absolute;
-  top: 40px; /* Ajuste para ficar logo abaixo do sino */
-  left: 50%;
+  top: 46px; /* Ajuste para ficar logo abaixo do sino */
+  left: 84%;
   transform: translateX(-50%); /* Centraliza o popup em relação ao sino */
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  width: 200px;
+  width: 20vw;
   z-index: 1000;
   text-align: center;
 }
@@ -456,9 +458,8 @@ onMounted(async () => {
 
 #topo-menu img {
   width: 40px;
-  height: 40px;
-  border-radius: 50%;
   object-fit: cover;
+  border: 1px solid white;
 }
 
 #topo-menu p {
@@ -472,6 +473,7 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   padding: 10px;
+  
 }
 
 #links-menu a {
@@ -481,6 +483,7 @@ onMounted(async () => {
   color: aliceblue;
   border-radius: 7px;
   margin-bottom: 5px;
+
 }
 
 #links-menu a:hover {
@@ -496,6 +499,7 @@ onMounted(async () => {
 #links-menu a span {
   margin-left: 10px;
   transition: opacity 0.3s ease;
+  font-size: 14px;
 }
 
 /* Area Menu de navegação com Area Conteudo */
