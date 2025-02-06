@@ -17,6 +17,7 @@ use App\Http\Requests\ValidateRequest;
 use App\Models\Atendente;
 use App\Models\Permissao;
 use App\Models\User_Permissao;
+use App\Services\ServiceGeral;
 use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
@@ -78,6 +79,23 @@ class LoginController extends Controller
 
             Session::put('id', Auth::id());
             Session::put('nome', Auth::user()->name);
+
+            if ($medico = ServiceGeral::VerificarMedico()){
+                            $consultas = $medico->consultas()->first();
+
+            
+                
+                            if ($consultas) {
+                                $tempoRestante = now()->diff($consultas->data_hora);
+                                $consultas->tempo_restante = $tempoRestante;
+                                dd($tempoRestante);
+                     
+                            }                Session::put('consultas', $consultas);
+
+
+
+
+            }
 
 
             return redirect('/definir/filial');

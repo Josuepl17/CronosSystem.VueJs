@@ -5,8 +5,9 @@
 
 
 <div v-if="isPopupOpen" ref="popupRef" class="popup">
-
-        <p>{{$page.props.tempo_proxima_consulta}}</p>
+         <h1>Consultas de Hoje</h1>
+         <br>
+        <p v-for="consulta in $page.props.consultas" :key="consulta.id">Nome: {{consulta.tempo_restante }} Hora: {{ consulta.tempo_restante }}</p>
 
       </div>
 
