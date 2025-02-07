@@ -1,17 +1,4 @@
-
-
 <template>
-
-
-
-<div v-if="isPopupOpen" ref="popupRef" class="popup">
-         <h1>Consultas de Hoje</h1>
-         <br>
-        <p v-for="consulta in $page.props.consultas" :key="consulta.id">Nome: {{consulta.tempo_restante }} Hora: {{ consulta.tempo_restante }}</p>
-
-      </div>
-
-
 
 
   <div id="conteiner-geral">
@@ -198,26 +185,12 @@
 
 import { ref, onMounted, onUnmounted } from "vue";
 
-const isPopupOpen = ref(false);
-const popupRef = ref(null);
+
 const iconRef = ref(null);
 
-// Função para alternar o popup
-const togglePopup = () => {
-  isPopupOpen.value = !isPopupOpen.value;
-};
 
-// Fecha o popup se clicar fora
-const handleClickOutside = (event) => {
-  if (
-    popupRef.value &&
-    !popupRef.value.contains(event.target) &&
-    iconRef.value &&
-    !iconRef.value.contains(event.target)
-  ) {
-    isPopupOpen.value = false;
-  }
-};
+
+
 
 // Adiciona/remover evento ao montar/desmontar o componente
 onMounted(() => {
@@ -289,34 +262,7 @@ onMounted(async () => {
 
 </script>
 
-<style scoped>
-/* Posicionamento correto do popup abaixo do sino */
-.notification-wrapper {
-  position: relative;
-  display: inline-block;
-  z-index: 900;
-}
 
-.notification-icon {
-  cursor: pointer;
-}
-
-/* Popup de Notificações */
-.popup {
-  position: absolute;
-  top: 46px; /* Ajuste para ficar logo abaixo do sino */
-  left: 84%;
-  transform: translateX(-50%); /* Centraliza o popup em relação ao sino */
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  width: 20vw;
-  z-index: 1000;
-  text-align: center;
-}
-</style>
 
 <style scoped>
 
