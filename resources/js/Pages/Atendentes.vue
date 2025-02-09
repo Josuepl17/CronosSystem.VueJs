@@ -46,6 +46,6 @@ const props = defineProps({
 </script>
 
 <style scoped>
-@import "..\Components\css\tabelas.css";
-@import "..\Components\css\botoes.css";
+@import "../../../public/css/tabelas.css";
+@import "../../../public/css/botoes.css";
 </style>

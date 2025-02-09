@@ -61,8 +61,8 @@ const form = useForm({
 </script>
 
 <style scoped>
-@import "..\Components\css\tabelas.css";
-@import "..\Components\css\botoes.css";
+@import "../../../public/css/tabelas.css";
+@import "../../../public/css/botoes.css";
 
 #tipo {
   background-color: rgb(255, 0, 0);

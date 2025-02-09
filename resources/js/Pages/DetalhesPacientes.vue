@@ -399,9 +399,10 @@ const visualizarRelatorio = (id, tipo_documento, prescricao) => {
 
 
 <style scoped>
-@import "../Components/css/tabelas.css";
-@import "../Components/css/modal.css";
-@import "../Components/css/botoes.css";
+@import "../../../public/css/modal.css";
+@import "../../../public/css/tabelas.css";
+@import "../../../public/css/botoes.css";
+
 
 nav {
   display: flex;

@@ -93,10 +93,9 @@ const props = defineProps({
 </script>
 
 <style scoped>
-@import "../Components/css/tabelas.css";
-@import "../Components/css/modal.css";
-@import "..\Components\css\botoes.css"; 
-
+@import "/css/tabelas.css";
+@import "/css/modal.css";
+@import "/css/botoes.css";
 
 
 
