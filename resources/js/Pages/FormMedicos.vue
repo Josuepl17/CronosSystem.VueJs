@@ -100,7 +100,7 @@ onMounted(() => {
 });
 
 const props = defineProps({
-  errors: Array,
+  errors: Object,
   medico: Array,
   permissoes: Array,
   idPermissaoSelect: Array,

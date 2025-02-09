@@ -33,7 +33,7 @@ onMounted(() => {
 });
 
 const props = defineProps({
-    errors: Array,
+    errors: Object,
 });
 
 const form = useForm({

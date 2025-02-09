@@ -187,19 +187,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { defineProps } from "vue";
 import { onMounted } from "vue";
 
 onMounted(() => {
-    document.title = " Editar Filial";
+  document.title = " Editar Filial";
 });
-
 
 const props = defineProps({
   filial: Object,
-  errors: Array,
+  errors: Object,
   usuariosFiliais: Array,
   usuariosfilialselect: Array,
 });
@@ -216,14 +215,6 @@ const form = useForm({
   im: props.filial.im,
   users: props.usuariosfilialselect,
 });
-
-
-
-
-
-
-
-
 </script>
 
 
@@ -241,14 +232,13 @@ const form = useForm({
   --cinza-escuro: #212529;
 }
 
-#box-usuarios{
+#box-usuarios {
   width: 30%;
 }
 
-.form-group{
+.form-group {
   width: 100%;
 }
-
 
 #conteiner-geral {
   width: 100%;

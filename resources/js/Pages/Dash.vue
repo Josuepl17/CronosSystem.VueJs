@@ -4,28 +4,28 @@
       <div id="conteudo-pessoal">
         <div class="card">
           <span class="card-titulo">
-            <img width="8%" src="check.png" alt="">&nbsp; Consultas Agendadas
+             Consultas Agendadas
           </span>
           <span class="card-conteudo">{{ props.consultasAgendadas }}</span>
         </div> <!-- card -->
 
         <div class="card">
           <span class="card-titulo">
-            <img width="8%" src="usuario-ferido.png" alt="">&nbsp; Pacientes Ativos
+            Pacientes Ativos
           </span>
           <span class="card-conteudo">{{ props.pacientes }}</span>
         </div> <!-- card -->
 
         <div class="card">
           <span class="card-titulo">
-            <img width="8%" src="pendente.png" alt="">&nbsp; Consultas Concluidas
+             Consultas Concluidas
           </span>
           <span class="card-conteudo">{{ props.consultasConcluidos }}</span>
         </div> <!-- card -->
 
         <div class="card">
           <span class="card-titulo">
-            <img width="8%" src="cancelado.png" alt="">&nbsp; Consultas Canceladas
+             Consultas Canceladas
           </span>
           <span class="card-conteudo">{{ props.consultasCanceladas }}</span>
         </div> <!-- card -->

@@ -178,27 +178,7 @@
 </template>
 
 <script setup>
-
-
-
-
-
-import { ref, onMounted, onUnmounted } from "vue";
-
-
-const iconRef = ref(null);
-
-
-
-
-
-// Adiciona/remover evento ao montar/desmontar o componente
-onMounted(() => {
-  document.addEventListener("click", handleClickOutside);
-});
-onUnmounted(() => {
-  document.removeEventListener("click", handleClickOutside);
-});
+import { ref, onMounted } from "vue";
 
 
 
@@ -210,6 +190,9 @@ const isModalOpen = ref(false);
 
 const menu = ref(null);
 const toggleButton = ref(null);
+
+
+const isReduced = ref(false);
 
 function toggleMenu() {
   const isReduced = menu.value.classList.toggle("reduzido");

@@ -90,11 +90,11 @@ onMounted(() => {
 });
 
 const props = defineProps({
-  errors: Array,
+  errors: Object,
   medicos: Array,
   paciente: {
     type: Object,
-    default: () => ({})
+    default: () => ({}),
   },
   medicosSelect: Array,
 });
@@ -112,21 +112,14 @@ const form = useForm({
   endereco: props.paciente.endereco || "",
 });
 
-
-
-
 function formatCPF() {
   form.cpf.value = cpf.value
-    .replace(/\D/g, '') // Remove tudo que não é número
-    .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o primeiro ponto
-    .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona o segundo ponto
-    .replace(/(\d{3})(\d{1,2})$/, '$1-$2') // Adiciona o traço
+    .replace(/\D/g, "") // Remove tudo que não é número
+    .replace(/(\d{3})(\d)/, "$1.$2") // Adiciona o primeiro ponto
+    .replace(/(\d{3})(\d)/, "$1.$2") // Adiciona o segundo ponto
+    .replace(/(\d{3})(\d{1,2})$/, "$1-$2") // Adiciona o traço
     .slice(0, 14); // Limita o tamanho ao formato do CPF
 }
-
-
-
-
 </script>
 
 <style scoped>

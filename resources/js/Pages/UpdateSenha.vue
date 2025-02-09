@@ -22,23 +22,21 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import { onMounted } from 'vue';
+import { defineProps } from "vue";
+import { useForm } from "@inertiajs/vue3";
+import { onMounted } from "vue";
 
 onMounted(() => {
-document.title = 'Nova Senha';
+  document.title = "Nova Senha";
 });
 
 const props = defineProps({
-  errors: Array,
+  errors: Object,
 });
-
 
 const form = useForm({
-  password: '',
+  password: "",
 });
-
 </script>
 
 <style scoped>
@@ -52,11 +50,11 @@ const form = useForm({
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 h1 {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: 16px;
 }
 
@@ -173,13 +171,15 @@ body {
 }
 
 @keyframes move {
-  0%, 49.99% {
-      opacity: 0;
-      z-index: 1;
+  0%,
+  49.99% {
+    opacity: 0;
+    z-index: 1;
   }
-  50%, 100% {
-      opacity: 1;
-      z-index: 5;
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
   }
 }
 
@@ -268,15 +268,15 @@ body {
   .container {
     min-height: 400px;
   }
-  
+
   .toggle-container {
     display: none;
   }
-  
+
   .sign-in {
     width: 100%;
   }
-  
+
   .container form {
     padding: 0 20px;
   }

@@ -74,33 +74,33 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import { onMounted } from 'vue';
+import { defineProps } from "vue";
+import { useForm } from "@inertiajs/vue3";
+import { onMounted } from "vue";
 
 onMounted(() => {
-    document.title = 'Inserir Atendente';
+  document.title = "Inserir Atendente";
 });
 
 const props = defineProps({
-    errors: Array,
-    atendente: Object,
-    permissoes: Array,
-    idPermissaoSelect: Array,
+  errors: Object,
+  atendente: Object,
+  permissoes: Array,
+  idPermissaoSelect: Array,
 });
 
 const form = useForm({
-    id: props.atendente?.id || "",
-    nome: props.atendente?.nome || "",
-    cpf: props.atendente?.cpf || "",
-    telefone: props.atendente?.telefone || "",
-    email: props.atendente?.email || "",
-    endereco: props.atendente?.endereco || "",
-    cidade: props.atendente?.cidade || "",
-    bairro: props.atendente?.bairro || "",
-    senha: "1234",
-    permissoes: props.idPermissaoSelect || [],
-    primeiro_acesso: "" || false,
+  id: props.atendente?.id || "",
+  nome: props.atendente?.nome || "",
+  cpf: props.atendente?.cpf || "",
+  telefone: props.atendente?.telefone || "",
+  email: props.atendente?.email || "",
+  endereco: props.atendente?.endereco || "",
+  cidade: props.atendente?.cidade || "",
+  bairro: props.atendente?.bairro || "",
+  senha: "1234",
+  permissoes: props.idPermissaoSelect || [],
+  primeiro_acesso: "" || false,
 });
 </script>
 

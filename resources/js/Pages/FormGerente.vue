@@ -61,30 +61,30 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import { onMounted } from 'vue';
+import { defineProps } from "vue";
+import { useForm } from "@inertiajs/vue3";
+import { onMounted } from "vue";
 
 onMounted(() => {
-    document.title = 'Inserir Gerente';
+  document.title = "Inserir Gerente";
 });
 
 const props = defineProps({
-    errors: Array,
-    gerente: Object,
+  errors: Object,
+  gerente: Object,
 });
 
 const form = useForm({
-    id: props.gerente?.id || "",
-    nome: props.gerente?.nome || "",
-    cpf: props.gerente?.cpf || "",
-    telefone: props.gerente?.telefone || "",
-    email: props.gerente?.email || "",
-    endereco: props.gerente?.endereco || "",
-    cidade: props.gerente?.cidade || "",
-    bairro: props.gerente?.bairro || "",
-    senha: "1234",
-    primeiro_acesso: "" || false,
+  id: props.gerente?.id || "",
+  nome: props.gerente?.nome || "",
+  cpf: props.gerente?.cpf || "",
+  telefone: props.gerente?.telefone || "",
+  email: props.gerente?.email || "",
+  endereco: props.gerente?.endereco || "",
+  cidade: props.gerente?.cidade || "",
+  bairro: props.gerente?.bairro || "",
+  senha: "1234",
+  primeiro_acesso: "" || false,
 });
 </script>
 

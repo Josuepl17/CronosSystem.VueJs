@@ -254,8 +254,7 @@
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { onMounted } from "vue";
-import { usePage } from '@inertiajs/vue3';
-
+import { usePage } from "@inertiajs/vue3";
 
 onMounted(() => {
   document.title = "Detalhes do Paciente";
@@ -264,8 +263,8 @@ onMounted(() => {
 const editado = ref(false);
 
 const editando = () => {
-   editado.value = true; // Define como "não salvo" ao editar
-    };
+  editado.value = true; // Define como "não salvo" ao editar
+};
 
 const props = defineProps({
   texto_principal: Object,
@@ -274,7 +273,7 @@ const props = defineProps({
   message: String,
   consultas: Array,
   arquivos: Array,
-  errors: Array,
+  errors: Object,
   pacienteinfo: Object,
   medicamentos: Array,
   csrf_token: String,
@@ -356,16 +355,12 @@ const AbrirReceituario = () => {
   receituario.id = null;
   receituario.tipo_documento = null;
   receituario.prescricao = null;
-
 };
 
 const fecharReceituario = () => {
-
   mostrarReceituario.value = false;
   mostrarRelatorios.value = true;
 };
-
-
 
 const mostrarRelatorios = ref(false);
 
@@ -377,19 +372,13 @@ const FecharRelatorios = () => {
   mostrarRelatorios.value = false;
 };
 
-
-
 const visualizarRelatorio = (id, tipo_documento, prescricao) => {
   mostrarRelatorios.value = false;
   mostrarReceituario.value = true;
   receituario.id = id;
   receituario.tipo_documento = tipo_documento;
   receituario.prescricao = prescricao;
-
 };
-
-
-
 </script>
 
 
@@ -402,7 +391,6 @@ const visualizarRelatorio = (id, tipo_documento, prescricao) => {
 @import "../../../public/css/modal.css";
 @import "../../../public/css/tabelas.css";
 @import "../../../public/css/botoes.css";
-
 
 nav {
   display: flex;
