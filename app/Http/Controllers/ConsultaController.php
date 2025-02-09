@@ -72,7 +72,6 @@ class ConsultaController extends Controller
         $consultas =  ServicesConsulta::ListarConsultas($date_inicial, $date_final);
         $consultas = ServiceGeral::CriptograrArrayID($consultas);
 
-        Session::put('tempo_proxima_consulta', "55");
 
         return Inertia::render('Consultas', compact('consultas', 'date_inicial', 'date_final'));
     }
@@ -139,11 +138,13 @@ class ConsultaController extends Controller
 
         $medico = Medico::find($request->medico_id);
 
-       $existeCosnulta =  ServicesConsulta::VerificarAgendamento($request);
-       
-       if ($existeCosnulta) {
-        return back()->withErrors(['hora' => 'Já existe uma consulta agendada para este médico nesta data e hora.'])->withInput();
-    }
+        $existeConsulta =  ServicesConsulta::VerificarAgendamento($request);
+
+        if ($existeConsulta) {
+            return back()->withErrors([
+                'hora' => "Já existe uma consulta agendada para esse médico as  {$existeConsulta->horainicial} até as {$existeConsulta->horafinal}."
+            ])->withInput();
+        }
 
         $ConsultaPaciente = ConsultaPaciente::updateOrCreate(
             ['id' => $request->id],

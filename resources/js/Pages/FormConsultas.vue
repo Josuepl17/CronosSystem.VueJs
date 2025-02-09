@@ -35,6 +35,12 @@
 
                             <label for="time">Hora Final</label>
                             <input v-model="form.horafinal" type="time" id="time" required>
+
+                                        <p v-if="props.errors.hora" style="color: red;">
+                {{ props.errors.hora }}
+            </p>
+
+                            
                         </div>
 
                         <div class="fechar-salvar">
@@ -44,9 +50,7 @@
                     </div>
                 </form>
             </div>
-            <p v-if="props.errors.hora" style="color: red;">
-                {{ props.errors.hora }}
-            </p>
+
         </template>
     </Layout>
 </template>
