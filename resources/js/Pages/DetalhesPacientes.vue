@@ -231,7 +231,7 @@
                     <button @click.prevent="visualizarRelatorio(relatorio.id, relatorio.tipo_documento, relatorio.prescricao)" id="salvar" type="submit">Ver</button>
                   </td>
                                   <td>
-                                    <a :href="'/pdf/' + receituario.id" id="salvar" class="button">Gerar</a>
+                                    <a :href="'/pdf/' + relatorio.id" id="salvar" class="button">Gerar</a>
                                   </td>
                 </tr>
               </tbody>

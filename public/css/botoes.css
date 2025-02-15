@@ -5,6 +5,7 @@ button {
     border: 1px solid rgba(255, 255, 255, 0.249);
     color: white;
     margin-right: 10px;
+    cursor: pointer;
 
   }
   
@@ -12,6 +13,7 @@ button {
     padding: 5px 15px;
     border: 1px solid rgba(255, 255, 255, 0.249);
     color: white;
+    cursor: pointer;
   }
 
 
@@ -41,6 +43,7 @@ button {
     color: white;
     margin-right: 10px;
     border-radius: 05px;
+    cursor: pointer;
 
   }
 
