@@ -25,7 +25,7 @@
               <div id="rodape">
                 <p v-if="editado" style="color: white; margin-right: 20px; font-style: italic; padding: 05px; background: red; border-radius: 5px;">Texto Não salvo</p>               
                  <button id="salvar"  type="submit">Salvar</button>
-                <button  type="button" @click="abrirarquivos">Escolher arquivo</button>
+                <button  type="button" @click="abrirarquivos">Arquivo</button>
                 <button type="button" @click.prevent="abrirModal">Novo</button>
                 
                 
@@ -77,14 +77,14 @@
               <table class="minimal-table"> 
                 <thead> 
                 <tr style="position: sticky; top: 0; background-color: white;">
-                <th>#</th> 
+             
                 <th >Medicamento Prescrito:</th>
                 <th >X</th>  
                 </tr> 
                 </thead> 
                 <tbody> 
                 <tr v-for="(medicamento) in medicamentos" :key="medicamento.id"> 
-                <td>{{ medicamento.id }}</td> 
+              
                 <td>{{ medicamento.medicamento }}</td> 
                 <td><Link class="delete" :href="'/delete/medicamento/' + medicamento.id" style="font-size: 12px; padding: 2px 5px;">X</Link></td>
                 </tr> 
@@ -153,14 +153,14 @@
             <table class="minimal-table">
               <thead>
                 <tr style="position: sticky; top: 0; background-color: white;">
-                  <th>#</th>
+                
                   <th>Arquivo</th>
                   <th>X</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="arquivo in arquivos" :key="arquivo.id">
-                  <td>{{arquivo.id}}</td>
+                  
                   <td>{{arquivo.nome}}</td>
                   <td style="width: 50px;">
                     <a :href="'/download/arquivo/' + arquivo.identificacao" style="background-color: white;">
@@ -218,14 +218,14 @@
             <table class="minimal-table">
               <thead>
                 <tr style="position: sticky; top: 0; background-color: white;">
-                  <th>#</th>
+                 
                   <th>tipo Documento</th>
                   <th style="width: 50px;">X</th>
                   <th style="width: 50px;">X</th>                </tr>
               </thead>
               <tbody>
                 <tr v-for="relatorio in relatorios" :key="relatorio.id">
-                  <td>{{relatorio.id}}</td>
+                  
                   <td>{{relatorio.tipo_documento}}</td>
                   <td style="width: 50px;">
                     <button @click.prevent="visualizarRelatorio(relatorio.id, relatorio.tipo_documento, relatorio.prescricao)" id="salvar" type="submit">Ver</button>
@@ -238,6 +238,7 @@
             </table>
             
           </div> <!-- /#tabela -->
+          <br>
           <button @click="AbrirReceituario" id="salvar" type="submit">Novo</button>
           <button id="fechar" type="button" @click.prevent="FecharRelatorios">Fechar</button>
         </div> <!-- /.modal-content -->
@@ -559,7 +560,7 @@ form {
   flex-direction: column;
   align-items: center;
   width: 65%;
-  height: 98%;
+  height: 88%;
   overflow: auto;
   margin-top: 10px;
 }
@@ -632,6 +633,28 @@ textarea {
   justify-content: flex-start;
   flex-direction: column;
   margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  #lado-direito {
+    display: none;
+  }
+
+  #lado-esquerdo {
+  width: 100%;
+  height: 88%;
+
+}
+
+#texto-principal {
+  width: 100%;
+  margin-bottom: 15px;
+  min-height: 340px;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+
 }
 
 .box-detalhes {

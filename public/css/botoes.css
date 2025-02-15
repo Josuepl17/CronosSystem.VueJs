@@ -63,4 +63,36 @@ button {
     background-color: red;
     
   }
+
+  @media screen and (max-width: 768px) {
+    #salvar {
+      padding: 4px 10px;
+    }
+
+    #fechar {
+      padding: 4px 10px;
+    }
+
+    #botao_inserir_superior {
+      padding: 4px 10px;
+    }
+
+    #inserir {
+      padding: 4px 10px;
+    }
+
+    .delete {
+      padding: 4px 10px;
+    }
+
+    button {
+      padding: 4px 10px;
+    }
+
+    a {
+      padding: 4px 10px;
+    }
+
+    
+  }
   
