@@ -20,7 +20,7 @@
                 <h1>{{ props.paciente.nome }}</h1>
               </div> <!-- /#titulo-texto -->
               <div id="conteiner-texto">
-                <textarea required @input="editando" v-model="form.texto_principal"></textarea>
+                <textarea required @input="resetTimer" v-model="form.texto_principal"></textarea>
               </div> <!-- /#conteiner-texto -->
               <div id="rodape">
                 <p v-if="editado" style="color: white; margin-right: 20px; font-style: italic; padding: 05px; background: red; border-radius: 5px;">Texto Não salvo</p>               
@@ -260,6 +260,22 @@ import { usePage } from "@inertiajs/vue3";
 onMounted(() => {
   document.title = "Detalhes do Paciente";
 });
+
+
+
+
+
+let timeout = null;
+
+const resetTimer = () => {
+  if (timeout) clearTimeout(timeout);
+
+  timeout = setTimeout(() => {
+    form.post('/create/paciente/detalhes', { preserveScroll: true });
+  }, 30 * 1000); // 30 segundos
+};
+
+
 
 const editado = ref(false);
 

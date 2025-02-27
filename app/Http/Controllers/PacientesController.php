@@ -14,6 +14,7 @@ use App\Models\Medico_Paciente;
 use App\Models\Medico;
 use App\Models\Paciente;
 use App\Models\RelatoriosPaciente;
+use App\Models\SaveDetalhePacientes;
 use App\Models\Tramite;
 use App\Services\ServiceGeral;
 use App\Services\ServicesPaciente;
@@ -209,6 +210,15 @@ class PacientesController extends Controller
 
     $pacienteId = FacadesSession::get('id_paciente');
 
+
+
+    SaveDetalhePacientes::create([
+        'texto_principal' => Crypt::encrypt($request->texto_principal),
+        'empresa_id' => Session::get('empresa_id'),
+        'paciente_id' => $pacienteId,
+        'medico_id' => Session::get('id')
+    ]);
+
     DetalhePaciente::updateOrCreate(
         [
         'paciente_id' => $pacienteId,
@@ -221,7 +231,6 @@ class PacientesController extends Controller
         'medico_id' => Session::get('id')
         ]
     );
-
         Session::put('message', "Criado Com Sucesso ");
 
         return Inertia::location('/detalhes/paciente');
