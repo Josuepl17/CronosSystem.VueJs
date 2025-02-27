@@ -4,22 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receituário Médico</title>
+    <title>Comprovante de Agendamento</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
-            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #fff;
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #007BFF;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
@@ -28,12 +27,8 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid #007BFF;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .header .logo {
-            width: 100px;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
         }
 
         .header .company-info {
@@ -42,45 +37,56 @@
 
         .header .company-info h1 {
             margin: 0;
-            font-size: 1.5em;
+            font-size: 1.6em;
             color: #007BFF;
         }
 
         .header .company-info p {
-            margin: 0;
-            font-size: 0.9em;
+            margin: 3px 0;
+            font-size: 1em;
             color: #555;
         }
 
         .doctor-info {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            padding-left: 15px;
+            border-left: 2px solid #007BFF;
+            border-radius: 8px;
         }
 
         .doctor-info h2 {
             margin: 0;
-            font-size: 1.2em;
-            color: #333;
+            font-size: 1.3em;
+            color: #007BFF;
         }
 
         .doctor-info p {
             margin: 5px 0 0;
-            font-size: 0.9em;
+            font-size: 1em;
             color: #555;
         }
 
         .content {
             margin-bottom: 40px;
-            height: 585px;
-        }
-
-        .content p {
-            font-size: 1em;
-            line-height: 1.5;
+            padding: 15px;
+            border-radius: 8px;
+            height: auto;
+            min-height: 150px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
             color: #333;
         }
 
+        .content p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+        }
+
         .footer {
-            text-align: right;
+            text-align: center;
+            margin-top: 40px;
         }
 
         .footer .signature {
@@ -90,14 +96,14 @@
 
         .footer .signature hr {
             border: none;
-            border-top: 1px solid #555;
+            border-top: 2px solid #007BFF;
             margin: 5px auto;
-            width: 200px;
+            width: 250px;
         }
 
         .footer .signature p {
             margin: 0;
-            font-size: 0.9em;
+            font-size: 1em;
             color: #555;
         }
     </style>
@@ -108,7 +114,7 @@
         <div class="header">
             <div class="company-info">
                 <h1>{{ $empresa->razao_social }}</h1>
-                <p>{{ $empresa->endereco . " - " . $empresa->cidade }}</p>
+                <p>{{ $empresa->endereco }} - {{ $empresa->cidade }}</p>
                 <p>Telefone: {{ $empresa->telefone }}</p>
                 <p>Email: contato@clinicavida.com.br</p>
             </div>
@@ -117,14 +123,14 @@
         <div class="doctor-info">
             <h2>Dr(a). {{ $medico->nome }}</h2>
             <p>CRM/CRP: {{ $medico->crp }}</p>
-            <p>Especialidade: {{ $medico->especialidade }} </p>
+            <p>Especialidade: {{ $medico->especialidade }}</p>
         </div>
 
         <div class="content">
             <p><strong>Comprovante de Agendamento</strong></p>
-            <p> Agendado Consulta para o(a) paciente {{ $paciente->nome }} no dia {{ $agendamento->data }} às {{ $agendamento->hora }}.</p>
-                <br>
-            </p>
+            <p>Consulta agendada para <strong>{{ $paciente->nome }}</strong></p>
+            <p>Data: <strong>{{ $agendamento->date }}</strong></p>
+            <p>Horário: <strong>{{ $agendamento->horainicial }} - {{ $agendamento->horafinal }}</strong></p>
         </div>
 
         <div class="footer">

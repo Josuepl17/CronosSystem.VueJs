@@ -60,7 +60,7 @@
                             </td>
 
                             <td>
-                                <Link v-if="$page.props.apagar_consulta" class="delete" :href="'/pdf/comprov/' + consulta.identificacao">Comprovante</Link>
+                                <a v-if="$page.props.apagar_consulta" class="delete" :href="`/emitir/comprov/${consulta.identificacao}`">Comprovante</a>
                             </td>
                         </tr>
                     </tbody>

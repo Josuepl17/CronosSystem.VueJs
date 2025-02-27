@@ -128,20 +128,26 @@ Route::middleware(['auth', 'web'])->group(function () {
     });
 
 
-    Route::get('/pdf/comprov/{id}', function (Request $request) {
 
-        $agendamento = ConsultaPaciente::find($request->id);
-        dd($agendamento);
+
+
+
+
+
+    Route::get('/emitir/comprov/{id}', function (Request $request) {
+
+        $id = Crypt::decrypt($request->id);
+        $agendamento = ConsultaPaciente::find($id);
 
         $data = [
-            'paciente' => Paciente::find($request->id),
-            'medico' => Medico::Find(Session::get('id')),
+            'paciente' => Paciente::find($agendamento->paciente_id),
+            'medico' => Medico::Find($agendamento->medico_id),
             'empresa' => Empresa::find(Session::get('empresa_id')),
-            
+            'agendamento' => $agendamento,
         ];
 
 
-        $pdf = Pdf::loadView('pdfreceituario', $data);
+        $pdf = Pdf::loadView('comprovanteAgendamento', $data);
         return $pdf->download('documento.pdf');
     });
 
