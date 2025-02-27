@@ -28,6 +28,7 @@
                             <th  style="width: 40px;">X</th>
                             <th style="width: 40px;">X</th>
                             <th style="width: 20px;">X</th>
+                            <th style="width: 20px;">X</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,6 +57,10 @@
                             </td>
                             <td>
                                 <Link v-if="$page.props.apagar_consulta" class="delete" :href="'/delete/consulta/' + consulta.identificacao">X</Link>
+                            </td>
+
+                            <td>
+                                <Link v-if="$page.props.apagar_consulta" class="delete" :href="'/pdf/comprov/' + consulta.identificacao">Comprovante</Link>
                             </td>
                         </tr>
                     </tbody>

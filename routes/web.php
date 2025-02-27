@@ -12,6 +12,7 @@ use App\Http\Controllers\PacientesController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\PermissoesMiddleware;
 use App\Models\Atendente;
+use App\Models\ConsultaPaciente;
 use App\Models\Empresa;
 use App\Models\Medico;
 use App\Models\Medico_Paciente;
@@ -122,6 +123,24 @@ Route::middleware(['auth', 'web'])->group(function () {
         ];
     
     
+        $pdf = Pdf::loadView('pdfreceituario', $data);
+        return $pdf->download('documento.pdf');
+    });
+
+
+    Route::get('/pdf/comprov/{id}', function (Request $request) {
+
+        $agendamento = ConsultaPaciente::find($request->id);
+        dd($agendamento);
+
+        $data = [
+            'paciente' => Paciente::find($request->id),
+            'medico' => Medico::Find(Session::get('id')),
+            'empresa' => Empresa::find(Session::get('empresa_id')),
+            
+        ];
+
+
         $pdf = Pdf::loadView('pdfreceituario', $data);
         return $pdf->download('documento.pdf');
     });
