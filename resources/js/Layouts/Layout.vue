@@ -397,6 +397,7 @@ onMounted(async () => {
   margin-left: 10px;
   transition: opacity 0.3s ease;
   width: 100%;
+  font-size: 12px;
 }
 
 #links-menu {

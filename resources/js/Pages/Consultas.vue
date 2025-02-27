@@ -49,6 +49,12 @@
                             <td>{{ consulta.horainicial }}</td>
                             <td>{{ consulta.horafinal }}</td>
                             <td>{{ consulta.motivo_status }}</td>
+
+                            
+                            <td>
+                                <a v-if="$page.props.apagar_consulta" class="delete" style="background-color: blue;" :href="`/emitir/comprov/${consulta.identificacao}`">Comprovante</a>
+                            </td>
+
                             <td>
                                 <Link v-if="$page.props.concluir_consulta" class="status-concluido" :href="'/concluir/consulta/' + consulta.identificacao">Concluir</Link>
                             </td>
@@ -59,9 +65,6 @@
                                 <Link v-if="$page.props.apagar_consulta" class="delete" :href="'/delete/consulta/' + consulta.identificacao">X</Link>
                             </td>
 
-                            <td>
-                                <a v-if="$page.props.apagar_consulta" class="delete" :href="`/emitir/comprov/${consulta.identificacao}`">Comprovante</a>
-                            </td>
                         </tr>
                     </tbody>
                 </table>

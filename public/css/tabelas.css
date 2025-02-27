@@ -65,7 +65,7 @@ text-align: center;
 
 /* Estilo para as células */
 .minimal-table tbody td {
-padding: 12px 15px;
+padding: 5px 15px;
 border-bottom: 1px solid #eee;
 color: #555;
 
