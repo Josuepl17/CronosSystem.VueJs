@@ -449,7 +449,7 @@ nav {
 
 <style>
 .publicacao {
-  width: 90%;
+  width: 99%;
   display: flex;
   border-radius: 8px;
   flex-direction: column;
