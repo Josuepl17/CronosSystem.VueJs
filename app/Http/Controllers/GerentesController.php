@@ -20,12 +20,12 @@ class GerentesController extends Controller
     {
         $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
         $gerentes = Gerente::wherein('id', $users)->get();
-        return Inertia::render('Gerentes', compact('gerentes'));
+        return Inertia::render('Gerentes/Gerentes', compact('gerentes'));
 
     }
 
     public function formGerencia(){
-        return Inertia::render('FormGerente');
+        return Inertia::render('Gerentes/FormGerente');
     }
 
 
@@ -90,6 +90,6 @@ class GerentesController extends Controller
 
     public function editGerente(Request $request){
         $gerente = Gerente::find($request->id);
-       return Inertia::render('FormGerente', compact('gerente'));
+       return Inertia::render('Gerentes/FormGerente', compact('gerente'));
     }
 }

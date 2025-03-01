@@ -105,5 +105,5 @@ const form = useForm({
 </script>
 
 <style scoped>
-@import "../../../public/css/formularios.css";
+@import "../../../../public/css/formularios.css";
 </style>

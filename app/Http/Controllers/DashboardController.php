@@ -17,8 +17,7 @@ class DashboardController extends Controller{
 
     public function dahsboard() {
         $id = Session::get('empresa_id');
-        $users = Empresa::find(Session::get('empresa_id'))->users()->where('users.id', '!=', 1)->pluck('users.id'); 
-        $pacientes = Paciente::wherein('id', $users)->get()->count();
+        $pacientes = Paciente::where('empresa_id', $id)->get()->count();
         $consultasAgendadas = ConsultaPaciente::where('empresa_id', $id)->where('status', 'Agendado')->get()->count();
         $consultasConcluidos = ConsultaPaciente::where('empresa_id', $id)->where('status', 'Concluido')->get()->count();
         $consultasCanceladas = ConsultaPaciente::where('empresa_id', $id)->where('status', 'Cancelado')->get()->count();

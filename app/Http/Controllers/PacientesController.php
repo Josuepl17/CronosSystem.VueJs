@@ -35,8 +35,7 @@ class PacientesController extends Controller
     {
         $empresaId = Session::get('empresa_id'); // Empresa selecionada
         $pacientes =  ServiceGeral::listarPacientes($empresaId);
-        return Inertia::render('Pacientes', compact('pacientes'));
-    }
+        return Inertia::render('Pacientes/Pacientes', compact('pacientes'));    }
     
 
 
@@ -71,7 +70,7 @@ class PacientesController extends Controller
         $pacientes = ServiceGeral::CriptograrArrayID($pacientes);
         ServicesPaciente::Autorizer(); // Responsável por mostrar ou inserir paciente
     
-        return Inertia::render('Pacientes', compact('pacientes'));
+        return Inertia::render('Pacientes/Pacientes', compact('pacientes'));
     }
     
 
@@ -85,7 +84,7 @@ class PacientesController extends Controller
     public function formPacientes()
     {
         $medicos = ServiceGeral::getMedicoLogadoOuTodos();
-        return Inertia::render('FormPacientes', compact('medicos'));
+        return Inertia::render('Pacientes/FormPacientes', compact('medicos'));
     }
 
 
@@ -120,7 +119,7 @@ class PacientesController extends Controller
 
         $medicos = Medico::whereIn('id', $users_id)->get();
 
-        return Inertia::render('FormPacientes', compact('medicosSelect', 'paciente', 'medicos'));
+        return Inertia::render('Pacientes/FormPacientes', compact('medicosSelect', 'paciente', 'medicos'));
 
         
     }
@@ -192,7 +191,7 @@ class PacientesController extends Controller
         }
 /*/////////////////////////////////////////////////////////////////////*/        
 
-        return Inertia::render('DetalhesPacientes', compact('texto_principal', 'tramites_paciente', 'paciente',  'consultas', 'arquivos', 'pacienteinfo', 'medicamentos', 'csrf_token', 'relatorios'));
+        return Inertia::render('Pacientes/DetalhesPacientes', compact('texto_principal', 'tramites_paciente', 'paciente',  'consultas', 'arquivos', 'pacienteinfo', 'medicamentos', 'csrf_token', 'relatorios'));
     }
 
 

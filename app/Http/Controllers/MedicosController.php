@@ -30,7 +30,7 @@ class MedicosController extends Controller
         $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id');
         $medicos = Medico::wherein('id', $users)->get();
         $medicos = ServiceGeral::formatarTelefoneCPF($medicos);
-        return Inertia::render('Medicos', compact('medicos'));
+        return Inertia::render('Profissional/Medicos', compact('medicos'));
 
     }
 
@@ -38,7 +38,7 @@ class MedicosController extends Controller
 
     public function formMedicos() {
         $permissoes = Permissao::all();
-        return Inertia::render('FormMedicos', compact('permissoes'));
+        return Inertia::render('Profissional/FormMedicos', compact('permissoes'));
     }
 
 
@@ -106,7 +106,7 @@ class MedicosController extends Controller
        $user = User::find($medico_id);
        $permissoes = Permissao::all();
        $idPermissaoSelect = $user->permissoes()->pluck('permissao_id')->toArray();
-       return Inertia::render('FormMedicos', compact('medico' , 'permissoes', 'idPermissaoSelect'));
+       return Inertia::render('Profissional/FormMedicos', compact('medico' , 'permissoes', 'idPermissaoSelect'));
 
 
     }

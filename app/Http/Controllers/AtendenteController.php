@@ -24,7 +24,7 @@ class AtendenteController extends Controller
         $users = Empresa::find(Session::get('empresa_id'))->users()->pluck('users.id'); // relacionamento empresa user
         $atendentes = Atendente::wherein('id', $users)->get();
         $atendentes = ServiceGeral::formatarTelefoneCPF($atendentes);
-        return Inertia::render('Atendentes', compact('atendentes'));
+        return Inertia::render('Atendentes/Atendentes', compact('atendentes'));
     }
 
 
@@ -35,7 +35,7 @@ class AtendenteController extends Controller
 
     public function formAtendentes() {
         $permissoes = Permissao::all();
-        return Inertia::render('FormAtendentes', compact('permissoes'));
+        return Inertia::render('Atendentes/FormAtendentes', compact('permissoes'));
     }
 
 
@@ -93,7 +93,7 @@ class AtendenteController extends Controller
         $user = User::find($id);
         $permissoes = Permissao::all();
         $idPermissaoSelect = $user->permissoes()->pluck('permissao_id')->toArray();
-        return Inertia::render('FormAtendentes', compact('atendente', 'idPermissaoSelect', 'permissoes'));
+        return Inertia::render('Atendentes/FormAtendentes', compact('atendente', 'idPermissaoSelect', 'permissoes'));
         
     }
 }

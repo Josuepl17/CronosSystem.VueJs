@@ -261,21 +261,15 @@ onMounted(() => {
   document.title = "Detalhes do Paciente";
 });
 
-
-
-
-
 let timeout = null;
 
 const resetTimer = () => {
   if (timeout) clearTimeout(timeout);
 
   timeout = setTimeout(() => {
-    form.post('/create/paciente/detalhes', { preserveScroll: true });
+    form.post("/create/paciente/detalhes", { preserveScroll: true });
   }, 30 * 1000); // 30 segundos
 };
-
-
 
 const editado = ref(false);
 
@@ -352,6 +346,9 @@ const abrirModal = () => {
 
 const fecharModal = () => {
   mostrarModal.value = false;
+    modal.id = null;
+    modal.titulo = null;
+     modal.descricao = null;
 };
 
 const mostrararquivos = ref(false);
@@ -405,9 +402,9 @@ const visualizarRelatorio = (id, tipo_documento, prescricao) => {
 
 
 <style scoped>
-@import "../../../public/css/modal.css";
-@import "../../../public/css/tabelas.css";
-@import "../../../public/css/botoes.css";
+@import "../../../../public/css/modal.css";
+@import "../../../../public/css/tabelas.css";
+@import "../../../../public/css/botoes.css";
 
 nav {
   display: flex;
@@ -657,20 +654,17 @@ textarea {
   }
 
   #lado-esquerdo {
-  width: 100%;
-  height: 88%;
+    width: 100%;
+    height: 88%;
+  }
 
-}
-
-#texto-principal {
-  width: 100%;
-  margin-bottom: 15px;
-  min-height: 340px;
-  background-color: #ffffff;
-  border-radius: 5px;
-}
-
-
+  #texto-principal {
+    width: 100%;
+    margin-bottom: 15px;
+    min-height: 340px;
+    background-color: #ffffff;
+    border-radius: 5px;
+  }
 }
 
 .box-detalhes {

@@ -32,12 +32,12 @@
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3';
-import { defineProps } from 'vue';
-import { onMounted } from 'vue';
+import { Link } from "@inertiajs/vue3";
+import { defineProps } from "vue";
+import { onMounted } from "vue";
 
 onMounted(() => {
-  document.title = 'Atendentes';
+  document.title = "Atendentes";
 });
 
 const props = defineProps({
@@ -46,6 +46,6 @@ const props = defineProps({
 </script>
 
 <style scoped>
-@import "../../../public/css/tabelas.css";
-@import "../../../public/css/botoes.css";
+@import "../../../../public/css/tabelas.css";
+@import "../../../../public/css/botoes.css";
 </style>

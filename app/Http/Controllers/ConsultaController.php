@@ -22,7 +22,7 @@ class ConsultaController extends Controller
 
     public function formVerificarConsulta()
     {
-        return Inertia::render('VerificarConsulta');
+        return Inertia::render('Consultas/VerificarConsulta');
     }
 
 
@@ -73,7 +73,7 @@ class ConsultaController extends Controller
         $consultas = ServiceGeral::CriptograrArrayID($consultas);
 
 
-        return Inertia::render('Consultas', compact('consultas', 'date_inicial', 'date_final'));
+        return Inertia::render('Consultas/Consultas', compact('consultas', 'date_inicial', 'date_final'));
     }
 
 
@@ -88,7 +88,7 @@ class ConsultaController extends Controller
         $medicos = ServiceGeral::getMedicoLogadoOuTodos();
         $pacientes = ServiceGeral::listarPacientes(Session::get('empresa_id'));
         $relacoes = Medico_Paciente::all();
-        return Inertia::render('FormConsultas', compact('medicos', 'pacientes',  'relacoes'));;
+        return Inertia::render('Consultas/FormConsultas', compact('medicos', 'pacientes',  'relacoes'));;
     }
 
 
