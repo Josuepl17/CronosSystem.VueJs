@@ -343,8 +343,7 @@ class LoginController extends Controller
 
 
      User_Empresa::where('empresa_id', Session::get('empresa_selecionada'))->delete();
-    // $user = User::wherein( 'id', $dados)->update(['empresa_id' => null]);
-    // dd($user);
+
 
         foreach ($dados as $dado) {
 
